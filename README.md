@@ -6,7 +6,6 @@ Currently, it is in a very early stage of development, so it is not complete yet
 
 ## How to play
 The goal of the game is to eat as many apples as possible. <Br>
-The snake is controlled by the arrow keys or WASD. <Br>
 In this adaption you can go through the walls and appear on the other side. <Br>
 It's game over when the snake hits itself. <Br>
 The snake grows by one block when it eats an apple. <Br>
@@ -20,3 +19,8 @@ After downloading the jar file, you can run it by double-clicking it. <Br>
 
 Alternatively, you can run it from the command line with the following command: <Br>
 `java -jar Snake.jar` <Br>
+
+## Controls
+The snake is controlled by the arrow keys or WASD. <Br>
+You can pause and resume the game by pressing escape. <Br>
+You can exit the game by pressing Ctrl + C. <Br>
