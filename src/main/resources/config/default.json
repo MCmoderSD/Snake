@@ -1,0 +1,9 @@
+{
+  "title": "Snake",
+  "icon": "/Images/icon.png",
+  "fieldWidth" : 32,
+  "fieldHeight" : 16,
+  "scale": 32,
+  "fps": 60,
+  "resizable": false
+}
