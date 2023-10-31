@@ -33,9 +33,4 @@ public class Frame extends JFrame {
     public InputHandler getInputs() {
         return UI.getInputs();
     }
-
-    // Setter
-    public void refresh() {
-        UI.repaint();
-    }
 }

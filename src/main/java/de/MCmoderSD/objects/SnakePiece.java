@@ -1,14 +1,20 @@
 package de.MCmoderSD.objects;
 
+import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
 
-import java.awt.Rectangle;
+import java.awt.*;
+
 public class SnakePiece extends Rectangle {
+
+    // Attributes
+    protected final Game game;
 
     // Constants
     protected final int fieldWidth;
     protected final int fieldHeight;
     protected final int scale;
+    protected final boolean solidWalls;
 
     // Direction
     protected boolean left = true;
@@ -16,33 +22,50 @@ public class SnakePiece extends Rectangle {
     protected boolean right = false;
     protected boolean down = false;
 
-    public SnakePiece(int x, int y, Config config) {
+    public SnakePiece(int x, int y, Game game, Config config) {
         super(x, y, config.getScale(), config.getScale());
 
+        this.game = game;
         fieldWidth = config.getFieldWidth();
         fieldHeight = config.getFieldHeight();
         scale = config.getScale();
+        solidWalls = config.isSolidWalls();
+    }
+
+    // Wall Hit Detected
+    public void wallHitDetected() {
+        if (solidWalls) {
+            // ToDo Game Over
+            System.out.println("Game Over");
+            game.gameOver();
+
+        } else {
+            if (left) x = fieldWidth * scale - scale;
+            if (up) y = fieldHeight * scale - scale;
+            if (right) x = 0;
+            if (down) y = 0;
+        }
     }
 
     // Move
     protected void move() {
         if (left) {
-            if (x - scale < 0) x = fieldWidth * scale - scale;
+            if (x - scale < 0) wallHitDetected();
             else x = x - scale;
         }
 
         if (up) {
-            if (y - scale < 0) y = fieldHeight * scale - scale;
+            if (y - scale < 0) wallHitDetected();
             else y = y - scale;
         }
 
         if (right) {
-            if (x + scale > fieldWidth * scale - scale) x = 0;
+            if (x + scale > fieldWidth * scale - scale) wallHitDetected();
             else x = x + scale;
         }
 
         if (down) {
-            if (y + scale > fieldHeight * scale - scale) y = 0;
+            if (y + scale > fieldHeight * scale - scale) wallHitDetected();
             else y = y + scale;
         }
     }

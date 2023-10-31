@@ -5,5 +5,11 @@
   "fieldHeight" : 16,
   "scale": 32,
   "fps": 60,
-  "resizable": false
+  "resizable": false,
+  "solidWalls": false,
+  "backgroundTile": "/Images/backgroundTile.png",
+  "snakeHead": "/Images/snakeHead.png",
+  "snakeBodyTile": "/Images/snakeBody.png",
+  "food": "/Images/food.png",
+  "goldFood": "/Images/goldFood.png"
 }

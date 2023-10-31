@@ -24,3 +24,15 @@ Alternatively, you can run it from the command line with the following command: 
 The snake is controlled by the arrow keys or WASD. <Br>
 You can pause and resume the game by pressing escape. <Br>
 You can exit the game by pressing Ctrl + C. <Br>
+
+## Features
+
+- [x] Snake movement
+- [x] Apple spawning
+- [x] Snake growing
+- [x] Snake hitting itself
+- [x] Snake going through walls
+- [x] Snake hitting walls (optional)
+- [ ] Game over screen
+- [ ] Score
+- [ ] Golden apple

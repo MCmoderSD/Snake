@@ -14,15 +14,26 @@ public class Config {
     // Config Variables
     private final String title;
     private final String iconPath;
+    private final String backgroundTilePath;
+    private final String snakeHeadPath;
+    private final String snakeBodyPath;
+    private final String foodPath;
+    private final String goldFoodPath;
     private final int scale;
     private final int fieldWidth;
     private final int fieldHeight;
     private final int fps;
     private final boolean resizable;
+    private final boolean solidWalls;
 
     // Assets
     private final Dimension dimension;
     private final BufferedImage icon;
+    private final BufferedImage backgroundTile;
+    private final BufferedImage snakeHead;
+    private final BufferedImage snakeBody;
+    private final BufferedImage food;
+    private final BufferedImage goldFood;
 
     // Constructor
     public Config(String[] args) {
@@ -41,10 +52,21 @@ public class Config {
         fieldHeight = config.get("fieldHeight").asInt();
         fps = config.get("fps").asInt();
         resizable = config.get("resizable").asBoolean();
+        solidWalls = config.get("solidWalls").asBoolean();
+        backgroundTilePath = config.get("backgroundTile").asText();
+        snakeHeadPath = config.get("snakeHead").asText();
+        snakeBodyPath = config.get("snakeBodyTile").asText();
+        foodPath = config.get("food").asText();
+        goldFoodPath = config.get("goldFood").asText();
 
         // Generate Assets
         dimension = new Dimension(fieldWidth * scale, fieldHeight * scale);
         icon = imageReader.read(iconPath);
+        backgroundTile = imageReader.scaleImage(backgroundTilePath, scale);
+        snakeHead = imageReader.scaleImage(snakeHeadPath, scale);
+        snakeBody = imageReader.scaleImage(snakeBodyPath, scale);
+        food = imageReader.scaleImage(foodPath, scale);
+        goldFood = imageReader.scaleImage(goldFoodPath, scale);
     }
 
     // Getters
@@ -78,6 +100,29 @@ public class Config {
         return resizable;
     }
 
+    public boolean isSolidWalls() {
+        return solidWalls;
+    }
+
+    public String getBackgroundTilePath() {
+        return backgroundTilePath;
+    }
+
+    public String getSnakeHeadPath() {
+        return snakeHeadPath;
+    }
+
+    public String getSnakeBodyPath() {
+        return snakeBodyPath;
+    }
+
+    public String getFoodPath() {
+        return foodPath;
+    }
+
+    public String getGoldFoodPath() {
+        return goldFoodPath;
+    }
 
     // Asset Getters
     public BufferedImage getIcon() {
@@ -86,5 +131,25 @@ public class Config {
 
     public Dimension getDimension() {
         return dimension;
+    }
+
+    public BufferedImage getBackgroundTile() {
+        return backgroundTile;
+    }
+
+    public BufferedImage getSnakeHead() {
+        return snakeHead;
+    }
+
+    public BufferedImage getSnakeBody() {
+        return snakeBody;
+    }
+
+    public BufferedImage getFood() {
+        return food;
+    }
+
+    public BufferedImage getGoldFood() {
+        return goldFood;
     }
 }

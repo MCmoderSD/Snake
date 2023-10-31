@@ -20,7 +20,7 @@ public class InputHandler implements KeyListener {
         this.game = game;
 
         // Initialize Attributes
-        left = true;
+        left = false;
         up = false;
         right = false;
         down = false;
@@ -33,8 +33,14 @@ public class InputHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_C) System.exit(0); // Exit
-       if (e.getKeyCode() == KeyEvent.VK_ESCAPE) game.togglePause(); // Pause
+
+        // Exit
+        if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_C) System.exit(0);
+        if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Q) System.exit(0);
+
+        // Pause
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) game.togglePause();
+        if (e.getKeyCode() == KeyEvent.VK_P) game.togglePause();
 
         // Direction
         if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) left = true;

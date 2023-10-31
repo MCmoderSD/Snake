@@ -9,6 +9,8 @@ import de.MCmoderSD.objects.Snake;
 
 @SuppressWarnings("BusyWait")
 public class Game implements Runnable{
+
+    // Associations
     private final Config config;
     private final Frame frame;
     private final InputHandler inputs;
@@ -16,15 +18,24 @@ public class Game implements Runnable{
 
     // Game Variables
     private Food food;
-    private int score = 0;
-    private boolean isPaused = false;
+    private int score;
+    private boolean isPaused;
+    private boolean gameOver;
 
     public Game(Config config) {
         this.config = config;
 
+        // Init Game Variables
+        score = 0;
+        isPaused = false;
+        gameOver = false;
+
+        // Init UI
         frame = new Frame(config, this);
         inputs = frame.getInputs();
-        snake = new Snake(config);
+
+        // Init Objects
+        snake = new Snake(this, config);
         food = new Food(config, snake.getSnakePieces());
 
         new Thread(this).start();
@@ -39,7 +50,7 @@ public class Game implements Runnable{
 
 
             // Game Loop
-            while (!isPaused) {
+            while (!isPaused && !gameOver) {
                 current = System.nanoTime();
                 delta += (current - now) / tickrate;
                 now = current;
@@ -48,9 +59,15 @@ public class Game implements Runnable{
                     // Game Loop Start:
 
 
+                    // Check for win
+                    if (config.getFieldWidth() * config.getFieldHeight() == snake.getSnakePieces().size()) {
+                        // ToDo Win
+                        System.out.println("Win");
+                        gameOver();
+                    }
 
                     // Check Collision with itself
-                    snake.checkCollision();
+                    if (snake.checkCollision()) gameOver();
 
                     // Check Collision with Food
                     if (snake.checkFood(food)) {
@@ -60,6 +77,7 @@ public class Game implements Runnable{
                         score++;
                         // ToDo Play Sound
                         food = new Food(config, snake.getSnakePieces());
+                        System.out.println("Score: " + score);
                     }
 
                     // Check Input and Move Snake
@@ -91,6 +109,11 @@ public class Game implements Runnable{
     // Setter
     public void togglePause() {
         isPaused = !isPaused;
+    }
+
+    public void gameOver() {
+        // ToDo Game Over
+        gameOver = true;
     }
 
     // Getter

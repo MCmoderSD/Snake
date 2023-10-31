@@ -1,5 +1,6 @@
 package de.MCmoderSD.objects;
 
+import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
 
 import java.util.ArrayList;
@@ -10,16 +11,16 @@ public class Snake extends SnakePiece {
     private final ArrayList<SnakePiece> snakePieces = new ArrayList<>();
 
     // Constructor
-    public Snake(Config config) {
-        super(0, 0, config);
+    public Snake(Game game, Config config) {
+        super(0, 0, game, config);
 
         x = (config.getFieldWidth() / 2) * config.getScale();
         y = (config.getFieldHeight() / 2) * config.getScale();
 
         // Initial Snake
         snakePieces.add(this); // Head
-        snakePieces.add(new SnakePiece(x + scale, y, config)); // Body
-        snakePieces.add(new SnakePiece(x + 2 * scale, y, config)); // Body
+        snakePieces.add(new SnakePiece(x + scale, y, game, config)); // Body
+        snakePieces.add(new SnakePiece(x + 2 * scale, y, game, config)); // Body
     }
 
 
@@ -48,7 +49,7 @@ public class Snake extends SnakePiece {
 
     // Grow
     public void grow(Config config) {
-        snakePieces.add(new SnakePiece(snakePieces.get(snakePieces.size() - 1).x, snakePieces.get(snakePieces.size() - 1).y, config));
+        snakePieces.add(new SnakePiece(snakePieces.get(snakePieces.size() - 1).x, snakePieces.get(snakePieces.size() - 1).y, game, config));
     }
 
     // Getter
