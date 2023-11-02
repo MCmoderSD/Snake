@@ -81,7 +81,7 @@ public class Config {
         // Read Config
         ImageStreamer imageStreamer = new ImageStreamer();
         JsonStreamer jsonStreamer= new JsonStreamer();
-        JsonNode config = jsonStreamer.read("/config/default.json");
+        JsonNode config = jsonStreamer.read(url);
 
         if (config == null) throw new IllegalArgumentException("The config file could not be loaded");
 
