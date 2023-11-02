@@ -3,6 +3,7 @@ package de.MCmoderSD.utilities;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.function.DoublePredicate;
 
 @SuppressWarnings("unused")
@@ -70,5 +71,11 @@ public class Calculate {
     // Random Chance
     public static boolean randomChance(double probability) {
         return Math.random() <= probability;
+    }
+
+    // File Checker
+    public static boolean doesFileExist(String filePath) {
+        File file = new File(filePath);
+        return file.exists() && file.isFile();
     }
 }

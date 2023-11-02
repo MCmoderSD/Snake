@@ -2,7 +2,9 @@ package de.MCmoderSD.main;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import de.MCmoderSD.utilities.ImageReader;
+import de.MCmoderSD.utilities.ImageStreamer;
 import de.MCmoderSD.utilities.JsonReader;
+import de.MCmoderSD.utilities.JsonStreamer;
 
 
 import java.awt.*;
@@ -71,6 +73,42 @@ public class Config {
         snakeBody = imageReader.scaleImage(snakeBodyPath, scale);
         food = imageReader.scaleImage(foodPath, scale);
         goldFood = imageReader.scaleImage(goldFoodPath, scale);
+    }
+
+    // Constructor asset streaming
+    public Config(String[] args, String url) {
+
+        // Read Config
+        ImageStreamer imageStreamer = new ImageStreamer();
+        JsonStreamer jsonStreamer= new JsonStreamer();
+        JsonNode config = jsonStreamer.read("/config/default.json");
+
+        if (config == null) throw new IllegalArgumentException("The config file could not be loaded");
+
+        title = config.get("title").asText();
+        iconPath = config.get("icon").asText();
+        scale = config.get("scale").asInt();
+        fieldWidth = config.get("fieldWidth").asInt();
+        fieldHeight = config.get("fieldHeight").asInt();
+        fps = config.get("fps").asInt();
+        tps = config.get("tps").asInt();
+        specialFoodChance = config.get("specialFoodChance").asDouble();
+        resizable = config.get("resizable").asBoolean();
+        solidWalls = config.get("solidWalls").asBoolean();
+        backgroundTilePath = config.get("backgroundTile").asText();
+        snakeHeadPath = config.get("snakeHead").asText();
+        snakeBodyPath = config.get("snakeBodyTile").asText();
+        foodPath = config.get("food").asText();
+        goldFoodPath = config.get("goldFood").asText();
+
+        // Generate Assets
+        dimension = new Dimension(fieldWidth * scale, fieldHeight * scale);
+        icon = imageStreamer.read(iconPath);
+        backgroundTile = imageStreamer.scaleImage(backgroundTilePath, scale);
+        snakeHead = imageStreamer.scaleImage(snakeHeadPath, scale);
+        snakeBody = imageStreamer.scaleImage(snakeBodyPath, scale);
+        food = imageStreamer.scaleImage(foodPath, scale);
+        goldFood = imageStreamer.scaleImage(goldFoodPath, scale);
     }
 
     // Getters

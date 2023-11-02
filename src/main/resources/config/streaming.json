@@ -1,0 +1,17 @@
+{
+  "title": "Snake",
+  "icon": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/icon.png",
+  "fieldWidth" : 32,
+  "fieldHeight" : 16,
+  "scale": 32,
+  "fps": 60,
+  "tps": 10,
+  "specialFoodChance": 0.05,
+  "resizable": false,
+  "solidWalls": false,
+  "backgroundTile": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/backgroundTile.png",
+  "snakeHead": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/snakeHead.png",
+  "snakeBodyTile": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/snakeBody.png",
+  "food": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/food.png",
+  "goldFood": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/goldFood.png"
+}
