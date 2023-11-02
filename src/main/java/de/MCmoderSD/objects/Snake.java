@@ -12,7 +12,7 @@ public class Snake extends SnakePiece {
 
     // Constructor
     public Snake(Game game, Config config) {
-        super(0, 0, game, config);
+        super(0, 0, config.getSnakeHead(), game, config);
 
         x = (config.getFieldWidth() / 2) * config.getScale();
         y = (config.getFieldHeight() / 2) * config.getScale();

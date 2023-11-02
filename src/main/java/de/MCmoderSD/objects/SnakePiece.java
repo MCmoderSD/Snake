@@ -4,11 +4,13 @@ import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class SnakePiece extends Rectangle {
 
     // Attributes
     protected final Game game;
+    protected final BufferedImage image;
 
     // Constants
     protected final int fieldWidth;
@@ -22,10 +24,24 @@ public class SnakePiece extends Rectangle {
     protected boolean right = false;
     protected boolean down = false;
 
+    // Default Constructor
     public SnakePiece(int x, int y, Game game, Config config) {
         super(x, y, config.getScale(), config.getScale());
 
         this.game = game;
+        image = config.getSnakeBody();
+        fieldWidth = config.getFieldWidth();
+        fieldHeight = config.getFieldHeight();
+        scale = config.getScale();
+        solidWalls = config.isSolidWalls();
+    }
+
+    // Constructor with Image
+    public SnakePiece(int x, int y, BufferedImage image, Game game, Config config) {
+        super(x, y, config.getScale(), config.getScale());
+
+        this.game = game;
+        this.image = image;
         fieldWidth = config.getFieldWidth();
         fieldHeight = config.getFieldHeight();
         scale = config.getScale();
@@ -107,5 +123,10 @@ public class SnakePiece extends Rectangle {
                 down = true;
             }
         }
+    }
+
+    // Getter
+    public BufferedImage getImage() {
+        return image;
     }
 }

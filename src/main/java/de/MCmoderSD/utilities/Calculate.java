@@ -3,6 +3,7 @@ package de.MCmoderSD.utilities;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.function.DoublePredicate;
 
 @SuppressWarnings("unused")
 public class Calculate {
@@ -59,5 +60,15 @@ public class Calculate {
 
         if (r + g + b > 382) return Color.BLACK;
         else return Color.WHITE;
+    }
+
+    // Calculate Tickrate
+    public static int calculateTickrate(int tps) {
+        return 1000000000 / tps;
+    }
+
+    // Random Chance
+    public static boolean randomChance(double probability) {
+        return Math.random() <= probability;
     }
 }

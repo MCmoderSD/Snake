@@ -34,6 +34,10 @@ public class InputHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
+        // Start
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) game.start();
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) game.start();
+
         // Exit
         if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_C) System.exit(0);
         if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Q) System.exit(0);

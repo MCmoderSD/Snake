@@ -23,6 +23,8 @@ public class Config {
     private final int fieldWidth;
     private final int fieldHeight;
     private final int fps;
+    private final int tps;
+    private final double specialFoodChance;
     private final boolean resizable;
     private final boolean solidWalls;
 
@@ -51,6 +53,8 @@ public class Config {
         fieldWidth = config.get("fieldWidth").asInt();
         fieldHeight = config.get("fieldHeight").asInt();
         fps = config.get("fps").asInt();
+        tps = config.get("tps").asInt();
+        specialFoodChance = config.get("specialFoodChance").asDouble();
         resizable = config.get("resizable").asBoolean();
         solidWalls = config.get("solidWalls").asBoolean();
         backgroundTilePath = config.get("backgroundTile").asText();
@@ -94,6 +98,14 @@ public class Config {
 
     public int getFps() {
         return fps;
+    }
+
+    public int getTps() {
+        return tps;
+    }
+
+    public double getSpecialFoodChance() {
+        return specialFoodChance;
     }
 
     public boolean isResizable() {

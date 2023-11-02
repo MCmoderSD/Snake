@@ -1,12 +1,20 @@
 package de.MCmoderSD.objects;
 
 import de.MCmoderSD.main.Config;
+import de.MCmoderSD.utilities.Calculate;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Food extends Rectangle {
+
+    // Attributes
+    private final boolean isSpecial;
+    private final BufferedImage image;
+
+    // Constructor
     public Food(Config config, ArrayList<SnakePiece> snakePieces) {
         Random random = new Random();
 
@@ -24,10 +32,24 @@ public class Food extends Rectangle {
         height = scale;
 
         if (snakePieces.size() < fieldWidth * fieldHeight && !validSpawn(snakePieces)) new Food(config, snakePieces);
+
+        isSpecial = Calculate.randomChance(config.getSpecialFoodChance());
+        if (isSpecial) image = config.getGoldFood();
+        else image = config.getFood();
     }
 
+    // Methods
     private boolean validSpawn(ArrayList<SnakePiece> snakePieces) {
         for (SnakePiece snakePiece : snakePieces) if (snakePiece.x == x && snakePiece.y == y) return false;
         return true;
+    }
+
+    // Getter
+    public boolean isSpecial() {
+        return isSpecial;
+    }
+
+    public BufferedImage getImage() {
+        return image;
     }
 }

@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 public class Frame extends JFrame {
 
     // Attributes
-    private final UI UI;
+    private final UI ui;
 
     // Constructor
     public Frame(Config config, Game game) {
@@ -20,8 +20,8 @@ public class Frame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // Create and add UI
-        UI = new UI(config, game);
-        add(UI);
+        ui = new UI(config, game);
+        add(ui);
 
         // Finalize and set visible
         pack();
@@ -31,6 +31,10 @@ public class Frame extends JFrame {
 
     // Getter
     public InputHandler getInputs() {
-        return UI.getInputs();
+        return ui.getInputs();
+    }
+
+    public UI getUI() {
+        return ui;
     }
 }

@@ -5,6 +5,8 @@
   "fieldHeight" : 16,
   "scale": 32,
   "fps": 60,
+  "tps": 10,
+  "specialFoodChance": 0.05,
   "resizable": false,
   "solidWalls": false,
   "backgroundTile": "/Images/backgroundTile.png",

@@ -2,10 +2,12 @@ package de.MCmoderSD.core;
 
 import de.MCmoderSD.UI.Frame;
 import de.MCmoderSD.UI.InputHandler;
+import de.MCmoderSD.UI.UI;
 import de.MCmoderSD.main.Config;
 import de.MCmoderSD.main.Main;
 import de.MCmoderSD.objects.Food;
 import de.MCmoderSD.objects.Snake;
+import de.MCmoderSD.utilities.Calculate;
 
 @SuppressWarnings("BusyWait")
 public class Game implements Runnable{
@@ -13,25 +15,33 @@ public class Game implements Runnable{
     // Associations
     private final Config config;
     private final Frame frame;
+    private final UI ui;
     private final InputHandler inputs;
     private final Snake snake;
+    private final double tickrate;
 
     // Game Variables
     private Food food;
     private int score;
     private boolean isPaused;
     private boolean gameOver;
+    private double speedModifier;
+    private boolean gameStarted;
 
     public Game(Config config) {
         this.config = config;
 
         // Init Game Variables
         score = 0;
+        speedModifier = 1;
         isPaused = false;
         gameOver = false;
+        gameStarted = false;
+        tickrate = Calculate.calculateTickrate(config.getTps());
 
         // Init UI
         frame = new Frame(config, this);
+        ui = frame.getUI();
         inputs = frame.getInputs();
 
         // Init Objects
@@ -45,14 +55,14 @@ public class Game implements Runnable{
     public void run() {
         while (Main.isRunning) {
             // Timer
-            double tickrate = 100000000, delta = 0;
+            double delta = 0;
             long current, now = System.nanoTime();
 
 
             // Game Loop
             while (!isPaused && !gameOver) {
                 current = System.nanoTime();
-                delta += (current - now) / tickrate;
+                delta += (current - now) / (tickrate/speedModifier);
                 now = current;
 
                 if (delta >= 1) {
@@ -75,6 +85,7 @@ public class Game implements Runnable{
                         // Interact with Food
                         snake.grow(config);
                         score++;
+                        ui.setScore(score);
                         // ToDo Play Sound
                         food = new Food(config, snake.getSnakePieces());
                         System.out.println("Score: " + score);
@@ -116,6 +127,14 @@ public class Game implements Runnable{
         gameOver = true;
     }
 
+    public void start() {
+        gameStarted = true;
+    }
+
+    public void setSpeedModifier(double speedModifier) {
+        this.speedModifier = speedModifier;
+    }
+
     // Getter
     public Snake getSnake() {
         return snake;
@@ -123,5 +142,9 @@ public class Game implements Runnable{
 
     public Food getFood() {
         return food;
+    }
+
+    public String getScore() {
+        return String.valueOf(score);
     }
 }
