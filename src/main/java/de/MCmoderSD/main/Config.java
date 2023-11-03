@@ -7,7 +7,7 @@ import de.MCmoderSD.utilities.JsonReader;
 import de.MCmoderSD.utilities.JsonStreamer;
 
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
 @SuppressWarnings("unused")

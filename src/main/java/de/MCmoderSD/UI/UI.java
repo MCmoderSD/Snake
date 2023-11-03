@@ -6,14 +6,17 @@ import de.MCmoderSD.objects.Food;
 import de.MCmoderSD.objects.Snake;
 import de.MCmoderSD.objects.SnakePiece;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
 import java.util.ArrayList;
 
 public class UI extends JPanel {
 
     // Associations
-    private final Config config;
     private final Game game;
     private final InputHandler inputs;
 
@@ -22,7 +25,6 @@ public class UI extends JPanel {
 
     // Constructor
     public UI(Config config, Game game) {
-        this.config = config;
         this.game = game;
 
         // Set UI Attributes
@@ -35,12 +37,12 @@ public class UI extends JPanel {
         // Add InputHandler
         addKeyListener(inputs = new InputHandler(game));
 
-        // Init UI Components
+        // Init Components
         scoreLabel = new JLabel("Score: " + game.getScore());
         scoreLabel.setFont(new Font("Roboto", Font.PLAIN, config.getScale()/2));
         scoreLabel.setForeground(Color.YELLOW);
-        scoreLabel.setSize(config.getScale() * 2, config.getScale());
-        scoreLabel.setLocation((config.getFieldWidth() - 2) * config.getScale(), 0);
+        scoreLabel.setSize(config.getScale() * 3, config.getScale());
+        scoreLabel.setLocation((config.getFieldWidth() - 3) * config.getScale(), 0);
         add(scoreLabel);
 
         // Debug
