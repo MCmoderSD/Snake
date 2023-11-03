@@ -1,10 +1,11 @@
 package de.MCmoderSD.utilities;
 
+import de.MCmoderSD.main.Main;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.function.DoublePredicate;
+import java.io.InputStream;
 
 @SuppressWarnings("unused")
 public class Calculate {
@@ -74,8 +75,8 @@ public class Calculate {
     }
 
     // File Checker
-    public static boolean doesFileExist(String filePath) {
-        File file = new File(filePath);
-        return file.exists() && file.isFile();
+    public static boolean doesFileExist(String resourcePath) {
+        InputStream inputStream = Main.class.getResourceAsStream(resourcePath);
+        return inputStream != null;
     }
 }
