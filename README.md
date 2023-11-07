@@ -34,5 +34,6 @@ You can exit the game by pressing Ctrl + C. <Br>
 - [x] Snake going through walls
 - [x] Snake hitting walls (optional)
 - [ ] Game over screen
-- [ ] Score
+- [x] Score
 - [ ] Golden apple
+- [x] Asset-streaming

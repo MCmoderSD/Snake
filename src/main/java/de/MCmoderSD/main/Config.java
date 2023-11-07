@@ -15,12 +15,6 @@ public class Config {
 
     // Config Variables
     private final String title;
-    private final String iconPath;
-    private final String backgroundTilePath;
-    private final String snakeHeadPath;
-    private final String snakeBodyPath;
-    private final String foodPath;
-    private final String goldFoodPath;
     private final int scale;
     private final int fieldWidth;
     private final int fieldHeight;
@@ -50,7 +44,6 @@ public class Config {
         if (config == null) throw new IllegalArgumentException("The config file could not be loaded");
 
         title = config.get("title").asText();
-        iconPath = config.get("icon").asText();
         scale = config.get("scale").asInt();
         fieldWidth = config.get("fieldWidth").asInt();
         fieldHeight = config.get("fieldHeight").asInt();
@@ -59,20 +52,15 @@ public class Config {
         specialFoodChance = config.get("specialFoodChance").asDouble();
         resizable = config.get("resizable").asBoolean();
         solidWalls = config.get("solidWalls").asBoolean();
-        backgroundTilePath = config.get("backgroundTile").asText();
-        snakeHeadPath = config.get("snakeHead").asText();
-        snakeBodyPath = config.get("snakeBodyTile").asText();
-        foodPath = config.get("food").asText();
-        goldFoodPath = config.get("goldFood").asText();
 
         // Generate Assets
         dimension = new Dimension(fieldWidth * scale, fieldHeight * scale);
-        icon = imageReader.read(iconPath);
-        backgroundTile = imageReader.scaleImage(backgroundTilePath, scale);
-        snakeHead = imageReader.scaleImage(snakeHeadPath, scale);
-        snakeBody = imageReader.scaleImage(snakeBodyPath, scale);
-        food = imageReader.scaleImage(foodPath, scale);
-        goldFood = imageReader.scaleImage(goldFoodPath, scale);
+        icon = imageReader.read(config.get("icon").asText());
+        backgroundTile = imageReader.scaleImage(config.get("backgroundTile").asText(), scale);
+        snakeHead = imageReader.scaleImage(config.get("snakeHead").asText(), scale);
+        snakeBody = imageReader.scaleImage(config.get("snakeBodyTile").asText(), scale);
+        food = imageReader.scaleImage(config.get("food").asText(), scale);
+        goldFood = imageReader.scaleImage(config.get("goldFood").asText(), scale);
     }
 
     // Constructor asset streaming
@@ -86,7 +74,6 @@ public class Config {
         if (config == null) throw new IllegalArgumentException("The config file could not be loaded");
 
         title = config.get("title").asText();
-        iconPath = config.get("icon").asText();
         scale = config.get("scale").asInt();
         fieldWidth = config.get("fieldWidth").asInt();
         fieldHeight = config.get("fieldHeight").asInt();
@@ -95,20 +82,15 @@ public class Config {
         specialFoodChance = config.get("specialFoodChance").asDouble();
         resizable = config.get("resizable").asBoolean();
         solidWalls = config.get("solidWalls").asBoolean();
-        backgroundTilePath = config.get("backgroundTile").asText();
-        snakeHeadPath = config.get("snakeHead").asText();
-        snakeBodyPath = config.get("snakeBodyTile").asText();
-        foodPath = config.get("food").asText();
-        goldFoodPath = config.get("goldFood").asText();
 
         // Generate Assets
         dimension = new Dimension(fieldWidth * scale, fieldHeight * scale);
-        icon = imageStreamer.read(iconPath);
-        backgroundTile = imageStreamer.scaleImage(backgroundTilePath, scale);
-        snakeHead = imageStreamer.scaleImage(snakeHeadPath, scale);
-        snakeBody = imageStreamer.scaleImage(snakeBodyPath, scale);
-        food = imageStreamer.scaleImage(foodPath, scale);
-        goldFood = imageStreamer.scaleImage(goldFoodPath, scale);
+        icon = imageStreamer.read(config.get("icon").asText());
+        backgroundTile = imageStreamer.scaleImage(config.get("backgroundTile").asText(), scale);
+        snakeHead = imageStreamer.scaleImage(config.get("snakeHead").asText(), scale);
+        snakeBody = imageStreamer.scaleImage(config.get("snakeBodyTile").asText(), scale);
+        food = imageStreamer.scaleImage(config.get("food").asText(), scale);
+        goldFood = imageStreamer.scaleImage(config.get("goldFood").asText(), scale);
     }
 
     // Getters
@@ -116,10 +98,6 @@ public class Config {
     // Config Getters
     public String getTitle() {
         return title;
-    }
-
-    public String getIconPath() {
-        return iconPath;
     }
 
     public int getFieldWidth() {
@@ -152,26 +130,6 @@ public class Config {
 
     public boolean isSolidWalls() {
         return solidWalls;
-    }
-
-    public String getBackgroundTilePath() {
-        return backgroundTilePath;
-    }
-
-    public String getSnakeHeadPath() {
-        return snakeHeadPath;
-    }
-
-    public String getSnakeBodyPath() {
-        return snakeBodyPath;
-    }
-
-    public String getFoodPath() {
-        return foodPath;
-    }
-
-    public String getGoldFoodPath() {
-        return goldFoodPath;
     }
 
     // Asset Getters

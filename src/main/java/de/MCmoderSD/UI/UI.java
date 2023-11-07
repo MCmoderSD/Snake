@@ -18,6 +18,7 @@ public class UI extends JPanel {
 
     // Associations
     private final Game game;
+    private final Config config;
     private final InputHandler inputs;
 
     // UI Components
@@ -26,6 +27,7 @@ public class UI extends JPanel {
     // Constructor
     public UI(Config config, Game game) {
         this.game = game;
+        this.config = config;
 
         // Set UI Attributes
         setPreferredSize(config.getDimension());
@@ -37,16 +39,12 @@ public class UI extends JPanel {
         // Add InputHandler
         addKeyListener(inputs = new InputHandler(game));
 
-        // Init Components
         scoreLabel = new JLabel("Score: " + game.getScore());
         scoreLabel.setFont(new Font("Roboto", Font.PLAIN, config.getScale()/2));
         scoreLabel.setForeground(Color.YELLOW);
         scoreLabel.setSize(config.getScale() * 3, config.getScale());
         scoreLabel.setLocation((config.getFieldWidth() - 3) * config.getScale(), 0);
         add(scoreLabel);
-
-        // Debug
-        setBackground(new Color(36, 41, 46));
     }
 
     // Render Engine
@@ -57,8 +55,8 @@ public class UI extends JPanel {
         // Cast Graphics to Graphics2D
         Graphics2D g = (Graphics2D) graphics;
 
-        // Background ToDo fix Background
-        //for (int x = 0; x < config.getFieldWidth(); x++) for (int y = 0; y < config.getFieldHeight(); y++) g.drawImage(config.getBackgroundTile(), x * config.getScale(), y * config.getScale(), null);
+        // Background
+        for (int x = 0; x < config.getFieldWidth(); x++) for (int y = 0; y < config.getFieldHeight(); y++) g.drawImage(config.getBackgroundTile(), x * config.getScale(), y * config.getScale(), null);
 
         // Temp Variables
         Snake snake = game.getSnake();
@@ -73,6 +71,9 @@ public class UI extends JPanel {
 
         // Draw Snake Body
         for (int i = 1; i < game.getSnake().getSnakePieces().size(); i++) g.drawImage(snakePieces.get(i).getImage(), snakePieces.get(i).x, snakePieces.get(i).y, null);
+
+        // Draw UI Components
+        paintComponents(g);
     }
 
     // Getter

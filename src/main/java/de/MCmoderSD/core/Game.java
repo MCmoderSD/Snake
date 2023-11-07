@@ -65,6 +65,17 @@ public class Game implements Runnable{
                 delta += (current - now) / (tickrate/speedModifier);
                 now = current;
 
+                // Wait for Start
+                if (!gameStarted) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    delta = 0;
+                }
+
+                // Tick
                 if (delta >= 1) {
                     // Game Loop Start:
 
@@ -94,9 +105,6 @@ public class Game implements Runnable{
                     // Check Input and Move Snake
                     snake.updateDirection(inputs.getDirection());
                     snake.moveSnake();
-
-                    // Check for Win
-                    //if (config.getFieldWidth() * config.getFieldHeight() == snake.getSnakePieces().size()) // ToDo Win
 
                     // Update Frame
                     frame.repaint();
