@@ -1,0 +1,110 @@
+package de.MCmoderSD.utilities.sound;
+
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioFormat;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+
+@SuppressWarnings("unused")
+public class WavPlayer {
+    private Clip clip;
+    private boolean loop = false;
+
+    public WavPlayer(String audioPath) {
+        loadClip(audioPath);
+    }
+
+    public WavPlayer(String audioPath, boolean isAbsolutePath) {
+        if (isAbsolutePath) loadClipFromAbsolutePath(audioPath);
+        else loadClip(audioPath);
+    }
+
+    public WavPlayer(String audioPath, boolean isAbsolutePath, boolean loop) {
+        this.loop = loop;
+        if (isAbsolutePath) loadClipFromAbsolutePath(audioPath);
+        else loadClip(audioPath);
+    }
+
+    private void loadClip(String audioPath) {
+        try {
+            if (audioPath.startsWith("http://") || audioPath.startsWith("https://")) {
+                URL url = new URL(audioPath);
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
+                AudioFormat format = new AudioFormat(44100, 16, 2, true, false);
+                AudioInputStream convertedInputStream = AudioSystem.getAudioInputStream(format, audioInputStream);
+                clip = AudioSystem.getClip();
+                clip.open(convertedInputStream);
+            } else {
+                InputStream resourceStream = getClass().getResourceAsStream(audioPath);
+                if (resourceStream != null) {
+                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(resourceStream));
+                    AudioFormat format = new AudioFormat(44100, 16, 2, true, false);
+                    AudioInputStream convertedInputStream = AudioSystem.getAudioInputStream(format, audioInputStream);
+                    clip = AudioSystem.getClip();
+                    clip.open(convertedInputStream);
+                } else System.err.println("File not found: " + audioPath);
+            }
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    private void loadClipFromAbsolutePath(String absolutePath) {
+        try {
+            File file = new File(absolutePath);
+            if (file.exists()) {
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+                AudioFormat format = new AudioFormat(44100, 16, 2, true, false);
+                AudioInputStream convertedInputStream = AudioSystem.getAudioInputStream(format, audioInputStream);
+                clip = AudioSystem.getClip();
+                clip.open(convertedInputStream);
+            } else System.err.println("File not found: " + absolutePath);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public void play() {
+        if (clip != null) {
+            clip.setFramePosition(0);
+            clip.start();
+            if (loop) clip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
+    }
+
+    public void play(boolean loop) {
+        if (loop) clip.loop(Clip.LOOP_CONTINUOUSLY);
+        else clip.start();
+    }
+
+    public void pause() {
+        if (clip != null && clip.isRunning()) clip.stop();
+    }
+
+    public void resume() {
+        if (clip != null && !clip.isRunning()) clip.start();
+    }
+
+    public void stop() {
+        if (clip != null) {
+
+            clip.stop();
+            clip.close();
+        }
+    }
+
+    public boolean isPlaying() {
+        return clip != null && clip.isRunning();
+    }
+
+    public void setLoop(boolean loop) {
+        this.loop = loop;
+    }
+}

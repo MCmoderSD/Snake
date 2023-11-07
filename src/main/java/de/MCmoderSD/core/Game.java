@@ -8,6 +8,7 @@ import de.MCmoderSD.main.Main;
 import de.MCmoderSD.objects.Food;
 import de.MCmoderSD.objects.Snake;
 import de.MCmoderSD.utilities.Calculate;
+import de.MCmoderSD.utilities.sound.AudioPlayer;
 
 @SuppressWarnings("BusyWait")
 public class Game implements Runnable{
@@ -16,6 +17,7 @@ public class Game implements Runnable{
     private final Config config;
     private final Frame frame;
     private final UI ui;
+    private final AudioPlayer audioPlayer;
     private final InputHandler inputs;
     private final Snake snake;
     private final double tickrate;
@@ -27,6 +29,7 @@ public class Game implements Runnable{
     private boolean gameOver;
     private double speedModifier;
     private boolean gameStarted;
+    private boolean ultActive;
 
     public Game(Config config) {
         this.config = config;
@@ -43,6 +46,7 @@ public class Game implements Runnable{
         frame = new Frame(config, this);
         ui = frame.getUI();
         inputs = frame.getInputs();
+        audioPlayer = config.getAudioPlayer();
 
         // Init Objects
         snake = new Snake(this, config);
@@ -88,18 +92,20 @@ public class Game implements Runnable{
                     }
 
                     // Check Collision with itself
-                    if (snake.checkCollision()) gameOver();
+                    if (snake.checkCollision() && !ultActive) gameOver();
 
                     // Check Collision with Food
                     if (snake.checkFood(food)) {
 
                         // Interact with Food
-                        snake.grow(config);
                         score++;
+                        snake.grow(config);
+                        audioPlayer.playAudio(food.getSound());
                         ui.setScore(score);
-                        // ToDo Play Sound
+
+                        if (food.isSpecial()) activateUlt();
+
                         food = new Food(config, snake.getSnakePieces());
-                        System.out.println("Score: " + score);
                     }
 
                     // Check Input and Move Snake
@@ -125,8 +131,25 @@ public class Game implements Runnable{
         }
     }
 
+    // Methods
+    private void activateUlt() {
+        new Thread(() -> {
+            try {
+                ultActive = true;
+                speedModifier = 2;
+                Thread.sleep(7000);
+                speedModifier = 1;
+                ultActive = false;
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
     // Setter
     public void togglePause() {
+        if (isPaused) audioPlayer.pauseAll();
+        else audioPlayer.resumeAll();
         isPaused = !isPaused;
     }
 

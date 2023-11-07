@@ -1,4 +1,4 @@
-package de.MCmoderSD.utilities;
+package de.MCmoderSD.utilities.image;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;

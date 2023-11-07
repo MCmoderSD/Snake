@@ -1,10 +1,11 @@
 package de.MCmoderSD.main;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import de.MCmoderSD.utilities.ImageReader;
-import de.MCmoderSD.utilities.ImageStreamer;
-import de.MCmoderSD.utilities.JsonReader;
-import de.MCmoderSD.utilities.JsonStreamer;
+import de.MCmoderSD.utilities.image.ImageReader;
+import de.MCmoderSD.utilities.image.ImageStreamer;
+import de.MCmoderSD.utilities.json.JsonReader;
+import de.MCmoderSD.utilities.json.JsonStreamer;
+import de.MCmoderSD.utilities.sound.AudioPlayer;
 
 
 import java.awt.Dimension;
@@ -12,6 +13,13 @@ import java.awt.image.BufferedImage;
 
 @SuppressWarnings("unused")
 public class Config {
+
+    // Associations
+    private final AudioPlayer audioPlayer;
+    private final JsonReader jsonReader;
+    private final JsonStreamer jsonStreamer;
+    private final ImageReader imageReader;
+    private final ImageStreamer imageStreamer;
 
     // Config Variables
     private final String title;
@@ -33,12 +41,19 @@ public class Config {
     private final BufferedImage food;
     private final BufferedImage goldFood;
 
+    // Sounds
+    private final String foodSound;
+    private final String ultSound;
+
     // Constructor
     public Config(String[] args) {
 
         // Read Config
-        ImageReader imageReader = new ImageReader();
-        JsonReader jsonReader = new JsonReader();
+        audioPlayer = new AudioPlayer();
+        imageReader = new ImageReader();
+        jsonReader = new JsonReader();
+        imageStreamer = null;
+        jsonStreamer = null;
         JsonNode config = jsonReader.read("/config/default.json");
 
         if (config == null) throw new IllegalArgumentException("The config file could not be loaded");
@@ -52,6 +67,8 @@ public class Config {
         specialFoodChance = config.get("specialFoodChance").asDouble();
         resizable = config.get("resizable").asBoolean();
         solidWalls = config.get("solidWalls").asBoolean();
+        foodSound = config.get("foodSound").asText();
+        ultSound = config.get("ultSound").asText();
 
         // Generate Assets
         dimension = new Dimension(fieldWidth * scale, fieldHeight * scale);
@@ -61,14 +78,19 @@ public class Config {
         snakeBody = imageReader.scaleImage(config.get("snakeBodyTile").asText(), scale);
         food = imageReader.scaleImage(config.get("food").asText(), scale);
         goldFood = imageReader.scaleImage(config.get("goldFood").asText(), scale);
+        audioPlayer.loadAudio(foodSound);
+        audioPlayer.loadAudio(ultSound);
     }
 
     // Constructor asset streaming
     public Config(String[] args, String url) {
 
         // Read Config
-        ImageStreamer imageStreamer = new ImageStreamer();
-        JsonStreamer jsonStreamer= new JsonStreamer();
+        audioPlayer = new AudioPlayer();
+        imageStreamer = new ImageStreamer();
+        jsonStreamer = new JsonStreamer();
+        imageReader = null;
+        jsonReader = null;
         JsonNode config = jsonStreamer.read(url);
 
         if (config == null) throw new IllegalArgumentException("The config file could not be loaded");
@@ -82,6 +104,8 @@ public class Config {
         specialFoodChance = config.get("specialFoodChance").asDouble();
         resizable = config.get("resizable").asBoolean();
         solidWalls = config.get("solidWalls").asBoolean();
+        foodSound = config.get("foodSound").asText();
+        ultSound = config.get("ultSound").asText();
 
         // Generate Assets
         dimension = new Dimension(fieldWidth * scale, fieldHeight * scale);
@@ -91,9 +115,32 @@ public class Config {
         snakeBody = imageStreamer.scaleImage(config.get("snakeBodyTile").asText(), scale);
         food = imageStreamer.scaleImage(config.get("food").asText(), scale);
         goldFood = imageStreamer.scaleImage(config.get("goldFood").asText(), scale);
+        audioPlayer.loadAudio(foodSound);
+        audioPlayer.loadAudio(ultSound);
     }
 
     // Getters
+
+    // Associations
+    public AudioPlayer getAudioPlayer() {
+        return audioPlayer;
+    }
+
+    public ImageReader getImageReader() {
+        return imageReader;
+    }
+
+    public ImageStreamer getImageStreamer() {
+        return imageStreamer;
+    }
+
+    public JsonReader getJsonReader() {
+        return jsonReader;
+    }
+
+    public JsonStreamer getJsonStreamer() {
+        return jsonStreamer;
+    }
 
     // Config Getters
     public String getTitle() {
@@ -130,6 +177,14 @@ public class Config {
 
     public boolean isSolidWalls() {
         return solidWalls;
+    }
+
+    public String getFoodSound() {
+        return foodSound;
+    }
+
+    public String getUltSound() {
+        return ultSound;
     }
 
     // Asset Getters

@@ -13,6 +13,7 @@ public class Food extends Rectangle {
     // Attributes
     private final boolean isSpecial;
     private final BufferedImage image;
+    private final String sound;
 
     // Constructor
     public Food(Config config, ArrayList<SnakePiece> snakePieces) {
@@ -36,6 +37,9 @@ public class Food extends Rectangle {
         isSpecial = Calculate.randomChance(config.getSpecialFoodChance());
         if (isSpecial) image = config.getGoldFood();
         else image = config.getFood();
+
+        if (isSpecial) sound = config.getUltSound();
+        else sound = config.getFoodSound();
     }
 
     // Methods
@@ -51,5 +55,9 @@ public class Food extends Rectangle {
 
     public BufferedImage getImage() {
         return image;
+    }
+
+    public String getSound() {
+        return sound;
     }
 }

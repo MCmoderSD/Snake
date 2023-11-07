@@ -37,3 +37,4 @@ You can exit the game by pressing Ctrl + C. <Br>
 - [x] Score
 - [ ] Golden apple
 - [x] Asset-streaming
+- [x] Sound effects
