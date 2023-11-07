@@ -36,14 +36,19 @@ public class Config {
     private final Dimension dimension;
     private final BufferedImage icon;
     private final BufferedImage backgroundTile;
-    private final BufferedImage snakeHead;
-    private final BufferedImage snakeBody;
+    private final BufferedImage head;
+    private final BufferedImage upperBody;
+    private final BufferedImage lowerBody;
+    private final BufferedImage legTile;
+    private final BufferedImage legTransition;
+    private final BufferedImage feet;
     private final BufferedImage food;
     private final BufferedImage goldFood;
 
     // Sounds
     private final String foodSound;
     private final String ultSound;
+    private final String dieSound;
 
     // Constructor
     public Config(String[] args) {
@@ -69,17 +74,23 @@ public class Config {
         solidWalls = config.get("solidWalls").asBoolean();
         foodSound = config.get("foodSound").asText();
         ultSound = config.get("ultSound").asText();
+        dieSound = config.get("dieSound").asText();
 
         // Generate Assets
         dimension = new Dimension(fieldWidth * scale, fieldHeight * scale);
         icon = imageReader.read(config.get("icon").asText());
         backgroundTile = imageReader.scaleImage(config.get("backgroundTile").asText(), scale);
-        snakeHead = imageReader.scaleImage(config.get("snakeHead").asText(), scale);
-        snakeBody = imageReader.scaleImage(config.get("snakeBodyTile").asText(), scale);
+        head = imageReader.scaleImage(config.get("head").asText(), scale);
+        upperBody = imageReader.scaleImage(config.get("upperBody").asText(), scale);
+        lowerBody = imageReader.scaleImage(config.get("lowerBody").asText(), scale);
+        legTile = imageReader.scaleImage(config.get("legTile").asText(), scale);
+        legTransition = imageReader.scaleImage(config.get("legTransition").asText(), scale);
+        feet = imageReader.scaleImage(config.get("feet").asText(), scale);
         food = imageReader.scaleImage(config.get("food").asText(), scale);
         goldFood = imageReader.scaleImage(config.get("goldFood").asText(), scale);
         audioPlayer.loadAudio(foodSound);
         audioPlayer.loadAudio(ultSound);
+        audioPlayer.loadAudio(dieSound);
     }
 
     // Constructor asset streaming
@@ -106,17 +117,23 @@ public class Config {
         solidWalls = config.get("solidWalls").asBoolean();
         foodSound = config.get("foodSound").asText();
         ultSound = config.get("ultSound").asText();
+        dieSound = config.get("dieSound").asText();
 
         // Generate Assets
         dimension = new Dimension(fieldWidth * scale, fieldHeight * scale);
         icon = imageStreamer.read(config.get("icon").asText());
         backgroundTile = imageStreamer.scaleImage(config.get("backgroundTile").asText(), scale);
-        snakeHead = imageStreamer.scaleImage(config.get("snakeHead").asText(), scale);
-        snakeBody = imageStreamer.scaleImage(config.get("snakeBodyTile").asText(), scale);
+        head = imageStreamer.scaleImage(config.get("head").asText(), scale);
+        upperBody = imageStreamer.scaleImage(config.get("upperBody").asText(), scale);
+        lowerBody = imageStreamer.scaleImage(config.get("lowerBody").asText(), scale);
+        legTile = imageStreamer.scaleImage(config.get("legTile").asText(), scale);
+        legTransition = imageStreamer.scaleImage(config.get("legTransition").asText(), scale);
+        feet = imageStreamer.scaleImage(config.get("feet").asText(), scale);
         food = imageStreamer.scaleImage(config.get("food").asText(), scale);
         goldFood = imageStreamer.scaleImage(config.get("goldFood").asText(), scale);
         audioPlayer.loadAudio(foodSound);
         audioPlayer.loadAudio(ultSound);
+        audioPlayer.loadAudio(dieSound);
     }
 
     // Getters
@@ -187,6 +204,10 @@ public class Config {
         return ultSound;
     }
 
+    public String getDieSound() {
+        return dieSound;
+    }
+
     // Asset Getters
     public BufferedImage getIcon() {
         return icon;
@@ -200,12 +221,28 @@ public class Config {
         return backgroundTile;
     }
 
-    public BufferedImage getSnakeHead() {
-        return snakeHead;
+    public BufferedImage getHead() {
+        return head;
     }
 
-    public BufferedImage getSnakeBody() {
-        return snakeBody;
+    public BufferedImage getUpperBody() {
+        return upperBody;
+    }
+
+    public BufferedImage getLowerBody() {
+        return lowerBody;
+    }
+
+    public BufferedImage getLegTile() {
+        return legTile;
+    }
+
+    public BufferedImage getLegTransition() {
+        return legTransition;
+    }
+
+    public BufferedImage getFeet() {
+        return feet;
     }
 
     public BufferedImage getFood() {

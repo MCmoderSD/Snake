@@ -12,15 +12,15 @@ public class Snake extends SnakePiece {
 
     // Constructor
     public Snake(Game game, Config config) {
-        super(0, 0, config.getSnakeHead(), game, config);
+        super(0, 0, config.getHead(), game, config);
 
         x = (config.getFieldWidth() / 2) * config.getScale();
         y = (config.getFieldHeight() / 2) * config.getScale();
 
         // Initial Snake
         snakePieces.add(this); // Head
-        snakePieces.add(new SnakePiece(x + scale, y, game, config)); // Body
-        snakePieces.add(new SnakePiece(x + 2 * scale, y, game, config)); // Body
+        snakePieces.add(new SnakePiece(x + scale, y, config.getUpperBody(),game, config)); // Upper Body
+        snakePieces.add(new SnakePiece(x + 2 * scale, y, config.getLowerBody(), game, config)); // Lower Body
     }
 
 

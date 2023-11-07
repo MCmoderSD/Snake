@@ -10,7 +10,7 @@ public class SnakePiece extends Rectangle {
 
     // Attributes
     protected final Game game;
-    protected final BufferedImage image;
+    protected BufferedImage image;
 
     // Constants
     protected final int fieldWidth;
@@ -29,7 +29,7 @@ public class SnakePiece extends Rectangle {
         super(x, y, config.getScale(), config.getScale());
 
         this.game = game;
-        image = config.getSnakeBody();
+        image = config.getLegTile();
         fieldWidth = config.getFieldWidth();
         fieldHeight = config.getFieldHeight();
         scale = config.getScale();

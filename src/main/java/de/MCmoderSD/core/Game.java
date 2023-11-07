@@ -136,9 +136,9 @@ public class Game implements Runnable{
         new Thread(() -> {
             try {
                 ultActive = true;
-                speedModifier = 2;
+                setSpeedModifier(2);
                 Thread.sleep(7000);
-                speedModifier = 1;
+                setSpeedModifier(1);
                 ultActive = false;
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -155,6 +155,7 @@ public class Game implements Runnable{
 
     public void gameOver() {
         // ToDo Game Over
+        audioPlayer.playAudio(config.getDieSound());
         gameOver = true;
     }
 
