@@ -51,12 +51,8 @@ public class SnakePiece extends Rectangle {
 
     // Wall Hit Detected
     public void wallHitDetected() {
-        if (solidWalls) {
-            // ToDo Game Over
-            System.out.println("Game Over");
-            game.gameOver();
-
-        } else {
+        if (solidWalls) game.gameOver();
+        else {
             if (left) x = fieldWidth * scale - scale;
             if (up) y = fieldHeight * scale - scale;
             if (right) x = 0;

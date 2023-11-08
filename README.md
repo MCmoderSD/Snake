@@ -23,6 +23,7 @@ Alternatively, you can run it from the command line with the following command: 
 ## Controls
 The snake is controlled by the arrow keys or WASD. <Br>
 You can pause and resume the game by pressing escape. <Br>
+To start the game, press space or enter. <Br>
 You can exit the game by pressing Ctrl + C. <Br>
 
 ## Features
@@ -40,3 +41,8 @@ You can exit the game by pressing Ctrl + C. <Br>
 - [x] Sound effects
 - [x] Ult Working
 - [ ] Ult Animation
+- [x] Rotation
+- [ ] Win
+- [ ] Game Over
+- [ ] Menu
+- [ ] Restart

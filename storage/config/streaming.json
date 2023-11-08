@@ -10,10 +10,15 @@
   "resizable": false,
   "solidWalls": false,
   "backgroundTile": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/backgroundTile.png",
-  "snakeHead": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/snakeHead.png",
-  "snakeBodyTile": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/snakeBody.png",
+  "head": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/Head.png",
+  "upperBody": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/UpperBody.png",
+  "lowerBody": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/LowerBody.png",
+  "legTile": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/LegTile.png",
+  "legTransition": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/LegTransition.png",
+  "feet": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/Feet.png",
   "food": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/food.png",
   "goldFood": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/goldFood.png",
-  "foodSound": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Audio/point.wav",
-  "ultSound": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Audio/rainbow.wav"
+  "foodSound": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Audio/Eating.wav",
+  "ultSound": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Audio/rainbow.wav",
+  "dieSound": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Audio/OOF.wav"
 }

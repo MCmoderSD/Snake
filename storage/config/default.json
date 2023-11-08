@@ -10,10 +10,15 @@
   "resizable": false,
   "solidWalls": false,
   "backgroundTile": "/Images/backgroundTile.png",
-  "snakeHead": "/Images/snakeHead.png",
-  "snakeBodyTile": "/Images/snakeBody.png",
+  "head": "/Images/Head.png",
+  "upperBody": "/Images/UpperBody.png",
+  "lowerBody": "/Images/LowerBody.png",
+  "legTile": "/Images/LegTile.png",
+  "legTransition": "/Images/LegTransition.png",
+  "feet": "/Images/Feet.png",
   "food": "/Images/food.png",
   "goldFood": "/Images/goldFood.png",
-  "foodSound": "/Audio/point.wav",
-  "ultSound": "/Audio/rainbow.wav"
+  "foodSound": "/Audio/Eating.wav",
+  "ultSound": "/Audio/rainbow.wav",
+  "dieSound": "/Audio/OOF.wav"
 }

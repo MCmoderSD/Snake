@@ -6,8 +6,12 @@ import de.MCmoderSD.objects.Food;
 import de.MCmoderSD.objects.Snake;
 import de.MCmoderSD.objects.SnakePiece;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
