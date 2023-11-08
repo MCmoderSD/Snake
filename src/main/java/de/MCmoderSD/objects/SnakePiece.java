@@ -4,6 +4,7 @@ import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
 
 import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 public class SnakePiece extends Rectangle {
@@ -128,5 +129,34 @@ public class SnakePiece extends Rectangle {
     // Getter
     public BufferedImage getImage() {
         return image;
+    }
+
+    public byte getDirection() {
+        if (left) return 0;
+        if (up) return 1;
+        if (right) return 2;
+        if (down) return 3;
+        return -1;
+    }
+
+    public AffineTransform getTransform() {
+        AffineTransform transform = new AffineTransform();
+        transform.translate(x, y);
+
+        int effectiveScale = scale / 2;
+
+        switch (getDirection()) {
+            case 0: transform.rotate(Math.toRadians(-90), effectiveScale, effectiveScale); break;
+            case 1: transform.rotate(Math.toRadians(0), effectiveScale, effectiveScale); break;
+            case 2: transform.rotate(Math.toRadians(90), effectiveScale, effectiveScale); break;
+            case 3: transform.rotate(Math.toRadians(180), effectiveScale, effectiveScale); break;
+        }
+
+        return transform;
+    }
+
+    // Setter
+    protected void setImage(BufferedImage image) {
+        this.image = image;
     }
 }
