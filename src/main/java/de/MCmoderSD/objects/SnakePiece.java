@@ -50,7 +50,7 @@ public class SnakePiece extends Rectangle {
     }
 
     // Wall Hit Detected
-    public void wallHitDetected() {
+    private void wallHitDetected() {
         if (solidWalls) game.gameOver();
         else {
             if (left) x = fieldWidth * scale - scale;

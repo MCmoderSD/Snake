@@ -71,7 +71,7 @@ public class UI extends JPanel {
         for (int i = snakePieces.size()-1; i >= 0; i--) {
             SnakePiece snakePiece = snakePieces.get(i);
 
-            g.setTransform(snakePiece.getTransform());
+            g.transform(snakePiece.getTransform());
             g.drawImage(snakePiece.getImage(), 0, 0, null);
             g.setTransform(new AffineTransform());
         }

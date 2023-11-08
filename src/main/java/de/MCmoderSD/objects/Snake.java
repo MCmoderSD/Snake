@@ -49,6 +49,7 @@ public class Snake extends SnakePiece {
             snakePieces.get(i).y = snakePieces.get(i - 1).y;
             snakePieces.get(i).updateDirection(snakePieces.get(i - 1).getDirection());
         }
+
         move();
     }
 
