@@ -33,55 +33,64 @@ public class WavPlayer {
     }
 
     private void loadClip(String audioPath) {
-        try {
-            if (audioPath.startsWith("http://") || audioPath.startsWith("https://")) {
-                URL url = new URL(audioPath);
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
-                AudioFormat format = new AudioFormat(44100, 16, 2, true, false);
-                AudioInputStream convertedInputStream = AudioSystem.getAudioInputStream(format, audioInputStream);
-                clip = AudioSystem.getClip();
-                clip.open(convertedInputStream);
-            } else {
-                InputStream resourceStream = getClass().getResourceAsStream(audioPath);
-                if (resourceStream != null) {
-                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(resourceStream));
+        new Thread(() -> {
+            try {
+                if (audioPath.startsWith("http://") || audioPath.startsWith("https://")) {
+                    URL url = new URL(audioPath);
+                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
                     AudioFormat format = new AudioFormat(44100, 16, 2, true, false);
                     AudioInputStream convertedInputStream = AudioSystem.getAudioInputStream(format, audioInputStream);
                     clip = AudioSystem.getClip();
                     clip.open(convertedInputStream);
-                } else System.err.println("File not found: " + audioPath);
+                } else {
+                    InputStream resourceStream = getClass().getResourceAsStream(audioPath);
+                    if (resourceStream != null) {
+                        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(resourceStream));
+                        AudioFormat format = new AudioFormat(44100, 16, 2, true, false);
+                        AudioInputStream convertedInputStream = AudioSystem.getAudioInputStream(format, audioInputStream);
+                        clip = AudioSystem.getClip();
+                        clip.open(convertedInputStream);
+                    } else System.err.println("File not found: " + audioPath);
+                }
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                System.err.println(e.getMessage());
             }
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            System.err.println(e.getMessage());
-        }
+        }).start();
     }
 
     private void loadClipFromAbsolutePath(String absolutePath) {
-        try {
-            File file = new File(absolutePath);
-            if (file.exists()) {
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
-                AudioFormat format = new AudioFormat(44100, 16, 2, true, false);
-                AudioInputStream convertedInputStream = AudioSystem.getAudioInputStream(format, audioInputStream);
-                clip = AudioSystem.getClip();
-                clip.open(convertedInputStream);
-            } else System.err.println("File not found: " + absolutePath);
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            System.err.println(e.getMessage());
-        }
+        new Thread(() -> {
+            try {
+                File file = new File(absolutePath);
+                if (file.exists()) {
+                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+                    AudioFormat format = new AudioFormat(44100, 16, 2, true, false);
+                    AudioInputStream convertedInputStream = AudioSystem.getAudioInputStream(format, audioInputStream);
+                    clip = AudioSystem.getClip();
+                    clip.open(convertedInputStream);
+                } else System.err.println("File not found: " + absolutePath);
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                System.err.println(e.getMessage());
+            }
+        }).start();
+
     }
 
     public void play() {
-        if (clip != null) {
-            clip.setFramePosition(0);
-            clip.start();
-            if (loop) clip.loop(Clip.LOOP_CONTINUOUSLY);
-        }
+        new Thread(() -> {
+            if (clip != null) {
+                clip.setFramePosition(0);
+                clip.start();
+                if (loop) clip.loop(Clip.LOOP_CONTINUOUSLY);
+            }
+        }).start();
     }
 
     public void play(boolean loop) {
-        if (loop) clip.loop(Clip.LOOP_CONTINUOUSLY);
-        else clip.start();
+        new Thread(() -> {
+            if (loop) clip.loop(Clip.LOOP_CONTINUOUSLY);
+            else clip.start();
+        }).start();
     }
 
     public void pause() {

@@ -136,6 +136,7 @@ public class Game implements Runnable{
         new Thread(() -> {
             try {
                 ultActive = true;
+                audioPlayer.playAudio(config.getUltSound());
                 setSpeedModifier(2);
                 Thread.sleep(7000);
                 setSpeedModifier(1);

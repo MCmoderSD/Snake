@@ -32,7 +32,7 @@ public class Snake extends SnakePiece {
     // Methods
 
     // Recolor Snake
-    private void rearangeImages() {
+    private void rearrangeImages() {
         if (snakePieces.size() == 5) snakePieces.get(snakePieces.size()-1).setImage(config.getLegTransition());
         if (snakePieces.size() > 5) {
             snakePieces.get(snakePieces.size()-2).setImage(config.getLegTransition());
@@ -67,10 +67,7 @@ public class Snake extends SnakePiece {
     // Grow
     public void grow(Config config) {
         snakePieces.add(new SnakePiece(snakePieces.get(snakePieces.size() - 1).x, snakePieces.get(snakePieces.size() - 1).y, game, config));
-        rearangeImages();
-
-        // Debug
-        System.out.println(snakePieces.get(1).getDirection());
+        rearrangeImages();
     }
 
     // Getter

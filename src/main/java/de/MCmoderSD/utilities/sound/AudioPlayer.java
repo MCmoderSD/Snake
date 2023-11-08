@@ -15,59 +15,59 @@ public class AudioPlayer {
         mp3Players = new HashMap<>();
     }
 
-    // Methods
-    private boolean isCurrentlyPlaying(String audioPath) {
-        if (audioPath.endsWith(".wav")) {
-            if (!wavPlayers.containsKey(audioPath)) return false;
-            else return  wavPlayers.get(audioPath).isPlaying();
-        } else if (audioPath.endsWith(".mp3")) {
-            if (!mp3Players.containsKey(audioPath)) return false;
-            else return mp3Players.get(audioPath).isPlaying();
-        } else System.err.println("Unsupported file format: " + audioPath);
-        return false;
-    }
-
 
     // Instant Play
     public void instantPlay(String audioPath) {
         if (audioPath.endsWith(".wav")) {
-            if (wavPlayers.containsKey(audioPath)) removeWavPlayer(audioPath);
-            WavPlayer wavPlayer = new WavPlayer(audioPath);
-            wavPlayer.play();
-            wavPlayers.put(audioPath, wavPlayer);
+            if (isPlaying(audioPath)) new WavPlayer(audioPath).play();
+            else {
+                WavPlayer wavPlayer = new WavPlayer(audioPath);
+                wavPlayer.play();
+                wavPlayers.put(audioPath, wavPlayer);
+            }
         } else if (audioPath.endsWith(".mp3")) {
-            if (mp3Players.containsKey(audioPath)) removeMp3Player(audioPath);
-            Mp3Player mp3Player = new Mp3Player(audioPath);
-            mp3Player.play();
-            mp3Players.put(audioPath, mp3Player);
+            if (isPlaying(audioPath)) new Mp3Player(audioPath).play();
+            else {
+                Mp3Player mp3Player = new Mp3Player(audioPath);
+                mp3Player.play();
+                mp3Players.put(audioPath, mp3Player);
+            }
         } else System.err.println("Unsupported file format: " + audioPath);
     }
 
     public void instantPlay(String audioPath, boolean isAbsolutePath) {
         if (audioPath.endsWith(".wav")) {
-            if (wavPlayers.containsKey(audioPath)) removeWavPlayer(audioPath);
-            WavPlayer wavPlayer = new WavPlayer(audioPath, isAbsolutePath);
-            wavPlayer.play();
-            wavPlayers.put(audioPath, wavPlayer);
+            if (isPlaying(audioPath)) new WavPlayer(audioPath).play();
+            else {
+                WavPlayer wavPlayer = new WavPlayer(audioPath, isAbsolutePath);
+                wavPlayer.play();
+                wavPlayers.put(audioPath, wavPlayer);
+            }
         } else if (audioPath.endsWith(".mp3")) {
-            if (mp3Players.containsKey(audioPath)) removeMp3Player(audioPath);
-            Mp3Player mp3Player = new Mp3Player(audioPath, isAbsolutePath);
-            mp3Player.play();
-            mp3Players.put(audioPath, mp3Player);
+            if (isPlaying(audioPath)) new Mp3Player(audioPath).play();
+            else {
+                Mp3Player mp3Player = new Mp3Player(audioPath, isAbsolutePath);
+                mp3Player.play();
+                mp3Players.put(audioPath, mp3Player);
+            }
         } else System.err.println("Unsupported file format: " + audioPath);
     }
 
     public void instantPlay(String audioPath, boolean isAbsolutePath, boolean loop) {
         if (audioPath.endsWith(".wav")) {
-            if (wavPlayers.containsKey(audioPath)) removeWavPlayer(audioPath);
-            WavPlayer wavPlayer = new WavPlayer(audioPath, isAbsolutePath, loop);
-            wavPlayer.play();
-            wavPlayers.put(audioPath, wavPlayer);
+            if (isPlaying(audioPath)) new WavPlayer(audioPath).play();
+            else {
+                WavPlayer wavPlayer = new WavPlayer(audioPath, isAbsolutePath, loop);
+                wavPlayer.play();
+                wavPlayers.put(audioPath, wavPlayer);
+            }
         } else if (audioPath.endsWith(".mp3")) {
-            if (mp3Players.containsKey(audioPath)) removeMp3Player(audioPath);
-            Mp3Player mp3Player = new Mp3Player(audioPath, isAbsolutePath, loop);
-            mp3Player.play();
-            mp3Players.put(audioPath, mp3Player);
+            if (isPlaying(audioPath)) new Mp3Player(audioPath).play();
+            else {
+                Mp3Player mp3Player = new Mp3Player(audioPath, isAbsolutePath, loop);
+                mp3Player.play();
+                mp3Players.put(audioPath, mp3Player);
+            }
         } else System.err.println("Unsupported file format: " + audioPath);
     }
 

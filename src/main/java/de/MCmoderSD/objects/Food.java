@@ -4,11 +4,15 @@ import de.MCmoderSD.main.Config;
 import de.MCmoderSD.utilities.Calculate;
 
 import java.awt.Rectangle;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Food extends Rectangle {
+
+    // Associations
+    private final Config config;
 
     // Attributes
     private final boolean isSpecial;
@@ -17,35 +21,37 @@ public class Food extends Rectangle {
 
     // Constructor
     public Food(Config config, ArrayList<SnakePiece> snakePieces) {
-        Random random = new Random();
+        this.config = config;
+
+        isSpecial = Calculate.randomChance(config.getSpecialFoodChance());
+        if (isSpecial) image = config.getGoldFood();
+        else image = config.getFood();
+
+        sound = config.getFoodSound();
 
         int scale = config.getScale();
-        int fieldWidth = config.getFieldWidth();
-        int fieldHeight = config.getFieldHeight();
 
-        x = random.nextInt(fieldWidth);
-        y = random.nextInt(fieldHeight);
+        Point spawnPoint = getValidSpawnPont(snakePieces);
+
+        x = spawnPoint.x;
+        y = spawnPoint.y;
 
         x = x * scale;
         y = y * scale;
 
         width = scale;
         height = scale;
-
-        if (snakePieces.size() < fieldWidth * fieldHeight && !validSpawn(snakePieces)) new Food(config, snakePieces);
-
-        isSpecial = Calculate.randomChance(config.getSpecialFoodChance());
-        if (isSpecial) image = config.getGoldFood();
-        else image = config.getFood();
-
-        if (isSpecial) sound = config.getUltSound();
-        else sound = config.getFoodSound();
     }
 
     // Methods
-    private boolean validSpawn(ArrayList<SnakePiece> snakePieces) {
-        for (SnakePiece snakePiece : snakePieces) if (snakePiece.x == x && snakePiece.y == y) return false;
-        return true;
+    private Point getValidSpawnPont(ArrayList<SnakePiece> snakePieces) {
+        Random random = new Random();
+
+        int x = random.nextInt(config.getFieldWidth());
+        int y = random.nextInt(config.getFieldHeight());
+
+        for (Rectangle snakePiece : snakePieces) if (snakePiece.x == x && snakePiece.y == y) return getValidSpawnPont(snakePieces);
+        return new Point(x, y);
     }
 
     // Getter
