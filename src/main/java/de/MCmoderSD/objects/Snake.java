@@ -3,6 +3,7 @@ package de.MCmoderSD.objects;
 import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Snake extends SnakePiece {
@@ -14,18 +15,14 @@ public class Snake extends SnakePiece {
     private final ArrayList<SnakePiece> snakePieces = new ArrayList<>();
 
     // Constructor
-    public Snake(Game game, Config config) {
-        super(0, 0, config.getHead(), game, config);
-
+    public Snake(int x, int y, BufferedImage image, Game game, Config config) {
+        super(x, y, image, game, config);
         this.config = config;
-
-        x = (config.getFieldWidth() / 2) * config.getScale() - 3;
-        y = (config.getFieldHeight() / 2) * config.getScale();
 
         // Initial Snake
         snakePieces.add(this); // Head
-        snakePieces.add(new SnakePiece(x + scale, y, config.getUpperBody(),game, config)); // Upper Body
-        snakePieces.add(new SnakePiece(x + 2 * scale, y, config.getLowerBody(), game, config)); // Lower Body
+        snakePieces.add(new SnakePiece(x + 1, y, config.getUpperBody(),game, config)); // Upper Body
+        snakePieces.add(new SnakePiece(x + 2, y, config.getLowerBody(), game, config)); // Lower Body
     }
 
 
@@ -55,13 +52,13 @@ public class Snake extends SnakePiece {
 
     // Check Collision
     public boolean checkCollision() {
-        for (int i = 1; i < snakePieces.size(); i++) if (snakePieces.get(0).intersects(snakePieces.get(i))) return true;
+        for (int i = 1; i < snakePieces.size(); i++) if (snakePieces.get(0).getBounds().intersects(snakePieces.get(i).getBounds())) return true;
         return false;
     }
 
     // Check Food
     public boolean checkFood(Food food) {
-        for (SnakePiece snakePiece : snakePieces) if (snakePiece.intersects(food)) return true;
+        for (SnakePiece snakePiece : snakePieces) if (snakePiece.getBounds().intersects(food.getBounds())) return true;
         return false;
     }
 

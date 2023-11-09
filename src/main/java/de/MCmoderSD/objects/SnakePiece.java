@@ -3,15 +3,19 @@ package de.MCmoderSD.objects;
 import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
-public class SnakePiece extends Rectangle {
+@SuppressWarnings("unused")
+public class SnakePiece {
 
     // Attributes
     protected final Game game;
     protected BufferedImage image;
+    protected int x;
+    protected int y;
 
     // Constants
     protected final int fieldWidth;
@@ -27,9 +31,10 @@ public class SnakePiece extends Rectangle {
 
     // Default Constructor
     public SnakePiece(int x, int y, Game game, Config config) {
-        super(x, y, config.getScale(), config.getScale());
-
         this.game = game;
+        this.x = x;
+        this.y = y;
+
         image = config.getLegTile();
         fieldWidth = config.getFieldWidth();
         fieldHeight = config.getFieldHeight();
@@ -39,10 +44,11 @@ public class SnakePiece extends Rectangle {
 
     // Constructor with Image
     public SnakePiece(int x, int y, BufferedImage image, Game game, Config config) {
-        super(x, y, config.getScale(), config.getScale());
-
         this.game = game;
         this.image = image;
+        this.x = x;
+        this.y = y;
+
         fieldWidth = config.getFieldWidth();
         fieldHeight = config.getFieldHeight();
         scale = config.getScale();
@@ -53,8 +59,8 @@ public class SnakePiece extends Rectangle {
     private void wallHitDetected() {
         if (solidWalls) game.gameOver();
         else {
-            if (left) x = fieldWidth * scale - scale;
-            if (up) y = fieldHeight * scale - scale;
+            if (left) x = fieldWidth - 1;
+            if (up) y = fieldHeight - 1;
             if (right) x = 0;
             if (down) y = 0;
         }
@@ -63,23 +69,23 @@ public class SnakePiece extends Rectangle {
     // Move
     protected void move() {
         if (left) {
-            if (x - scale < 0) wallHitDetected();
-            else x = x - scale;
+            if (x - 1 < 0) wallHitDetected();
+            else x = x - 1;
         }
 
         if (up) {
-            if (y - scale < 0) wallHitDetected();
-            else y = y - scale;
+            if (y - 1 < 0) wallHitDetected();
+            else y = y - 1;
         }
 
         if (right) {
-            if (x + scale > fieldWidth * scale - scale) wallHitDetected();
-            else x = x + scale;
+            if (x + 1 > fieldWidth - 1) wallHitDetected();
+            else x = x + 1;
         }
 
         if (down) {
-            if (y + scale > fieldHeight * scale - scale) wallHitDetected();
-            else y = y + scale;
+            if (y + 1 > fieldHeight - 1) wallHitDetected();
+            else y = y + 1;
         }
     }
 
@@ -123,10 +129,6 @@ public class SnakePiece extends Rectangle {
     }
 
     // Getter
-    public BufferedImage getImage() {
-        return image;
-    }
-
     public byte getDirection() {
         if (left) return 0;
         if (up) return 1;
@@ -137,7 +139,7 @@ public class SnakePiece extends Rectangle {
 
     public AffineTransform getTransform() {
         AffineTransform transform = new AffineTransform();
-        transform.translate(x, y);
+        transform.translate(x * scale, y * scale);
 
         int effectiveScale = scale / 2;
 
@@ -149,6 +151,38 @@ public class SnakePiece extends Rectangle {
         }
 
         return transform;
+    }
+
+    public int getScale() {
+        return scale;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getPositionX() {
+        return x * scale;
+    }
+
+    public int getPositionY() {
+        return y * scale;
+    }
+
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    public Point getPosition() {
+        return new Point(getPositionX(), getPositionY());
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(getPositionX(), getPositionY(), scale, scale);
     }
 
     // Setter

@@ -9,7 +9,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Food extends Rectangle {
+@SuppressWarnings("unused")
+public class Food {
 
     // Associations
     private final Config config;
@@ -18,6 +19,10 @@ public class Food extends Rectangle {
     private final boolean isSpecial;
     private final BufferedImage image;
     private final String sound;
+    private final int x;
+    private final int y;
+    private final int scale;
+
 
     // Constructor
     public Food(Config config, ArrayList<SnakePiece> snakePieces) {
@@ -29,18 +34,12 @@ public class Food extends Rectangle {
 
         sound = config.getFoodSound();
 
-        int scale = config.getScale();
+        scale = config.getScale();
 
         Point spawnPoint = getValidSpawnPont(snakePieces);
 
         x = spawnPoint.x;
         y = spawnPoint.y;
-
-        x = x * scale;
-        y = y * scale;
-
-        width = scale;
-        height = scale;
     }
 
     // Methods
@@ -50,7 +49,7 @@ public class Food extends Rectangle {
         int x = random.nextInt(config.getFieldWidth());
         int y = random.nextInt(config.getFieldHeight());
 
-        for (Rectangle snakePiece : snakePieces) if (snakePiece.x == x && snakePiece.y == y) return getValidSpawnPont(snakePieces);
+        for (SnakePiece snakePiece : snakePieces) if (snakePiece.getX() == x && snakePiece.getY() == y) return getValidSpawnPont(snakePieces);
         return new Point(x, y);
     }
 
@@ -65,5 +64,33 @@ public class Food extends Rectangle {
 
     public String getSound() {
         return sound;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getScale() {
+        return scale;
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(getPositionX(), getPositionY(), scale, scale);
+    }
+
+    public Point getPosition() {
+        return new Point(getPositionX(), getPositionY());
+    }
+
+    public int getPositionX() {
+        return x * scale;
+    }
+
+    public int getPositionY() {
+        return y * scale;
     }
 }

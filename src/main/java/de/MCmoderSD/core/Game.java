@@ -24,6 +24,7 @@ public class Game implements Runnable{
 
     // Game Variables
     private Food food;
+    private Thread ult;
     private int score;
     private boolean isPaused;
     private boolean gameOver;
@@ -49,7 +50,7 @@ public class Game implements Runnable{
         audioPlayer = config.getAudioPlayer();
 
         // Init Objects
-        snake = new Snake(this, config);
+        snake = new Snake(config.getFieldWidth()/2 - 2, config.getFieldHeight()/2, config.getHead(), this, config);
         food = new Food(config, snake.getSnakePieces());
 
         new Thread(this).start();
@@ -128,12 +129,15 @@ public class Game implements Runnable{
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            ui.requestFocusInWindow();
         }
     }
 
     // Methods
     private void activateUlt() {
-        new Thread(() -> {
+        if (ult != null && ult.isAlive()) ult.interrupt();
+
+        ult = new Thread(() -> {
             try {
                 ultActive = true;
                 audioPlayer.playAudio(config.getUltSound());
@@ -142,10 +146,13 @@ public class Game implements Runnable{
                 setSpeedModifier(1);
                 ultActive = false;
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                Thread.currentThread().interrupt();
             }
-        }).start();
+        });
+
+        ult.start();
     }
+
 
     // Setter
     public void togglePause() {

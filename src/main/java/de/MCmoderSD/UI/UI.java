@@ -65,7 +65,7 @@ public class UI extends JPanel {
         Food food = game.getFood();
 
         // Draw Food
-        g.drawImage(food.getImage(), food.x, food.y, null);
+        g.drawImage(food.getImage(), food.getPositionX(), food.getPositionY(), null);
 
         // Draw Snake
         for (int i = snakePieces.size()-1; i >= 0; i--) {
