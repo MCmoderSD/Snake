@@ -6,13 +6,13 @@ import de.MCmoderSD.objects.Food;
 import de.MCmoderSD.objects.Snake;
 import de.MCmoderSD.objects.SnakePiece;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class UI extends JPanel {
@@ -70,9 +70,14 @@ public class UI extends JPanel {
         // Draw Snake
         for (int i = snakePieces.size()-1; i >= 0; i--) {
             SnakePiece snakePiece = snakePieces.get(i);
+            BufferedImage image = snakePiece.getImage();
+            ImageIcon animation = snakePiece.getAnimation();
 
             g.transform(snakePiece.getTransform());
-            g.drawImage(snakePiece.getImage(), 0, 0, null);
+            g.drawImage(image, 0, 0, null);
+
+            if (game.isUltActive()) g.drawImage(animation.getImage(), 0, 0, null);
+
             g.setTransform(new AffineTransform());
         }
 

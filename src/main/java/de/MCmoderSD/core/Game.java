@@ -50,7 +50,7 @@ public class Game implements Runnable{
         audioPlayer = config.getAudioPlayer();
 
         // Init Objects
-        snake = new Snake(config.getFieldWidth()/2 - 2, config.getFieldHeight()/2, config.getHead(), this, config);
+        snake = new Snake(config.getFieldWidth()/2 - 2, config.getFieldHeight()/2, config.getHead(), config.getHeadAnimation(), this, config);
         food = new Food(config, snake.getSnakePieces());
 
         new Thread(this).start();
@@ -121,6 +121,7 @@ public class Game implements Runnable{
                     // Game Loop End:
                     delta--;
                 }
+                ui.requestFocusInWindow();
             }
 
             // Delay to prevent 100% CPU Usage
@@ -156,6 +157,7 @@ public class Game implements Runnable{
 
     // Setter
     public void togglePause() {
+        if (ultActive) return;
         if (isPaused) audioPlayer.pauseAll();
         else audioPlayer.resumeAll();
         isPaused = !isPaused;
@@ -186,5 +188,9 @@ public class Game implements Runnable{
 
     public String getScore() {
         return String.valueOf(score);
+    }
+
+    public boolean isUltActive() {
+        return ultActive;
     }
 }

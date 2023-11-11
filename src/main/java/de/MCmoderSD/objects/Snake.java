@@ -3,6 +3,7 @@ package de.MCmoderSD.objects;
 import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
 
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -15,14 +16,14 @@ public class Snake extends SnakePiece {
     private final ArrayList<SnakePiece> snakePieces = new ArrayList<>();
 
     // Constructor
-    public Snake(int x, int y, BufferedImage image, Game game, Config config) {
-        super(x, y, image, game, config);
+    public Snake(int x, int y, BufferedImage image, ImageIcon animation, Game game, Config config) {
+        super(x, y, image, animation, game, config);
         this.config = config;
 
         // Initial Snake
         snakePieces.add(this); // Head
-        snakePieces.add(new SnakePiece(x + 1, y, config.getUpperBody(),game, config)); // Upper Body
-        snakePieces.add(new SnakePiece(x + 2, y, config.getLowerBody(), game, config)); // Lower Body
+        snakePieces.add(new SnakePiece(x + 1, y, config.getUpperBody(), config.getUpperBodyAnimation(),game, config)); // Upper Body
+        snakePieces.add(new SnakePiece(x + 2, y, config.getLowerBody(), config.getLowerBodyAnimation(), game, config)); // Lower Body
     }
 
 
@@ -30,13 +31,16 @@ public class Snake extends SnakePiece {
 
     // Recolor Snake
     private void rearrangeImages() {
-        if (snakePieces.size() == 5) snakePieces.get(snakePieces.size()-1).setImage(config.getLegTransition());
+        if (snakePieces.size() == 5) snakePieces.get(snakePieces.size()-1).setAssets(config.getLegTransition(), config.getLegTransitionAnimation());
         if (snakePieces.size() > 5) {
             snakePieces.get(snakePieces.size()-2).setImage(config.getLegTransition());
             snakePieces.get(snakePieces.size()-1).setImage(config.getFeet());
+
+            snakePieces.get(snakePieces.size()-2).setAnimation(config.getLegTransitionAnimation());
+            snakePieces.get(snakePieces.size()-1).setAnimation(config.getFeetAnimation());
         }
 
-        for (int i = 4; i < snakePieces.size() - 2; i++) snakePieces.get(i).setImage(config.getLegTile());
+        for (int i = 4; i < snakePieces.size() - 2; i++) snakePieces.get(i).setAssets(config.getLegTile(), config.getLegTileAnimation());
     }
 
     // Move

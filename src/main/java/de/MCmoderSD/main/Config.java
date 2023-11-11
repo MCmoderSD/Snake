@@ -8,6 +8,7 @@ import de.MCmoderSD.utilities.json.JsonStreamer;
 import de.MCmoderSD.utilities.sound.AudioPlayer;
 
 
+import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
@@ -50,6 +51,14 @@ public class Config {
     private final String ultSound;
     private final String dieSound;
 
+    // Animations
+    private final ImageIcon headAnimation;
+    private final ImageIcon upperBodyAnimation;
+    private final ImageIcon lowerBodyAnimation;
+    private final ImageIcon legTileAnimation;
+    private final ImageIcon legTransitionAnimation;
+    private final ImageIcon feetAnimation;
+
     // Constructor
     public Config(String[] args) {
 
@@ -57,7 +66,7 @@ public class Config {
         audioPlayer = new AudioPlayer();
         imageReader = new ImageReader();
         jsonReader = new JsonReader();
-        imageStreamer = null;
+        imageStreamer = new ImageStreamer();
         jsonStreamer = null;
         JsonNode config = jsonReader.read("/config/default.json");
 
@@ -91,6 +100,14 @@ public class Config {
         audioPlayer.loadAudio(foodSound);
         audioPlayer.loadAudio(ultSound);
         audioPlayer.loadAudio(dieSound);
+
+        // Animations
+        headAnimation = imageReader.readGif(config.get("headAnimation").asText(), scale);
+        upperBodyAnimation = imageReader.readGif(config.get("upperBodyAnimation").asText(), scale);
+        lowerBodyAnimation = imageReader.readGif(config.get("lowerBodyAnimation").asText(), scale);
+        legTileAnimation = imageReader.readGif(config.get("legTileAnimation").asText(), scale);
+        legTransitionAnimation = imageReader.readGif(config.get("legTransitionAnimation").asText(), scale);
+        feetAnimation = imageReader.readGif(config.get("feetAnimation").asText(), scale);
     }
 
     // Constructor asset streaming
@@ -134,6 +151,14 @@ public class Config {
         audioPlayer.loadAudio(foodSound);
         audioPlayer.loadAudio(ultSound);
         audioPlayer.loadAudio(dieSound);
+
+        // Animations
+        headAnimation = imageStreamer.readGif(config.get("headAnimation").asText(), scale);
+        upperBodyAnimation = imageStreamer.readGif(config.get("upperBodyAnimation").asText(), scale);
+        lowerBodyAnimation = imageStreamer.readGif(config.get("lowerBodyAnimation").asText(), scale);
+        legTileAnimation = imageStreamer.readGif(config.get("legTileAnimation").asText(), scale);
+        legTransitionAnimation = imageStreamer.readGif(config.get("legTransitionAnimation").asText(), scale);
+        feetAnimation = imageStreamer.readGif(config.get("feetAnimation").asText(), scale);
     }
 
     // Getters
@@ -196,6 +221,8 @@ public class Config {
         return solidWalls;
     }
 
+    // Sound Getters
+
     public String getFoodSound() {
         return foodSound;
     }
@@ -251,5 +278,30 @@ public class Config {
 
     public BufferedImage getGoldFood() {
         return goldFood;
+    }
+
+    // Animation Getters
+    public ImageIcon getHeadAnimation() {
+        return headAnimation;
+    }
+
+    public ImageIcon getUpperBodyAnimation() {
+        return upperBodyAnimation;
+    }
+
+    public ImageIcon getLowerBodyAnimation() {
+        return lowerBodyAnimation;
+    }
+
+    public ImageIcon getLegTileAnimation() {
+        return legTileAnimation;
+    }
+
+    public ImageIcon getLegTransitionAnimation() {
+        return legTransitionAnimation;
+    }
+
+    public ImageIcon getFeetAnimation() {
+        return feetAnimation;
     }
 }

@@ -3,6 +3,7 @@ package de.MCmoderSD.objects;
 import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
 
+import javax.swing.*;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
@@ -14,6 +15,7 @@ public class SnakePiece {
     // Attributes
     protected final Game game;
     protected BufferedImage image;
+    protected ImageIcon animation;
     protected int x;
     protected int y;
 
@@ -36,6 +38,7 @@ public class SnakePiece {
         this.y = y;
 
         image = config.getLegTile();
+        animation = config.getLegTileAnimation();
         fieldWidth = config.getFieldWidth();
         fieldHeight = config.getFieldHeight();
         scale = config.getScale();
@@ -43,9 +46,10 @@ public class SnakePiece {
     }
 
     // Constructor with Image
-    public SnakePiece(int x, int y, BufferedImage image, Game game, Config config) {
+    public SnakePiece(int x, int y, BufferedImage image, ImageIcon animation, Game game, Config config) {
         this.game = game;
         this.image = image;
+        this.animation = animation;
         this.x = x;
         this.y = y;
 
@@ -129,7 +133,11 @@ public class SnakePiece {
     }
 
     // Getter
-    public byte getDirection() {
+    protected Game getGame() {
+        return game;
+    }
+
+    protected byte getDirection() {
         if (left) return 0;
         if (up) return 1;
         if (right) return 2;
@@ -153,23 +161,23 @@ public class SnakePiece {
         return transform;
     }
 
-    public int getScale() {
+    protected int getScale() {
         return scale;
     }
 
-    public int getX() {
+    protected int getX() {
         return x;
     }
 
-    public int getY() {
+    protected int getY() {
         return y;
     }
 
-    public int getPositionX() {
+    protected int getPositionX() {
         return x * scale;
     }
 
-    public int getPositionY() {
+    protected int getPositionY() {
         return y * scale;
     }
 
@@ -177,16 +185,29 @@ public class SnakePiece {
         return image;
     }
 
-    public Point getPosition() {
+    public ImageIcon getAnimation() {
+        return animation;
+    }
+
+    protected Point getPosition() {
         return new Point(getPositionX(), getPositionY());
     }
 
-    public Rectangle getBounds() {
+    protected Rectangle getBounds() {
         return new Rectangle(getPositionX(), getPositionY(), scale, scale);
     }
 
     // Setter
+    protected void setAssets(BufferedImage image, ImageIcon animation) {
+        this.image = image;
+        this.animation = animation;
+    }
+
     protected void setImage(BufferedImage image) {
         this.image = image;
+    }
+
+    protected void setAnimation(ImageIcon animation) {
+        this.animation = animation;
     }
 }

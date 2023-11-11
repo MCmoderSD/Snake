@@ -34,13 +34,12 @@ You can exit the game by pressing Ctrl + C. <Br>
 - [x] Snake hitting itself
 - [x] Snake going through walls
 - [x] Snake hitting walls (optional)
-- [ ] Game over screen
 - [x] Score
-- [ ] Golden apple
+- [x] Golden apple
 - [x] Asset-streaming
 - [x] Sound effects
 - [x] Ult Working
-- [ ] Ult Animation
+- [x] Ult Animation
 - [x] Rotation
 - [ ] Win
 - [ ] Game Over
