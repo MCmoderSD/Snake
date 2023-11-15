@@ -19,10 +19,12 @@ public class Game implements Runnable{
     private final UI ui;
     private final AudioPlayer audioPlayer;
     private final InputHandler inputs;
-    private final Snake snake;
+
+    // Attributes
     private final double tickrate;
 
     // Game Variables
+    private Snake snake;
     private Food food;
     private Thread ult;
     private int score;
@@ -61,13 +63,17 @@ public class Game implements Runnable{
         while (Main.isRunning) {
             // Timer
             double delta = 0;
-            long current, now = System.nanoTime();
+            long current;
+            long timer = 0;
+            long now = System.nanoTime();
+            int renderedFrames = 0;
 
 
             // Game Loop
             while (!isPaused && !gameOver) {
                 current = System.nanoTime();
                 delta += (current - now) / (tickrate/speedModifier);
+                timer += current - now;
                 now = current;
 
                 // Wait for Start
@@ -114,8 +120,17 @@ public class Game implements Runnable{
                     snake.moveSnake();
 
                     // Update Frame
-                    frame.repaint();
+                    if (renderedFrames < config.getFps()) {
+                        frame.repaint();
+                        renderedFrames++;
+                    }
 
+                    // FPS Counter
+                    if (timer >= 1000000000) {
+                        ui.setFps(renderedFrames);
+                        timer = 0;
+                        renderedFrames = 0;
+                    }
 
 
                     // Game Loop End:
@@ -166,6 +181,7 @@ public class Game implements Runnable{
     public void gameOver() {
         // ToDo Game Over
         audioPlayer.playAudio(config.getDieSound());
+        ui.setResetButton(true);
         gameOver = true;
     }
 
@@ -175,6 +191,23 @@ public class Game implements Runnable{
 
     public void setSpeedModifier(double speedModifier) {
         this.speedModifier = speedModifier;
+    }
+
+    public void reset() {
+        // Reset Game Variables
+        score = 0;
+        speedModifier = 1;
+        gameStarted = false;
+        gameOver = false;
+
+        // Reset Objects
+        snake = new Snake(config.getFieldWidth()/2 - 2, config.getFieldHeight()/2, config.getHead(), config.getHeadAnimation(), this, config);
+        food = new Food(config, snake.getSnakePieces());
+
+        // Reset UI
+        ui.setScore(score);
+        ui.setResetButton(false);
+        ui.repaint();
     }
 
     // Getter

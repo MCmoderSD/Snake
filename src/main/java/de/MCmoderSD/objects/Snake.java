@@ -3,7 +3,7 @@ package de.MCmoderSD.objects;
 import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 

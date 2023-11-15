@@ -10,6 +10,6 @@ public class Main {
         streamingMode = !Calculate.doesFileExist("/config/default.json");
 
         if (!streamingMode) new Game(new Config(args));
-        else new Game(new Config(args, "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/config/streaming.json"));
+        else new Game(new Config(args, "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources"));
     }
 }

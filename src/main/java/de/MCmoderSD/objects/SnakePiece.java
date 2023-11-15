@@ -3,7 +3,7 @@ package de.MCmoderSD.objects;
 import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
@@ -61,7 +61,7 @@ public class SnakePiece {
 
     // Wall Hit Detected
     private void wallHitDetected() {
-        if (solidWalls) game.gameOver();
+        if (solidWalls && !game.isUltActive()) game.gameOver();
         else {
             if (left) x = fieldWidth - 1;
             if (up) y = fieldHeight - 1;
@@ -189,11 +189,11 @@ public class SnakePiece {
         return animation;
     }
 
-    protected Point getPosition() {
+    public Point getPosition() {
         return new Point(getPositionX(), getPositionY());
     }
 
-    protected Rectangle getBounds() {
+    public Rectangle getBounds() {
         return new Rectangle(getPositionX(), getPositionY(), scale, scale);
     }
 

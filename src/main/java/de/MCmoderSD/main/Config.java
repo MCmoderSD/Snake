@@ -8,7 +8,7 @@ import de.MCmoderSD.utilities.json.JsonStreamer;
 import de.MCmoderSD.utilities.sound.AudioPlayer;
 
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
@@ -23,7 +23,6 @@ public class Config {
     private final ImageStreamer imageStreamer;
 
     // Config Variables
-    private final String title;
     private final int scale;
     private final int fieldWidth;
     private final int fieldHeight;
@@ -59,6 +58,13 @@ public class Config {
     private final ImageIcon legTransitionAnimation;
     private final ImageIcon feetAnimation;
 
+    // Language
+    private final String language;
+    private final String title;
+    private final String restart;
+    private final String gameOver;
+    private final String score;
+
     // Constructor
     public Config(String[] args) {
 
@@ -66,13 +72,12 @@ public class Config {
         audioPlayer = new AudioPlayer();
         imageReader = new ImageReader();
         jsonReader = new JsonReader();
-        imageStreamer = new ImageStreamer();
+        imageStreamer = null;
         jsonStreamer = null;
         JsonNode config = jsonReader.read("/config/default.json");
 
         if (config == null) throw new IllegalArgumentException("The config file could not be loaded");
 
-        title = config.get("title").asText();
         scale = config.get("scale").asInt();
         fieldWidth = config.get("fieldWidth").asInt();
         fieldHeight = config.get("fieldHeight").asInt();
@@ -108,6 +113,17 @@ public class Config {
         legTileAnimation = imageReader.readGif(config.get("legTileAnimation").asText(), scale);
         legTransitionAnimation = imageReader.readGif(config.get("legTransitionAnimation").asText(), scale);
         feetAnimation = imageReader.readGif(config.get("feetAnimation").asText(), scale);
+
+        if (args.length > 0) language = args[0];
+        else language = "en";
+
+        JsonNode languageConfig = jsonReader.read("/language/" + language + ".json");
+
+        // Language
+        title = languageConfig.get("title").asText();
+        restart = languageConfig.get("restart").asText();
+        gameOver = languageConfig.get("gameOver").asText();
+        score = languageConfig.get("score").asText();
     }
 
     // Constructor asset streaming
@@ -115,15 +131,15 @@ public class Config {
 
         // Read Config
         audioPlayer = new AudioPlayer();
-        imageStreamer = new ImageStreamer();
-        jsonStreamer = new JsonStreamer();
+        imageStreamer = new ImageStreamer(url);
+        jsonStreamer = new JsonStreamer(url);
         imageReader = null;
         jsonReader = null;
-        JsonNode config = jsonStreamer.read(url);
+        JsonNode config = jsonStreamer.read("/config/default.json");
 
         if (config == null) throw new IllegalArgumentException("The config file could not be loaded");
 
-        title = config.get("title").asText();
+        // Constants
         scale = config.get("scale").asInt();
         fieldWidth = config.get("fieldWidth").asInt();
         fieldHeight = config.get("fieldHeight").asInt();
@@ -132,9 +148,11 @@ public class Config {
         specialFoodChance = config.get("specialFoodChance").asDouble();
         resizable = config.get("resizable").asBoolean();
         solidWalls = config.get("solidWalls").asBoolean();
-        foodSound = config.get("foodSound").asText();
-        ultSound = config.get("ultSound").asText();
-        dieSound = config.get("dieSound").asText();
+
+        /// Sounds
+        foodSound = url + config.get("foodSound").asText();
+        ultSound = url + config.get("ultSound").asText();
+        dieSound = url + config.get("dieSound").asText();
 
         // Generate Assets
         dimension = new Dimension(fieldWidth * scale, fieldHeight * scale);
@@ -159,6 +177,17 @@ public class Config {
         legTileAnimation = imageStreamer.readGif(config.get("legTileAnimation").asText(), scale);
         legTransitionAnimation = imageStreamer.readGif(config.get("legTransitionAnimation").asText(), scale);
         feetAnimation = imageStreamer.readGif(config.get("feetAnimation").asText(), scale);
+
+        if (args.length > 0) language = args[0];
+        else language = "en";
+
+        JsonNode languageConfig = jsonStreamer.read(url, "/language/" + language + ".json");
+
+        // Language
+        title = languageConfig.get("title").asText();
+        restart = languageConfig.get("restart").asText();
+        gameOver = languageConfig.get("gameOver").asText();
+        score = languageConfig.get("score").asText();
     }
 
     // Getters
@@ -185,10 +214,6 @@ public class Config {
     }
 
     // Config Getters
-    public String getTitle() {
-        return title;
-    }
-
     public int getFieldWidth() {
         return fieldWidth;
     }
@@ -303,5 +328,26 @@ public class Config {
 
     public ImageIcon getFeetAnimation() {
         return feetAnimation;
+    }
+
+    // Language Getters
+    public String getLanguage() {
+        return language;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getRestart() {
+        return restart;
+    }
+
+    public String getGameOver() {
+        return gameOver;
+    }
+
+    public String getScore() {
+        return score;
     }
 }

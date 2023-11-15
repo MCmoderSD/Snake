@@ -10,12 +10,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 
 @SuppressWarnings("unused")
-public class JsonReader {
-
-    // Attributes
-    private final ObjectMapper mapper;
-    private final HashMap<String, JsonNode> jsonCache;
-    private boolean isAbsolute;
+public class JsonReader extends JsonUtility {
 
     // Constructor without isAbsolute
     public JsonReader() {
@@ -27,11 +22,13 @@ public class JsonReader {
     // Constructor with isAbsolute
     public JsonReader(boolean isAbsolute) {
         this.isAbsolute = isAbsolute;
+        this.url = null;
         mapper = new ObjectMapper();
         jsonCache = new HashMap<>();
     }
 
     // Read JSON file and return JsonNode
+    @Override
     public JsonNode read(String json) {
         if (jsonCache.containsKey(json)) return jsonCache.get(json); // Checks if the path has already been loaded
 
@@ -55,29 +52,26 @@ public class JsonReader {
         }
     }
 
-    // Setter
-    public void clearCache() {
-        jsonCache.clear();
-    }
+    public JsonNode read(String json, boolean isAbsolute) {
+        if (jsonCache.containsKey(json)) return jsonCache.get(json); // Checks if the path has already been loaded
 
-    public void clearCache(String json) {
-        jsonCache.remove(json);
-    }
+        InputStream inputStream;
 
-    public void switchMode() {
-        isAbsolute = !isAbsolute;
-    }
+        try {
+            if (isAbsolute) inputStream = Files.newInputStream(Paths.get(json)); // JSON is Local
+            else inputStream = getClass().getResourceAsStream(json); // JSON is in Jar
 
-    public void setAbsolute(boolean isAbsolute) {
-        this.isAbsolute = isAbsolute;
-    }
+            // Null check
+            if (inputStream == null) throw new IllegalArgumentException("The JSON file could not be found: " + json);
 
-    // Getter
-    public HashMap<String, JsonNode> getJsonCache() {
-        return jsonCache;
-    }
+            // Write to cache
+            JsonNode node = mapper.readTree(inputStream);
+            jsonCache.put(json, node);
 
-    public boolean isAbsolute() {
-        return isAbsolute;
+            // return
+            return node;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

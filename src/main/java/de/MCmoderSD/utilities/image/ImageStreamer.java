@@ -1,8 +1,7 @@
 package de.MCmoderSD.utilities.image;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -10,19 +9,25 @@ import java.net.URL;
 import java.util.HashMap;
 
 @SuppressWarnings("unused")
-public class ImageStreamer {
+public class ImageStreamer extends ImageUtility {
 
-    // Attributes
-    private final HashMap<String, BufferedImage> bufferedImageCache;
-    private final HashMap<String, ImageIcon> imageIconCache;
-
-    // Constructor without isAbsolute
+    // Default Constructor
     public ImageStreamer() {
+        isAbsolute = false;
         bufferedImageCache = new HashMap<>();
         imageIconCache = new HashMap<>();
+        url = null;
     }
 
-    // Read image file and return BufferedImage
+    // Constructor with URL
+    public ImageStreamer(String url) {
+        isAbsolute = false;
+        bufferedImageCache = new HashMap<>();
+        imageIconCache = new HashMap<>();
+        this.url = url;
+    }
+
+    @Override
     public BufferedImage read(String url) {
         if (!url.endsWith(".png") && !url.endsWith(".jpg") && !url.endsWith(".jpeg") && !url.endsWith(".gif"))
             throw new IllegalArgumentException("Unsupported image format: " + url); // Image format is not supported
@@ -30,7 +35,9 @@ public class ImageStreamer {
             return bufferedImageCache.get(url); // Checks the cache for the image
 
         BufferedImage image = null;
+
         try {
+            if (this.url != null) url = this.url + url;
             image = ImageIO.read(new URL(url));
         } catch (IOException e) {
             System.err.println(e.getMessage());
@@ -45,122 +52,30 @@ public class ImageStreamer {
         return image;
     }
 
-    public BufferedImage read(String url, int width, int height) {
-        return scaleImage(read(url), width, height);
-    }
-
-    public BufferedImage read(String url, int scale) {
-        return scaleImage(read(url), scale);
-    }
-
-    public BufferedImage read(URL url) {
-        if (!url.toString().endsWith(".png") && !url.toString().endsWith(".jpg") && !url.toString().endsWith(".jpeg") && !url.toString().endsWith(".gif"))
-            throw new IllegalArgumentException("Unsupported image format: " + url); // Image format is not supported
-        if (bufferedImageCache.containsKey(url.toString()))
-            return bufferedImageCache.get(url.toString()); // Checks the cache for the image
+    public BufferedImage read(String url, String resource) {
+        if (!resource.endsWith(".png") && !resource.endsWith(".jpg") && !resource.endsWith(".jpeg") && !resource.endsWith(".gif"))
+            throw new IllegalArgumentException("Unsupported image format: " + resource); // Image format is not supported
+        if (bufferedImageCache.containsKey(resource))
+            return bufferedImageCache.get(resource); // Checks the cache for the image
 
         BufferedImage image = null;
 
         try {
-            image = ImageIO.read(url);
+            image = ImageIO.read(new URL(url + resource));
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
 
         // Null check
-        if (image == null) throw new IllegalArgumentException("The image could not be loaded: " + url);
+        if (image == null)
+            throw new IllegalArgumentException("The image could not be loaded: " + url + resource); // Image could not be loaded (Image is null
 
-        bufferedImageCache.put(url.toString(), image);
+        // Add to cache
+        bufferedImageCache.put(resource, image);
         return image;
     }
 
-    public BufferedImage read(URL url, int width, int height) {
-        return scaleImage(read(url), width, height);
-    }
-
-    public BufferedImage read(URL url, int scale) {
-        return scaleImage(read(url), scale);
-    }
-
-    public BufferedImage read(ImageIcon image) {
-        return (BufferedImage) image.getImage();
-    }
-
-    public BufferedImage read(ImageIcon image, int width, int height) {
-        return scaleImage(read(image), width, height);
-    }
-
-    public BufferedImage read(ImageIcon image, int scale) {
-        return scaleImage(read(image), scale);
-    }
-
-    public BufferedImage read(Image image) {
-        return (BufferedImage) image;
-    }
-
-    public BufferedImage read(Image image, int width, int height) {
-        return scaleImage(read(image), width, height);
-    }
-
-    public BufferedImage read(Image image, int scale) {
-        return scaleImage(read(image), scale);
-    }
-
-    // Create ImageIcon
-    public ImageIcon createImageIcon(String url) {
-        if (imageIconCache.containsKey(url)) return imageIconCache.get(url);
-
-        ImageIcon imageIcon = new ImageIcon(read(url));
-        imageIconCache.put(url, imageIcon);
-
-        return imageIcon;
-    }
-
-    public ImageIcon createImageIcon(String url, int width, int height) {
-        return new ImageIcon(scaleImage(url, width, height));
-    }
-
-    public ImageIcon createImageIcon(String url, int scale) {
-        return new ImageIcon(scaleImage(url, scale, scale));
-    }
-
-    public ImageIcon createImageIcon(BufferedImage image) {
-        return new ImageIcon(image);
-    }
-
-    public ImageIcon createImageIcon(BufferedImage image, int width, int height) {
-        return new ImageIcon(scaleImage(image, width, height));
-    }
-
-    public ImageIcon createImageIcon(BufferedImage image, int scale) {
-        return new ImageIcon(scaleImage(image, scale));
-    }
-
-    public ImageIcon createImageIcon(URL url) {
-        return new ImageIcon(read(url));
-    }
-
-    public ImageIcon createImageIcon(URL url, int width, int height) {
-        return new ImageIcon(scaleImage(url, width, height));
-    }
-
-    public ImageIcon createImageIcon(URL url, int scale) {
-        return new ImageIcon(scaleImage(url, scale));
-    }
-
-    public ImageIcon createImageIcon(Image image) {
-        return new ImageIcon(image);
-    }
-
-    public ImageIcon createImageIcon(Image image, int width, int height) {
-        return new ImageIcon(scaleImage(image, width, height));
-    }
-
-    public ImageIcon createImageIcon(Image image, int scale) {
-        return new ImageIcon(scaleImage(image, scale));
-    }
-
-    // Animation Loader
+    @Override
     public ImageIcon readGif(String url) {
         if (!url.endsWith(".gif"))
             throw new IllegalArgumentException("Unsupported image format: " + url); // Animation format is not supported
@@ -170,6 +85,7 @@ public class ImageStreamer {
         ImageIcon imageIcon; // Load the Animation
 
         try {
+            if (this.url != null) url = this.url + url;
             imageIcon = new ImageIcon(new URL(url));
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
@@ -179,197 +95,21 @@ public class ImageStreamer {
         return imageIcon;
     }
 
-    public ImageIcon readGif(String url, int width, int height) {
-        return new ImageIcon(readGif(url).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
-    }
+    public ImageIcon readGif(String url, String resource) {
+        if (!resource.endsWith(".gif"))
+            throw new IllegalArgumentException("Unsupported image format: " + url + resource); // Animation format is not supported
+        if (imageIconCache.containsKey(resource))
+            return imageIconCache.get(resource); // Checks the cache for the Animation
 
-    public ImageIcon readGif(String url, int scale) {
-        return readGif(url, scale, scale);
-    }
+        ImageIcon imageIcon; // Load the Animation
 
-    public ImageIcon readGif(URL url) {
-        if (!url.toString().endsWith(".gif"))
-            throw new IllegalArgumentException("Unsupported image format: " + url); // Animation format is not supported
-        if (imageIconCache.containsKey(url.toString()))
-            return imageIconCache.get(url.toString()); // Checks the cache for the Animation
+        try {
+            imageIcon = new ImageIcon(new URL(url + resource));
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
 
-        ImageIcon imageIcon = new ImageIcon(url);
-
-        imageIconCache.put(url.toString(), imageIcon);
+        imageIconCache.put(resource, imageIcon);
         return imageIcon;
-    }
-
-    public ImageIcon readGif(URL url, int width, int height) {
-        return new ImageIcon(readGif(url).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
-    }
-
-    public ImageIcon readGif(URL url, int scale) {
-        return readGif(url, scale, scale);
-    }
-
-
-    // Image scaling
-    public BufferedImage scaleImage(BufferedImage image, int width, int height) {
-        BufferedImage scaledImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        scaledImage.getGraphics().drawImage(image, 0, 0, width, height, null);
-        return scaledImage;
-    }
-
-    public BufferedImage scaleImage(BufferedImage image, int scale) {
-        return scaleImage(image, scale, scale);
-    }
-
-    public BufferedImage scaleImage(String url, int width, int height) {
-        return scaleImage(read(url), width, height);
-    }
-
-    public BufferedImage scaleImage(String url, int scale) {
-        return scaleImage(url, scale, scale);
-    }
-
-    public BufferedImage scaleImage(URL url, int width, int height) {
-        return scaleImage(read(url), width, height);
-    }
-
-    public BufferedImage scaleImage(URL url, int scale) {
-        return scaleImage(url, scale, scale);
-    }
-
-    public BufferedImage scaleImage(ImageIcon image, int width, int height) {
-        return scaleImage((BufferedImage) image.getImage(), width, height);
-    }
-
-    public BufferedImage scaleImage(ImageIcon image, int scale) {
-        return scaleImage(image, scale, scale);
-    }
-
-    public BufferedImage scaleImage(Image image, int width, int height) {
-        return scaleImage((BufferedImage) image, width, height);
-    }
-
-    public BufferedImage scaleImage(Image image, int scale) {
-        return scaleImage(image, scale, scale);
-    }
-
-
-    // ImageIcon scaling
-    public ImageIcon scaleImageIcon(ImageIcon image, int width, int height) {
-        return createImageIcon((BufferedImage) image.getImage(), width, height);
-    }
-
-    public ImageIcon scaleImageIcon(ImageIcon image, int scale) {
-        return createImageIcon((BufferedImage) image.getImage(), scale);
-    }
-
-    public ImageIcon scaleImageIcon(String url, int width, int height) {
-        return createImageIcon(scaleImage(url, width, height));
-    }
-
-    public ImageIcon scaleImageIcon(String url, int scale) {
-        return createImageIcon(scaleImage(url, scale));
-    }
-
-    public ImageIcon scaleImageIcon(URL url, int width, int height) {
-        return createImageIcon(scaleImage(url, width, height));
-    }
-
-    public ImageIcon scaleImageIcon(URL url, int scale) {
-        return createImageIcon(scaleImage(url, scale));
-    }
-
-    public ImageIcon scaleImageIcon(BufferedImage image, int width, int height) {
-        return createImageIcon(scaleImage(image, width, height));
-    }
-
-    public ImageIcon scaleImageIcon(BufferedImage image, int scale) {
-        return createImageIcon(scaleImage(image, scale));
-    }
-
-    public ImageIcon scaleImageIcon(Image image, int width, int height) {
-        return createImageIcon(scaleImage(image, width, height));
-    }
-
-    public ImageIcon scaleImageIcon(Image image, int scale) {
-        return createImageIcon(scaleImage(image, scale));
-    }
-
-    // Animation scaling
-    public ImageIcon scaleAnimation(String url, int width, int height) {
-        return new ImageIcon(readGif(url).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
-    }
-
-    public ImageIcon scaleAnimation(String url, int scale) {
-        return scaleAnimation(url, scale, scale);
-    }
-
-    public ImageIcon scaleAnimation(ImageIcon image, int width, int height) {
-        return new ImageIcon(image.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
-    }
-
-    public ImageIcon scaleAnimation(ImageIcon image, int scale) {
-        return scaleAnimation(image, scale, scale);
-    }
-
-    public ImageIcon scaleAnimation(URL url, int width, int height) {
-        return new ImageIcon(readGif(url).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
-    }
-
-    public ImageIcon scaleAnimation(URL url, int scale) {
-        return scaleAnimation(url, scale, scale);
-    }
-
-    // Setter
-    public void addImageToCache(String url, BufferedImage image) {
-        bufferedImageCache.put(url, image);
-    }
-
-    public void addImageToCache(String url, ImageIcon image) {
-        imageIconCache.put(url, image);
-    }
-
-    public void clearImageIconCache() {
-        imageIconCache.clear();
-    }
-
-    public void removeImageIcon(String url) {
-        imageIconCache.remove(url);
-    }
-
-    public void clearImageCache() {
-        bufferedImageCache.clear();
-    }
-
-    public void removeImage(String url) {
-        bufferedImageCache.remove(url);
-    }
-
-    public void clearCache() {
-        bufferedImageCache.clear();
-        imageIconCache.clear();
-    }
-
-    // Getter
-    public HashMap<String, BufferedImage> getBufferedImageCache() {
-        return bufferedImageCache;
-    }
-
-    public HashMap<String, ImageIcon> getImageIconCache() {
-        return imageIconCache;
-    }
-
-    public boolean isCached(String url, boolean isImageIcon) {
-        return isImageIcon ? imageIconCache.containsKey(url) : bufferedImageCache.containsKey(url);
-    }
-
-    public boolean isCached(String url) {
-        return isCached(url, false) || isCached(url, true);
-    }
-
-    public boolean isCached(BufferedImage image) {
-        return bufferedImageCache.containsValue(image);
-    }
-
-    public boolean isCached(ImageIcon image) {
-        return imageIconCache.containsValue(image);
     }
 }

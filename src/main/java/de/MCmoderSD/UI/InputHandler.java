@@ -9,15 +9,18 @@ public class InputHandler implements KeyListener {
 
     // Associations
     private final Game game;
+    private final UI ui;
 
     // Attributes
     private boolean left;
     private boolean up;
     private boolean right;
     private boolean down;
+    private boolean f3isPressed;
 
-    public InputHandler(Game game) {
+    public InputHandler(Game game, UI ui) {
         this.game = game;
+        this.ui = ui;
 
         // Initialize Attributes
         left = false;
@@ -27,12 +30,13 @@ public class InputHandler implements KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
     public void keyPressed(KeyEvent e) {
+
+        // F3 Pressed
+        if (e.getKeyCode() == KeyEvent.VK_F3) f3isPressed = true;
 
         // Start
         if (e.getKeyCode() == KeyEvent.VK_ENTER) game.start();
@@ -46,6 +50,12 @@ public class InputHandler implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) game.togglePause();
         if (e.getKeyCode() == KeyEvent.VK_P) game.togglePause();
 
+        // Debug
+        if (f3isPressed && (e.getKeyCode() == KeyEvent.VK_F)) ui.toggleFps();
+        if (f3isPressed && (e.getKeyCode() == KeyEvent.VK_B)) ui.toggleHitbox();
+        if (f3isPressed && (e.getKeyCode() == KeyEvent.VK_G)) ui.toggleGridLines();
+
+
         // Direction
         if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) left = true;
         if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) up = true;
@@ -55,6 +65,9 @@ public class InputHandler implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+
+        // F3 Pressed
+        if (e.getKeyCode() == KeyEvent.VK_F3) f3isPressed = false;
 
         // Direction Reset
         if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) left = false;

@@ -7,26 +7,34 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Objects;
 
 @SuppressWarnings("unused")
-public class JsonStreamer {
+public class JsonStreamer extends JsonUtility {
 
-    // Attributes
-    private final ObjectMapper mapper;
-    private final HashMap<String, JsonNode> jsonCache;
-
-    // Constructor
+    // Constructor without isAbsolute
     public JsonStreamer() {
+        isAbsolute = false;
+        mapper = new ObjectMapper();
+        jsonCache = new HashMap<>();
+    }
+
+    // Constructor with URL
+    public JsonStreamer(String url) {
+        this.isAbsolute = false;
+        this.url = url;
         mapper = new ObjectMapper();
         jsonCache = new HashMap<>();
     }
 
     // Read JSON file and return JsonNode
-    public JsonNode read(String url) {
-        if (jsonCache.containsKey(url)) return jsonCache.get(url); // Checks if the path has already been loaded
+    @Override
+    public JsonNode read(String resource) {
+        if (jsonCache.containsKey(resource)) return jsonCache.get(resource); // Checks if the path has already been loaded
 
         try {
-            URL json = new URL(url);
+            if (this.url != null) this.url = url + resource;
+            URL json = new URL(Objects.requireNonNull(url));
             InputStream inputStream = json.openStream();
 
             // Null check
@@ -43,17 +51,24 @@ public class JsonStreamer {
         }
     }
 
-    // Setter
-    public void clearCache() {
-        jsonCache.clear();
-    }
+    public JsonNode read(String url, String resource) {
+        if (jsonCache.containsKey(resource)) return jsonCache.get(resource); // Checks if the path has already been loaded
 
-    public void clearCache(String url) {
-        jsonCache.remove(url);
-    }
+        try {
+            URL json = new URL(url + resource);
+            InputStream inputStream = json.openStream();
 
-    // Getter
-    public HashMap<String, JsonNode> getJsonCache() {
-        return jsonCache;
+            // Null check
+            if (inputStream == null) throw new IllegalArgumentException("The JSON file could not be found: " + json);
+
+            // Write to cache
+            JsonNode node = mapper.readTree(inputStream);
+            jsonCache.put(resource, node);
+
+            // return
+            return node;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
