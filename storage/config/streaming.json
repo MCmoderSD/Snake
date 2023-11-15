@@ -1,5 +1,4 @@
 {
-  "title": "Snake",
   "icon": "https://raw.githubusercontent.com/MCmoderSD/Snake/master/src/main/resources/Images/Icon.png",
   "fieldWidth" : 32,
   "fieldHeight" : 16,
