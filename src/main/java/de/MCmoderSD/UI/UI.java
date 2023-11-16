@@ -72,12 +72,11 @@ public class UI extends JPanel {
         add(scoreLabel);
 
         // FPS Label
-        fpsLabel = new JLabel("FPS: " + config.getTps());
+        fpsLabel = new JLabel();
         fpsLabel.setFont(defaultFont);
         fpsLabel.setForeground(Color.YELLOW);
         fpsLabel.setSize(config.getScale() * 3, config.getScale());
         fpsLabel.setLocation(config.getScale()/4, 0);
-        fpsLabel.setHorizontalTextPosition(JLabel.CENTER); // ToDo Fix
         fpsLabel.setVisible(showFps);
         add(fpsLabel);
 
