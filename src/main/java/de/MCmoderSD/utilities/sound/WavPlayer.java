@@ -1,11 +1,6 @@
 package de.MCmoderSD.utilities.sound;
 
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.*;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -14,9 +9,12 @@ import java.net.URL;
 
 @SuppressWarnings("unused")
 public class WavPlayer {
+
+    // Attributes
     private Clip clip;
     private boolean loop = false;
 
+    // Constructors
     public WavPlayer(String audioPath) {
         loadClip(audioPath);
     }
@@ -32,6 +30,7 @@ public class WavPlayer {
         else loadClip(audioPath);
     }
 
+    // Methods
     private void loadClip(String audioPath) {
         new Thread(() -> {
             try {

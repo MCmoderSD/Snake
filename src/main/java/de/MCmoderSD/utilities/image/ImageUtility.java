@@ -1,16 +1,16 @@
 package de.MCmoderSD.utilities.image;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import java.awt.Image;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 
-
 @SuppressWarnings("unused")
 public abstract class ImageUtility {
+
     // Attributes
     protected HashMap<String, BufferedImage> bufferedImageCache;
     protected HashMap<String, ImageIcon> imageIconCache;
@@ -338,14 +338,6 @@ public abstract class ImageUtility {
         isAbsolute = !isAbsolute;
     }
 
-    public void setAbsolute(boolean isAbsolute) {
-        this.isAbsolute = isAbsolute;
-    }
-
-    public void setURL(String url) {
-        this.url = url;
-    }
-
     // Getter
     public HashMap<String, BufferedImage> getBufferedImageCache() {
         return bufferedImageCache;
@@ -371,7 +363,15 @@ public abstract class ImageUtility {
         return isAbsolute;
     }
 
+    public void setAbsolute(boolean isAbsolute) {
+        this.isAbsolute = isAbsolute;
+    }
+
     public String getURL() {
         return url;
+    }
+
+    public void setURL(String url) {
+        this.url = url;
     }
 }

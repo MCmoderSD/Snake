@@ -3,8 +3,7 @@ package de.MCmoderSD.objects;
 import de.MCmoderSD.main.Config;
 import de.MCmoderSD.utilities.Calculate;
 
-import java.awt.Rectangle;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
@@ -19,6 +18,8 @@ public class Food {
     private final boolean isSpecial;
     private final BufferedImage image;
     private final String sound;
+    private final Color color;
+    private final Color hitboxColor;
     private final int x;
     private final int y;
     private final int scale;
@@ -29,11 +30,11 @@ public class Food {
         this.config = config;
 
         isSpecial = Calculate.randomChance(config.getSpecialFoodChance());
-        if (isSpecial) image = config.getGoldFood();
-        else image = config.getFood();
+        image = isSpecial ? config.getGoldFood() : config.getFood();
+        color = isSpecial ? config.getGoldFoodColor() : config.getFoodColor();
 
+        hitboxColor = config.getFoodHitboxColor();
         sound = config.getFoodSound();
-
         scale = config.getScale();
 
         Point spawnPoint = getValidSpawnPont(snakePieces);
@@ -49,7 +50,8 @@ public class Food {
         int x = random.nextInt(config.getFieldWidth());
         int y = random.nextInt(config.getFieldHeight());
 
-        for (SnakePiece snakePiece : snakePieces) if (snakePiece.getX() == x && snakePiece.getY() == y) return getValidSpawnPont(snakePieces);
+        for (SnakePiece snakePiece : snakePieces)
+            if (snakePiece.getX() == x && snakePiece.getY() == y) return getValidSpawnPont(snakePieces);
         return new Point(x, y);
     }
 
@@ -82,6 +84,10 @@ public class Food {
         return new Rectangle(getPositionX(), getPositionY(), scale, scale);
     }
 
+    public Rectangle getSmallBounds() {
+        return new Rectangle(getPositionX() + 1, getPositionY() + 1, scale - 2, scale - 2);
+    }
+
     public Point getPosition() {
         return new Point(getPositionX(), getPositionY());
     }
@@ -92,5 +98,13 @@ public class Food {
 
     public int getPositionY() {
         return y * scale;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public Color getHitboxColor() {
+        return hitboxColor;
     }
 }

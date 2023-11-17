@@ -11,7 +11,7 @@ import de.MCmoderSD.utilities.Calculate;
 import de.MCmoderSD.utilities.sound.AudioPlayer;
 
 @SuppressWarnings("BusyWait")
-public class Game implements Runnable{
+public class Game implements Runnable {
 
     // Associations
     private final Config config;
@@ -52,7 +52,7 @@ public class Game implements Runnable{
         audioPlayer = config.getAudioPlayer();
 
         // Init Objects
-        snake = new Snake(config.getFieldWidth()/2 - 2, config.getFieldHeight()/2, config.getHead(), config.getHeadAnimation(), this, config);
+        snake = new Snake(config.getFieldWidth() / 2 - 2, config.getFieldHeight() / 2, config.getHead(), config.getHeadAnimation(), this, config);
         food = new Food(config, snake.getSnakePieces());
 
         new Thread(this).start();
@@ -72,7 +72,7 @@ public class Game implements Runnable{
             // Game Loop
             while (!isPaused && !gameOver) {
                 current = System.nanoTime();
-                delta += (current - now) / (tickrate/speedModifier);
+                delta += (current - now) / (tickrate / speedModifier);
                 timer += current - now;
                 now = current;
 
@@ -201,7 +201,7 @@ public class Game implements Runnable{
         gameOver = false;
 
         // Reset Objects
-        snake = new Snake(config.getFieldWidth()/2 - 2, config.getFieldHeight()/2, config.getHead(), config.getHeadAnimation(), this, config);
+        snake = new Snake(config.getFieldWidth() / 2 - 2, config.getFieldHeight() / 2, config.getHead(), config.getHeadAnimation(), this, config);
         food = new Food(config, snake.getSnakePieces());
 
         // Reset UI

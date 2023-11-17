@@ -9,7 +9,49 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="release v0.9.1&#10;- code improvements" />
+    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="release v0.9.1&#10;- code improvements">
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Background.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/BackgroundTile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/UI/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/core/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Snake.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/SnakePiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/SnakePiece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/Calculate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/Calculate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/image/ImageUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/image/ImageUtility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/WavPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/WavPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/Feet.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/Head.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/LegTile.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/LegTransition.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/LowerBody.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/UpperBody.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Audio/Eating.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Audio/OOF.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Audio/Rainbow.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/BackgroundTile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Feet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Food.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/GoldFood.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Head.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LegTile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LegTransition.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LowerBody.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/UpperBody.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config/default.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config/streaming.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/language/de.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/language/en.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/config/default.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/config/default.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/config/streaming.json" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +59,13 @@
   </component>
   <component name="CompilerWorkspaceConfiguration">
     <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="FormatOnSaveOptions">
     <option name="myRunOnSave" value="true" />
@@ -35,10 +84,10 @@
     <option name="selectedTabId" value="CurrentFile" />
     <option name="sortByName" value="true" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2YF2SE42TOb4MYgzYDBnKt2rmW2" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -56,29 +105,31 @@
     "code.cleanup.on.save": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/MCmoderSD/IdeaProjects/Current/Snake/src/main/resources",
+    "last_opened_file_path": "C:/Users/MCmoderSD/IdeaProjects/Current/Snake/storage",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\storage" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\storage" />
+      <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\docs" />
+      <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="JAR Application.Snake-asset-streaming.jar">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="de.MCmoderSD.main.Main" />
       <module name="Snake" />
@@ -100,10 +151,15 @@
       <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/Snake.jar" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JAR Application.Snake-asset-streaming.jar" />
+      <item itemvalue="JAR Application.Snake.jar" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR Application.Snake-asset-streaming.jar" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JAR Application.Snake-asset-streaming.jar" />
         <item itemvalue="JAR Application.Snake.jar" />
       </list>
     </recent_temporary>
@@ -117,6 +173,10 @@
       <option name="presentableId" value="Default" />
       <updated>1697792516620</updated>
       <workItem from="1700107012235" duration="1899000" />
+      <workItem from="1700228701826" duration="42000" />
+      <workItem from="1700228755646" duration="17000" />
+      <workItem from="1700228798093" duration="8000" />
+      <workItem from="1700228815984" duration="8536000" />
     </task>
     <task id="LOCAL-00001" summary="release v0.9.1&#10;- code improvements">
       <option name="closed" value="true" />

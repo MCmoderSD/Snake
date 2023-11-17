@@ -3,27 +3,30 @@ package de.MCmoderSD.objects;
 import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
 
-import javax.swing.ImageIcon;
-import java.awt.Point;
-import java.awt.Rectangle;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 @SuppressWarnings("unused")
 public class SnakePiece {
 
-    // Attributes
+    // Associations
     protected final Game game;
-    protected BufferedImage image;
-    protected ImageIcon animation;
-    protected int x;
-    protected int y;
 
     // Constants
     protected final int fieldWidth;
     protected final int fieldHeight;
     protected final int scale;
     protected final boolean solidWalls;
+    protected final Color color;
+    protected final Color hitboxColor;
+
+    // Attributes
+    protected BufferedImage image;
+    protected ImageIcon animation;
+    protected int x;
+    protected int y;
 
     // Direction
     protected boolean left = true;
@@ -43,6 +46,8 @@ public class SnakePiece {
         fieldHeight = config.getFieldHeight();
         scale = config.getScale();
         solidWalls = config.isSolidWalls();
+        color = config.getSnakeColor();
+        hitboxColor = config.getSnakeHitboxColor();
     }
 
     // Constructor with Image
@@ -57,6 +62,8 @@ public class SnakePiece {
         fieldHeight = config.getFieldHeight();
         scale = config.getScale();
         solidWalls = config.isSolidWalls();
+        color = config.getSnakeColor();
+        hitboxColor = config.getSnakeHitboxColor();
     }
 
     // Wall Hit Detected
@@ -96,7 +103,8 @@ public class SnakePiece {
     // Update Direction if not the opposite direction
     public void updateDirection(byte direction) {
         switch (direction) {
-            case -1: break;
+            case -1:
+                break;
 
             case 0: {
                 if (right) break;
@@ -137,7 +145,7 @@ public class SnakePiece {
         return game;
     }
 
-    protected byte getDirection() {
+    public byte getDirection() {
         if (left) return 0;
         if (up) return 1;
         if (right) return 2;
@@ -152,32 +160,40 @@ public class SnakePiece {
         int effectiveScale = scale / 2;
 
         switch (getDirection()) {
-            case 0: transform.rotate(Math.toRadians(-90), effectiveScale, effectiveScale); break;
-            case 1: transform.rotate(Math.toRadians(0), effectiveScale, effectiveScale); break;
-            case 2: transform.rotate(Math.toRadians(90), effectiveScale, effectiveScale); break;
-            case 3: transform.rotate(Math.toRadians(180), effectiveScale, effectiveScale); break;
+            case 0:
+                transform.rotate(Math.toRadians(-90), effectiveScale, effectiveScale);
+                break;
+            case 1:
+                transform.rotate(Math.toRadians(0), effectiveScale, effectiveScale);
+                break;
+            case 2:
+                transform.rotate(Math.toRadians(90), effectiveScale, effectiveScale);
+                break;
+            case 3:
+                transform.rotate(Math.toRadians(180), effectiveScale, effectiveScale);
+                break;
         }
 
         return transform;
     }
 
-    protected int getScale() {
+    public int getScale() {
         return scale;
     }
 
-    protected int getX() {
+    public int getX() {
         return x;
     }
 
-    protected int getY() {
+    public int getY() {
         return y;
     }
 
-    protected int getPositionX() {
+    public int getPositionX() {
         return x * scale;
     }
 
-    protected int getPositionY() {
+    public int getPositionY() {
         return y * scale;
     }
 
@@ -185,8 +201,16 @@ public class SnakePiece {
         return image;
     }
 
+    public void setImage(BufferedImage image) {
+        this.image = image;
+    }
+
     public ImageIcon getAnimation() {
         return animation;
+    }
+
+    public void setAnimation(ImageIcon animation) {
+        this.animation = animation;
     }
 
     public Point getPosition() {
@@ -197,17 +221,21 @@ public class SnakePiece {
         return new Rectangle(getPositionX(), getPositionY(), scale, scale);
     }
 
+    public Rectangle getSmallBounds() {
+        return new Rectangle(getPositionX() + 1, getPositionY() + 1, scale - 2, scale - 2);
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public Color getHitboxColor() {
+        return hitboxColor;
+    }
+
     // Setter
-    protected void setAssets(BufferedImage image, ImageIcon animation) {
+    public void setAssets(BufferedImage image, ImageIcon animation) {
         this.image = image;
-        this.animation = animation;
-    }
-
-    protected void setImage(BufferedImage image) {
-        this.image = image;
-    }
-
-    protected void setAnimation(ImageIcon animation) {
         this.animation = animation;
     }
 }

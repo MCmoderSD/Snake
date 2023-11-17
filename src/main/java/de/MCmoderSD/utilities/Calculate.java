@@ -2,13 +2,8 @@ package de.MCmoderSD.utilities;
 
 import de.MCmoderSD.main.Main;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 
@@ -83,5 +78,10 @@ public class Calculate {
     public static boolean doesFileExist(String resourcePath) {
         InputStream inputStream = Main.class.getResourceAsStream(resourcePath);
         return inputStream != null;
+    }
+
+    // String to Color
+    public static Color getColor(String hex) {
+        return new Color(Integer.parseInt(hex.substring(1), 16));
     }
 }

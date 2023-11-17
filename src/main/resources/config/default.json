@@ -1,7 +1,7 @@
 {
   "icon": "/Images/Icon.png",
-  "fieldWidth" : 32,
-  "fieldHeight" : 16,
+  "fieldWidth": 32,
+  "fieldHeight": 16,
   "scale": 32,
   "fps": 60,
   "tps": 10,
@@ -25,5 +25,15 @@
   "lowerBodyAnimation": "/Animations/LowerBody.gif",
   "legTileAnimation": "/Animations/LegTile.gif",
   "legTransitionAnimation": "/Animations/LegTransition.gif",
-  "feetAnimation": "/Animations/Feet.gif"
+  "feetAnimation": "/Animations/Feet.gif",
+  "gridLayoutColor": "#000000",
+  "snakeHitboxColor": "#FF0000",
+  "foodHitboxColor": "#FFFF00",
+  "fpsColor": "#FFFF00",
+  "scoreColor": "#FFFF00",
+  "textColor": "#000000",
+  "backgroundColor": "#1e2428",
+  "snakeColor": "#5662f6",
+  "foodColor": "#e27662",
+  "goldFoodColor": "#1ccb5b"
 }

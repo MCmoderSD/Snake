@@ -1,15 +1,15 @@
 package de.MCmoderSD.main;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import de.MCmoderSD.utilities.Calculate;
 import de.MCmoderSD.utilities.image.ImageReader;
 import de.MCmoderSD.utilities.image.ImageStreamer;
 import de.MCmoderSD.utilities.json.JsonReader;
 import de.MCmoderSD.utilities.json.JsonStreamer;
 import de.MCmoderSD.utilities.sound.AudioPlayer;
 
-
-import javax.swing.ImageIcon;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 @SuppressWarnings("unused")
@@ -65,16 +65,37 @@ public class Config {
     private final String gameOver;
     private final String score;
 
+    // Color
+    private final Color gridLayoutColor;
+    private final Color snakeHitboxColor;
+    private final Color foodHitboxColor;
+    private final Color fpsColor;
+    private final Color scoreColor;
+    private final Color textColor;
+    private final Color backgroundColor;
+    private final Color snakeColor;
+    private final Color foodColor;
+    private final Color goldFoodColor;
+
     // Constructor
     public Config(String[] args) {
 
         // Read Config
         audioPlayer = new AudioPlayer();
-        imageReader = new ImageReader();
-        jsonReader = new JsonReader();
         imageStreamer = null;
         jsonStreamer = null;
-        JsonNode config = jsonReader.read("/config/default.json");
+
+        JsonNode config;
+
+        if (args.length < 2) {
+            imageReader = new ImageReader();
+            jsonReader = new JsonReader();
+            config = jsonReader.read("/config/default.json");
+        } else {
+            imageReader = new ImageReader(true);
+            jsonReader = new JsonReader(true);
+            config = jsonReader.read(args[1]);
+        }
 
         if (config == null) throw new IllegalArgumentException("The config file could not be loaded");
 
@@ -114,16 +135,26 @@ public class Config {
         legTransitionAnimation = imageReader.readGif(config.get("legTransitionAnimation").asText(), scale);
         feetAnimation = imageReader.readGif(config.get("feetAnimation").asText(), scale);
 
-        if (args.length > 0) language = args[0];
-        else language = "en";
-
-        JsonNode languageConfig = jsonReader.read("/language/" + language + ".json");
+        language = args.length > 0 ? args[0] : "en";
+        JsonNode languageConfig = args[0].length() == 2 ? jsonReader.read("/language/" + language + ".json") : jsonReader.read(args[0], true);
 
         // Language
         title = languageConfig.get("title").asText();
         restart = languageConfig.get("restart").asText();
         gameOver = languageConfig.get("gameOver").asText();
         score = languageConfig.get("score").asText();
+
+        // Colors
+        gridLayoutColor = Calculate.getColor(config.get("gridLayoutColor").asText());
+        snakeHitboxColor = Calculate.getColor(config.get("snakeHitboxColor").asText());
+        foodHitboxColor = Calculate.getColor(config.get("foodHitboxColor").asText());
+        fpsColor = Calculate.getColor(config.get("fpsColor").asText());
+        scoreColor = Calculate.getColor(config.get("scoreColor").asText());
+        textColor = Calculate.getColor(config.get("textColor").asText());
+        backgroundColor = Calculate.getColor(config.get("backgroundColor").asText());
+        snakeColor = Calculate.getColor(config.get("snakeColor").asText());
+        foodColor = Calculate.getColor(config.get("foodColor").asText());
+        goldFoodColor = Calculate.getColor(config.get("goldFoodColor").asText());
     }
 
     // Constructor asset streaming
@@ -134,7 +165,7 @@ public class Config {
         imageStreamer = new ImageStreamer(url);
         jsonStreamer = new JsonStreamer(url);
         imageReader = null;
-        jsonReader = null;
+        jsonReader = new JsonReader(true);
         JsonNode config = jsonStreamer.read("/config/default.json");
 
         if (config == null) throw new IllegalArgumentException("The config file could not be loaded");
@@ -178,16 +209,26 @@ public class Config {
         legTransitionAnimation = imageStreamer.readGif(config.get("legTransitionAnimation").asText(), scale);
         feetAnimation = imageStreamer.readGif(config.get("feetAnimation").asText(), scale);
 
-        if (args.length > 0) language = args[0];
-        else language = "en";
-
-        JsonNode languageConfig = jsonStreamer.read(url, "/language/" + language + ".json");
+        language = args.length > 0 ? args[0] : "en";
+        JsonNode languageConfig = args[0].length() == 2 ? jsonReader.read("/language/" + language + ".json") : jsonReader.read(args[0], true);
 
         // Language
         title = languageConfig.get("title").asText();
         restart = languageConfig.get("restart").asText();
         gameOver = languageConfig.get("gameOver").asText();
         score = languageConfig.get("score").asText();
+
+        // Colors
+        gridLayoutColor = Calculate.getColor(config.get("gridLayoutColor").asText());
+        snakeHitboxColor = Calculate.getColor(config.get("snakeHitboxColor").asText());
+        foodHitboxColor = Calculate.getColor(config.get("foodHitboxColor").asText());
+        fpsColor = Calculate.getColor(config.get("fpsColor").asText());
+        scoreColor = Calculate.getColor(config.get("scoreColor").asText());
+        textColor = Calculate.getColor(config.get("textColor").asText());
+        backgroundColor = Calculate.getColor(config.get("backgroundColor").asText());
+        snakeColor = Calculate.getColor(config.get("snakeColor").asText());
+        foodColor = Calculate.getColor(config.get("foodColor").asText());
+        goldFoodColor = Calculate.getColor(config.get("goldFoodColor").asText());
     }
 
     // Getters
@@ -349,5 +390,46 @@ public class Config {
 
     public String getScore() {
         return score;
+    }
+
+    // Color Getters
+    public Color getGridLayoutColor() {
+        return gridLayoutColor;
+    }
+
+    public Color getSnakeHitboxColor() {
+        return snakeHitboxColor;
+    }
+
+    public Color getFoodHitboxColor() {
+        return foodHitboxColor;
+    }
+
+    public Color getFpsColor() {
+        return fpsColor;
+    }
+
+    public Color getScoreColor() {
+        return scoreColor;
+    }
+
+    public Color getTextColor() {
+        return textColor;
+    }
+
+    public Color getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public Color getSnakeColor() {
+        return snakeColor;
+    }
+
+    public Color getFoodColor() {
+        return foodColor;
+    }
+
+    public Color getGoldFoodColor() {
+        return goldFoodColor;
     }
 }
