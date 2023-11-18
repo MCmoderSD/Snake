@@ -12,37 +12,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="release v1.1&#10;- op ult added&#10;- bug fixed">
+    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="release v1.1.1&#10;- fix&#10;- improved ImageStreamer &#10;- improved JsonStreamer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/Snake.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/image/ImageStreamer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/image/ImageStreamer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/json/JsonStreamer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/json/JsonStreamer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/Feet.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/Head.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/LegTile.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/LegTransition.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/LowerBody.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/OpFood.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/UpperBody.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Audio/Eating.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Audio/OOF.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Audio/Rainbow.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/BackgroundTile.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Feet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Food.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/GoldFood.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Head.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LegTile.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LegTransition.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LowerBody.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/UpperBody.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config/default.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/de.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/en.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +97,7 @@
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JAR Application.Snake.jar">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="de.MCmoderSD.main.Main" />
       <module name="Snake" />
@@ -153,9 +126,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="JAR Application.Snake-asset-streaming.jar" />
         <item itemvalue="JAR Application.Snake.jar" />
+        <item itemvalue="JAR Application.Snake-asset-streaming.jar" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -172,7 +145,7 @@
       <workItem from="1700228755646" duration="17000" />
       <workItem from="1700228798093" duration="8000" />
       <workItem from="1700228815984" duration="8796000" />
-      <workItem from="1700285483533" duration="5498000" />
+      <workItem from="1700285483533" duration="5799000" />
     </task>
     <task id="LOCAL-00001" summary="release v0.9.1&#10;- code improvements">
       <option name="closed" value="true" />
@@ -198,7 +171,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700290147112</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="release v1.1.1&#10;- fix&#10;- improved ImageStreamer &#10;- improved JsonStreamer">
+      <option name="closed" value="true" />
+      <created>1700291238288</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1700291238288</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -209,6 +190,7 @@
     <MESSAGE value="release v0.9.1&#10;- code improvements" />
     <MESSAGE value="release v1.0&#10;- code improvements&#10;- custom assets&#10;- custom language&#10;- improved debug" />
     <MESSAGE value="release v1.1&#10;- op ult added&#10;- bug fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="release v1.1&#10;- op ult added&#10;- bug fixed" />
+    <MESSAGE value="release v1.1.1&#10;- fix&#10;- improved ImageStreamer &#10;- improved JsonStreamer" />
+    <option name="LAST_COMMIT_MESSAGE" value="release v1.1.1&#10;- fix&#10;- improved ImageStreamer &#10;- improved JsonStreamer" />
   </component>
 </project>
