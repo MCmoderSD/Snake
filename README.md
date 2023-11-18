@@ -2,64 +2,66 @@
 
 ## Description
 
-This is a simple snake game written in Java using the Swing library with Graphics2D. <Br>
-Currently, it is in a very early stage of development, so it is not complete yet. <Br>
+This is a simple snake game written in Java using the Swing library with Graphics2D. <br>
+Currently, it is in a very early stage of development, so it is not complete yet. <br>
 
 ## How to play
 
-The goal of the game is to eat as many apples as possible. <Br>
-In this adaption you can go through the walls and appear on the other side. <Br>
-It's game over when the snake hits itself. <Br>
-The snake grows by one block when it eats an apple. <Br>
-The golden apple activates your ult for 7 seconds. <Br>
-Your ult makes you twice as fast, makes you invincible, and you can go through the walls. <Br>
+The goal of the game is to eat as many apples as possible. <br>
+In this adaptation, you can go through the walls and appear on the other side. <br>
+It's game over when the snake hits itself. <br>
+The snake grows by one block when it eats an apple. <br>
+The golden apple activates your ult for 7 seconds. <br>
+Your ult makes you twice as fast, makes you invincible, and you can go through the walls. <br>
+The enchanted golden apple activates your op ult for 7 seconds. <br>
+Your op ult is like the normal ult, but you are three times as fast and grow every second. <br>
 
 ## How to run
 
-You need Java 8 installed on your computer to run this game. <Br>
-You can download it [here](https://www.java.com/de/download/manual.jsp). <Br>
+You need Java 8 installed on your computer to run this game. <br>
+You can download it [here](https://www.java.com/de/download/manual.jsp). <br>
 
-You can download the latest release [here](https://github.com/MCmoderSD/Snake/releases/latest). <Br>
-After downloading the jar file, you can run it by double-clicking it. <Br>
+You can download the latest release [here](https://github.com/MCmoderSD/Snake/releases/latest). <br>
+After downloading the JAR file, you can run it by double-clicking it. <br>
 
-You can either download the main jar or the jar with asset-streaming. <Br>
-The main jar contains all the assets, but it is a lot bigger. <Br>
-The jar with asset-streaming downloads the assets from the internet, so it is a lot smaller. <Br>
-The downside is that you need a good and constant internet connection to run it. <Br>
+You can either download the main JAR or the JAR with asset-streaming. <br>
+The main JAR contains all the assets, but it is a lot bigger. <br>
+The JAR with asset-streaming downloads the assets from the internet, so it is a lot smaller. <br>
+The downside is that you need a good and constant internet connection to run it. <br>
 
-Alternatively, you can run it from the command line with the following command: <Br>
-`java -jar Snake.jar` <Br>
+Alternatively, you can run it from the command line with the following command: <br>
+`java -jar Snake.jar` <br>
 
-You can change the language of the game by adding the following argument: <Br>
-`java -jar Snake.jar en` <Br>
+You can change the language of the game by adding the following argument: <br>
+`java -jar Snake.jar en` <br>
 
-Currently, the following languages are supported: <Br>
+Currently, the following languages are supported: <br>
 
 - English (en)
 - German (de)
 
-I'm planning to add more languages in the future. <Br>
-If you want to help me translate the game into your language, please contact me and [read more](#custom-language). <Br>
+I'm planning to add more languages in the future. <br>
+If you want to help me translate the game into your language, please contact me and [read more](#custom-language). <br>
 
 ## Controls
 
-The snake is controlled by the arrow keys or WASD. <Br>
-You can pause and resume the game by pressing escape. <Br>
-To start the game, press space or enter. <Br>
-You can exit the game by pressing Ctrl + C. <Br>
+The snake is controlled by the arrow keys or WASD. <br>
+You can pause and resume the game by pressing escape. <br>
+To start the game, press space or enter. <br>
+You can exit the game by pressing Ctrl + C. <br>
 
 ## Debugging
 
-You can enable an FPS counter by pressing F3 + F . <Br>
-You can enable grid lines by pressing F3 + G. <Br>
-You can enable hitboxes by pressing F3 + B. <Br>
+You can enable an FPS counter by pressing F3 + F. <br>
+You can enable grid lines by pressing F3 + G. <br>
+You can enable hitboxes by pressing F3 + B. <br>
 
 ## Custom Assets
 
-You can add your own assets to the game. <Br>
-You can use both the main jar and the jar with asset-streaming. <Br>
+You can add your own assets to the game. <br>
+You can use both the main JAR and the JAR with asset-streaming. <br>
 
-1. Create a `.json` file with the following structure: <Br>
+1. Create a `.json` file with the following structure: <br>
 
 ```json
 {
@@ -103,21 +105,21 @@ You can use both the main jar and the jar with asset-streaming. <Br>
 }
 ```
 
-2. Replace the paths with the absolute paths to your assets. <Br>
-   If it doesn't work, try using forward slashes instead of backslashes or double slashes. <Br>
-   For audio there is currently only support for `.wav` files encoded with 16 bit PCM. <Br>
-   For images, you can use `.jpg`, `.jpeg`, but `.png` works best. <Br>
-   For animations, you can use `.gif` files. <Br> <Br>
+2. Replace the paths with the absolute paths to your assets. <br>
+   If it doesn't work, try using forward slashes instead of backslashes or double slashes. <br>
+   For audio, there is currently only support for .wav files encoded with 16-bit PCM. <br>
+   For images, you can use .jpg, .jpeg, but .png works best. <br>
+   For animations, you can use .gif files. <br> <br>
 
 3. Run the game with the custom config file. <br>
-   For example: `java -jar Snake.jar <language> <PathToTheConfigFile>` <br> <br>
+   For example: java -jar Snake.jar <language> <PathToTheConfigFile> <br> <br>
 
 ## Custom Language
 
-You can use your own language pack in the game. <Br>
-You can use both the main jar and the jar with asset-streaming. <Br>
+You can use your language pack in the game. <br>
+You can use both the main JAR and the JAR with asset-streaming. <br>
 
-1. Create a `.json` file with the following structure: <Br>
+1. Create a .json file with the following structure: <br>
 
 ```json
 {
@@ -128,10 +130,10 @@ You can use both the main jar and the jar with asset-streaming. <Br>
 }
 ```
 
-2. Replace the values with your own translations. <Br>
-   If you want to help me translate the game into your language, please contact me. <Br>
+2. Replace the values with your translations. <br>
+   If you want to help me translate the game into your language, please contact me. <br> <br>
 3. Run the game with the custom language file. <br>
-   For example: `java -jar Snake.jar <PathToTheLanguageFile>` <br> <br>
+   For example: java -jar Snake.jar <PathToTheLanguageFile> <br> <br>
 
 ## Features
 
@@ -147,6 +149,9 @@ You can use both the main jar and the jar with asset-streaming. <Br>
 - [x] Sound effects
 - [x] Ult Working
 - [x] Ult Animation
+- [x] Ult Sound
+- [x] Ult Timer
+- [x] Op Ult
 - [x] Rotation
 - [x] Restart
 - [x] Pause
@@ -159,3 +164,4 @@ You can use both the main jar and the jar with asset-streaming. <Br>
 - [ ] Win
 - [ ] Game Over
 - [ ] Menu
+- [ ] Op Ult Animation

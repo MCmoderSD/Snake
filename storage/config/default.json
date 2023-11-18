@@ -26,6 +26,7 @@
   "legTileAnimation": "/Animations/LegTile.gif",
   "legTransitionAnimation": "/Animations/LegTransition.gif",
   "feetAnimation": "/Animations/Feet.gif",
+  "opFoodAnimation": "/Animations/OpFood.gif",
   "gridLayoutColor": "#000000",
   "snakeHitboxColor": "#FF0000",
   "foodHitboxColor": "#FFFF00",
@@ -35,5 +36,6 @@
   "backgroundColor": "#1e2428",
   "snakeColor": "#5662f6",
   "foodColor": "#e27662",
-  "goldFoodColor": "#1ccb5b"
+  "goldFoodColor": "#1ccb5b",
+  "opFoodColor": "#FF00FF"
 }

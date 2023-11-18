@@ -3,6 +3,7 @@ package de.MCmoderSD.objects;
 import de.MCmoderSD.main.Config;
 import de.MCmoderSD.utilities.Calculate;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -16,7 +17,9 @@ public class Food {
 
     // Attributes
     private final boolean isSpecial;
+    private final boolean isOp;
     private final BufferedImage image;
+    private final ImageIcon animation;
     private final String sound;
     private final Color color;
     private final Color hitboxColor;
@@ -31,7 +34,12 @@ public class Food {
 
         isSpecial = Calculate.randomChance(config.getSpecialFoodChance());
         image = isSpecial ? config.getGoldFood() : config.getFood();
-        color = isSpecial ? config.getGoldFoodColor() : config.getFoodColor();
+
+
+        isOp = isSpecial && Calculate.randomChance(config.getSpecialFoodChance());
+        animation = isOp ? config.getOpFoodAnimation() : null;
+
+        color = isOp ? config.getOpFoodColor() : isSpecial ? config.getGoldFoodColor() : config.getFoodColor();
 
         hitboxColor = config.getFoodHitboxColor();
         sound = config.getFoodSound();
@@ -60,8 +68,16 @@ public class Food {
         return isSpecial;
     }
 
+    public boolean isOp() {
+        return isOp;
+    }
+
     public BufferedImage getImage() {
         return image;
+    }
+
+    public ImageIcon getAnimation() {
+        return animation;
     }
 
     public String getSound() {

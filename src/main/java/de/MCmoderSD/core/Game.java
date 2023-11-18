@@ -110,7 +110,7 @@ public class Game implements Runnable {
                         audioPlayer.playAudio(food.getSound());
                         ui.setScore(score);
 
-                        if (food.isSpecial()) activateUlt();
+                        if (food.isSpecial()) activateUlt(food.isOp());
 
                         food = new Food(config, snake.getSnakePieces());
                     }
@@ -150,16 +150,28 @@ public class Game implements Runnable {
     }
 
     // Methods
-    private void activateUlt() {
+    private void activateUlt(boolean isOp) {
         if (ult != null && ult.isAlive()) ult.interrupt();
 
         ult = new Thread(() -> {
             try {
                 ultActive = true;
                 audioPlayer.playAudio(config.getUltSound());
-                setSpeedModifier(2);
-                Thread.sleep(7000);
-                setSpeedModifier(1);
+                if (isOp) {
+                    setSpeedModifier(3);
+                    for (int i = 0; i < 7; i++) {
+                        snake.grow(config);
+                        score++;
+                        ui.setScore(score);
+                        Thread.sleep(1000);
+                    }
+                    setSpeedModifier(1);
+                } else {
+                    setSpeedModifier(2);
+                    Thread.sleep(7000);
+                    setSpeedModifier(1);
+                }
+
                 ultActive = false;
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();

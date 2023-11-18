@@ -57,6 +57,7 @@ public class Config {
     private final ImageIcon legTileAnimation;
     private final ImageIcon legTransitionAnimation;
     private final ImageIcon feetAnimation;
+    private final ImageIcon opFoodAnimation;
 
     // Language
     private final String language;
@@ -76,6 +77,7 @@ public class Config {
     private final Color snakeColor;
     private final Color foodColor;
     private final Color goldFoodColor;
+    private final Color opFoodColor;
 
     // Constructor
     public Config(String[] args) {
@@ -134,9 +136,10 @@ public class Config {
         legTileAnimation = imageReader.readGif(config.get("legTileAnimation").asText(), scale);
         legTransitionAnimation = imageReader.readGif(config.get("legTransitionAnimation").asText(), scale);
         feetAnimation = imageReader.readGif(config.get("feetAnimation").asText(), scale);
+        opFoodAnimation = imageReader.readGif(config.get("opFoodAnimation").asText(), scale);
 
         language = args.length > 0 ? args[0] : "en";
-        JsonNode languageConfig = args[0].length() == 2 ? jsonReader.read("/language/" + language + ".json") : jsonReader.read(args[0], true);
+        JsonNode languageConfig = language.length() == 2 ? jsonReader.read("/language/" + language + ".json") : jsonReader.read(args[0], true);
 
         // Language
         title = languageConfig.get("title").asText();
@@ -155,6 +158,7 @@ public class Config {
         snakeColor = Calculate.getColor(config.get("snakeColor").asText());
         foodColor = Calculate.getColor(config.get("foodColor").asText());
         goldFoodColor = Calculate.getColor(config.get("goldFoodColor").asText());
+        opFoodColor = Calculate.getColor(config.get("opFoodColor").asText());
     }
 
     // Constructor asset streaming
@@ -208,6 +212,7 @@ public class Config {
         legTileAnimation = imageStreamer.readGif(config.get("legTileAnimation").asText(), scale);
         legTransitionAnimation = imageStreamer.readGif(config.get("legTransitionAnimation").asText(), scale);
         feetAnimation = imageStreamer.readGif(config.get("feetAnimation").asText(), scale);
+        opFoodAnimation = imageStreamer.readGif(config.get("opFoodAnimation").asText(), scale);
 
         language = args.length > 0 ? args[0] : "en";
         JsonNode languageConfig = args[0].length() == 2 ? jsonReader.read("/language/" + language + ".json") : jsonReader.read(args[0], true);
@@ -229,6 +234,7 @@ public class Config {
         snakeColor = Calculate.getColor(config.get("snakeColor").asText());
         foodColor = Calculate.getColor(config.get("foodColor").asText());
         goldFoodColor = Calculate.getColor(config.get("goldFoodColor").asText());
+        opFoodColor = Calculate.getColor(config.get("opFoodColor").asText());
     }
 
     // Getters
@@ -371,6 +377,10 @@ public class Config {
         return feetAnimation;
     }
 
+    public ImageIcon getOpFoodAnimation() {
+        return opFoodAnimation;
+    }
+
     // Language Getters
     public String getLanguage() {
         return language;
@@ -431,5 +441,9 @@ public class Config {
 
     public Color getGoldFoodColor() {
         return goldFoodColor;
+    }
+
+    public Color getOpFoodColor() {
+        return opFoodColor;
     }
 }
