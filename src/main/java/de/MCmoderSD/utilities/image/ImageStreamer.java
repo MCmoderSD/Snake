@@ -1,7 +1,7 @@
 package de.MCmoderSD.utilities.image;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -37,8 +37,8 @@ public class ImageStreamer extends ImageUtility {
         BufferedImage image = null;
 
         try {
-            if (this.url != null) url = this.url + url;
-            image = ImageIO.read(new URL(url));
+            if (this.url != null) image = ImageIO.read(new URL(this.url + url));
+            else image = ImageIO.read(new URL(url));
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -85,8 +85,8 @@ public class ImageStreamer extends ImageUtility {
         ImageIcon imageIcon; // Load the Animation
 
         try {
-            if (this.url != null) url = this.url + url;
-            imageIcon = new ImageIcon(new URL(url));
+            if (this.url != null) imageIcon = new ImageIcon(new URL(this.url + url));
+            else imageIcon = new ImageIcon(new URL(url));
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }

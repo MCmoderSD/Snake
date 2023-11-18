@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Objects;
 
 @SuppressWarnings("unused")
 public class JsonStreamer extends JsonUtility {
@@ -30,11 +29,15 @@ public class JsonStreamer extends JsonUtility {
     // Read JSON file and return JsonNode
     @Override
     public JsonNode read(String resource) {
-        if (jsonCache.containsKey(resource)) return jsonCache.get(resource); // Checks if the path has already been loaded
+        if (jsonCache.containsKey(resource))
+            return jsonCache.get(resource); // Checks if the path has already been loaded
+
+        URL json;
 
         try {
-            if (this.url != null) this.url = url + resource;
-            URL json = new URL(Objects.requireNonNull(url));
+            if (this.url != null) json = new URL(url + resource);
+            else json = new URL(resource);
+
             InputStream inputStream = json.openStream();
 
             // Null check
@@ -52,7 +55,8 @@ public class JsonStreamer extends JsonUtility {
     }
 
     public JsonNode read(String url, String resource) {
-        if (jsonCache.containsKey(resource)) return jsonCache.get(resource); // Checks if the path has already been loaded
+        if (jsonCache.containsKey(resource))
+            return jsonCache.get(resource); // Checks if the path has already been loaded
 
         try {
             URL json = new URL(url + resource);

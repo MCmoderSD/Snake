@@ -215,7 +215,7 @@ public class Config {
         opFoodAnimation = imageStreamer.readGif(config.get("opFoodAnimation").asText(), scale);
 
         language = args.length > 0 ? args[0] : "en";
-        JsonNode languageConfig = args[0].length() == 2 ? jsonReader.read("/language/" + language + ".json") : jsonReader.read(args[0], true);
+        JsonNode languageConfig = language.length() == 2 ? jsonStreamer.read("/language/" + language + ".json") : jsonReader.read(args[0], true);
 
         // Language
         title = languageConfig.get("title").asText();
