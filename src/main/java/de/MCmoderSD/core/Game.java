@@ -158,17 +158,17 @@ public class Game implements Runnable {
                 ultActive = true;
                 audioPlayer.playAudio(config.getUltSound());
                 if (isOp) {
-                    setSpeedModifier(3);
-                    for (int i = 0; i < 7; i++) {
+                    setSpeedModifier(config.getOpUltSpeedModifier());
+                    for (int i = 0; i < config.getSpecialFoodDuration(); i++) {
                         snake.grow(config);
                         score++;
                         ui.setScore(score);
-                        Thread.sleep(1000);
+                        Thread.sleep(config.getOpUltGrowInterval());
                     }
                     setSpeedModifier(1);
                 } else {
-                    setSpeedModifier(2);
-                    Thread.sleep(7000);
+                    setSpeedModifier(config.getUltSpeedModifier());
+                    Thread.sleep((long) (config.getSpecialFoodDuration() * 1000));
                     setSpeedModifier(1);
                 }
 

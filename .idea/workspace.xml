@@ -12,10 +12,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="release v1.1.1&#10;- fix&#10;- improved ImageStreamer &#10;- improved JsonStreamer">
+    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="corrupted jar">
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/json/JsonNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/json/JsonValue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/Snake.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/core/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/image/ImageStreamer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/image/ImageStreamer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/image/ImageUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/image/ImageUtility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/json/JsonReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/json/JsonStreamer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/json/JsonUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/json/JsonUtility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config/default.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/default.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +82,7 @@
     "code.cleanup.on.save": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/MCmoderSD/IdeaProjects/Current/Snake/src/main/resources",
+    "last_opened_file_path": "C:/Users/MCmoderSD/IdeaProjects/Current/Snake/src/main/java/de/MCmoderSD/utilities/json",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -79,14 +90,15 @@
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "rearrange.code.on.save": "true",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
+    "settings.editor.selected.configurable": "actions.on.save",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\java\de\MCmoderSD\utilities\json" />
+      <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\java\de\MCmoderSD\utilities\image" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\storage" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources\Animations" />
@@ -127,8 +139,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="JAR Application.Snake.jar" />
-        <item itemvalue="JAR Application.Snake-asset-streaming.jar" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JAR Application.Snake-asset-streaming.jar" />
       </list>
     </recent_temporary>
   </component>
@@ -145,7 +157,13 @@
       <workItem from="1700228755646" duration="17000" />
       <workItem from="1700228798093" duration="8000" />
       <workItem from="1700228815984" duration="8796000" />
-      <workItem from="1700285483533" duration="5799000" />
+      <workItem from="1700285483533" duration="5857000" />
+      <workItem from="1700291432295" duration="433000" />
+      <workItem from="1700325129613" duration="2862000" />
+      <workItem from="1700384818284" duration="27000" />
+      <workItem from="1700469300447" duration="1002000" />
+      <workItem from="1700592545795" duration="87000" />
+      <workItem from="1700864760855" duration="1693000" />
     </task>
     <task id="LOCAL-00001" summary="release v0.9.1&#10;- code improvements">
       <option name="closed" value="true" />
@@ -179,7 +197,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700291238288</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="corrupted jar">
+      <option name="closed" value="true" />
+      <created>1700291380165</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1700291380165</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,6 +217,7 @@
     <MESSAGE value="release v1.0&#10;- code improvements&#10;- custom assets&#10;- custom language&#10;- improved debug" />
     <MESSAGE value="release v1.1&#10;- op ult added&#10;- bug fixed" />
     <MESSAGE value="release v1.1.1&#10;- fix&#10;- improved ImageStreamer &#10;- improved JsonStreamer" />
-    <option name="LAST_COMMIT_MESSAGE" value="release v1.1.1&#10;- fix&#10;- improved ImageStreamer &#10;- improved JsonStreamer" />
+    <MESSAGE value="corrupted jar" />
+    <option name="LAST_COMMIT_MESSAGE" value="corrupted jar" />
   </component>
 </project>

@@ -1,8 +1,8 @@
 package de.MCmoderSD.utilities.image;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -109,7 +109,7 @@ public abstract class ImageUtility {
     public ImageIcon createImageIcon(String resource) {
         if (imageIconCache.containsKey(resource)) return imageIconCache.get(resource);
 
-        if (this.url != null) resource = (this.url + url);
+        if (this.url != null) resource = (this.url + resource);
 
         ImageIcon imageIcon = new ImageIcon(read(resource));
         imageIconCache.put(resource, imageIcon);

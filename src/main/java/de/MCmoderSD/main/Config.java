@@ -1,11 +1,10 @@
 package de.MCmoderSD.main;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import de.MCmoderSD.utilities.Calculate;
 import de.MCmoderSD.utilities.image.ImageReader;
 import de.MCmoderSD.utilities.image.ImageStreamer;
-import de.MCmoderSD.utilities.json.JsonReader;
-import de.MCmoderSD.utilities.json.JsonStreamer;
+import de.MCmoderSD.utilities.json.JsonNode;
+import de.MCmoderSD.utilities.json.JsonUtility;
 import de.MCmoderSD.utilities.sound.AudioPlayer;
 
 import javax.swing.*;
@@ -17,8 +16,7 @@ public class Config {
 
     // Associations
     private final AudioPlayer audioPlayer;
-    private final JsonReader jsonReader;
-    private final JsonStreamer jsonStreamer;
+    private final JsonUtility jsonUtility;
     private final ImageReader imageReader;
     private final ImageStreamer imageStreamer;
 
@@ -28,7 +26,11 @@ public class Config {
     private final int fieldHeight;
     private final int fps;
     private final int tps;
+    private final int opUltGrowInterval;
     private final double specialFoodChance;
+    private final double specialFoodDuration;
+    private final double ultSpeedModifier;
+    private final double opUltSpeedModifier;
     private final boolean resizable;
     private final boolean solidWalls;
 
@@ -85,18 +87,17 @@ public class Config {
         // Read Config
         audioPlayer = new AudioPlayer();
         imageStreamer = null;
-        jsonStreamer = null;
 
         JsonNode config;
 
         if (args.length < 2) {
             imageReader = new ImageReader();
-            jsonReader = new JsonReader();
-            config = jsonReader.read("/config/default.json");
+            jsonUtility = new JsonUtility();
+            config = jsonUtility.load("/config/default.json");
         } else {
             imageReader = new ImageReader(true);
-            jsonReader = new JsonReader(true);
-            config = jsonReader.read(args[1]);
+            jsonUtility = new JsonUtility(true);
+            config = jsonUtility.load(args[1]);
         }
 
         if (config == null) throw new IllegalArgumentException("The config file could not be loaded");
@@ -106,7 +107,11 @@ public class Config {
         fieldHeight = config.get("fieldHeight").asInt();
         fps = config.get("fps").asInt();
         tps = config.get("tps").asInt();
+        opUltGrowInterval = config.get("opUltGrowInterval").asInt();
         specialFoodChance = config.get("specialFoodChance").asDouble();
+        specialFoodDuration = config.get("specialFoodDuration").asDouble();
+        ultSpeedModifier = config.get("ultSpeed").asDouble();
+        opUltSpeedModifier = config.get("opUltSpeed").asDouble();
         resizable = config.get("resizable").asBoolean();
         solidWalls = config.get("solidWalls").asBoolean();
         foodSound = config.get("foodSound").asText();
@@ -139,7 +144,7 @@ public class Config {
         opFoodAnimation = imageReader.readGif(config.get("opFoodAnimation").asText(), scale);
 
         language = args.length > 0 ? args[0] : "en";
-        JsonNode languageConfig = language.length() == 2 ? jsonReader.read("/language/" + language + ".json") : jsonReader.read(args[0], true);
+        JsonNode languageConfig = language.length() == 2 ? jsonUtility.load("/language/" + language + ".json") : jsonUtility.load(args[0], true);
 
         // Language
         title = languageConfig.get("title").asText();
@@ -167,10 +172,9 @@ public class Config {
         // Read Config
         audioPlayer = new AudioPlayer();
         imageStreamer = new ImageStreamer(url);
-        jsonStreamer = new JsonStreamer(url);
+        jsonUtility = new JsonUtility(url);
         imageReader = null;
-        jsonReader = new JsonReader(true);
-        JsonNode config = jsonStreamer.read("/config/default.json");
+        JsonNode config = jsonUtility.load("/config/default.json");
 
         if (config == null) throw new IllegalArgumentException("The config file could not be loaded");
 
@@ -180,7 +184,11 @@ public class Config {
         fieldHeight = config.get("fieldHeight").asInt();
         fps = config.get("fps").asInt();
         tps = config.get("tps").asInt();
+        opUltGrowInterval = config.get("opUltGrowInterval").asInt();
         specialFoodChance = config.get("specialFoodChance").asDouble();
+        specialFoodDuration = config.get("specialFoodDuration").asDouble();
+        ultSpeedModifier = config.get("ultSpeed").asDouble();
+        opUltSpeedModifier = config.get("opUltSpeed").asDouble();
         resizable = config.get("resizable").asBoolean();
         solidWalls = config.get("solidWalls").asBoolean();
 
@@ -215,7 +223,7 @@ public class Config {
         opFoodAnimation = imageStreamer.readGif(config.get("opFoodAnimation").asText(), scale);
 
         language = args.length > 0 ? args[0] : "en";
-        JsonNode languageConfig = language.length() == 2 ? jsonStreamer.read("/language/" + language + ".json") : jsonReader.read(args[0], true);
+        JsonNode languageConfig = language.length() == 2 ? jsonUtility.load("/language/" + language + ".json") : jsonUtility.load(args[0], true);
 
         // Language
         title = languageConfig.get("title").asText();
@@ -252,12 +260,8 @@ public class Config {
         return imageStreamer;
     }
 
-    public JsonReader getJsonReader() {
-        return jsonReader;
-    }
-
-    public JsonStreamer getJsonStreamer() {
-        return jsonStreamer;
+    public JsonUtility getJsonReader() {
+        return jsonUtility;
     }
 
     // Config Getters
@@ -281,8 +285,24 @@ public class Config {
         return tps;
     }
 
+    public int getOpUltGrowInterval() {
+        return opUltGrowInterval;
+    }
+
     public double getSpecialFoodChance() {
         return specialFoodChance;
+    }
+
+    public double getSpecialFoodDuration() {
+        return specialFoodDuration;
+    }
+
+    public double getUltSpeedModifier() {
+        return ultSpeedModifier;
+    }
+
+    public double getOpUltSpeedModifier() {
+        return opUltSpeedModifier;
     }
 
     public boolean isResizable() {
