@@ -43,7 +43,7 @@ public class Game implements Runnable {
         isPaused = false;
         gameOver = false;
         gameStarted = false;
-        tickrate = Calculate.calculateTickrate(config.getTps());
+        tickrate = Calculate.tickrate(config.getTps());
 
         // Init UI
         frame = new Frame(config, this);

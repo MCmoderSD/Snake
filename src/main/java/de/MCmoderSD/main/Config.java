@@ -153,17 +153,17 @@ public class Config {
         score = languageConfig.get("score").asText();
 
         // Colors
-        gridLayoutColor = Calculate.getColor(config.get("gridLayoutColor").asText());
-        snakeHitboxColor = Calculate.getColor(config.get("snakeHitboxColor").asText());
-        foodHitboxColor = Calculate.getColor(config.get("foodHitboxColor").asText());
-        fpsColor = Calculate.getColor(config.get("fpsColor").asText());
-        scoreColor = Calculate.getColor(config.get("scoreColor").asText());
-        textColor = Calculate.getColor(config.get("textColor").asText());
-        backgroundColor = Calculate.getColor(config.get("backgroundColor").asText());
-        snakeColor = Calculate.getColor(config.get("snakeColor").asText());
-        foodColor = Calculate.getColor(config.get("foodColor").asText());
-        goldFoodColor = Calculate.getColor(config.get("goldFoodColor").asText());
-        opFoodColor = Calculate.getColor(config.get("opFoodColor").asText());
+        gridLayoutColor = Calculate.hexStringToColor(config.get("gridLayoutColor").asText());
+        snakeHitboxColor = Calculate.hexStringToColor(config.get("snakeHitboxColor").asText());
+        foodHitboxColor = Calculate.hexStringToColor(config.get("foodHitboxColor").asText());
+        fpsColor = Calculate.hexStringToColor(config.get("fpsColor").asText());
+        scoreColor = Calculate.hexStringToColor(config.get("scoreColor").asText());
+        textColor = Calculate.hexStringToColor(config.get("textColor").asText());
+        backgroundColor = Calculate.hexStringToColor(config.get("backgroundColor").asText());
+        snakeColor = Calculate.hexStringToColor(config.get("snakeColor").asText());
+        foodColor = Calculate.hexStringToColor(config.get("foodColor").asText());
+        goldFoodColor = Calculate.hexStringToColor(config.get("goldFoodColor").asText());
+        opFoodColor = Calculate.hexStringToColor(config.get("opFoodColor").asText());
     }
 
     // Constructor asset streaming
@@ -232,17 +232,17 @@ public class Config {
         score = languageConfig.get("score").asText();
 
         // Colors
-        gridLayoutColor = Calculate.getColor(config.get("gridLayoutColor").asText());
-        snakeHitboxColor = Calculate.getColor(config.get("snakeHitboxColor").asText());
-        foodHitboxColor = Calculate.getColor(config.get("foodHitboxColor").asText());
-        fpsColor = Calculate.getColor(config.get("fpsColor").asText());
-        scoreColor = Calculate.getColor(config.get("scoreColor").asText());
-        textColor = Calculate.getColor(config.get("textColor").asText());
-        backgroundColor = Calculate.getColor(config.get("backgroundColor").asText());
-        snakeColor = Calculate.getColor(config.get("snakeColor").asText());
-        foodColor = Calculate.getColor(config.get("foodColor").asText());
-        goldFoodColor = Calculate.getColor(config.get("goldFoodColor").asText());
-        opFoodColor = Calculate.getColor(config.get("opFoodColor").asText());
+        gridLayoutColor = Calculate.hexStringToColor(config.get("gridLayoutColor").asText());
+        snakeHitboxColor = Calculate.hexStringToColor(config.get("snakeHitboxColor").asText());
+        foodHitboxColor = Calculate.hexStringToColor(config.get("foodHitboxColor").asText());
+        fpsColor = Calculate.hexStringToColor(config.get("fpsColor").asText());
+        scoreColor = Calculate.hexStringToColor(config.get("scoreColor").asText());
+        textColor = Calculate.hexStringToColor(config.get("textColor").asText());
+        backgroundColor = Calculate.hexStringToColor(config.get("backgroundColor").asText());
+        snakeColor = Calculate.hexStringToColor(config.get("snakeColor").asText());
+        foodColor = Calculate.hexStringToColor(config.get("foodColor").asText());
+        goldFoodColor = Calculate.hexStringToColor(config.get("goldFoodColor").asText());
+        opFoodColor = Calculate.hexStringToColor(config.get("opFoodColor").asText());
     }
 
     // Getters

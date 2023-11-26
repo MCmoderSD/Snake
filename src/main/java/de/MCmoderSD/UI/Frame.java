@@ -4,7 +4,7 @@ import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
 import de.MCmoderSD.utilities.Calculate;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class Frame extends JFrame {
 
@@ -25,7 +25,7 @@ public class Frame extends JFrame {
 
         // Finalize and set visible
         pack();
-        setLocation(Calculate.centerFrame(this));
+        setLocation(Calculate.centerOfJFrame(this));
         setVisible(true);
     }
 
