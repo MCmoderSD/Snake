@@ -12,17 +12,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="release 1.2&#10;&#10;- improved code &#10;- new JsonUtility">
+    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="release 1.2.1&#10;&#10;- improved code &#10;- new JsonUtility">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Snake.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/UI/Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/UI/Frame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/core/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/Calculate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/Calculate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/json/JsonNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/json/JsonNode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,29 +59,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "code.cleanup.on.save": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/MCmoderSD/IdeaProjects/Current/Snake/src/main/resources",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/MCmoderSD/IdeaProjects/Current/Snake/src/main/resources&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources" />
@@ -105,7 +96,7 @@
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="JAR Application.Snake-asset-streaming.jar">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="de.MCmoderSD.main.Main" />
       <module name="Snake" />
@@ -134,8 +125,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR Application.Snake-asset-streaming.jar" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JAR Application.Snake-asset-streaming.jar" />
         <item itemvalue="JAR Application.Snake.jar" />
       </list>
     </recent_temporary>
@@ -162,7 +153,17 @@
       <workItem from="1700864760855" duration="2136000" />
       <workItem from="1700867761557" duration="119000" />
       <workItem from="1701034269521" duration="397000" />
-      <workItem from="1701036157572" duration="490000" />
+      <workItem from="1701036157572" duration="769000" />
+      <workItem from="1701083802269" duration="89000" />
+      <workItem from="1701083904047" duration="7000" />
+      <workItem from="1701134931709" duration="1208000" />
+      <workItem from="1701143645251" duration="22000" />
+      <workItem from="1701143680000" duration="283000" />
+      <workItem from="1701144560171" duration="672000" />
+      <workItem from="1701160689454" duration="1203000" />
+      <workItem from="1701237004541" duration="38000" />
+      <workItem from="1701237056286" duration="39000" />
+      <workItem from="1701273841612" duration="293000" />
     </task>
     <task id="LOCAL-00001" summary="release v0.9.1&#10;- code improvements">
       <option name="closed" value="true" />
@@ -212,7 +213,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700866642055</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="release 1.2.1&#10;&#10;- improved code &#10;- new JsonUtility">
+      <option name="closed" value="true" />
+      <created>1701036839475</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1701036839477</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,7 +235,8 @@
     <MESSAGE value="release v1.1.1&#10;- fix&#10;- improved ImageStreamer &#10;- improved JsonStreamer" />
     <MESSAGE value="corrupted jar" />
     <MESSAGE value="release 1.2&#10;&#10;- improved code &#10;- new JsonUtility" />
-    <option name="LAST_COMMIT_MESSAGE" value="release 1.2&#10;&#10;- improved code &#10;- new JsonUtility" />
+    <MESSAGE value="release 1.2.1&#10;&#10;- improved code &#10;- new JsonUtility" />
+    <option name="LAST_COMMIT_MESSAGE" value="release 1.2.1&#10;&#10;- improved code &#10;- new JsonUtility" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,6 +1,5 @@
 package de.MCmoderSD.main;
 
-import de.MCmoderSD.utilities.Calculate;
 import de.MCmoderSD.utilities.image.ImageReader;
 import de.MCmoderSD.utilities.image.ImageStreamer;
 import de.MCmoderSD.utilities.json.JsonNode;
@@ -153,17 +152,17 @@ public class Config {
         score = languageConfig.get("score").asText();
 
         // Colors
-        gridLayoutColor = Calculate.hexStringToColor(config.get("gridLayoutColor").asText());
-        snakeHitboxColor = Calculate.hexStringToColor(config.get("snakeHitboxColor").asText());
-        foodHitboxColor = Calculate.hexStringToColor(config.get("foodHitboxColor").asText());
-        fpsColor = Calculate.hexStringToColor(config.get("fpsColor").asText());
-        scoreColor = Calculate.hexStringToColor(config.get("scoreColor").asText());
-        textColor = Calculate.hexStringToColor(config.get("textColor").asText());
-        backgroundColor = Calculate.hexStringToColor(config.get("backgroundColor").asText());
-        snakeColor = Calculate.hexStringToColor(config.get("snakeColor").asText());
-        foodColor = Calculate.hexStringToColor(config.get("foodColor").asText());
-        goldFoodColor = Calculate.hexStringToColor(config.get("goldFoodColor").asText());
-        opFoodColor = Calculate.hexStringToColor(config.get("opFoodColor").asText());
+        gridLayoutColor = config.get("gridLayoutColor").asColor();
+        snakeHitboxColor = config.get("snakeHitboxColor").asColor();
+        foodHitboxColor = config.get("foodHitboxColor").asColor();
+        fpsColor = config.get("fpsColor").asColor();
+        scoreColor = config.get("scoreColor").asColor();
+        textColor = config.get("textColor").asColor();
+        backgroundColor = config.get("backgroundColor").asColor();
+        snakeColor = config.get("snakeColor").asColor();
+        foodColor = config.get("foodColor").asColor();
+        goldFoodColor = config.get("goldFoodColor").asColor();
+        opFoodColor = config.get("opFoodColor").asColor();
     }
 
     // Constructor asset streaming
@@ -232,17 +231,17 @@ public class Config {
         score = languageConfig.get("score").asText();
 
         // Colors
-        gridLayoutColor = Calculate.hexStringToColor(config.get("gridLayoutColor").asText());
-        snakeHitboxColor = Calculate.hexStringToColor(config.get("snakeHitboxColor").asText());
-        foodHitboxColor = Calculate.hexStringToColor(config.get("foodHitboxColor").asText());
-        fpsColor = Calculate.hexStringToColor(config.get("fpsColor").asText());
-        scoreColor = Calculate.hexStringToColor(config.get("scoreColor").asText());
-        textColor = Calculate.hexStringToColor(config.get("textColor").asText());
-        backgroundColor = Calculate.hexStringToColor(config.get("backgroundColor").asText());
-        snakeColor = Calculate.hexStringToColor(config.get("snakeColor").asText());
-        foodColor = Calculate.hexStringToColor(config.get("foodColor").asText());
-        goldFoodColor = Calculate.hexStringToColor(config.get("goldFoodColor").asText());
-        opFoodColor = Calculate.hexStringToColor(config.get("opFoodColor").asText());
+        gridLayoutColor = config.get("gridLayoutColor").asColor();
+        snakeHitboxColor = config.get("snakeHitboxColor").asColor();
+        foodHitboxColor = config.get("foodHitboxColor").asColor();
+        fpsColor = config.get("fpsColor").asColor();
+        scoreColor = config.get("scoreColor").asColor();
+        textColor = config.get("textColor").asColor();
+        backgroundColor = config.get("backgroundColor").asColor();
+        snakeColor = config.get("snakeColor").asColor();
+        foodColor = config.get("foodColor").asColor();
+        goldFoodColor = config.get("goldFoodColor").asColor();
+        opFoodColor = config.get("opFoodColor").asColor();
     }
 
     // Getters
