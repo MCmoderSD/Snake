@@ -169,7 +169,7 @@ public class Config {
     public Config(String[] args, String url) {
 
         // Read Config
-        audioPlayer = new AudioPlayer();
+        audioPlayer = new AudioPlayer(url);
         imageStreamer = new ImageStreamer(url);
         jsonUtility = new JsonUtility(url);
         imageReader = null;
@@ -192,9 +192,9 @@ public class Config {
         solidWalls = config.get("solidWalls").asBoolean();
 
         /// Sounds
-        foodSound = url + config.get("foodSound").asText();
-        ultSound = url + config.get("ultSound").asText();
-        dieSound = url + config.get("dieSound").asText();
+        foodSound = config.get("foodSound").asText();
+        ultSound = config.get("ultSound").asText();
+        dieSound = config.get("dieSound").asText();
 
         // Generate Assets
         dimension = new Dimension(fieldWidth * scale, fieldHeight * scale);

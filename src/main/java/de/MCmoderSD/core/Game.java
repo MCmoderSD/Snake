@@ -107,7 +107,7 @@ public class Game implements Runnable {
                         // Interact with Food
                         score++;
                         snake.grow(config);
-                        audioPlayer.playAudio(food.getSound());
+                        audioPlayer.play(food.getSound());
                         ui.setScore(score);
 
                         if (food.isSpecial()) activateUlt(food.isOp());
@@ -156,7 +156,7 @@ public class Game implements Runnable {
         ult = new Thread(() -> {
             try {
                 ultActive = true;
-                audioPlayer.playAudio(config.getUltSound());
+                audioPlayer.play(config.getUltSound());
                 if (isOp) {
                     setSpeedModifier(config.getOpUltSpeedModifier());
                     for (int i = 0; i < config.getSpecialFoodDuration(); i++) {
@@ -192,7 +192,7 @@ public class Game implements Runnable {
 
     public void gameOver() {
         // ToDo Game Over
-        audioPlayer.playAudio(config.getDieSound());
+        audioPlayer.play(config.getDieSound());
         ui.setResetButton(true);
         gameOver = true;
     }

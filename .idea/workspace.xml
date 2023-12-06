@@ -12,8 +12,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="release 1.2.1&#10;&#10;- improved code &#10;- new JsonUtility">
+    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="Json Utility Update">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Snake.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/core/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/AudioPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/Mp3Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/WavPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/WavPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/Feet.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/Head.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/LegTile.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/LegTransition.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/LowerBody.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/OpFood.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/UpperBody.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Audio/Eating.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Audio/OOF.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Audio/Rainbow.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/BackgroundTile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Feet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Food.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/GoldFood.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Head.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LegTile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LegTransition.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LowerBody.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/UpperBody.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config/default.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/language/de.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/language/en.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +101,7 @@
     &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/MCmoderSD/IdeaProjects/Current/Snake/src/main/resources&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/MCmoderSD/IdeaProjects/Current/Snake/src/main/java/de/MCmoderSD/utilities/sound&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -84,11 +116,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\java\de\MCmoderSD\utilities\sound" />
+      <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\java\de\MCmoderSD\utilities\json" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\java\de\MCmoderSD\utilities" />
-      <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\java\de\MCmoderSD\utilities\json" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\java\de\MCmoderSD\utilities\image" />
-      <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\storage" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\storage" />
@@ -164,6 +196,11 @@
       <workItem from="1701237004541" duration="38000" />
       <workItem from="1701237056286" duration="39000" />
       <workItem from="1701273841612" duration="293000" />
+      <workItem from="1701363091577" duration="264000" />
+      <workItem from="1701455914650" duration="430000" />
+      <workItem from="1701456367365" duration="1776000" />
+      <workItem from="1701466048095" duration="126000" />
+      <workItem from="1701904607366" duration="677000" />
     </task>
     <task id="LOCAL-00001" summary="release v0.9.1&#10;- code improvements">
       <option name="closed" value="true" />
@@ -221,7 +258,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701036839477</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Json Utility Update">
+      <option name="closed" value="true" />
+      <created>1701363340685</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1701363340685</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,7 +281,8 @@
     <MESSAGE value="corrupted jar" />
     <MESSAGE value="release 1.2&#10;&#10;- improved code &#10;- new JsonUtility" />
     <MESSAGE value="release 1.2.1&#10;&#10;- improved code &#10;- new JsonUtility" />
-    <option name="LAST_COMMIT_MESSAGE" value="release 1.2.1&#10;&#10;- improved code &#10;- new JsonUtility" />
+    <MESSAGE value="Json Utility Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Json Utility Update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
