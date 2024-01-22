@@ -2,10 +2,20 @@ package de.MCmoderSD.UI;
 
 import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
-import de.MCmoderSD.objects.*;
+import de.MCmoderSD.objects.Food;
+import de.MCmoderSD.objects.Snake;
+import de.MCmoderSD.objects.SnakePiece;
+import de.MCmoderSD.objects.Background;
+import de.MCmoderSD.objects.BackgroundTile;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -21,43 +31,44 @@ public class UI extends JPanel {
 
     // UI Components
     private final Background background;
-    private final JLabel scoreLabel;
     private final JLabel fpsLabel;
+    private final JLabel scoreLabel;
     private final JButton resetButton;
 
-    // Attributes
-    private boolean showFps;
-    private boolean debug;
-    private boolean hitbox;
-    private boolean gridLines;
+    // Variables
+    private int fps;
 
     // Constructor
-    public UI(Config config, Game game) {
-        this.game = game;
+    public UI(Frame frame, Config config) {
         this.config = config;
 
         // Set UI Attributes
         setPreferredSize(config.getDimension());
-        setFocusable(true);
-        requestFocus();
         setDoubleBuffered(true);
         setLayout(null);
-
-        showFps = false;
-        debug = false;
-        hitbox = false;
-        gridLines = false;
 
         int width = config.getFieldWidth() * config.getScale();
         int height = config.getFieldHeight() * config.getScale();
 
+        // Init Game
+        game = new Game(this, config);
+
         // Add InputHandler
-        addKeyListener(inputs = new InputHandler(game, this));
+        addKeyListener(inputs = new InputHandler(game));
 
         // UI Components
         Font defaultFont = new Font("Roboto", Font.PLAIN, config.getScale() / 2);
 
         background = new Background(config);
+
+        // FPS Label
+        fpsLabel = new JLabel();
+        fpsLabel.setFont(defaultFont);
+        fpsLabel.setForeground(config.getFpsColor());
+        fpsLabel.setSize(config.getScale() * 3, config.getScale());
+        fpsLabel.setLocation(config.getScale() / 4, 0);
+        fpsLabel.setVisible(game.isShowFPS());
+        add(fpsLabel);
 
         // Score Label
         scoreLabel = new JLabel(config.getScore() + ": " + game.getScore());
@@ -66,15 +77,6 @@ public class UI extends JPanel {
         scoreLabel.setSize(config.getScale() * 3, config.getScale());
         scoreLabel.setLocation((config.getFieldWidth() - 3) * config.getScale(), 0);
         add(scoreLabel);
-
-        // FPS Label
-        fpsLabel = new JLabel();
-        fpsLabel.setFont(defaultFont);
-        fpsLabel.setForeground(config.getFpsColor());
-        fpsLabel.setSize(config.getScale() * 3, config.getScale());
-        fpsLabel.setLocation(config.getScale() / 4, 0);
-        fpsLabel.setVisible(showFps);
-        add(fpsLabel);
 
         int buttonWidth = width / 4;
         int buttonHeight = height / 6;
@@ -90,8 +92,11 @@ public class UI extends JPanel {
         resetButton.addActionListener(e -> game.reset());
         resetButton.setBackground(Color.white);
         resetButton.setForeground(config.getTextColor());
-        resetButton.setVisible(false);
+        resetButton.setVisible(game.isGameOver());
         add(resetButton);
+
+        frame.add(this);
+        frame.pack();
     }
 
     // Render Engine
@@ -108,15 +113,15 @@ public class UI extends JPanel {
         Food food = game.getFood();
 
         // Background
-        for (BackgroundTile tile : background.getBackgroundTilesList()) {
-            g.setColor(tile.getColor());
+        for (BackgroundTile tile : background.getBackgroundTiles()) {
+            g.setColor(background.getColor());
             g.fill(tile.getBounds());
-            g.drawImage(tile.getImage(), tile.getPositionX(), tile.getPositionY(), null);
+            g.drawImage(tile.getImage(), tile.getX() * tile.getScale(), tile.getY() * tile.getScale(), null);
         }
 
         // Draw Food ToDo fix animation
         g.setColor(food.getColor());
-        g.drawImage(food.isOp() ? food.getAnimation().getImage() : food.getImage(), food.getPositionX(), food.getPositionY(), null);
+        g.drawImage(food.isOp() ? food.getAnimation().getImage() : food.getImage(), food.getX() * food.getScale(), food.getY() * food.getScale(), null);
 
         // Draw Snake
         for (int i = snakePieces.size() - 1; i >= 0; i--) {
@@ -134,30 +139,18 @@ public class UI extends JPanel {
             g.setTransform(new AffineTransform()); // Reset Transform
         }
 
-        // Debug
-
         // Draw Grid Lines
-        if (gridLines || debug) {
-            for (BackgroundTile tile : background.getBackgroundTilesList()) {
+        if (game.isShowGridLines() || game.isDebug()) {
+            for (BackgroundTile tile : background.getBackgroundTiles()) {
                 g.setColor(tile.getHitboxColor());
                 g.draw(tile.getBounds());
             }
         }
 
         // Draw Hitboxes
-        if (debug) { // Debug Mode
+        if (game.isShowHitboxes() || game.isDebug()) {
 
-            // Snake
-            g.setColor(snake.getHitboxColor());
-            for (SnakePiece snakePiece : snakePieces) g.draw(snakePiece.getSmallBounds());
-
-            // Food
-            g.setColor(snake.getHitboxColor());
-            g.draw(food.getSmallBounds());
-
-        } else if (hitbox) { // Hitbox Mode
-
-            // Snake
+            //Snake
             g.setColor(snake.getHitboxColor());
             for (SnakePiece snakePiece : snakePieces) g.draw(snakePiece.getBounds());
 
@@ -166,7 +159,7 @@ public class UI extends JPanel {
             g.draw(food.getBounds());
         }
 
-        // Draw UI Components
+        // Update UI Components
         paintComponents(g);
     }
 
@@ -176,53 +169,15 @@ public class UI extends JPanel {
     }
 
     // Setter
-    public void setScore(int score) {
-        scoreLabel.setText(config.getScore() + ": " + score);
-    }
-
     public void setFps(int fps) {
         fpsLabel.setText("FPS: " + fps);
     }
 
-    public void toggleFps() {
-        fpsLabel.setVisible(!fpsLabel.isVisible());
-        showFps = !showFps;
+    public void setScore(int score) {
+        scoreLabel.setText(config.getScore() + ": " + score);
     }
 
-    public void setFps(boolean fps) {
-        fpsLabel.setVisible(fps);
-        showFps = fps;
-    }
-
-    public void toggleHitbox() {
-        hitbox = !hitbox;
-    }
-
-    public void setHitbox(boolean hitbox) {
-        this.hitbox = hitbox;
-    }
-
-    public void toggleGridLines() {
-        gridLines = !gridLines;
-    }
-
-    public void setGridLines(boolean gridLines) {
-        this.gridLines = gridLines;
-    }
-
-    public void toggleDebug() {
-        debug = !debug;
-        hitbox = !hitbox;
-        gridLines = !gridLines;
-    }
-
-    public void setDebug(boolean debug) {
-        this.debug = debug;
-        hitbox = debug;
-        gridLines = debug;
-    }
-
-    public void setResetButton(boolean visible) {
-        resetButton.setVisible(visible);
+    public void setGameOver(boolean gameOver) {
+        resetButton.setVisible(gameOver);
     }
 }

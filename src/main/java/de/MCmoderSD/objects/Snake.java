@@ -3,7 +3,7 @@ package de.MCmoderSD.objects;
 import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -26,9 +26,6 @@ public class Snake extends SnakePiece {
         snakePieces.add(new SnakePiece(x + 1, y, config.getUpperBody(), config.getUpperBodyAnimation(), game, config)); // Upper Body
         snakePieces.add(new SnakePiece(x + 2, y, config.getLowerBody(), config.getLowerBodyAnimation(), game, config)); // Lower Body
     }
-
-
-    // Methods
 
     // Recolor Snake
     private void rearrangeImages() {

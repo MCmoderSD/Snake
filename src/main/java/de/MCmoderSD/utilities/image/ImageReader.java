@@ -8,7 +8,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.Objects;
 
 @SuppressWarnings("unused")
@@ -16,18 +15,17 @@ public class ImageReader extends ImageUtility {
 
     // Default Constructor
     public ImageReader() {
-        isAbsolute = false;
-        bufferedImageCache = new HashMap<>();
-        imageIconCache = new HashMap<>();
-        url = null;
+        super();
+    }
+
+    // Constructor with url
+    public ImageReader(String url) {
+        super(url);
     }
 
     // Constructor with isAbsolute
     public ImageReader(boolean isAbsolute) {
-        this.isAbsolute = isAbsolute;
-        bufferedImageCache = new HashMap<>();
-        imageIconCache = new HashMap<>();
-        url = null;
+        super(isAbsolute);
     }
 
     @Override
@@ -40,7 +38,8 @@ public class ImageReader extends ImageUtility {
         BufferedImage image = null;
         try {
             if (isAbsolute) image = ImageIO.read(Files.newInputStream(Paths.get(resource))); // Image is local
-            else image = ImageIO.read((Objects.requireNonNull(getClass().getResource(resource)))); // Image is in the JAR file
+            else
+                image = ImageIO.read((Objects.requireNonNull(getClass().getResource(resource)))); // Image is in the JAR file
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -63,7 +62,8 @@ public class ImageReader extends ImageUtility {
         BufferedImage image = null;
         try {
             if (isAbsolute) image = ImageIO.read(Files.newInputStream(Paths.get(resource))); // Image is local
-            else image = ImageIO.read((Objects.requireNonNull(getClass().getResource(resource)))); // Image is in the JAR file
+            else
+                image = ImageIO.read((Objects.requireNonNull(getClass().getResource(resource)))); // Image is in the JAR file
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

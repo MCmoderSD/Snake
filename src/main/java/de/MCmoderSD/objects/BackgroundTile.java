@@ -2,7 +2,8 @@ package de.MCmoderSD.objects;
 
 import de.MCmoderSD.main.Config;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 @SuppressWarnings("unused")
@@ -40,6 +41,10 @@ public class BackgroundTile {
         return hitboxColor;
     }
 
+    public int getScale() {
+        return scale;
+    }
+
     public int getX() {
         return x;
     }
@@ -48,23 +53,7 @@ public class BackgroundTile {
         return y;
     }
 
-    public int getScale() {
-        return scale;
-    }
-
-    public int getPositionX() {
-        return x * scale;
-    }
-
-    public int getPositionY() {
-        return y * scale;
-    }
-
-    public Point getPosition() {
-        return new Point(getPositionX(), getPositionY());
-    }
-
     public Rectangle getBounds() {
-        return new Rectangle(getPositionX(), getPositionY(), scale, scale);
+        return new Rectangle(x * scale, y * scale, scale, scale);
     }
 }

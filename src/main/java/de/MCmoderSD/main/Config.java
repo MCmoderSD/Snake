@@ -6,8 +6,9 @@ import de.MCmoderSD.utilities.json.JsonNode;
 import de.MCmoderSD.utilities.json.JsonUtility;
 import de.MCmoderSD.utilities.sound.AudioPlayer;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
 @SuppressWarnings("unused")
@@ -15,9 +16,6 @@ public class Config {
 
     // Associations
     private final AudioPlayer audioPlayer;
-    private final JsonUtility jsonUtility;
-    private final ImageReader imageReader;
-    private final ImageStreamer imageStreamer;
 
     // Config Variables
     private final int scale;
@@ -83,17 +81,16 @@ public class Config {
     // Constructor
     public Config(String[] args) {
 
-        // Read Config
+        // Init Utilities
         audioPlayer = new AudioPlayer();
-        imageStreamer = null;
+        ImageReader imageReader = new ImageReader();
+        JsonUtility jsonUtility = new JsonUtility();
 
         JsonNode config;
 
-        if (args.length < 2) {
-            imageReader = new ImageReader();
-            jsonUtility = new JsonUtility();
-            config = jsonUtility.load("/config/default.json");
-        } else {
+        // Load Config
+        if (args.length < 2) config = jsonUtility.load("/config/default.json");
+        else {
             imageReader = new ImageReader(true);
             jsonUtility = new JsonUtility(true);
             config = jsonUtility.load(args[1]);
@@ -129,9 +126,6 @@ public class Config {
         feet = imageReader.scaleImage(config.get("feet").asText(), scale);
         food = imageReader.scaleImage(config.get("food").asText(), scale);
         goldFood = imageReader.scaleImage(config.get("goldFood").asText(), scale);
-        audioPlayer.loadAudio(foodSound);
-        audioPlayer.loadAudio(ultSound);
-        audioPlayer.loadAudio(dieSound);
 
         // Animations
         headAnimation = imageReader.readGif(config.get("headAnimation").asText(), scale);
@@ -142,6 +136,7 @@ public class Config {
         feetAnimation = imageReader.readGif(config.get("feetAnimation").asText(), scale);
         opFoodAnimation = imageReader.readGif(config.get("opFoodAnimation").asText(), scale);
 
+        // Language set
         language = args.length > 0 ? args[0] : "en";
         JsonNode languageConfig = language.length() == 2 ? jsonUtility.load("/language/" + language + ".json") : jsonUtility.load(args[0], true);
 
@@ -168,16 +163,23 @@ public class Config {
     // Constructor asset streaming
     public Config(String[] args, String url) {
 
-        // Read Config
-        audioPlayer = new AudioPlayer(url);
-        imageStreamer = new ImageStreamer(url);
-        jsonUtility = new JsonUtility(url);
-        imageReader = null;
-        JsonNode config = jsonUtility.load("/config/default.json");
+        // Init Utilities
+        audioPlayer = new AudioPlayer();
+        ImageStreamer imageStreamer = new ImageStreamer(url);
+        JsonUtility jsonUtility = new JsonUtility(url);
+
+        JsonNode config;
+
+        // Load Config
+        if (args.length < 2) config = jsonUtility.load("/config/default.json");
+        else {
+            imageStreamer = new ImageStreamer(true);
+            jsonUtility = new JsonUtility(true);
+            config = jsonUtility.load(args[1]);
+        }
 
         if (config == null) throw new IllegalArgumentException("The config file could not be loaded");
 
-        // Constants
         scale = config.get("scale").asInt();
         fieldWidth = config.get("fieldWidth").asInt();
         fieldHeight = config.get("fieldHeight").asInt();
@@ -190,8 +192,6 @@ public class Config {
         opUltSpeedModifier = config.get("opUltSpeed").asDouble();
         resizable = config.get("resizable").asBoolean();
         solidWalls = config.get("solidWalls").asBoolean();
-
-        /// Sounds
         foodSound = config.get("foodSound").asText();
         ultSound = config.get("ultSound").asText();
         dieSound = config.get("dieSound").asText();
@@ -208,9 +208,6 @@ public class Config {
         feet = imageStreamer.scaleImage(config.get("feet").asText(), scale);
         food = imageStreamer.scaleImage(config.get("food").asText(), scale);
         goldFood = imageStreamer.scaleImage(config.get("goldFood").asText(), scale);
-        audioPlayer.loadAudio(foodSound);
-        audioPlayer.loadAudio(ultSound);
-        audioPlayer.loadAudio(dieSound);
 
         // Animations
         headAnimation = imageStreamer.readGif(config.get("headAnimation").asText(), scale);
@@ -221,6 +218,7 @@ public class Config {
         feetAnimation = imageStreamer.readGif(config.get("feetAnimation").asText(), scale);
         opFoodAnimation = imageStreamer.readGif(config.get("opFoodAnimation").asText(), scale);
 
+        // Language set
         language = args.length > 0 ? args[0] : "en";
         JsonNode languageConfig = language.length() == 2 ? jsonUtility.load("/language/" + language + ".json") : jsonUtility.load(args[0], true);
 
@@ -249,18 +247,6 @@ public class Config {
     // Associations
     public AudioPlayer getAudioPlayer() {
         return audioPlayer;
-    }
-
-    public ImageReader getImageReader() {
-        return imageReader;
-    }
-
-    public ImageStreamer getImageStreamer() {
-        return imageStreamer;
-    }
-
-    public JsonUtility getJsonReader() {
-        return jsonUtility;
     }
 
     // Config Getters

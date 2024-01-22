@@ -2,8 +2,10 @@ package de.MCmoderSD.utilities;
 
 import de.MCmoderSD.main.Main;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.io.InputStream;
 
 @SuppressWarnings("unused")

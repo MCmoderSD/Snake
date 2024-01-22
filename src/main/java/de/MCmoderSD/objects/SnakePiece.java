@@ -3,8 +3,9 @@ package de.MCmoderSD.objects;
 import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
@@ -145,7 +146,7 @@ public class SnakePiece {
         return game;
     }
 
-    public byte getDirection() {
+    protected byte getDirection() {
         if (left) return 0;
         if (up) return 1;
         if (right) return 2;
@@ -189,14 +190,6 @@ public class SnakePiece {
         return y;
     }
 
-    public int getPositionX() {
-        return x * scale;
-    }
-
-    public int getPositionY() {
-        return y * scale;
-    }
-
     public BufferedImage getImage() {
         return image;
     }
@@ -213,16 +206,8 @@ public class SnakePiece {
         this.animation = animation;
     }
 
-    public Point getPosition() {
-        return new Point(getPositionX(), getPositionY());
-    }
-
     public Rectangle getBounds() {
-        return new Rectangle(getPositionX(), getPositionY(), scale, scale);
-    }
-
-    public Rectangle getSmallBounds() {
-        return new Rectangle(getPositionX() + 1, getPositionY() + 1, scale - 2, scale - 2);
+        return new Rectangle(x * scale, y * scale, scale, scale);
     }
 
     public Color getColor() {

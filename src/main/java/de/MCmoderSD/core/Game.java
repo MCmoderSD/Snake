@@ -1,7 +1,5 @@
 package de.MCmoderSD.core;
 
-import de.MCmoderSD.UI.Frame;
-import de.MCmoderSD.UI.InputHandler;
 import de.MCmoderSD.UI.UI;
 import de.MCmoderSD.main.Config;
 import de.MCmoderSD.main.Main;
@@ -15,17 +13,13 @@ public class Game implements Runnable {
 
     // Associations
     private final Config config;
-    private final Frame frame;
     private final UI ui;
     private final AudioPlayer audioPlayer;
-    private final InputHandler inputs;
 
     // Attributes
     private final double tickrate;
 
     // Game Variables
-    private Snake snake;
-    private Food food;
     private Thread ult;
     private int score;
     private boolean isPaused;
@@ -34,8 +28,22 @@ public class Game implements Runnable {
     private boolean gameStarted;
     private boolean ultActive;
 
-    public Game(Config config) {
+    // Debug Variables
+    private boolean debug;
+    private boolean showFPS;
+    private boolean showHitboxes;
+    private boolean showGridLines;
+
+    // Objects
+    private Snake snake;
+    private Food food;
+
+    public Game(UI ui, Config config) {
+
+        // Init Associations
+        this.ui = ui;
         this.config = config;
+        this.audioPlayer = config.getAudioPlayer();
 
         // Init Game Variables
         score = 0;
@@ -43,13 +51,14 @@ public class Game implements Runnable {
         isPaused = false;
         gameOver = false;
         gameStarted = false;
+        ultActive = false;
         tickrate = Calculate.tickrate(config.getTps());
 
-        // Init UI
-        frame = new Frame(config, this);
-        ui = frame.getUI();
-        inputs = frame.getInputs();
-        audioPlayer = config.getAudioPlayer();
+        // Init Debug Variables
+        debug = false;
+        showFPS = false;
+        showHitboxes = false;
+        showGridLines = false;
 
         // Init Objects
         snake = new Snake(config.getFieldWidth() / 2 - 2, config.getFieldHeight() / 2, config.getHead(), config.getHeadAnimation(), this, config);
@@ -60,7 +69,8 @@ public class Game implements Runnable {
 
     @Override
     public void run() {
-        while (Main.isRunning) {
+        while (Main.IS_RUNNING) {
+
             // Timer
             double delta = 0;
             long current;
@@ -105,23 +115,22 @@ public class Game implements Runnable {
                     if (snake.checkFood(food)) {
 
                         // Interact with Food
-                        score++;
-                        snake.grow(config);
-                        audioPlayer.play(food.getSound());
-                        ui.setScore(score);
+                        score++; // Increase Score
+                        snake.grow(config); // Grow Snake
+                        audioPlayer.play(food.getSound()); // Play Sound
 
-                        if (food.isSpecial()) activateUlt(food.isOp());
+                        if (food.isSpecial()) activateUlt(food.isOp()); // Activate Ult
 
-                        food = new Food(config, snake.getSnakePieces());
+                        food = new Food(config, snake.getSnakePieces()); // Spawn new Food
                     }
 
                     // Check Input and Move Snake
-                    snake.updateDirection(inputs.getDirection());
+                    snake.updateDirection(ui.getInputs().getDirection());
                     snake.moveSnake();
 
                     // Update Frame
                     if (renderedFrames < config.getFps()) {
-                        frame.repaint();
+                        ui.repaint();
                         renderedFrames++;
                     }
 
@@ -131,7 +140,6 @@ public class Game implements Runnable {
                         timer = 0;
                         renderedFrames = 0;
                     }
-
 
                     // Game Loop End:
                     delta--;
@@ -162,7 +170,6 @@ public class Game implements Runnable {
                     for (int i = 0; i < config.getSpecialFoodDuration(); i++) {
                         snake.grow(config);
                         score++;
-                        ui.setScore(score);
                         Thread.sleep(config.getOpUltGrowInterval());
                     }
                     setSpeedModifier(1);
@@ -181,19 +188,9 @@ public class Game implements Runnable {
         ult.start();
     }
 
-
-    // Setter
-    public void togglePause() {
-        if (ultActive) return;
-        if (isPaused) audioPlayer.pauseAll();
-        else audioPlayer.resumeAll();
-        isPaused = !isPaused;
-    }
-
     public void gameOver() {
         // ToDo Game Over
         audioPlayer.play(config.getDieSound());
-        ui.setResetButton(true);
         gameOver = true;
     }
 
@@ -209,17 +206,38 @@ public class Game implements Runnable {
         // Reset Game Variables
         score = 0;
         speedModifier = 1;
-        gameStarted = false;
+        isPaused = false;
         gameOver = false;
+        gameStarted = false;
+        ultActive = false;
 
         // Reset Objects
         snake = new Snake(config.getFieldWidth() / 2 - 2, config.getFieldHeight() / 2, config.getHead(), config.getHeadAnimation(), this, config);
         food = new Food(config, snake.getSnakePieces());
+    }
 
-        // Reset UI
-        ui.setScore(score);
-        ui.setResetButton(false);
-        ui.repaint();
+    // Trigger
+    public void togglePause() {
+        if (ultActive) return;
+        if (isPaused) audioPlayer.pauseAll();
+        else audioPlayer.resumeAll();
+        isPaused = !isPaused;
+    }
+
+    public void toggleDebug() {
+        debug = !debug;
+    }
+
+    public void toggleFps() {
+        showFPS = !showFPS;
+    }
+
+    public void toggleHitbox() {
+        showHitboxes = !showHitboxes;
+    }
+
+    public void toggleGridLines() {
+        showGridLines = !showGridLines;
     }
 
     // Getter
@@ -231,11 +249,32 @@ public class Game implements Runnable {
         return food;
     }
 
-    public String getScore() {
-        return String.valueOf(score);
+    public int getScore() {
+        return score;
     }
 
     public boolean isUltActive() {
         return ultActive;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    // Debug Getter
+    public boolean isDebug() {
+        return debug;
+    }
+
+    public boolean isShowFPS() {
+        return showFPS;
+    }
+
+    public boolean isShowHitboxes() {
+        return showHitboxes;
+    }
+
+    public boolean isShowGridLines() {
+        return showGridLines;
     }
 }

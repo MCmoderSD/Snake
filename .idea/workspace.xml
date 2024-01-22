@@ -12,41 +12,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="Json Utility Update">
+    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="release v1.2.2&#10;&#10;- Improved Audio System">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/language/it.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Snake.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/UI/Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/UI/Frame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/UI/InputHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/UI/InputHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/UI/UI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/core/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/AudioPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/Mp3Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Background.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Background.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/BackgroundTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/BackgroundTile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Snake.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/SnakePiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/SnakePiece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/Calculate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/Calculate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/image/ImageReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/image/ImageReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/image/ImageStreamer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/image/ImageStreamer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/json/JsonNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/json/JsonNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/json/JsonValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/json/JsonValue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/WavPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/WavPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/Feet.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/Head.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/LegTile.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/LegTransition.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/LowerBody.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/OpFood.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/UpperBody.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Audio/Eating.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Audio/OOF.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Audio/Rainbow.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/BackgroundTile.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Feet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Food.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/GoldFood.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Head.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LegTile.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LegTransition.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LowerBody.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/UpperBody.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config/default.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/de.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/en.json" beforeDir="false" />
     </list>
+    <list id="d78f859a-edd0-44f6-b06d-89263ffa805d" name="Changes by timon" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,11 +57,25 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "MCmoderSD"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="5146602d-c972-4204-ad17-52e8e56eaf1d" />
+        <option name="url" value="https://github.com/MCmoderSD/Snake.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/storage/language/de.json" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
-  </component>
-  <component name="OptimizeOnSaveOptions">
-    <option name="myRunOnSave" value="true" />
   </component>
   <component name="ProblemsViewState">
     <option name="groupByToolId" value="true" />
@@ -95,13 +98,15 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/MCmoderSD/IdeaProjects/Current/Snake/src/main/java/de/MCmoderSD/utilities/sound&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/MCmoderSD/IdeaProjects/Current/Snake/src/main/resources&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -116,9 +121,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\java\de\MCmoderSD\utilities\sound" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\java\de\MCmoderSD\utilities\json" />
-      <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\java\de\MCmoderSD\utilities" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\java\de\MCmoderSD\utilities\image" />
     </key>
@@ -163,6 +168,14 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-1.8.0_392-azul-1.8.0_392-249ae16d76d6-e51da85f" />
+        <option value="jdk-1.8.0_392-azul-1.8.0_392-f644763e9732-7f9aae63" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -201,6 +214,14 @@
       <workItem from="1701456367365" duration="1776000" />
       <workItem from="1701466048095" duration="126000" />
       <workItem from="1701904607366" duration="677000" />
+      <workItem from="1701905308355" duration="756000" />
+      <workItem from="1701977410780" duration="946000" />
+      <workItem from="1701978385899" duration="6542000" />
+      <workItem from="1702158541327" duration="18000" />
+      <workItem from="1705935426792" duration="4141000" />
+      <workItem from="1705946339916" duration="308000" />
+      <workItem from="1705948873231" duration="314000" />
+      <workItem from="1705951064747" duration="8419000" />
     </task>
     <task id="LOCAL-00001" summary="release v0.9.1&#10;- code improvements">
       <option name="closed" value="true" />
@@ -266,11 +287,30 @@
       <option name="project" value="LOCAL" />
       <updated>1701363340685</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="release v1.2.2&#10;&#10;- Improved Audio System">
+      <option name="closed" value="true" />
+      <created>1701905533015</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1701905533015</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -282,7 +322,8 @@
     <MESSAGE value="release 1.2&#10;&#10;- improved code &#10;- new JsonUtility" />
     <MESSAGE value="release 1.2.1&#10;&#10;- improved code &#10;- new JsonUtility" />
     <MESSAGE value="Json Utility Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Json Utility Update" />
+    <MESSAGE value="release v1.2.2&#10;&#10;- Improved Audio System" />
+    <option name="LAST_COMMIT_MESSAGE" value="release v1.2.2&#10;&#10;- Improved Audio System" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

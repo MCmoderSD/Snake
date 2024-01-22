@@ -6,25 +6,23 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 
 @SuppressWarnings("unused")
 public class ImageStreamer extends ImageUtility {
 
     // Default Constructor
     public ImageStreamer() {
-        isAbsolute = false;
-        bufferedImageCache = new HashMap<>();
-        imageIconCache = new HashMap<>();
-        url = null;
+        super();
     }
 
-    // Constructor with URL
+    // Constructor with url
     public ImageStreamer(String url) {
-        isAbsolute = false;
-        bufferedImageCache = new HashMap<>();
-        imageIconCache = new HashMap<>();
-        this.url = url;
+        super(url);
+    }
+
+    // Constructor with isAbsolute
+    public ImageStreamer(boolean isAbsolute) {
+        super(isAbsolute);
     }
 
     @Override

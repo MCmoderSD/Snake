@@ -9,7 +9,6 @@ public class InputHandler implements KeyListener {
 
     // Associations
     private final Game game;
-    private final UI ui;
 
     // Attributes
     private boolean left;
@@ -18,9 +17,10 @@ public class InputHandler implements KeyListener {
     private boolean down;
     private boolean f3isPressed;
 
-    public InputHandler(Game game, UI ui) {
+    public InputHandler(Game game) {
+
+        // Init Associations
         this.game = game;
-        this.ui = ui;
 
         // Initialize Attributes
         left = false;
@@ -30,7 +30,8 @@ public class InputHandler implements KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -51,9 +52,9 @@ public class InputHandler implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_P) game.togglePause();
 
         // Debug
-        if (f3isPressed && (e.getKeyCode() == KeyEvent.VK_F)) ui.toggleFps();
-        if (f3isPressed && (e.getKeyCode() == KeyEvent.VK_B)) ui.toggleHitbox();
-        if (f3isPressed && (e.getKeyCode() == KeyEvent.VK_G)) ui.toggleGridLines();
+        if (f3isPressed && (e.getKeyCode() == KeyEvent.VK_F)) game.toggleFps();
+        if (f3isPressed && (e.getKeyCode() == KeyEvent.VK_B)) game.toggleHitbox();
+        if (f3isPressed && (e.getKeyCode() == KeyEvent.VK_G)) game.toggleGridLines();
 
 
         // Direction

@@ -3,8 +3,10 @@ package de.MCmoderSD.objects;
 import de.MCmoderSD.main.Config;
 import de.MCmoderSD.utilities.Calculate;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
@@ -97,23 +99,7 @@ public class Food {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(getPositionX(), getPositionY(), scale, scale);
-    }
-
-    public Rectangle getSmallBounds() {
-        return new Rectangle(getPositionX() + 1, getPositionY() + 1, scale - 2, scale - 2);
-    }
-
-    public Point getPosition() {
-        return new Point(getPositionX(), getPositionY());
-    }
-
-    public int getPositionX() {
-        return x * scale;
-    }
-
-    public int getPositionY() {
-        return y * scale;
+        return new Rectangle(x * scale, y * scale, scale, scale);
     }
 
     public Color getColor() {
