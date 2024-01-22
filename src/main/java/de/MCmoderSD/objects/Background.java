@@ -13,13 +13,13 @@ public class Background {
     private final Color color;
 
     // Constructor
-    public Background(Config config) {
-        color = config.getBackgroundColor();
+    public Background() {
+        color = Config.BACKGROUND_COLOR;
         backgroundTiles = new ArrayList<>();
 
-        for (int x = 0; x < config.getFieldWidth(); x++)
-            for (int y = 0; y < config.getFieldHeight(); y++)
-                backgroundTiles.add(new BackgroundTile(config, x, y));
+        for (int x = 0; x < Config.FIELD_WIDTH; x++)
+            for (int y = 0; y < Config.FIELD_HEIGHT; y++)
+                backgroundTiles.add(new BackgroundTile(x, y));
     }
 
     // Getter

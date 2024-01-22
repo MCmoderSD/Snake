@@ -39,6 +39,8 @@ Currently, the following languages are supported: <br>
 
 - English (en)
 - German (de)
+- Italian (it)
+- Spanish (es)
 
 I'm planning to add more languages in the future. <br>
 If you want to help me translate the game into your language, please contact me and [read more](#custom-language). <br>

@@ -35,46 +35,49 @@ public class InputHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        int keycode = e.getKeyCode();
 
         // F3 Pressed
-        if (e.getKeyCode() == KeyEvent.VK_F3) f3isPressed = true;
+        if (keycode == KeyEvent.VK_F3) f3isPressed = true;
 
         // Start
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) game.start();
-        if (e.getKeyCode() == KeyEvent.VK_SPACE) game.start();
+        if (keycode == KeyEvent.VK_ENTER) game.start();
+        if (keycode == KeyEvent.VK_SPACE) game.start();
 
         // Exit
-        if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_C) System.exit(0);
-        if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Q) System.exit(0);
+        if (e.isControlDown() && keycode == KeyEvent.VK_C) System.exit(0);
+        if (e.isControlDown() && keycode == KeyEvent.VK_Q) System.exit(0);
+        if (e.isAltDown() && keycode == KeyEvent.VK_Q) System.exit(0);
+        if (e.isAltDown() && keycode == KeyEvent.VK_F4) System.exit(0);
 
         // Pause
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) game.togglePause();
-        if (e.getKeyCode() == KeyEvent.VK_P) game.togglePause();
+        if (keycode == KeyEvent.VK_ESCAPE) game.togglePause();
+        if (keycode == KeyEvent.VK_P) game.togglePause();
 
         // Debug
-        if (f3isPressed && (e.getKeyCode() == KeyEvent.VK_F)) game.toggleFps();
-        if (f3isPressed && (e.getKeyCode() == KeyEvent.VK_B)) game.toggleHitbox();
-        if (f3isPressed && (e.getKeyCode() == KeyEvent.VK_G)) game.toggleGridLines();
-
+        if (f3isPressed && (keycode == KeyEvent.VK_F)) game.toggleFps();
+        if (f3isPressed && (keycode == KeyEvent.VK_B)) game.toggleHitbox();
+        if (f3isPressed && (keycode == KeyEvent.VK_G)) game.toggleGridLines();
 
         // Direction
-        if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) left = true;
-        if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) up = true;
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) right = true;
-        if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) down = true;
+        if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A) left = true;
+        if (keycode == KeyEvent.VK_UP || keycode == KeyEvent.VK_W) up = true;
+        if (keycode == KeyEvent.VK_RIGHT || keycode == KeyEvent.VK_D) right = true;
+        if (keycode == KeyEvent.VK_DOWN || keycode == KeyEvent.VK_S) down = true;
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        int keycode = e.getKeyCode();
 
         // F3 Pressed
-        if (e.getKeyCode() == KeyEvent.VK_F3) f3isPressed = false;
+        if (keycode == KeyEvent.VK_F3) f3isPressed = false;
 
         // Direction Reset
-        if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) left = false;
-        if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) up = false;
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) right = false;
-        if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) down = false;
+        if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A) left = false;
+        if (keycode == KeyEvent.VK_UP || keycode == KeyEvent.VK_W) up = false;
+        if (keycode == KeyEvent.VK_RIGHT || keycode == KeyEvent.VK_D) right = false;
+        if (keycode == KeyEvent.VK_DOWN || keycode == KeyEvent.VK_S) down = false;
     }
 
     // Getter

@@ -37,9 +37,9 @@
   "fpsColor": "#FFFF00",
   "scoreColor": "#FFFF00",
   "textColor": "#000000",
-  "backgroundColor": "#1e2428",
-  "snakeColor": "#5662f6",
-  "foodColor": "#e27662",
-  "goldFoodColor": "#1ccb5b",
+  "backgroundColor": "#1E2428",
+  "snakeColor": "#5662F6",
+  "foodColor": "#E27662",
+  "goldFoodColor": "#1CCB5B",
   "opFoodColor": "#FF00FF"
 }

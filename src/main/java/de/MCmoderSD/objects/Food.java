@@ -14,38 +14,34 @@ import java.util.Random;
 @SuppressWarnings("unused")
 public class Food {
 
-    // Associations
-    private final Config config;
-
     // Attributes
-    private final boolean isSpecial;
-    private final boolean isOp;
     private final BufferedImage image;
     private final ImageIcon animation;
     private final String sound;
     private final Color color;
     private final Color hitboxColor;
+    private final boolean isSpecial;
+    private final boolean isOp;
     private final int x;
     private final int y;
     private final int scale;
 
 
     // Constructor
-    public Food(Config config, ArrayList<SnakePiece> snakePieces) {
-        this.config = config;
+    public Food(ArrayList<SnakePiece> snakePieces) {
 
-        isSpecial = Calculate.randomChance(config.getSpecialFoodChance());
-        image = isSpecial ? config.getGoldFood() : config.getFood();
+        isSpecial = Calculate.randomChance(Config.SPECIAL_FOOD_CHANCE);
+        image = isSpecial ? Config.GOLD_FOOD : Config.FOOD;
 
 
-        isOp = isSpecial && Calculate.randomChance(config.getSpecialFoodChance());
-        animation = isOp ? config.getOpFoodAnimation() : null;
+        isOp = isSpecial && Calculate.randomChance(Config.SPECIAL_FOOD_CHANCE);
+        animation = isOp ? Config.OP_FOOD_ANIMATION : null;
 
-        color = isOp ? config.getOpFoodColor() : isSpecial ? config.getGoldFoodColor() : config.getFoodColor();
+        color = isOp ? Config.OP_FOOD_COLOR : isSpecial ? Config.GOLD_FOOD_COLOR : Config.FOOD_COLOR;
 
-        hitboxColor = config.getFoodHitboxColor();
-        sound = config.getFoodSound();
-        scale = config.getScale();
+        hitboxColor = Config.FOOD_HITBOX_COLOR;
+        sound = Config.FOOD_SOUND;
+        scale = Config.SCALE;
 
         Point spawnPoint = getValidSpawnPont(snakePieces);
 
@@ -57,8 +53,8 @@ public class Food {
     private Point getValidSpawnPont(ArrayList<SnakePiece> snakePieces) {
         Random random = new Random();
 
-        int x = random.nextInt(config.getFieldWidth());
-        int y = random.nextInt(config.getFieldHeight());
+        int x = random.nextInt(Config.FIELD_WIDTH);
+        int y = random.nextInt(Config.FIELD_HEIGHT);
 
         for (SnakePiece snakePiece : snakePieces)
             if (snakePiece.getX() == x && snakePiece.getY() == y) return getValidSpawnPont(snakePieces);
@@ -66,14 +62,6 @@ public class Food {
     }
 
     // Getter
-    public boolean isSpecial() {
-        return isSpecial;
-    }
-
-    public boolean isOp() {
-        return isOp;
-    }
-
     public BufferedImage getImage() {
         return image;
     }
@@ -84,6 +72,22 @@ public class Food {
 
     public String getSound() {
         return sound;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public Color getHitboxColor() {
+        return hitboxColor;
+    }
+
+    public boolean isSpecial() {
+        return isSpecial;
+    }
+
+    public boolean isOp() {
+        return isOp;
     }
 
     public int getX() {
@@ -100,13 +104,5 @@ public class Food {
 
     public Rectangle getBounds() {
         return new Rectangle(x * scale, y * scale, scale, scale);
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public Color getHitboxColor() {
-        return hitboxColor;
     }
 }

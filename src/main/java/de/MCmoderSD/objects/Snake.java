@@ -9,38 +9,31 @@ import java.util.ArrayList;
 
 public class Snake extends SnakePiece {
 
-    // Associations
-    private final Config config;
-
     // Attributes
     private final ArrayList<SnakePiece> snakePieces;
 
     // Constructor
-    public Snake(int x, int y, BufferedImage image, ImageIcon animation, Game game, Config config) {
-        super(x, y, image, animation, game, config);
-        this.config = config;
+    public Snake(Game game, int x, int y, BufferedImage image, ImageIcon animation) {
+        super(game, x, y, image, animation);
         snakePieces = new ArrayList<>();
 
         // Initial Snake
         snakePieces.add(this); // Head
-        snakePieces.add(new SnakePiece(x + 1, y, config.getUpperBody(), config.getUpperBodyAnimation(), game, config)); // Upper Body
-        snakePieces.add(new SnakePiece(x + 2, y, config.getLowerBody(), config.getLowerBodyAnimation(), game, config)); // Lower Body
+        snakePieces.add(new SnakePiece(game, x + 1, y, Config.UPPER_BODY, Config.UPPER_BODY_ANIMATION)); // Upper Body
+        snakePieces.add(new SnakePiece(game, x + 2, y, Config.LOWER_BODY, Config.LOWER_BODY_ANIMATION)); // Lower Body
     }
 
     // Recolor Snake
     private void rearrangeImages() {
         if (snakePieces.size() == 4)
-            snakePieces.get(snakePieces.size() - 1).setAssets(config.getLegTransition(), config.getLegTransitionAnimation());
+            snakePieces.get(snakePieces.size() - 1).setAssets(Config.LEG_TRANSITION, Config.LEG_TRANSITION_ANIMATION);
         if (snakePieces.size() > 4) {
-            snakePieces.get(snakePieces.size() - 2).setImage(config.getLegTransition());
-            snakePieces.get(snakePieces.size() - 1).setImage(config.getFeet());
-
-            snakePieces.get(snakePieces.size() - 2).setAnimation(config.getLegTransitionAnimation());
-            snakePieces.get(snakePieces.size() - 1).setAnimation(config.getFeetAnimation());
+            snakePieces.get(snakePieces.size() - 2).setAssets(Config.LEG_TRANSITION, Config.LEG_TRANSITION_ANIMATION);
+            snakePieces.get(snakePieces.size() - 1).setAssets(Config.FEET, Config.FEET_ANIMATION);
         }
 
         for (int i = 3; i < snakePieces.size() - 2; i++)
-            snakePieces.get(i).setAssets(config.getLegTile(), config.getLegTileAnimation());
+            snakePieces.get(i).setAssets(Config.LEG_TILE, Config.LEG_TILE_ANIMATION);
     }
 
     // Move
@@ -57,7 +50,7 @@ public class Snake extends SnakePiece {
     // Check Collision
     public boolean checkCollision() {
         for (int i = 1; i < snakePieces.size(); i++)
-            if (snakePieces.get(0).getBounds().intersects(snakePieces.get(i).getBounds())) return true;
+            if (snakePieces.get(i).getBounds().intersects(snakePieces.get(0).getBounds())) return true;
         return false;
     }
 
@@ -68,8 +61,8 @@ public class Snake extends SnakePiece {
     }
 
     // Grow
-    public void grow(Config config) {
-        snakePieces.add(new SnakePiece(snakePieces.get(snakePieces.size() - 1).x, snakePieces.get(snakePieces.size() - 1).y, game, config));
+    public void grow() {
+        snakePieces.add(new SnakePiece(game, snakePieces.get(snakePieces.size() - 1).x, snakePieces.get(snakePieces.size() - 1).y));
         rearrangeImages();
     }
 

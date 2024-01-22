@@ -18,14 +18,14 @@ public class BackgroundTile {
     private final int scale;
 
     // Constructor
-    public BackgroundTile(Config config, int x, int y) {
+    public BackgroundTile(int x, int y) {
         this.x = x;
         this.y = y;
 
-        image = config.getBackgroundTile();
-        color = config.getBackgroundColor();
-        hitboxColor = config.getGridLayoutColor();
-        scale = config.getScale();
+        image = Config.BACKGROUND_TILE;
+        color = Config.BACKGROUND_COLOR;
+        hitboxColor = Config.GRID_LAYOUT_COLOR;
+        scale = Config.SCALE;
     }
 
     // Getter

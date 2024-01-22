@@ -36,35 +36,35 @@ public class SnakePiece {
     protected boolean down = false;
 
     // Default Constructor
-    public SnakePiece(int x, int y, Game game, Config config) {
+    public SnakePiece(Game game, int x, int y) {
         this.game = game;
         this.x = x;
         this.y = y;
 
-        image = config.getLegTile();
-        animation = config.getLegTileAnimation();
-        fieldWidth = config.getFieldWidth();
-        fieldHeight = config.getFieldHeight();
-        scale = config.getScale();
-        solidWalls = config.isSolidWalls();
-        color = config.getSnakeColor();
-        hitboxColor = config.getSnakeHitboxColor();
+        image = Config.LEG_TILE;
+        animation = Config.LEG_TILE_ANIMATION;
+        fieldWidth = Config.FIELD_WIDTH;
+        fieldHeight = Config.FIELD_HEIGHT;
+        scale = Config.SCALE;
+        solidWalls = Config.SOLID_WALLS;
+        color = Config.SNAKE_COLOR;
+        hitboxColor = Config.SNAKE_HITBOX_COLOR;
     }
 
     // Constructor with Image
-    public SnakePiece(int x, int y, BufferedImage image, ImageIcon animation, Game game, Config config) {
+    public SnakePiece(Game game, int x, int y, BufferedImage image, ImageIcon animation) {
         this.game = game;
         this.image = image;
         this.animation = animation;
         this.x = x;
         this.y = y;
 
-        fieldWidth = config.getFieldWidth();
-        fieldHeight = config.getFieldHeight();
-        scale = config.getScale();
-        solidWalls = config.isSolidWalls();
-        color = config.getSnakeColor();
-        hitboxColor = config.getSnakeHitboxColor();
+        fieldWidth = Config.FIELD_WIDTH;
+        fieldHeight = Config.FIELD_HEIGHT;
+        scale = Config.SCALE;
+        solidWalls = Config.SOLID_WALLS;
+        color = Config.SNAKE_COLOR;
+        hitboxColor = Config.SNAKE_HITBOX_COLOR;
     }
 
     // Wall Hit Detected
@@ -76,6 +76,14 @@ public class SnakePiece {
             if (right) x = 0;
             if (down) y = 0;
         }
+    }
+
+    protected byte getDirection() {
+        if (left) return 0;
+        if (up) return 1;
+        if (right) return 2;
+        if (down) return 3;
+        return -1;
     }
 
     // Move
@@ -141,19 +149,6 @@ public class SnakePiece {
         }
     }
 
-    // Getter
-    protected Game getGame() {
-        return game;
-    }
-
-    protected byte getDirection() {
-        if (left) return 0;
-        if (up) return 1;
-        if (right) return 2;
-        if (down) return 3;
-        return -1;
-    }
-
     public AffineTransform getTransform() {
         AffineTransform transform = new AffineTransform();
         transform.translate(x * scale, y * scale);
@@ -178,6 +173,27 @@ public class SnakePiece {
         return transform;
     }
 
+    // Getter
+    protected Game getGame() {
+        return game;
+    }
+
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    public ImageIcon getAnimation() {
+        return animation;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public Color getHitboxColor() {
+        return hitboxColor;
+    }
+
     public int getScale() {
         return scale;
     }
@@ -190,32 +206,8 @@ public class SnakePiece {
         return y;
     }
 
-    public BufferedImage getImage() {
-        return image;
-    }
-
-    public void setImage(BufferedImage image) {
-        this.image = image;
-    }
-
-    public ImageIcon getAnimation() {
-        return animation;
-    }
-
-    public void setAnimation(ImageIcon animation) {
-        this.animation = animation;
-    }
-
     public Rectangle getBounds() {
         return new Rectangle(x * scale, y * scale, scale, scale);
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public Color getHitboxColor() {
-        return hitboxColor;
     }
 
     // Setter

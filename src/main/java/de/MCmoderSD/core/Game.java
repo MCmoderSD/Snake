@@ -12,7 +12,6 @@ import de.MCmoderSD.utilities.sound.AudioPlayer;
 public class Game implements Runnable {
 
     // Associations
-    private final Config config;
     private final UI ui;
     private final AudioPlayer audioPlayer;
 
@@ -42,7 +41,6 @@ public class Game implements Runnable {
 
         // Init Associations
         this.ui = ui;
-        this.config = config;
         this.audioPlayer = config.getAudioPlayer();
 
         // Init Game Variables
@@ -52,7 +50,7 @@ public class Game implements Runnable {
         gameOver = false;
         gameStarted = false;
         ultActive = false;
-        tickrate = Calculate.tickrate(config.getTps());
+        tickrate = Calculate.tickrate(Config.TPS);
 
         // Init Debug Variables
         debug = false;
@@ -61,8 +59,8 @@ public class Game implements Runnable {
         showGridLines = false;
 
         // Init Objects
-        snake = new Snake(config.getFieldWidth() / 2 - 2, config.getFieldHeight() / 2, config.getHead(), config.getHeadAnimation(), this, config);
-        food = new Food(config, snake.getSnakePieces());
+        snake = new Snake(this, Config.FIELD_WIDTH / 2 - 2, Config.FIELD_HEIGHT / 2, Config.HEAD, Config.HEAD_ANIMATION);
+        food = new Food(snake.getSnakePieces());
 
         new Thread(this).start();
     }
@@ -102,7 +100,7 @@ public class Game implements Runnable {
 
 
                     // Check for win
-                    if (config.getFieldWidth() * config.getFieldHeight() == snake.getSnakePieces().size()) {
+                    if (Config.FIELD_WIDTH * Config.FIELD_HEIGHT == snake.getSnakePieces().size()) {
                         // ToDo Win
                         System.out.println("Win");
                         gameOver();
@@ -116,12 +114,13 @@ public class Game implements Runnable {
 
                         // Interact with Food
                         score++; // Increase Score
-                        snake.grow(config); // Grow Snake
+                        ui.setScore(score); // Update Score
+                        snake.grow(); // Grow Snake
                         audioPlayer.play(food.getSound()); // Play Sound
 
                         if (food.isSpecial()) activateUlt(food.isOp()); // Activate Ult
 
-                        food = new Food(config, snake.getSnakePieces()); // Spawn new Food
+                        food = new Food(snake.getSnakePieces()); // Spawn new Food
                     }
 
                     // Check Input and Move Snake
@@ -129,7 +128,7 @@ public class Game implements Runnable {
                     snake.moveSnake();
 
                     // Update Frame
-                    if (renderedFrames < config.getFps()) {
+                    if (renderedFrames < Config.FPS) {
                         ui.repaint();
                         renderedFrames++;
                     }
@@ -164,18 +163,18 @@ public class Game implements Runnable {
         ult = new Thread(() -> {
             try {
                 ultActive = true;
-                audioPlayer.play(config.getUltSound());
+                audioPlayer.play(Config.ULT_SOUND);
                 if (isOp) {
-                    setSpeedModifier(config.getOpUltSpeedModifier());
-                    for (int i = 0; i < config.getSpecialFoodDuration(); i++) {
-                        snake.grow(config);
+                    setSpeedModifier(Config.OP_ULT_SPEED_MODIFIER);
+                    for (int i = 0; i < Config.SPECIAL_FOOD_DURATION; i++) {
+                        snake.grow();
                         score++;
-                        Thread.sleep(config.getOpUltGrowInterval());
+                        Thread.sleep(Config.OP_ULT_GROW_INTERVAL);
                     }
                     setSpeedModifier(1);
                 } else {
-                    setSpeedModifier(config.getUltSpeedModifier());
-                    Thread.sleep((long) (config.getSpecialFoodDuration() * 1000));
+                    setSpeedModifier(Config.ULT_SPEED_MODIFIER);
+                    Thread.sleep((Config.SPECIAL_FOOD_DURATION * 1000));
                     setSpeedModifier(1);
                 }
 
@@ -190,8 +189,11 @@ public class Game implements Runnable {
 
     public void gameOver() {
         // ToDo Game Over
-        audioPlayer.play(config.getDieSound());
+        audioPlayer.play(Config.DIE_SOUND);
+        ui.setGameOver(true);
         gameOver = true;
+
+        System.out.println("Game Over");
     }
 
     public void start() {
@@ -203,6 +205,7 @@ public class Game implements Runnable {
     }
 
     public void reset() {
+
         // Reset Game Variables
         score = 0;
         speedModifier = 1;
@@ -212,8 +215,13 @@ public class Game implements Runnable {
         ultActive = false;
 
         // Reset Objects
-        snake = new Snake(config.getFieldWidth() / 2 - 2, config.getFieldHeight() / 2, config.getHead(), config.getHeadAnimation(), this, config);
-        food = new Food(config, snake.getSnakePieces());
+        snake = new Snake(this, Config.FIELD_WIDTH / 2 - 2, Config.FIELD_HEIGHT / 2, Config.HEAD, Config.HEAD_ANIMATION);
+        food = new Food(snake.getSnakePieces());
+
+        // Reset UI
+        ui.setScore(score);
+        ui.setGameOver(false);
+        ui.repaint();
     }
 
     // Trigger
