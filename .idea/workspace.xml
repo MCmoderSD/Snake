@@ -14,30 +14,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="refactoring">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/language/es.json" afterDir="false" />
+    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="static config">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Snake.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Snake.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/UI/Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/UI/Frame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/UI/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/core/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Background.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Background.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/BackgroundTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/BackgroundTile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Food.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Snake.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/SnakePiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/SnakePiece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config/default.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/default.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/de.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/language/de.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/language/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/it.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/language/it.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" afterDir="false" />
     </list>
-    <list id="d78f859a-edd0-44f6-b06d-89263ffa805d" name="Changes by timon" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/UI/InputHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/UI/InputHandler.java" afterDir="false" />
-    </list>
+    <list id="d78f859a-edd0-44f6-b06d-89263ffa805d" name="Changes by timon" comment="static config" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,38 +77,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/MCmoderSD/IdeaProjects/Current/Snake/src/main/resources&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "Application.Main.executor": "Run",
+    "JAR Application.Snake-asset-streaming.jar.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "code.cleanup.on.save": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/MCmoderSD/IdeaProjects/Current/Snake/src/main/resources",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "actions.on.save",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources" />
+      <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\storage" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\java\de\MCmoderSD\utilities\sound" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\java\de\MCmoderSD\utilities\json" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\java\de\MCmoderSD\utilities" />
-      <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\java\de\MCmoderSD\utilities\image" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\storage" />
@@ -135,7 +117,7 @@
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JAR Application.Snake.jar">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="de.MCmoderSD.main.Main" />
       <module name="Snake" />
@@ -164,9 +146,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="JAR Application.Snake-asset-streaming.jar" />
         <item itemvalue="JAR Application.Snake.jar" />
+        <item itemvalue="JAR Application.Snake-asset-streaming.jar" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -223,7 +205,7 @@
       <workItem from="1705935426792" duration="4141000" />
       <workItem from="1705946339916" duration="308000" />
       <workItem from="1705948873231" duration="314000" />
-      <workItem from="1705951064747" duration="15836000" />
+      <workItem from="1705951064747" duration="16491000" />
     </task>
     <task id="LOCAL-00001" summary="release v0.9.1&#10;- code improvements">
       <option name="closed" value="true" />
@@ -305,7 +287,23 @@
       <option name="project" value="LOCAL" />
       <updated>1705959722698</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Changes by timon">
+      <option name="closed" value="true" />
+      <created>1705967092627</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1705967092628</updated>
+    </task>
+    <task id="LOCAL-00012" summary="static config">
+      <option name="closed" value="true" />
+      <created>1705967123822</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1705967123822</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,7 +332,9 @@
     <MESSAGE value="Json Utility Update" />
     <MESSAGE value="release v1.2.2&#10;&#10;- Improved Audio System" />
     <MESSAGE value="refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring" />
+    <MESSAGE value="Changes by timon" />
+    <MESSAGE value="static config" />
+    <option name="LAST_COMMIT_MESSAGE" value="static config" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
