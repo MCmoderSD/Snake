@@ -2,11 +2,11 @@ package de.MCmoderSD.UI;
 
 import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
+import de.MCmoderSD.objects.Background;
+import de.MCmoderSD.objects.BackgroundTile;
 import de.MCmoderSD.objects.Food;
 import de.MCmoderSD.objects.Snake;
 import de.MCmoderSD.objects.SnakePiece;
-import de.MCmoderSD.objects.Background;
-import de.MCmoderSD.objects.BackgroundTile;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,7 +26,6 @@ public class UI extends JPanel {
 
     // Associations
     private final Game game;
-    private final Config config;
     private final InputHandler inputs;
 
     // UI Components
@@ -35,20 +34,16 @@ public class UI extends JPanel {
     private final JLabel scoreLabel;
     private final JButton resetButton;
 
-    // Variables
-    private int fps;
-
     // Constructor
     public UI(Frame frame, Config config) {
-        this.config = config;
 
         // Set UI Attributes
-        setPreferredSize(config.getDimension());
+        setPreferredSize(Config.DIMENSION);
         setDoubleBuffered(true);
         setLayout(null);
 
-        int width = config.getFieldWidth() * config.getScale();
-        int height = config.getFieldHeight() * config.getScale();
+        int width = Config.FIELD_WIDTH * Config.SCALE;
+        int height = Config.FIELD_HEIGHT * Config.SCALE;
 
         // Init Game
         game = new Game(this, config);
@@ -57,41 +52,41 @@ public class UI extends JPanel {
         addKeyListener(inputs = new InputHandler(game));
 
         // UI Components
-        Font defaultFont = new Font("Roboto", Font.PLAIN, config.getScale() / 2);
+        Font defaultFont = new Font("Roboto", Font.PLAIN, Config.SCALE / 2);
 
-        background = new Background(config);
+        background = new Background();
 
         // FPS Label
         fpsLabel = new JLabel();
         fpsLabel.setFont(defaultFont);
-        fpsLabel.setForeground(config.getFpsColor());
-        fpsLabel.setSize(config.getScale() * 3, config.getScale());
-        fpsLabel.setLocation(config.getScale() / 4, 0);
+        fpsLabel.setForeground(Config.FPS_COLOR);
+        fpsLabel.setSize(Config.SCALE * 3, Config.SCALE);
+        fpsLabel.setLocation(Config.SCALE / 4, 0);
         fpsLabel.setVisible(game.isShowFPS());
         add(fpsLabel);
 
         // Score Label
-        scoreLabel = new JLabel(config.getScore() + ": " + game.getScore());
+        scoreLabel = new JLabel(Config.SCORE_PREFIX + game.getScore());
         scoreLabel.setFont(defaultFont);
-        scoreLabel.setForeground(config.getScoreColor());
-        scoreLabel.setSize(config.getScale() * 3, config.getScale());
-        scoreLabel.setLocation((config.getFieldWidth() - 3) * config.getScale(), 0);
+        scoreLabel.setForeground(Config.SCORE_COLOR);
+        scoreLabel.setSize(Config.SCALE * 3, Config.SCALE);
+        scoreLabel.setLocation((Config.SCALE - 3) * Config.SCALE, 0);
         add(scoreLabel);
 
         int buttonWidth = width / 4;
         int buttonHeight = height / 6;
 
         // Reset Button
-        resetButton = new JButton(config.getRestart());
+        resetButton = new JButton(Config.RESTART);
         resetButton.setBorder(null);
         resetButton.setFocusable(false);
         resetButton.setSize(buttonWidth, buttonHeight);
-        resetButton.setToolTipText(config.getRestart());
+        resetButton.setToolTipText(Config.RESTART_TOOL_TIP);
         resetButton.setFont(new Font("Roboto", Font.PLAIN, buttonHeight / 2));
         resetButton.setLocation((width - buttonWidth) / 2, (height - buttonHeight) / 2);
         resetButton.addActionListener(e -> game.reset());
         resetButton.setBackground(Color.white);
-        resetButton.setForeground(config.getTextColor());
+        resetButton.setForeground(Config.TEXT_COLOR);
         resetButton.setVisible(game.isGameOver());
         add(resetButton);
 
@@ -160,6 +155,7 @@ public class UI extends JPanel {
         }
 
         // Update UI Components
+        fpsLabel.setVisible(game.isShowFPS());
         paintComponents(g);
     }
 
@@ -170,11 +166,11 @@ public class UI extends JPanel {
 
     // Setter
     public void setFps(int fps) {
-        fpsLabel.setText("FPS: " + fps);
+        fpsLabel.setText(Config.FPS_PREFIX + fps);
     }
 
     public void setScore(int score) {
-        scoreLabel.setText(config.getScore() + ": " + score);
+        scoreLabel.setText(Config.SCORE_PREFIX + score);
     }
 
     public void setGameOver(boolean gameOver) {

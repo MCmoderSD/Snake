@@ -14,69 +14,71 @@ import java.awt.image.BufferedImage;
 @SuppressWarnings("unused")
 public class Config {
 
-    // Associations
+    // Utilities
     private final AudioPlayer audioPlayer;
 
     // Config Variables
-    private final int scale;
-    private final int fieldWidth;
-    private final int fieldHeight;
-    private final int fps;
-    private final int tps;
-    private final int opUltGrowInterval;
-    private final double specialFoodChance;
-    private final double specialFoodDuration;
-    private final double ultSpeedModifier;
-    private final double opUltSpeedModifier;
-    private final boolean resizable;
-    private final boolean solidWalls;
+    public static int SCALE;
+    public static int FIELD_WIDTH;
+    public static int FIELD_HEIGHT;
+    public static int FPS;
+    public static int TPS;
+    public static long OP_ULT_GROW_INTERVAL;
+    public static long SPECIAL_FOOD_DURATION;
+    public static double SPECIAL_FOOD_CHANCE;
+    public static double ULT_SPEED_MODIFIER;
+    public static double OP_ULT_SPEED_MODIFIER;
+    public static boolean RESIZABLE;
+    public static boolean SOLID_WALLS;
 
     // Assets
-    private final Dimension dimension;
-    private final BufferedImage icon;
-    private final BufferedImage backgroundTile;
-    private final BufferedImage head;
-    private final BufferedImage upperBody;
-    private final BufferedImage lowerBody;
-    private final BufferedImage legTile;
-    private final BufferedImage legTransition;
-    private final BufferedImage feet;
-    private final BufferedImage food;
-    private final BufferedImage goldFood;
+    public static Dimension DIMENSION;
+    public static BufferedImage ICON;
+    public static BufferedImage BACKGROUND_TILE;
+    public static BufferedImage HEAD;
+    public static BufferedImage UPPER_BODY;
+    public static BufferedImage LOWER_BODY;
+    public static BufferedImage LEG_TILE;
+    public static BufferedImage LEG_TRANSITION;
+    public static BufferedImage FEET;
+    public static BufferedImage FOOD;
+    public static BufferedImage GOLD_FOOD;
 
     // Sounds
-    private final String foodSound;
-    private final String ultSound;
-    private final String dieSound;
+    public static String FOOD_SOUND;
+    public static String ULT_SOUND;
+    public static String DIE_SOUND;
 
     // Animations
-    private final ImageIcon headAnimation;
-    private final ImageIcon upperBodyAnimation;
-    private final ImageIcon lowerBodyAnimation;
-    private final ImageIcon legTileAnimation;
-    private final ImageIcon legTransitionAnimation;
-    private final ImageIcon feetAnimation;
-    private final ImageIcon opFoodAnimation;
+    public static ImageIcon HEAD_ANIMATION;
+    public static ImageIcon UPPER_BODY_ANIMATION;
+    public static ImageIcon LOWER_BODY_ANIMATION;
+    public static ImageIcon LEG_TILE_ANIMATION;
+    public static ImageIcon LEG_TRANSITION_ANIMATION;
+    public static ImageIcon FEET_ANIMATION;
+    public static ImageIcon OP_FOOD_ANIMATION;
 
     // Language
-    private final String language;
-    private final String title;
-    private final String restart;
-    private final String gameOver;
-    private final String score;
+    public static String LANGUAGE;
+    public static String TITLE;
+    public static String RESTART;
+    public static String RESTART_TOOL_TIP;
+    public static String GAME_OVER;
+    public static String SCORE_PREFIX;
+    public static String FPS_PREFIX;
 
-    // Color
-    private final Color gridLayoutColor;
-    private final Color snakeHitboxColor;
-    private final Color foodHitboxColor;
-    private final Color fpsColor;
-    private final Color scoreColor;
-    private final Color textColor;
-    private final Color backgroundColor;
-    private final Color snakeColor;
-    private final Color foodColor;
-    private final Color goldFoodColor;
-    private final Color opFoodColor;
+    // Colors
+    public static Color GRID_LAYOUT_COLOR;
+    public static Color SNAKE_HITBOX_COLOR;
+    public static Color FOOD_HITBOX_COLOR;
+    public static Color FPS_COLOR;
+    public static Color SCORE_COLOR;
+    public static Color TEXT_COLOR;
+    public static Color BACKGROUND_COLOR;
+    public static Color SNAKE_COLOR;
+    public static Color FOOD_COLOR;
+    public static Color GOLD_FOOD_COLOR;
+    public static Color OP_FOOD_COLOR;
 
     // Constructor
     public Config(String[] args) {
@@ -98,73 +100,75 @@ public class Config {
 
         if (config == null) throw new IllegalArgumentException("The config file could not be loaded");
 
-        scale = config.get("scale").asInt();
-        fieldWidth = config.get("fieldWidth").asInt();
-        fieldHeight = config.get("fieldHeight").asInt();
-        fps = config.get("fps").asInt();
-        tps = config.get("tps").asInt();
-        opUltGrowInterval = config.get("opUltGrowInterval").asInt();
-        specialFoodChance = config.get("specialFoodChance").asDouble();
-        specialFoodDuration = config.get("specialFoodDuration").asDouble();
-        ultSpeedModifier = config.get("ultSpeed").asDouble();
-        opUltSpeedModifier = config.get("opUltSpeed").asDouble();
-        resizable = config.get("resizable").asBoolean();
-        solidWalls = config.get("solidWalls").asBoolean();
-        foodSound = config.get("foodSound").asText();
-        ultSound = config.get("ultSound").asText();
-        dieSound = config.get("dieSound").asText();
+        SCALE = config.get("scale").asInt();
+        FIELD_WIDTH = config.get("fieldWidth").asInt();
+        FIELD_HEIGHT = config.get("fieldHeight").asInt();
+        FPS = config.get("fps").asInt();
+        TPS = config.get("tps").asInt();
+        OP_ULT_GROW_INTERVAL = config.get("opUltGrowInterval").asLong();
+        SPECIAL_FOOD_DURATION = config.get("specialFoodDuration").asLong();
+        SPECIAL_FOOD_CHANCE = config.get("specialFoodChance").asDouble();
+        ULT_SPEED_MODIFIER = config.get("ultSpeed").asDouble();
+        OP_ULT_SPEED_MODIFIER = config.get("opUltSpeed").asDouble();
+        RESIZABLE = config.get("resizable").asBoolean();
+        SOLID_WALLS = config.get("solidWalls").asBoolean();
+        FOOD_SOUND = config.get("foodSound").asText();
+        ULT_SOUND = config.get("ultSound").asText();
+        DIE_SOUND = config.get("dieSound").asText();
 
         // Generate Assets
-        dimension = new Dimension(fieldWidth * scale, fieldHeight * scale);
-        icon = imageReader.read(config.get("icon").asText());
-        backgroundTile = imageReader.scaleImage(config.get("backgroundTile").asText(), scale);
-        head = imageReader.scaleImage(config.get("head").asText(), scale);
-        upperBody = imageReader.scaleImage(config.get("upperBody").asText(), scale);
-        lowerBody = imageReader.scaleImage(config.get("lowerBody").asText(), scale);
-        legTile = imageReader.scaleImage(config.get("legTile").asText(), scale);
-        legTransition = imageReader.scaleImage(config.get("legTransition").asText(), scale);
-        feet = imageReader.scaleImage(config.get("feet").asText(), scale);
-        food = imageReader.scaleImage(config.get("food").asText(), scale);
-        goldFood = imageReader.scaleImage(config.get("goldFood").asText(), scale);
+        DIMENSION = new Dimension(FIELD_WIDTH * SCALE, FIELD_HEIGHT * SCALE);
+        ICON = imageReader.read(config.get("icon").asText());
+        BACKGROUND_TILE = imageReader.scaleImage(config.get("backgroundTile").asText(), SCALE);
+        HEAD = imageReader.scaleImage(config.get("head").asText(), SCALE);
+        UPPER_BODY = imageReader.scaleImage(config.get("upperBody").asText(), SCALE);
+        LOWER_BODY = imageReader.scaleImage(config.get("lowerBody").asText(), SCALE);
+        LEG_TILE = imageReader.scaleImage(config.get("legTile").asText(), SCALE);
+        LEG_TRANSITION = imageReader.scaleImage(config.get("legTransition").asText(), SCALE);
+        FEET = imageReader.scaleImage(config.get("feet").asText(), SCALE);
+        FOOD = imageReader.scaleImage(config.get("food").asText(), SCALE);
+        GOLD_FOOD = imageReader.scaleImage(config.get("goldFood").asText(), SCALE);
 
         // Animations
-        headAnimation = imageReader.readGif(config.get("headAnimation").asText(), scale);
-        upperBodyAnimation = imageReader.readGif(config.get("upperBodyAnimation").asText(), scale);
-        lowerBodyAnimation = imageReader.readGif(config.get("lowerBodyAnimation").asText(), scale);
-        legTileAnimation = imageReader.readGif(config.get("legTileAnimation").asText(), scale);
-        legTransitionAnimation = imageReader.readGif(config.get("legTransitionAnimation").asText(), scale);
-        feetAnimation = imageReader.readGif(config.get("feetAnimation").asText(), scale);
-        opFoodAnimation = imageReader.readGif(config.get("opFoodAnimation").asText(), scale);
+        HEAD_ANIMATION = imageReader.readGif(config.get("headAnimation").asText(), SCALE);
+        UPPER_BODY_ANIMATION = imageReader.readGif(config.get("upperBodyAnimation").asText(), SCALE);
+        LOWER_BODY_ANIMATION = imageReader.readGif(config.get("lowerBodyAnimation").asText(), SCALE);
+        LEG_TILE_ANIMATION = imageReader.readGif(config.get("legTileAnimation").asText(), SCALE);
+        LEG_TRANSITION_ANIMATION = imageReader.readGif(config.get("legTransitionAnimation").asText(), SCALE);
+        FEET_ANIMATION = imageReader.readGif(config.get("feetAnimation").asText(), SCALE);
+        OP_FOOD_ANIMATION = imageReader.readGif(config.get("opFoodAnimation").asText(), SCALE);
 
         // Language set
-        language = args.length > 0 ? args[0] : "en";
-        JsonNode languageConfig = language.length() == 2 ? jsonUtility.load("/language/" + language + ".json") : jsonUtility.load(args[0], true);
+        LANGUAGE = args.length > 0 ? args[0] : "en";
+        JsonNode languageConfig = LANGUAGE.length() == 2 ? jsonUtility.load("/language/" + LANGUAGE + ".json") : jsonUtility.load(args[0], true);
 
         // Language
-        title = languageConfig.get("title").asText();
-        restart = languageConfig.get("restart").asText();
-        gameOver = languageConfig.get("gameOver").asText();
-        score = languageConfig.get("score").asText();
+        TITLE = languageConfig.get("title").asText();
+        RESTART = languageConfig.get("restart").asText();
+        RESTART_TOOL_TIP = languageConfig.get("restartToolTip").asText();
+        GAME_OVER = languageConfig.get("gameOver").asText();
+        SCORE_PREFIX = languageConfig.get("scorePrefix").asText();
+        FPS_PREFIX = languageConfig.get("fpsPrefix").asText();
 
         // Colors
-        gridLayoutColor = config.get("gridLayoutColor").asColor();
-        snakeHitboxColor = config.get("snakeHitboxColor").asColor();
-        foodHitboxColor = config.get("foodHitboxColor").asColor();
-        fpsColor = config.get("fpsColor").asColor();
-        scoreColor = config.get("scoreColor").asColor();
-        textColor = config.get("textColor").asColor();
-        backgroundColor = config.get("backgroundColor").asColor();
-        snakeColor = config.get("snakeColor").asColor();
-        foodColor = config.get("foodColor").asColor();
-        goldFoodColor = config.get("goldFoodColor").asColor();
-        opFoodColor = config.get("opFoodColor").asColor();
+        GRID_LAYOUT_COLOR = config.get("gridLayoutColor").asColor();
+        SNAKE_HITBOX_COLOR = config.get("snakeHitboxColor").asColor();
+        FOOD_HITBOX_COLOR = config.get("foodHitboxColor").asColor();
+        FPS_COLOR = config.get("fpsColor").asColor();
+        SCORE_COLOR = config.get("scoreColor").asColor();
+        TEXT_COLOR = config.get("textColor").asColor();
+        BACKGROUND_COLOR = config.get("backgroundColor").asColor();
+        SNAKE_COLOR = config.get("snakeColor").asColor();
+        FOOD_COLOR = config.get("foodColor").asColor();
+        GOLD_FOOD_COLOR = config.get("goldFoodColor").asColor();
+        OP_FOOD_COLOR = config.get("opFoodColor").asColor();
     }
 
     // Constructor asset streaming
     public Config(String[] args, String url) {
 
         // Init Utilities
-        audioPlayer = new AudioPlayer();
+        audioPlayer = new AudioPlayer(url);
         ImageStreamer imageStreamer = new ImageStreamer(url);
         JsonUtility jsonUtility = new JsonUtility(url);
 
@@ -180,275 +184,72 @@ public class Config {
 
         if (config == null) throw new IllegalArgumentException("The config file could not be loaded");
 
-        scale = config.get("scale").asInt();
-        fieldWidth = config.get("fieldWidth").asInt();
-        fieldHeight = config.get("fieldHeight").asInt();
-        fps = config.get("fps").asInt();
-        tps = config.get("tps").asInt();
-        opUltGrowInterval = config.get("opUltGrowInterval").asInt();
-        specialFoodChance = config.get("specialFoodChance").asDouble();
-        specialFoodDuration = config.get("specialFoodDuration").asDouble();
-        ultSpeedModifier = config.get("ultSpeed").asDouble();
-        opUltSpeedModifier = config.get("opUltSpeed").asDouble();
-        resizable = config.get("resizable").asBoolean();
-        solidWalls = config.get("solidWalls").asBoolean();
-        foodSound = config.get("foodSound").asText();
-        ultSound = config.get("ultSound").asText();
-        dieSound = config.get("dieSound").asText();
+        SCALE = config.get("scale").asInt();
+        FIELD_WIDTH = config.get("fieldWidth").asInt();
+        FIELD_HEIGHT = config.get("fieldHeight").asInt();
+        FPS = config.get("fps").asInt();
+        TPS = config.get("tps").asInt();
+        OP_ULT_GROW_INTERVAL = config.get("opUltGrowInterval").asLong();
+        SPECIAL_FOOD_DURATION = config.get("specialFoodDuration").asLong();
+        SPECIAL_FOOD_CHANCE = config.get("specialFoodChance").asDouble();
+        ULT_SPEED_MODIFIER = config.get("ultSpeed").asDouble();
+        OP_ULT_SPEED_MODIFIER = config.get("opUltSpeed").asDouble();
+        RESIZABLE = config.get("resizable").asBoolean();
+        SOLID_WALLS = config.get("solidWalls").asBoolean();
+        FOOD_SOUND = config.get("foodSound").asText();
+        ULT_SOUND = config.get("ultSound").asText();
+        DIE_SOUND = config.get("dieSound").asText();
 
         // Generate Assets
-        dimension = new Dimension(fieldWidth * scale, fieldHeight * scale);
-        icon = imageStreamer.read(config.get("icon").asText());
-        backgroundTile = imageStreamer.scaleImage(config.get("backgroundTile").asText(), scale);
-        head = imageStreamer.scaleImage(config.get("head").asText(), scale);
-        upperBody = imageStreamer.scaleImage(config.get("upperBody").asText(), scale);
-        lowerBody = imageStreamer.scaleImage(config.get("lowerBody").asText(), scale);
-        legTile = imageStreamer.scaleImage(config.get("legTile").asText(), scale);
-        legTransition = imageStreamer.scaleImage(config.get("legTransition").asText(), scale);
-        feet = imageStreamer.scaleImage(config.get("feet").asText(), scale);
-        food = imageStreamer.scaleImage(config.get("food").asText(), scale);
-        goldFood = imageStreamer.scaleImage(config.get("goldFood").asText(), scale);
+        DIMENSION = new Dimension(FIELD_WIDTH * SCALE, FIELD_HEIGHT * SCALE);
+        ICON = imageStreamer.read(config.get("icon").asText());
+        BACKGROUND_TILE = imageStreamer.scaleImage(config.get("backgroundTile").asText(), SCALE);
+        HEAD = imageStreamer.scaleImage(config.get("head").asText(), SCALE);
+        UPPER_BODY = imageStreamer.scaleImage(config.get("upperBody").asText(), SCALE);
+        LOWER_BODY = imageStreamer.scaleImage(config.get("lowerBody").asText(), SCALE);
+        LEG_TILE = imageStreamer.scaleImage(config.get("legTile").asText(), SCALE);
+        LEG_TRANSITION = imageStreamer.scaleImage(config.get("legTransition").asText(), SCALE);
+        FEET = imageStreamer.scaleImage(config.get("feet").asText(), SCALE);
+        FOOD = imageStreamer.scaleImage(config.get("food").asText(), SCALE);
+        GOLD_FOOD = imageStreamer.scaleImage(config.get("goldFood").asText(), SCALE);
 
         // Animations
-        headAnimation = imageStreamer.readGif(config.get("headAnimation").asText(), scale);
-        upperBodyAnimation = imageStreamer.readGif(config.get("upperBodyAnimation").asText(), scale);
-        lowerBodyAnimation = imageStreamer.readGif(config.get("lowerBodyAnimation").asText(), scale);
-        legTileAnimation = imageStreamer.readGif(config.get("legTileAnimation").asText(), scale);
-        legTransitionAnimation = imageStreamer.readGif(config.get("legTransitionAnimation").asText(), scale);
-        feetAnimation = imageStreamer.readGif(config.get("feetAnimation").asText(), scale);
-        opFoodAnimation = imageStreamer.readGif(config.get("opFoodAnimation").asText(), scale);
+        HEAD_ANIMATION = imageStreamer.readGif(config.get("headAnimation").asText(), SCALE);
+        UPPER_BODY_ANIMATION = imageStreamer.readGif(config.get("upperBodyAnimation").asText(), SCALE);
+        LOWER_BODY_ANIMATION = imageStreamer.readGif(config.get("lowerBodyAnimation").asText(), SCALE);
+        LEG_TILE_ANIMATION = imageStreamer.readGif(config.get("legTileAnimation").asText(), SCALE);
+        LEG_TRANSITION_ANIMATION = imageStreamer.readGif(config.get("legTransitionAnimation").asText(), SCALE);
+        FEET_ANIMATION = imageStreamer.readGif(config.get("feetAnimation").asText(), SCALE);
+        OP_FOOD_ANIMATION = imageStreamer.readGif(config.get("opFoodAnimation").asText(), SCALE);
 
         // Language set
-        language = args.length > 0 ? args[0] : "en";
-        JsonNode languageConfig = language.length() == 2 ? jsonUtility.load("/language/" + language + ".json") : jsonUtility.load(args[0], true);
+        LANGUAGE = args.length > 0 ? args[0] : "en";
+        JsonNode languageConfig = LANGUAGE.length() == 2 ? jsonUtility.load("/language/" + LANGUAGE + ".json") : jsonUtility.load(args[0], true);
 
         // Language
-        title = languageConfig.get("title").asText();
-        restart = languageConfig.get("restart").asText();
-        gameOver = languageConfig.get("gameOver").asText();
-        score = languageConfig.get("score").asText();
+        TITLE = languageConfig.get("title").asText();
+        RESTART = languageConfig.get("restart").asText();
+        RESTART_TOOL_TIP = languageConfig.get("restartToolTip").asText();
+        GAME_OVER = languageConfig.get("gameOver").asText();
+        SCORE_PREFIX = languageConfig.get("scorePrefix").asText();
+        FPS_PREFIX = languageConfig.get("fpsPrefix").asText();
 
         // Colors
-        gridLayoutColor = config.get("gridLayoutColor").asColor();
-        snakeHitboxColor = config.get("snakeHitboxColor").asColor();
-        foodHitboxColor = config.get("foodHitboxColor").asColor();
-        fpsColor = config.get("fpsColor").asColor();
-        scoreColor = config.get("scoreColor").asColor();
-        textColor = config.get("textColor").asColor();
-        backgroundColor = config.get("backgroundColor").asColor();
-        snakeColor = config.get("snakeColor").asColor();
-        foodColor = config.get("foodColor").asColor();
-        goldFoodColor = config.get("goldFoodColor").asColor();
-        opFoodColor = config.get("opFoodColor").asColor();
+        GRID_LAYOUT_COLOR = config.get("gridLayoutColor").asColor();
+        SNAKE_HITBOX_COLOR = config.get("snakeHitboxColor").asColor();
+        FOOD_HITBOX_COLOR = config.get("foodHitboxColor").asColor();
+        FPS_COLOR = config.get("fpsColor").asColor();
+        SCORE_COLOR = config.get("scoreColor").asColor();
+        TEXT_COLOR = config.get("textColor").asColor();
+        BACKGROUND_COLOR = config.get("backgroundColor").asColor();
+        SNAKE_COLOR = config.get("snakeColor").asColor();
+        FOOD_COLOR = config.get("foodColor").asColor();
+        GOLD_FOOD_COLOR = config.get("goldFoodColor").asColor();
+        OP_FOOD_COLOR = config.get("opFoodColor").asColor();
     }
 
-    // Getters
-
-    // Associations
+    // Getter
     public AudioPlayer getAudioPlayer() {
         return audioPlayer;
-    }
-
-    // Config Getters
-    public int getFieldWidth() {
-        return fieldWidth;
-    }
-
-    public int getFieldHeight() {
-        return fieldHeight;
-    }
-
-    public int getScale() {
-        return scale;
-    }
-
-    public int getFps() {
-        return fps;
-    }
-
-    public int getTps() {
-        return tps;
-    }
-
-    public int getOpUltGrowInterval() {
-        return opUltGrowInterval;
-    }
-
-    public double getSpecialFoodChance() {
-        return specialFoodChance;
-    }
-
-    public double getSpecialFoodDuration() {
-        return specialFoodDuration;
-    }
-
-    public double getUltSpeedModifier() {
-        return ultSpeedModifier;
-    }
-
-    public double getOpUltSpeedModifier() {
-        return opUltSpeedModifier;
-    }
-
-    public boolean isResizable() {
-        return resizable;
-    }
-
-    public boolean isSolidWalls() {
-        return solidWalls;
-    }
-
-    // Sound Getters
-
-    public String getFoodSound() {
-        return foodSound;
-    }
-
-    public String getUltSound() {
-        return ultSound;
-    }
-
-    public String getDieSound() {
-        return dieSound;
-    }
-
-    // Asset Getters
-    public BufferedImage getIcon() {
-        return icon;
-    }
-
-    public Dimension getDimension() {
-        return dimension;
-    }
-
-    public BufferedImage getBackgroundTile() {
-        return backgroundTile;
-    }
-
-    public BufferedImage getHead() {
-        return head;
-    }
-
-    public BufferedImage getUpperBody() {
-        return upperBody;
-    }
-
-    public BufferedImage getLowerBody() {
-        return lowerBody;
-    }
-
-    public BufferedImage getLegTile() {
-        return legTile;
-    }
-
-    public BufferedImage getLegTransition() {
-        return legTransition;
-    }
-
-    public BufferedImage getFeet() {
-        return feet;
-    }
-
-    public BufferedImage getFood() {
-        return food;
-    }
-
-    public BufferedImage getGoldFood() {
-        return goldFood;
-    }
-
-    // Animation Getters
-    public ImageIcon getHeadAnimation() {
-        return headAnimation;
-    }
-
-    public ImageIcon getUpperBodyAnimation() {
-        return upperBodyAnimation;
-    }
-
-    public ImageIcon getLowerBodyAnimation() {
-        return lowerBodyAnimation;
-    }
-
-    public ImageIcon getLegTileAnimation() {
-        return legTileAnimation;
-    }
-
-    public ImageIcon getLegTransitionAnimation() {
-        return legTransitionAnimation;
-    }
-
-    public ImageIcon getFeetAnimation() {
-        return feetAnimation;
-    }
-
-    public ImageIcon getOpFoodAnimation() {
-        return opFoodAnimation;
-    }
-
-    // Language Getters
-    public String getLanguage() {
-        return language;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getRestart() {
-        return restart;
-    }
-
-    public String getGameOver() {
-        return gameOver;
-    }
-
-    public String getScore() {
-        return score;
-    }
-
-    // Color Getters
-    public Color getGridLayoutColor() {
-        return gridLayoutColor;
-    }
-
-    public Color getSnakeHitboxColor() {
-        return snakeHitboxColor;
-    }
-
-    public Color getFoodHitboxColor() {
-        return foodHitboxColor;
-    }
-
-    public Color getFpsColor() {
-        return fpsColor;
-    }
-
-    public Color getScoreColor() {
-        return scoreColor;
-    }
-
-    public Color getTextColor() {
-        return textColor;
-    }
-
-    public Color getBackgroundColor() {
-        return backgroundColor;
-    }
-
-    public Color getSnakeColor() {
-        return snakeColor;
-    }
-
-    public Color getFoodColor() {
-        return foodColor;
-    }
-
-    public Color getGoldFoodColor() {
-        return goldFoodColor;
-    }
-
-    public Color getOpFoodColor() {
-        return opFoodColor;
     }
 }

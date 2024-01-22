@@ -1,6 +1,8 @@
 {
   "title": "Snake",
   "restart": "Restart",
+  "restartToolTip": "Restart the game",
   "gameOver": "Game Over",
-  "score": "Score"
+  "scorePrefix": "Score: ",
+  "fpsPrefix": "FPS: "
 }

@@ -1,6 +1,8 @@
 {
   "title": "Schlange",
   "restart": "Neustart",
+  "restartToolTip": "Startet das Spiel neu",
   "gameOver": "Spiel vorbei",
-  "score": "Punkte"
+  "scorePrefix": "Punkte: ",
+  "fpsPrefix": "FPS: "
 }
