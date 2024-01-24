@@ -1,0 +1,8 @@
+{
+  "title": "Käärme",
+  "restart": "Käynnistä uudelleen",
+  "restartToolTip": "Käynnistä peli uudelleen",
+  "gameOver": "Peli ohi",
+  "scorePrefix": "Pisteet: ",
+  "fpsPrefix": "FPS: "
+}

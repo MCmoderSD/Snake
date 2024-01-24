@@ -1,0 +1,8 @@
+{
+  "title": "スネーク",
+  "restart": "再起動",
+  "restartToolTip": "ゲームを再起動する",
+  "gameOver": "ゲームオーバー",
+  "scorePrefix": "スコア: ",
+  "fpsPrefix": "FPS: "
+}

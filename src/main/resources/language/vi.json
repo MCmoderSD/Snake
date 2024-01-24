@@ -1,0 +1,8 @@
+{
+  "title": "Rắn",
+  "restart": "Khởi động lại",
+  "restartToolTip": "Khởi động lại trò chơi",
+  "gameOver": "Kết thúc trò chơi",
+  "scorePrefix": "Điểm: ",
+  "fpsPrefix": "FPS: "
+}

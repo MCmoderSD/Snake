@@ -43,7 +43,7 @@ public class ImageStreamer extends ImageUtility {
 
         // Null check
         if (image == null)
-            throw new IllegalArgumentException("The image could not be loaded: " + url); // Image could not be loaded (Image is null
+            throw new IllegalArgumentException("The image could not be loaded: " + url); // Image could not be loaded (Image is null)
 
         // Add to cache
         bufferedImageCache.put(url, image);
@@ -66,7 +66,7 @@ public class ImageStreamer extends ImageUtility {
 
         // Null check
         if (image == null)
-            throw new IllegalArgumentException("The image could not be loaded: " + url + resource); // Image could not be loaded (Image is null
+            throw new IllegalArgumentException("The image could not be loaded: " + url + resource); // Image could not be loaded (Image is null)
 
         // Add to cache
         bufferedImageCache.put(resource, image);

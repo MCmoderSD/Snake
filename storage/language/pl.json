@@ -1,0 +1,8 @@
+{
+  "title": "Wąż",
+  "restart": "Restart",
+  "restartToolTip": "Uruchom ponownie grę",
+  "gameOver": "Koniec gry",
+  "scorePrefix": "Wynik: ",
+  "fpsPrefix": "FPS: "
+}

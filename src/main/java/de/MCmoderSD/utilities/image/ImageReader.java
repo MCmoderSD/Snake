@@ -46,7 +46,7 @@ public class ImageReader extends ImageUtility {
 
         // Null check
         if (image == null)
-            throw new IllegalArgumentException("The image could not be loaded: " + resource); // Image could not be loaded (Image is null
+            throw new IllegalArgumentException("The image could not be loaded: " + resource); // Image could not be loaded (Image is null)
 
         // Add to cache
         bufferedImageCache.put(resource, image);
@@ -70,7 +70,7 @@ public class ImageReader extends ImageUtility {
 
         // Null check
         if (image == null)
-            throw new IllegalArgumentException("The image could not be loaded: " + resource); // Image could not be loaded (Image is null
+            throw new IllegalArgumentException("The image could not be loaded: " + resource); // Image could not be loaded (Image is null)
 
         // Add to cache
         bufferedImageCache.put(resource, image);

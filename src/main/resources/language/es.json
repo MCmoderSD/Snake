@@ -1,0 +1,8 @@
+{
+  "title": "Serpiente",
+  "restart": "Reiniciar",
+  "restartToolTip": "Reiniciar el juego",
+  "gameOver": "Juego terminado",
+  "scorePrefix": "Puntos: ",
+  "fpsPrefix": "FPS: "
+}
