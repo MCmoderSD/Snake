@@ -35,7 +35,7 @@ public class SnakePiece {
     protected boolean right = false;
     protected boolean down = false;
 
-    // Default Constructor
+    // Grow Constructor
     public SnakePiece(Game game, int x, int y) {
         this.game = game;
 
@@ -54,7 +54,7 @@ public class SnakePiece {
         this.y = y;
     }
 
-    // Constructor with Image
+    // Init Constructor
     public SnakePiece(Game game, int x, int y, BufferedImage image, ImageIcon animation) {
         this.game = game;
 
@@ -155,6 +155,11 @@ public class SnakePiece {
         }
     }
 
+    // Getter
+    protected Game getGame() {
+        return game;
+    }
+
     public AffineTransform getTransform() {
         AffineTransform transform = new AffineTransform();
         transform.translate(x * scale, y * scale);
@@ -177,11 +182,6 @@ public class SnakePiece {
         }
 
         return transform;
-    }
-
-    // Getter
-    protected Game getGame() {
-        return game;
     }
 
     public BufferedImage getImage() {
@@ -217,7 +217,7 @@ public class SnakePiece {
     }
 
     // Setter
-    public void setAssets(BufferedImage image, ImageIcon animation) {
+    public void overrideAssets(BufferedImage image, ImageIcon animation) {
         this.image = image;
         this.animation = animation;
     }

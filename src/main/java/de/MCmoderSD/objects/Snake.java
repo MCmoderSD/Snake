@@ -7,11 +7,11 @@ import javax.swing.ImageIcon;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+// This class is the head of the snake and contains the snake pieces
 public class Snake extends SnakePiece {
 
     // Attributes
     private final ArrayList<SnakePiece> snakePieces;
-    //private final Game game;
 
     // Constructor
     public Snake(Game game, int x, int y, BufferedImage image, ImageIcon animation) {
@@ -27,28 +27,30 @@ public class Snake extends SnakePiece {
     // Rearrange Snake
     private void rearrangeImages() {
         if (snakePieces.size() == 4)
-            snakePieces.get(snakePieces.size() - 1).setAssets(Config.LEG_TRANSITION, Config.LEG_TRANSITION_ANIMATION);
+            snakePieces.get(snakePieces.size() - 1).overrideAssets(Config.LEG_TRANSITION, Config.LEG_TRANSITION_ANIMATION);
         if (snakePieces.size() > 4) {
-            snakePieces.get(snakePieces.size() - 2).setAssets(Config.LEG_TRANSITION, Config.LEG_TRANSITION_ANIMATION);
-            snakePieces.get(snakePieces.size() - 1).setAssets(Config.FEET, Config.FEET_ANIMATION);
+            snakePieces.get(snakePieces.size() - 2).overrideAssets(Config.LEG_TRANSITION, Config.LEG_TRANSITION_ANIMATION);
+            snakePieces.get(snakePieces.size() - 1).overrideAssets(Config.FEET, Config.FEET_ANIMATION);
         }
 
         for (int i = 3; i < snakePieces.size() - 2; i++)
-            snakePieces.get(i).setAssets(Config.LEG_TILE, Config.LEG_TILE_ANIMATION);
+            snakePieces.get(i).overrideAssets(Config.LEG_TILE, Config.LEG_TILE_ANIMATION);
     }
 
     // Move
     public void moveSnake() {
+
+        // Move Tail
         for (int i = snakePieces.size() - 1; i > 0; i--) {
             snakePieces.get(i).x = snakePieces.get(i - 1).x;
             snakePieces.get(i).y = snakePieces.get(i - 1).y;
             snakePieces.get(i).updateDirection(snakePieces.get(i - 1).getDirection());
         }
 
-        move();
+        move(); // Head
     }
 
-    // Check Collision
+    // Check head collision with itself
     public boolean checkCollision() {
         for (int i = 1; i < snakePieces.size(); i++)
             if (snakePieces.get(i).getBounds().intersects(snakePieces.get(0).getBounds())) return true;

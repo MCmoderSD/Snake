@@ -14,11 +14,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="static config">
+    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="Background rework">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Background.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Background.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/BackgroundTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/BackgroundTile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Snake.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/SnakePiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/SnakePiece.java" afterDir="false" />
     </list>
     <list id="d78f859a-edd0-44f6-b06d-89263ffa805d" name="Changes by timon" comment="static config" />
@@ -209,7 +207,7 @@
       <workItem from="1705946339916" duration="308000" />
       <workItem from="1705948873231" duration="314000" />
       <workItem from="1705951064747" duration="16491000" />
-      <workItem from="1706086950568" duration="1486000" />
+      <workItem from="1706086950568" duration="4548000" />
     </task>
     <task id="LOCAL-00001" summary="release v0.9.1&#10;- code improvements">
       <option name="closed" value="true" />
@@ -307,7 +305,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705967123822</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Background rework">
+      <option name="closed" value="true" />
+      <created>1706089808911</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1706089808912</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,7 +344,8 @@
     <MESSAGE value="refactoring" />
     <MESSAGE value="Changes by timon" />
     <MESSAGE value="static config" />
-    <option name="LAST_COMMIT_MESSAGE" value="static config" />
+    <MESSAGE value="Background rework" />
+    <option name="LAST_COMMIT_MESSAGE" value="Background rework" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
