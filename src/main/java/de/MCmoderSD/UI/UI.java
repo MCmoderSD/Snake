@@ -114,9 +114,11 @@ public class UI extends JPanel {
             g.drawImage(tile.getImage(), tile.getX() * tile.getScale(), tile.getY() * tile.getScale(), null);
         }
 
-        // Draw Food ToDo fix animation
+        // Draw Food
         g.setColor(food.getColor());
         g.drawImage(food.isOp() ? food.getAnimation().getImage() : food.getImage(), food.getX() * food.getScale(), food.getY() * food.getScale(), null);
+        if (food.isOp())
+            g.drawImage(food.getCover(), food.getX() * food.getScale(), food.getY() * food.getScale(), null);
 
         // Draw Snake
         for (int i = snakePieces.size() - 1; i >= 0; i--) {

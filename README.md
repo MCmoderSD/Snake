@@ -42,8 +42,11 @@ Currently, the following languages are supported: <br>
 - Italian (it)
 - Spanish (es)
 
+and many other but not approved by native speakers. <br>
+
 I'm planning to add more languages in the future. <br>
-If you want to help me translate the game into your language, please contact me and [read more](#custom-language). <br>
+If you want to help me translate the game into your language , please contact me and [read more](#custom-language). <br>
+Or else you can approve the translations [here](#unapproved). <br>
 
 ## Controls
 
@@ -67,43 +70,50 @@ You can use both the main JAR and the JAR with asset-streaming. <br>
 
 ```json
 {
-  "icon": "/Path/To/Icon.png",
+  "icon": "/Images/Icon.png",
   "fieldWidth": 32,
   "fieldHeight": 16,
   "scale": 32,
   "fps": 60,
   "tps": 10,
   "specialFoodChance": 0.05,
+  "specialFoodDuration": 7,
+  "opUltGrowInterval": 1000,
+  "ultSpeed": 2,
+  "opUltSpeed": 3,
   "resizable": false,
   "solidWalls": false,
-  "backgroundTile": "/Path/To/BackgroundTile.png",
-  "head": "/Path/To/Head.png",
-  "upperBody": "/Path/To/UpperBody.png",
-  "lowerBody": "/Path/To/LowerBody.png",
-  "legTile": "/Path/To/LegTile.png",
-  "legTransition": "/Path/To/LegTransition.png",
-  "feet": "/Path/To/Feet.png",
-  "food": "/Path/To/Food.png",
-  "goldFood": "/Path/To/GoldFood.png",
-  "foodSound": "/Path/To/Food.wav",
-  "ultSound": "/Path/To/Ult.wav",
-  "dieSound": "/Path/To/Die.wav",
-  "headAnimation": "/Path/To/Head.gif",
-  "upperBodyAnimation": "/Path/To/UpperBody.gif",
-  "lowerBodyAnimation": "/Path/To/LowerBody.gif",
-  "legTileAnimation": "/Path/To/LegTile.gif",
-  "legTransitionAnimation": "/Path/To/LegTransition.gif",
-  "feetAnimation": "/Path/To/Feet.gif",
+  "backgroundCover": "/Images/BackgroundCover.png",
+  "backgroundTile": "/Images/BackgroundTile.png",
+  "head": "/Images/Head.png",
+  "upperBody": "/Images/UpperBody.png",
+  "lowerBody": "/Images/LowerBody.png",
+  "legTile": "/Images/LegTile.png",
+  "legTransition": "/Images/LegTransition.png",
+  "feet": "/Images/Feet.png",
+  "food": "/Images/Food.png",
+  "goldFood": "/Images/GoldFood.png",
+  "foodSound": "/Audio/Eating.wav",
+  "ultSound": "/Audio/Rainbow.wav",
+  "dieSound": "/Audio/OOF.wav",
+  "headAnimation": "/Animations/Head.gif",
+  "upperBodyAnimation": "/Animations/UpperBody.gif",
+  "lowerBodyAnimation": "/Animations/LowerBody.gif",
+  "legTileAnimation": "/Animations/LegTile.gif",
+  "legTransitionAnimation": "/Animations/LegTransition.gif",
+  "feetAnimation": "/Animations/Feet.gif",
+  "opFoodAnimation": "/Animations/OpFood.gif",
   "gridLayoutColor": "#000000",
   "snakeHitboxColor": "#FF0000",
   "foodHitboxColor": "#FFFF00",
   "fpsColor": "#FFFF00",
   "scoreColor": "#FFFF00",
   "textColor": "#000000",
-  "backgroundColor": "#1e2428",
-  "snakeColor": "#5662f6",
-  "foodColor": "#e27662",
-  "goldFoodColor": "#1ccb5b"
+  "backgroundColor": "#1E2428",
+  "snakeColor": "#5662F6",
+  "foodColor": "#E27662",
+  "goldFoodColor": "#1CCB5B",
+  "opFoodColor": "#FF00FF"
 }
 ```
 
@@ -127,8 +137,10 @@ You can use both the main JAR and the JAR with asset-streaming. <br>
 {
   "title": "Snake",
   "restart": "Restart",
+  "restartToolTip": "Restart the game",
   "gameOver": "Game Over",
-  "score": "Score"
+  "scorePrefix": "Score: ",
+  "fpsPrefix": "FPS: "
 }
 ```
 
@@ -136,6 +148,44 @@ You can use both the main JAR and the JAR with asset-streaming. <br>
    If you want to help me translate the game into your language, please contact me. <br> <br>
 3. Run the game with the custom language file. <br>
    For example: java -jar Snake.jar <PathToTheLanguageFile> <br> <br>
+
+## Languages
+
+### Approved
+
+- English (en)
+- German (de)
+- Italian (it)
+- Spanish (es)
+
+### Unapproved
+
+- French (fr)
+- Portuguese (pt)
+- Russian (ru)
+- Chinese (zh)
+- Japanese (ja)
+- Korean (ko)
+- Turkish (tr)
+- Polish (pl)
+- Dutch (nl)
+- Swedish (sv)
+- Czech (cs)
+- Hungarian (hu)
+- Danish (da)
+- Finnish (fi)
+- Norwegian (no)
+- Romanian (ro)
+- Slovak (sk)
+- Slovenian (sl)
+- Ukrainian (uk)
+- Vietnamese (vi)
+- Greek (el)
+- Bulgarian (bg)
+- Croatian (hr)
+- Lithuanian (lt)
+- Serbian (sr)
+- Arabic (ar)
 
 ## Features
 
@@ -163,7 +213,7 @@ You can use both the main JAR and the JAR with asset-streaming. <br>
 - [x] Hitboxes
 - [x] Language Support
 - [x] Custom Assets
+- [x] Op Ult Animation
 - [ ] Win
 - [ ] Game Over
 - [ ] Menu
-- [ ] Op Ult Animation

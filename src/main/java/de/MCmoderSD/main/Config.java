@@ -34,6 +34,7 @@ public class Config {
     // Assets
     public static Dimension DIMENSION;
     public static BufferedImage ICON;
+    public static BufferedImage BACKGROUND_COVER;
     public static BufferedImage BACKGROUND_TILE;
     public static BufferedImage HEAD;
     public static BufferedImage UPPER_BODY;
@@ -119,6 +120,7 @@ public class Config {
         // Generate Assets
         DIMENSION = new Dimension(FIELD_WIDTH * SCALE, FIELD_HEIGHT * SCALE);
         ICON = imageReader.read(config.get("icon").asText());
+        BACKGROUND_COVER = imageReader.scaleImage(config.get("backgroundCover").asText(), SCALE);
         BACKGROUND_TILE = imageReader.scaleImage(config.get("backgroundTile").asText(), SCALE);
         HEAD = imageReader.scaleImage(config.get("head").asText(), SCALE);
         UPPER_BODY = imageReader.scaleImage(config.get("upperBody").asText(), SCALE);
@@ -162,6 +164,11 @@ public class Config {
         FOOD_COLOR = config.get("foodColor").asColor();
         GOLD_FOOD_COLOR = config.get("goldFoodColor").asColor();
         OP_FOOD_COLOR = config.get("opFoodColor").asColor();
+
+        // Sound
+        audioPlayer.loadAudio(FOOD_SOUND);
+        audioPlayer.loadAudio(ULT_SOUND);
+        audioPlayer.loadAudio(DIE_SOUND);
     }
 
     // Constructor asset streaming
@@ -203,6 +210,7 @@ public class Config {
         // Generate Assets
         DIMENSION = new Dimension(FIELD_WIDTH * SCALE, FIELD_HEIGHT * SCALE);
         ICON = imageStreamer.read(config.get("icon").asText());
+        BACKGROUND_COVER = imageStreamer.scaleImage(config.get("backgroundCover").asText(), SCALE);
         BACKGROUND_TILE = imageStreamer.scaleImage(config.get("backgroundTile").asText(), SCALE);
         HEAD = imageStreamer.scaleImage(config.get("head").asText(), SCALE);
         UPPER_BODY = imageStreamer.scaleImage(config.get("upperBody").asText(), SCALE);
@@ -246,6 +254,11 @@ public class Config {
         FOOD_COLOR = config.get("foodColor").asColor();
         GOLD_FOOD_COLOR = config.get("goldFoodColor").asColor();
         OP_FOOD_COLOR = config.get("opFoodColor").asColor();
+
+        // Sound
+        audioPlayer.loadAudio(FOOD_SOUND);
+        audioPlayer.loadAudio(ULT_SOUND);
+        audioPlayer.loadAudio(DIE_SOUND);
     }
 
     // Getter

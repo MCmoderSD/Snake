@@ -27,6 +27,7 @@ public class InputHandler implements KeyListener {
         up = false;
         right = false;
         down = false;
+        f3isPressed = false;
     }
 
     @Override
@@ -35,7 +36,11 @@ public class InputHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+
+        // Variables
         int keycode = e.getKeyCode();
+        boolean control = e.isControlDown();
+        boolean alt = e.isAltDown();
 
         // F3 Pressed
         if (keycode == KeyEvent.VK_F3) f3isPressed = true;
@@ -45,10 +50,10 @@ public class InputHandler implements KeyListener {
         if (keycode == KeyEvent.VK_SPACE) game.start();
 
         // Exit
-        if (e.isControlDown() && keycode == KeyEvent.VK_C) System.exit(0);
-        if (e.isControlDown() && keycode == KeyEvent.VK_Q) System.exit(0);
-        if (e.isAltDown() && keycode == KeyEvent.VK_Q) System.exit(0);
-        if (e.isAltDown() && keycode == KeyEvent.VK_F4) System.exit(0);
+        if (control && keycode == KeyEvent.VK_C) System.exit(0);
+        if (control && keycode == KeyEvent.VK_Q) System.exit(0);
+        if (alt && keycode == KeyEvent.VK_Q) System.exit(0);
+        if (alt && keycode == KeyEvent.VK_F4) System.exit(0);
 
         // Pause
         if (keycode == KeyEvent.VK_ESCAPE) game.togglePause();
@@ -60,14 +65,16 @@ public class InputHandler implements KeyListener {
         if (f3isPressed && (keycode == KeyEvent.VK_G)) game.toggleGridLines();
 
         // Direction
-        if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A) left = true;
-        if (keycode == KeyEvent.VK_UP || keycode == KeyEvent.VK_W) up = true;
-        if (keycode == KeyEvent.VK_RIGHT || keycode == KeyEvent.VK_D) right = true;
-        if (keycode == KeyEvent.VK_DOWN || keycode == KeyEvent.VK_S) down = true;
+        if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A || keycode == KeyEvent.VK_NUMPAD4) left = true;
+        if (keycode == KeyEvent.VK_UP || keycode == KeyEvent.VK_W || keycode == KeyEvent.VK_NUMPAD8) up = true;
+        if (keycode == KeyEvent.VK_RIGHT || keycode == KeyEvent.VK_D || keycode == KeyEvent.VK_NUMPAD6) right = true;
+        if (keycode == KeyEvent.VK_DOWN || keycode == KeyEvent.VK_S || keycode == KeyEvent.VK_NUMPAD3) down = true;
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+
+        // Variables
         int keycode = e.getKeyCode();
 
         // F3 Pressed

@@ -21,9 +21,11 @@ public class Game implements Runnable {
     // Game Variables
     private Thread ult;
     private int score;
-    private boolean isPaused;
-    private boolean gameOver;
     private double speedModifier;
+
+    // Game State Variables
+    private boolean paused;
+    private boolean gameOver;
     private boolean gameStarted;
     private boolean ultActive;
 
@@ -46,7 +48,7 @@ public class Game implements Runnable {
         // Init Game Variables
         score = 0;
         speedModifier = 1;
-        isPaused = false;
+        paused = false;
         gameOver = false;
         gameStarted = false;
         ultActive = false;
@@ -78,7 +80,7 @@ public class Game implements Runnable {
 
 
             // Game Loop
-            while (!isPaused && !gameOver) {
+            while (!paused && !gameOver) {
                 current = System.nanoTime();
                 delta += (current - now) / (tickrate / speedModifier);
                 timer += current - now;
@@ -112,7 +114,6 @@ public class Game implements Runnable {
                     // Check Collision with Food
                     if (snake.checkFood(food)) {
 
-                        // Interact with Food
                         score++; // Increase Score
                         ui.setScore(score); // Update Score
                         snake.grow(); // Grow Snake
@@ -209,7 +210,7 @@ public class Game implements Runnable {
         // Reset Game Variables
         score = 0;
         speedModifier = 1;
-        isPaused = false;
+        paused = false;
         gameOver = false;
         gameStarted = false;
         ultActive = false;
@@ -227,11 +228,12 @@ public class Game implements Runnable {
     // Trigger
     public void togglePause() {
         if (ultActive) return;
-        if (isPaused) audioPlayer.pauseAll();
-        else audioPlayer.resumeAll();
-        isPaused = !isPaused;
+        if (paused) audioPlayer.resumeAll();
+        else audioPlayer.pauseAll();
+        paused = !paused;
     }
 
+    @SuppressWarnings("unused")
     public void toggleDebug() {
         debug = !debug;
     }
@@ -261,6 +263,7 @@ public class Game implements Runnable {
         return score;
     }
 
+    // Game State Getter
     public boolean isUltActive() {
         return ultActive;
     }

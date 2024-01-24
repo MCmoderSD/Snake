@@ -16,6 +16,7 @@ public class Food {
 
     // Attributes
     private final BufferedImage image;
+    private final BufferedImage cover;
     private final ImageIcon animation;
     private final String sound;
     private final Color color;
@@ -36,6 +37,7 @@ public class Food {
 
         isOp = isSpecial && Calculate.randomChance(Config.SPECIAL_FOOD_CHANCE);
         animation = isOp ? Config.OP_FOOD_ANIMATION : null;
+        cover = isOp ? Config.BACKGROUND_COVER : null;
 
         color = isOp ? Config.OP_FOOD_COLOR : isSpecial ? Config.GOLD_FOOD_COLOR : Config.FOOD_COLOR;
         hitboxColor = Config.FOOD_HITBOX_COLOR;
@@ -63,6 +65,10 @@ public class Food {
     // Getter
     public BufferedImage getImage() {
         return image;
+    }
+
+    public BufferedImage getCover() {
+        return cover;
     }
 
     public ImageIcon getAnimation() {
