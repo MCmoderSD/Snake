@@ -1,8 +1,0 @@
-{
-  "title": "Kača",
-  "restart": "Znova zaženi",
-  "restartToolTip": "Znova zaženi igro",
-  "gameOver": "Konec igre",
-  "scorePrefix": "Točke: ",
-  "fpsPrefix": "FPS: "
-}

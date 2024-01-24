@@ -1,8 +1,0 @@
-{
-  "title": "Змія",
-  "restart": "Перезапустити",
-  "restartToolTip": "Перезапустити гру",
-  "gameOver": "Гра закінчена",
-  "scorePrefix": "Рахунок: ",
-  "fpsPrefix": "FPS: "
-}

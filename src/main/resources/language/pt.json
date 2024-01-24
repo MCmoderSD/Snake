@@ -1,8 +1,0 @@
-{
-  "title": "Cobra",
-  "restart": "Reiniciar",
-  "restartToolTip": "Reiniciar o jogo",
-  "gameOver": "Fim do jogo",
-  "scorePrefix": "Pontuação: ",
-  "fpsPrefix": "FPS: "
-}
