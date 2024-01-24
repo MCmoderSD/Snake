@@ -2,7 +2,6 @@ package de.MCmoderSD.UI;
 
 import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
-import de.MCmoderSD.objects.Background;
 import de.MCmoderSD.objects.BackgroundTile;
 import de.MCmoderSD.objects.Food;
 import de.MCmoderSD.objects.Snake;
@@ -29,7 +28,7 @@ public class UI extends JPanel {
     private final InputHandler inputs;
 
     // UI Components
-    private final Background background;
+    private final ArrayList<BackgroundTile> background;
     private final JLabel fpsLabel;
     private final JLabel scoreLabel;
     private final JButton resetButton;
@@ -42,9 +41,6 @@ public class UI extends JPanel {
         setDoubleBuffered(true);
         setLayout(null);
 
-        int width = Config.FIELD_WIDTH * Config.SCALE;
-        int height = Config.FIELD_HEIGHT * Config.SCALE;
-
         // Init Game
         game = new Game(this, config);
 
@@ -54,7 +50,11 @@ public class UI extends JPanel {
         // UI Components
         Font defaultFont = new Font("Roboto", Font.PLAIN, Config.SCALE / 2);
 
-        background = new Background();
+        // Background
+        background = new ArrayList<>();
+        for (int x = 0; x < Config.FIELD_WIDTH; x++)
+            for (int y = 0; y < Config.FIELD_HEIGHT; y++)
+                background.add(new BackgroundTile(x, y));
 
         // FPS Label
         fpsLabel = new JLabel();
@@ -73,8 +73,8 @@ public class UI extends JPanel {
         scoreLabel.setLocation((Config.SCALE - 3) * Config.SCALE, 0);
         add(scoreLabel);
 
-        int buttonWidth = width / 4;
-        int buttonHeight = height / 6;
+        int buttonWidth = Config.DIMENSION.width / 4;
+        int buttonHeight = Config.DIMENSION.height / 6;
 
         // Reset Button
         resetButton = new JButton(Config.RESTART);
@@ -83,7 +83,7 @@ public class UI extends JPanel {
         resetButton.setSize(buttonWidth, buttonHeight);
         resetButton.setToolTipText(Config.RESTART_TOOL_TIP);
         resetButton.setFont(new Font("Roboto", Font.PLAIN, buttonHeight / 2));
-        resetButton.setLocation((width - buttonWidth) / 2, (height - buttonHeight) / 2);
+        resetButton.setLocation((Config.DIMENSION.width - buttonWidth) / 2, (Config.DIMENSION.height - buttonHeight) / 2);
         resetButton.addActionListener(e -> game.reset());
         resetButton.setBackground(Color.white);
         resetButton.setForeground(Config.TEXT_COLOR);
@@ -108,8 +108,8 @@ public class UI extends JPanel {
         Food food = game.getFood();
 
         // Background
-        for (BackgroundTile tile : background.getBackgroundTiles()) {
-            g.setColor(background.getColor());
+        for (BackgroundTile tile : background) {
+            g.setColor(tile.getColor());
             g.fill(tile.getBounds());
             g.drawImage(tile.getImage(), tile.getX() * tile.getScale(), tile.getY() * tile.getScale(), null);
         }
@@ -136,7 +136,7 @@ public class UI extends JPanel {
 
         // Draw Grid Lines
         if (game.isShowGridLines() || game.isDebug()) {
-            for (BackgroundTile tile : background.getBackgroundTiles()) {
+            for (BackgroundTile tile : background) {
                 g.setColor(tile.getHitboxColor());
                 g.draw(tile.getBounds());
             }

@@ -1,0 +1,39 @@
+<changelist name="Uncommitted_changes_before_Update_at_11_29_23,_7_07_AM_[Changes]" date="1701238051828" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_29_23,_7_07_AM_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 11/29/23, 7:07 AM [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="src/main/resources/Animations/lowerBody.gif" />
+    <option name="AFTER_PATH" value="src/main/resources/Animations/LowerBody.gif" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_29_23,_7_07_AM_[Changes]/LowerBody.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="src/main/resources/Audio/point.wav" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="src/main/resources/Audio/rainbow.wav" />
+    <option name="AFTER_PATH" value="src/main/resources/Audio/Rainbow.wav" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_29_23,_7_07_AM_[Changes]/Rainbow.wav" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="storage/Audio/point.wav" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="src/main/resources/Animations/head.gif" />
+    <option name="AFTER_PATH" value="src/main/resources/Animations/Head.gif" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_29_23,_7_07_AM_[Changes]/Head.gif" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="storage/Audio/rainbow.wav" />
+    <option name="AFTER_PATH" value="storage/Audio/Rainbow.wav" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_29_23,_7_07_AM_[Changes]/Rainbow1.wav" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="src/main/resources/Animations/upperBody.gif" />
+    <option name="AFTER_PATH" value="src/main/resources/Animations/UpperBody.gif" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_29_23,_7_07_AM_[Changes]/UpperBody.gif" />
+  </binary>
+</changelist>

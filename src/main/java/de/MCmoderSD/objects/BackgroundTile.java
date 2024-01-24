@@ -13,19 +13,19 @@ public class BackgroundTile {
     private final BufferedImage image;
     private final Color color;
     private final Color hitboxColor;
+    private final int scale;
     private final int x;
     private final int y;
-    private final int scale;
 
     // Constructor
     public BackgroundTile(int x, int y) {
-        this.x = x;
-        this.y = y;
-
         image = Config.BACKGROUND_TILE;
         color = Config.BACKGROUND_COLOR;
         hitboxColor = Config.GRID_LAYOUT_COLOR;
         scale = Config.SCALE;
+
+        this.x = x;
+        this.y = y;
     }
 
     // Getter

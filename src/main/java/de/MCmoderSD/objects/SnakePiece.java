@@ -16,12 +16,12 @@ public class SnakePiece {
     protected final Game game;
 
     // Constants
+    protected final Color color;
+    protected final Color hitboxColor;
     protected final int fieldWidth;
     protected final int fieldHeight;
     protected final int scale;
     protected final boolean solidWalls;
-    protected final Color color;
-    protected final Color hitboxColor;
 
     // Attributes
     protected BufferedImage image;
@@ -38,33 +38,39 @@ public class SnakePiece {
     // Default Constructor
     public SnakePiece(Game game, int x, int y) {
         this.game = game;
-        this.x = x;
-        this.y = y;
 
-        image = Config.LEG_TILE;
-        animation = Config.LEG_TILE_ANIMATION;
+        color = Config.SNAKE_COLOR;
+        hitboxColor = Config.SNAKE_HITBOX_COLOR;
+
         fieldWidth = Config.FIELD_WIDTH;
         fieldHeight = Config.FIELD_HEIGHT;
         scale = Config.SCALE;
         solidWalls = Config.SOLID_WALLS;
-        color = Config.SNAKE_COLOR;
-        hitboxColor = Config.SNAKE_HITBOX_COLOR;
+
+        image = Config.LEG_TILE;
+        animation = Config.LEG_TILE_ANIMATION;
+
+        this.x = x;
+        this.y = y;
     }
 
     // Constructor with Image
     public SnakePiece(Game game, int x, int y, BufferedImage image, ImageIcon animation) {
         this.game = game;
-        this.image = image;
-        this.animation = animation;
-        this.x = x;
-        this.y = y;
+
+        color = Config.SNAKE_COLOR;
+        hitboxColor = Config.SNAKE_HITBOX_COLOR;
 
         fieldWidth = Config.FIELD_WIDTH;
         fieldHeight = Config.FIELD_HEIGHT;
         scale = Config.SCALE;
         solidWalls = Config.SOLID_WALLS;
-        color = Config.SNAKE_COLOR;
-        hitboxColor = Config.SNAKE_HITBOX_COLOR;
+
+        this.image = image;
+        this.animation = animation;
+
+        this.x = x;
+        this.y = y;
     }
 
     // Wall Hit Detected

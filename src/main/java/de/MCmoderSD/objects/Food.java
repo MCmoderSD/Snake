@@ -22,9 +22,9 @@ public class Food {
     private final Color hitboxColor;
     private final boolean isSpecial;
     private final boolean isOp;
+    private final int scale;
     private final int x;
     private final int y;
-    private final int scale;
 
 
     // Constructor
@@ -38,13 +38,12 @@ public class Food {
         animation = isOp ? Config.OP_FOOD_ANIMATION : null;
 
         color = isOp ? Config.OP_FOOD_COLOR : isSpecial ? Config.GOLD_FOOD_COLOR : Config.FOOD_COLOR;
-
         hitboxColor = Config.FOOD_HITBOX_COLOR;
+
         sound = Config.FOOD_SOUND;
         scale = Config.SCALE;
 
         Point spawnPoint = getValidSpawnPont(snakePieces);
-
         x = spawnPoint.x;
         y = spawnPoint.y;
     }
@@ -90,16 +89,16 @@ public class Food {
         return isOp;
     }
 
+    public int getScale() {
+        return scale;
+    }
+
     public int getX() {
         return x;
     }
 
     public int getY() {
         return y;
-    }
-
-    public int getScale() {
-        return scale;
     }
 
     public Rectangle getBounds() {

@@ -11,6 +11,7 @@ public class Snake extends SnakePiece {
 
     // Attributes
     private final ArrayList<SnakePiece> snakePieces;
+    //private final Game game;
 
     // Constructor
     public Snake(Game game, int x, int y, BufferedImage image, ImageIcon animation) {
@@ -23,7 +24,7 @@ public class Snake extends SnakePiece {
         snakePieces.add(new SnakePiece(game, x + 2, y, Config.LOWER_BODY, Config.LOWER_BODY_ANIMATION)); // Lower Body
     }
 
-    // Recolor Snake
+    // Rearrange Snake
     private void rearrangeImages() {
         if (snakePieces.size() == 4)
             snakePieces.get(snakePieces.size() - 1).setAssets(Config.LEG_TRANSITION, Config.LEG_TRANSITION_ANIMATION);

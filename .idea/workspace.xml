@@ -16,7 +16,10 @@
   <component name="ChangeListManager">
     <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="static config">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Background.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Background.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/BackgroundTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/BackgroundTile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/SnakePiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/objects/SnakePiece.java" afterDir="false" />
     </list>
     <list id="d78f859a-edd0-44f6-b06d-89263ffa805d" name="Changes by timon" comment="static config" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,13 +42,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "MCmoderSD"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MCmoderSD&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -62,7 +66,7 @@
   </component>
   <component name="ProblemsViewState">
     <option name="groupByToolId" value="true" />
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
     <option name="sortByName" value="true" />
   </component>
   <component name="ProjectColorInfo">{
@@ -70,39 +74,39 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2YF2SE42TOb4MYgzYDBnKt2rmW2" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "Application.Main.executor": "Run",
-    "JAR Application.Snake-asset-streaming.jar.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "code.cleanup.on.save": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/MCmoderSD/IdeaProjects/Current/Snake/src/main/resources",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.Snake-asset-streaming.jar.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/MCmoderSD/IdeaProjects/Current/Snake/src/main/resources&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources" />
@@ -117,7 +121,7 @@
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="JAR Application.Snake.jar">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="de.MCmoderSD.main.Main" />
       <module name="Snake" />
@@ -146,17 +150,16 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JAR Application.Snake.jar" />
         <item itemvalue="JAR Application.Snake-asset-streaming.jar" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-1.8.0_392-azul-1.8.0_392-249ae16d76d6-e51da85f" />
-        <option value="jdk-1.8.0_392-azul-1.8.0_392-f644763e9732-7f9aae63" />
+        <option value="jdk-1.8.0_392-corretto-1.8.0_392-3183f394aec4-70002c48" />
       </set>
     </attachedChunks>
   </component>
@@ -206,6 +209,7 @@
       <workItem from="1705946339916" duration="308000" />
       <workItem from="1705948873231" duration="314000" />
       <workItem from="1705951064747" duration="16491000" />
+      <workItem from="1706086950568" duration="1486000" />
     </task>
     <task id="LOCAL-00001" summary="release v0.9.1&#10;- code improvements">
       <option name="closed" value="true" />
