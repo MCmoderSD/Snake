@@ -1,0 +1,8 @@
+{
+  "title": "الثعبان",
+  "restart": "إعادة التشغيل",
+  "restartToolTip": "إعادة تشغيل اللعبة",
+  "gameOver": "نهاية اللعبة",
+  "scorePrefix": "النقاط: ",
+  "fpsPrefix": "إطار في الثانية: "
+}

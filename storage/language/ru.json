@@ -1,0 +1,8 @@
+{
+  "title": "Змейка",
+  "restart": "Перезапустить",
+  "restartToolTip": "Перезапустить игру",
+  "gameOver": "Игра окончена",
+  "scorePrefix": "Счет: ",
+  "fpsPrefix": "FPS: "
+}

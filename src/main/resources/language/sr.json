@@ -1,0 +1,8 @@
+{
+  "title": "Змија",
+  "restart": "Поново покрени",
+  "restartToolTip": "Поново покрени игру",
+  "gameOver": "Игра завршена",
+  "scorePrefix": "Резултат: ",
+  "fpsPrefix": "FPS: "
+}

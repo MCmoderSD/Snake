@@ -1,0 +1,8 @@
+{
+  "title": "Kígyó",
+  "restart": "Újraindítás",
+  "restartToolTip": "Játék újraindítása",
+  "gameOver": "Játék Vége",
+  "scorePrefix": "Pontszám: ",
+  "fpsPrefix": "FPS: "
+}

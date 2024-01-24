@@ -1,0 +1,8 @@
+{
+  "title": "Șarpe",
+  "restart": "Restart",
+  "restartToolTip": "Restartează jocul",
+  "gameOver": "Joc Terminat",
+  "scorePrefix": "Scor: ",
+  "fpsPrefix": "FPS: "
+}

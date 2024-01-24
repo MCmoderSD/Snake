@@ -1,0 +1,8 @@
+{
+  "title": "Had",
+  "restart": "Reštart",
+  "restartToolTip": "Reštartuj hru",
+  "gameOver": "Koniec hry",
+  "scorePrefix": "Skóre: ",
+  "fpsPrefix": "FPS: "
+}
