@@ -225,7 +225,7 @@ public class Config {
 
         // Language set
         LANGUAGE = args.length > 0 ? args[0] : "en";
-        JsonNode languageConfig = LANGUAGE.length() == 2 ? jsonUtility.load("/language/" + LANGUAGE + ".json", false) : jsonUtility.load(args[0], true);
+        JsonNode languageConfig = LANGUAGE.length() == 2 ? jsonUtility.load(url, "/language/" + LANGUAGE + ".json") : jsonUtility.load(args[0], true);
 
         // Language
         TITLE = languageConfig.get("title").asText();

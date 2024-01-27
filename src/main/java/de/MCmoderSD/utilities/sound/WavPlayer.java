@@ -10,6 +10,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Objects;
 
 public class WavPlayer {
@@ -28,8 +29,9 @@ public class WavPlayer {
     private void loadClip(String audioPath) {
         try {
             InputStream audioSrc;
-            if (audioPath.startsWith("http") || new File(audioPath).isAbsolute())
-                audioSrc = new File(audioPath).toURI().toURL().openStream();
+            if (new File(audioPath).isAbsolute())
+                audioSrc = new File(audioPath).toURI().toURL().openStream(); // Absolute path
+            else if (audioPath.startsWith("http")) audioSrc = new URL(audioPath).openStream(); // Internet path
             else audioSrc = getClass().getResourceAsStream(audioPath); // Relative path
 
             // Add buffer for mark/reset support
@@ -59,9 +61,7 @@ public class WavPlayer {
     // Play clip
     public void play() {
         if (clip == null) return;
-        if (clip.isRunning()) {
-            clip.stop(); // Stop the clip before resetting it
-        }
+        if (clip.isRunning()) clip.stop(); // Stop the clip before resetting it
         clip.setFramePosition(0);
         clip.start();
     }

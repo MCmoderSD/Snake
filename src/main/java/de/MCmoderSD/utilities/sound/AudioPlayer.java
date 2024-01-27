@@ -48,14 +48,12 @@ public class AudioPlayer {
         if (audioPath.endsWith(".wav")) {
             if (url != null && !audioPath.startsWith(url)) audioPath = url + audioPath;
             if (wavPlayers.containsKey(audioPath)) {
-                wavPlayers.get(audioPath).play();
                 if (wavPlayers.get(audioPath).isPlaying()) {
                     WavPlayer wavPlayer = new WavPlayer(audioPath, loop);
                     instantWavPlayers.add(wavPlayer);
                     wavPlayer.play();
-                }
-            }
-            if (loadedWavPlayers.containsKey(audioPath)) {
+                } else wavPlayers.get(audioPath).play();
+            } else if (loadedWavPlayers.containsKey(audioPath)) {
                 WavPlayer wavPlayer = loadedWavPlayers.get(audioPath);
                 wavPlayers.put(audioPath, wavPlayer);
                 loadedWavPlayers.remove(audioPath);
