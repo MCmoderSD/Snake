@@ -14,65 +14,63 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="Utility Rework">
-      <change afterPath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" afterDir="false" />
+    <list default="true" id="160aacd4-75e6-441f-8907-bcaf0ba36c66" name="Changes" comment="Utility Fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Snake.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Snake.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/main/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/AudioPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/WavPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/WavPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/Feet.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/Head.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/LegTile.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/LegTransition.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/LowerBody.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/OpFood.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Animations/UpperBody.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Audio/Eating.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Audio/OOF.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Audio/Rainbow.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/BackgroundCover.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/BackgroundTile.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Feet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Food.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/GoldFood.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Head.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LegTile.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LegTransition.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LowerBody.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/UpperBody.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config/default.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/ar.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/bg.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/cs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/da.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/de.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/el.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/en.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/es.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/fi.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/fr.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/hr.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/hu.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/it.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/ja.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/ko.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/lt.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/nl.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/no.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/pl.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/pt.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/ro.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/ru.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/sk.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/sl.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/sr.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/sv.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/tr.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/uk.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/vi.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/language/zh.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Snake-asset-streaming.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Snake.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Animations/Feet.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Animations/Head.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Animations/LegTile.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Animations/LegTransition.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Animations/LowerBody.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Animations/OpFood.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Animations/UpperBody.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Audio/Eating.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Audio/OOF.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Audio/Rainbow.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Images/BackgroundCover.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Images/BackgroundTile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Images/Feet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Images/Food.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Images/GoldFood.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Images/Head.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Images/Icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Images/LegTile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Images/LegTransition.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Images/LowerBody.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/Images/UpperBody.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/config/default.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/ar.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/bg.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/cs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/da.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/de.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/el.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/en.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/es.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/fi.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/fr.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/hr.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/hu.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/it.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/ja.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/ko.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/lt.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/nl.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/no.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/pl.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/pt.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/ro.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/ru.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/sk.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/sl.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/sr.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/sv.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/tr.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/uk.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/vi.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/language/zh.json" beforeDir="false" />
     </list>
     <list id="d78f859a-edd0-44f6-b06d-89263ffa805d" name="Changes by timon" comment="static config" />
     <option name="SHOW_DIALOG" value="false" />
@@ -135,33 +133,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "Application.Main.executor": "Debug",
-    "JAR Application.Snake-asset-streaming.jar.executor": "Run",
-    "JAR Application.Snake.jar.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "code.cleanup.on.save": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/MCmoderSD/IdeaProjects/Current/Snake/src/main/resources",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.Snake-asset-streaming.jar.executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.Snake.jar.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/MCmoderSD/IdeaProjects/Current/Snake/src/main/resources&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources" />
@@ -171,14 +169,14 @@
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\java\de\MCmoderSD\utilities\sound" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\storage" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\storage\config" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\storage\language" />
-      <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\storage" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\src\main\resources" />
       <recent name="C:\Users\MCmoderSD\IdeaProjects\Current\Snake\docs" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JAR Application.Snake.jar">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="de.MCmoderSD.main.Main" />
       <module name="Snake" />
@@ -209,9 +207,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JAR Application.Snake.jar" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JAR Application.Snake-asset-streaming.jar" />
-        <item itemvalue="JAR Application.Snake.jar" />
       </list>
     </recent_temporary>
   </component>
@@ -276,7 +274,9 @@
       <workItem from="1706275896153" duration="618000" />
       <workItem from="1706277211674" duration="6224000" />
       <workItem from="1706378551541" duration="24000" />
-      <workItem from="1706378586604" duration="8917000" />
+      <workItem from="1706378586604" duration="12750000" />
+      <workItem from="1706392225643" duration="2321000" />
+      <workItem from="1706395386717" duration="1003000" />
     </task>
     <task id="LOCAL-00001" summary="release v0.9.1&#10;- code improvements">
       <option name="closed" value="true" />
@@ -398,7 +398,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706384957979</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Utility Fix">
+      <option name="closed" value="true" />
+      <created>1706388648343</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1706388648343</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -432,7 +440,8 @@
     <MESSAGE value="Background rework" />
     <MESSAGE value="repo fix" />
     <MESSAGE value="Utility Rework" />
-    <option name="LAST_COMMIT_MESSAGE" value="Utility Rework" />
+    <MESSAGE value="Utility Fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Utility Fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -445,11 +454,6 @@
           <properties class="java.lang.IllegalArgumentException" package="java.lang" />
           <option name="timeStamp" value="3" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/MCmoderSD/utilities/sound/WavPlayer.java</url>
-          <line>65</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
