@@ -43,9 +43,10 @@ public class UI extends JPanel {
 
         // Init Game
         game = new Game(this, config);
+        inputs = new InputHandler(game);
 
         // Add InputHandler
-        addKeyListener(inputs = new InputHandler(game));
+        addKeyListener(inputs);
 
         // UI Components
         Font defaultFont = new Font("Roboto", Font.PLAIN, Config.SCALE / 2);

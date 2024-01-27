@@ -4,13 +4,20 @@ import de.MCmoderSD.core.Game;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class InputHandler implements KeyListener {
 
     // Associations
     private final Game game;
 
-    // Attributes
+    // Direction Key Mapping
+    private final ArrayList<Integer> leftKeys;
+    private final ArrayList<Integer> upKeys;
+    private final ArrayList<Integer> rightKeys;
+    private final ArrayList<Integer> downKeys;
+
+    // Variables
     private boolean left;
     private boolean up;
     private boolean right;
@@ -28,6 +35,34 @@ public class InputHandler implements KeyListener {
         right = false;
         down = false;
         f3isPressed = false;
+
+
+        // Init Lists
+        leftKeys = new ArrayList<>();
+        upKeys = new ArrayList<>();
+        rightKeys = new ArrayList<>();
+        downKeys = new ArrayList<>();
+
+        // leftKeys
+        leftKeys.add(KeyEvent.VK_LEFT);
+        leftKeys.add(KeyEvent.VK_A);
+        leftKeys.add(KeyEvent.VK_NUMPAD4);
+
+        // upKeys
+        upKeys.add(KeyEvent.VK_UP);
+        upKeys.add(KeyEvent.VK_W);
+        upKeys.add(KeyEvent.VK_NUMPAD8);
+
+        // rightKeys
+        rightKeys.add(KeyEvent.VK_RIGHT);
+        rightKeys.add(KeyEvent.VK_D);
+        rightKeys.add(KeyEvent.VK_NUMPAD6);
+
+        // downKeys
+        downKeys.add(KeyEvent.VK_DOWN);
+        downKeys.add(KeyEvent.VK_S);
+        downKeys.add(KeyEvent.VK_NUMPAD2);
+        downKeys.add(KeyEvent.VK_NUMPAD5);
     }
 
     @Override
@@ -65,10 +100,10 @@ public class InputHandler implements KeyListener {
         if (f3isPressed && (keycode == KeyEvent.VK_G)) game.toggleGridLines();
 
         // Direction
-        if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A || keycode == KeyEvent.VK_NUMPAD4) left = true;
-        if (keycode == KeyEvent.VK_UP || keycode == KeyEvent.VK_W || keycode == KeyEvent.VK_NUMPAD8) up = true;
-        if (keycode == KeyEvent.VK_RIGHT || keycode == KeyEvent.VK_D || keycode == KeyEvent.VK_NUMPAD6) right = true;
-        if (keycode == KeyEvent.VK_DOWN || keycode == KeyEvent.VK_S || keycode == KeyEvent.VK_NUMPAD3) down = true;
+        if (leftKeys.contains(keycode)) left = true;
+        if (upKeys.contains(keycode)) up = true;
+        if (rightKeys.contains(keycode)) right = true;
+        if (downKeys.contains(keycode)) down = true;
     }
 
     @Override
@@ -81,10 +116,10 @@ public class InputHandler implements KeyListener {
         if (keycode == KeyEvent.VK_F3) f3isPressed = false;
 
         // Direction Reset
-        if (keycode == KeyEvent.VK_LEFT || keycode == KeyEvent.VK_A) left = false;
-        if (keycode == KeyEvent.VK_UP || keycode == KeyEvent.VK_W) up = false;
-        if (keycode == KeyEvent.VK_RIGHT || keycode == KeyEvent.VK_D) right = false;
-        if (keycode == KeyEvent.VK_DOWN || keycode == KeyEvent.VK_S) down = false;
+        if (leftKeys.contains(keycode)) left = false;
+        if (upKeys.contains(keycode)) up = false;
+        if (rightKeys.contains(keycode)) right = false;
+        if (downKeys.contains(keycode)) down = false;
     }
 
     // Getter

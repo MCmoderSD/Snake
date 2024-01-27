@@ -10,7 +10,6 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Objects;
 
 public class WavPlayer {
@@ -30,7 +29,7 @@ public class WavPlayer {
         try {
             InputStream audioSrc;
             if (audioPath.startsWith("http") || new File(audioPath).isAbsolute())
-                audioSrc = new URL(audioPath).openStream();
+                audioSrc = new File(audioPath).toURI().toURL().openStream();
             else audioSrc = getClass().getResourceAsStream(audioPath); // Relative path
 
             // Add buffer for mark/reset support

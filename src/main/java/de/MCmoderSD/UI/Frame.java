@@ -9,6 +9,8 @@ public class Frame extends JFrame {
 
     // Constructor
     public Frame(Config config) {
+
+        // Init JFrame
         super(Config.TITLE);
         setResizable(Config.RESIZABLE);
         setIconImage(Config.ICON);

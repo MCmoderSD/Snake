@@ -170,6 +170,7 @@ public class Game implements Runnable {
                     for (int i = 0; i < Config.SPECIAL_FOOD_DURATION; i++) {
                         snake.grow();
                         score++;
+                        ui.setScore(score);
                         Thread.sleep(Config.OP_ULT_GROW_INTERVAL);
                     }
                     setSpeedModifier(1);

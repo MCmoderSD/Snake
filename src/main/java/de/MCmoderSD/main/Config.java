@@ -142,7 +142,7 @@ public class Config {
 
         // Language set
         LANGUAGE = args.length > 0 ? args[0] : "en";
-        JsonNode languageConfig = LANGUAGE.length() == 2 ? jsonUtility.load("/language/" + LANGUAGE + ".json") : jsonUtility.load(args[0], true);
+        JsonNode languageConfig = LANGUAGE.length() == 2 ? jsonUtility.load("/language/" + LANGUAGE + ".json", false) : jsonUtility.load(args[0], true);
 
         // Language
         TITLE = languageConfig.get("title").asText();
@@ -179,15 +179,8 @@ public class Config {
         ImageStreamer imageStreamer = new ImageStreamer(url);
         JsonUtility jsonUtility = new JsonUtility(url);
 
-        JsonNode config;
-
         // Load Config
-        if (args.length < 2) config = jsonUtility.load("/config/default.json");
-        else {
-            imageStreamer = new ImageStreamer(true);
-            jsonUtility = new JsonUtility(true);
-            config = jsonUtility.load(args[1]);
-        }
+        JsonNode config = jsonUtility.load("/config/default.json");
 
         if (config == null) throw new IllegalArgumentException("The config file could not be loaded");
 
@@ -232,7 +225,7 @@ public class Config {
 
         // Language set
         LANGUAGE = args.length > 0 ? args[0] : "en";
-        JsonNode languageConfig = LANGUAGE.length() == 2 ? jsonUtility.load("/language/" + LANGUAGE + ".json") : jsonUtility.load(args[0], true);
+        JsonNode languageConfig = LANGUAGE.length() == 2 ? jsonUtility.load("/language/" + LANGUAGE + ".json", false) : jsonUtility.load(args[0], true);
 
         // Language
         TITLE = languageConfig.get("title").asText();

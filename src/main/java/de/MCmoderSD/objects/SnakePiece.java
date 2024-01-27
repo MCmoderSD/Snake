@@ -37,16 +37,21 @@ public class SnakePiece {
 
     // Grow Constructor
     public SnakePiece(Game game, int x, int y) {
+
+        // Init Association
         this.game = game;
 
+        // Init Constants
         color = Config.SNAKE_COLOR;
         hitboxColor = Config.SNAKE_HITBOX_COLOR;
 
         fieldWidth = Config.FIELD_WIDTH;
         fieldHeight = Config.FIELD_HEIGHT;
         scale = Config.SCALE;
+
         solidWalls = Config.SOLID_WALLS;
 
+        // Init Attributes
         image = Config.LEG_TILE;
         animation = Config.LEG_TILE_ANIMATION;
 
@@ -56,16 +61,21 @@ public class SnakePiece {
 
     // Init Constructor
     public SnakePiece(Game game, int x, int y, BufferedImage image, ImageIcon animation) {
+
+        // Init Association
         this.game = game;
 
+        // Init Constants
         color = Config.SNAKE_COLOR;
         hitboxColor = Config.SNAKE_HITBOX_COLOR;
 
         fieldWidth = Config.FIELD_WIDTH;
         fieldHeight = Config.FIELD_HEIGHT;
         scale = Config.SCALE;
+
         solidWalls = Config.SOLID_WALLS;
 
+        // Init Attributes
         this.image = image;
         this.animation = animation;
 
