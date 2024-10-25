@@ -1,0 +1,8 @@
+{
+  "title": "Slange",
+  "restart": "Start på nytt",
+  "restartToolTip": "Start spillet på nytt",
+  "gameOver": "Spill slutt",
+  "scorePrefix": "Poengsum: ",
+  "fpsPrefix": "FPS: "
+}
