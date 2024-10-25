@@ -1,0 +1,57 @@
+{
+  "settings": {
+    "fieldWidth": 32,
+    "fieldHeight": 16,
+    "scale": 32,
+    "fps": 60,
+    "tps": 10,
+    "specialFoodChance": 0.05,
+    "specialFoodDuration": 7,
+    "opUltGrowInterval": 1000,
+    "ultSpeed": 2,
+    "opUltSpeed": 3,
+    "solidWalls": false
+  },
+  "assets": {
+    "images": {
+      "icon": "/Images/Icon.png",
+      "backgroundTile": "/Images/BackgroundTile.png",
+      "backgroundCover": "/Images/BackgroundCover.png",
+      "head": "/Images/Head.png",
+      "upperBody": "/Images/UpperBody.png",
+      "lowerBody": "/Images/LowerBody.png",
+      "legTile": "/Images/LegTile.png",
+      "legTransition": "/Images/LegTransition.png",
+      "feet": "/Images/Feet.png",
+      "food": "/Images/Food.png",
+      "goldFood": "/Images/GoldFood.png"
+    },
+    "animations": {
+      "head": "/Animations/Head.gif",
+      "upperBody": "/Animations/UpperBody.gif",
+      "lowerBody": "/Animations/LowerBody.gif",
+      "legTile": "/Animations/LegTile.gif",
+      "legTransition": "/Animations/LegTransition.gif",
+      "feet": "/Animations/Feet.gif",
+      "opFood": "/Animations/OpFood.gif"
+    },
+    "sounds": {
+      "food": "/Audio/Eating.wav",
+      "ult": "/Audio/Rainbow.wav",
+      "die": "/Audio/OOF.wav"
+    }
+  },
+  "colors": {
+    "gridLayout": "#000000",
+    "snakeHitbox": "#FF0000",
+    "foodHitbox": "#FFFF00",
+    "fps": "#FFFF00",
+    "score": "#FFFF00",
+    "text": "#000000",
+    "background": "#1E2428",
+    "snake": "#5662F6",
+    "food": "#E27662",
+    "goldFood": "#1CCB5B",
+    "opFood": "#FF00FF"
+  }
+}

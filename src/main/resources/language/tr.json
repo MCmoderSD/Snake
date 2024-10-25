@@ -1,8 +1,0 @@
-{
-  "title": "Yılan",
-  "restart": "Yeniden Başlat",
-  "restartToolTip": "Oyunu yeniden başlat",
-  "gameOver": "Oyun Bitti",
-  "scorePrefix": "Puan: ",
-  "fpsPrefix": "FPS: "
-}

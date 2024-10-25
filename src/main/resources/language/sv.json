@@ -1,8 +1,0 @@
-{
-  "title": "Orm",
-  "restart": "Starta om",
-  "restartToolTip": "Starta om spelet",
-  "gameOver": "Spelet är över",
-  "scorePrefix": "Poäng: ",
-  "fpsPrefix": "FPS: "
-}
