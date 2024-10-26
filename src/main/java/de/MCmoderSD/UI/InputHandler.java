@@ -4,7 +4,8 @@ import de.MCmoderSD.core.Game;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
+
+import java.util.HashSet;
 
 public class InputHandler implements KeyListener {
 
@@ -12,10 +13,10 @@ public class InputHandler implements KeyListener {
     private final Game game;
 
     // Direction Key Mapping
-    private final ArrayList<Integer> leftKeys;
-    private final ArrayList<Integer> upKeys;
-    private final ArrayList<Integer> rightKeys;
-    private final ArrayList<Integer> downKeys;
+    private final HashSet<Integer> leftKeys;
+    private final HashSet<Integer> upKeys;
+    private final HashSet<Integer> rightKeys;
+    private final HashSet<Integer> downKeys;
 
     // Variables
     private boolean left;
@@ -37,11 +38,11 @@ public class InputHandler implements KeyListener {
         f3isPressed = false;
 
 
-        // Init Lists
-        leftKeys = new ArrayList<>();
-        upKeys = new ArrayList<>();
-        rightKeys = new ArrayList<>();
-        downKeys = new ArrayList<>();
+        // Init Direction Key Mapping
+        leftKeys = new HashSet<>();
+        upKeys = new HashSet<>();
+        rightKeys = new HashSet<>();
+        downKeys = new HashSet<>();
 
         // leftKeys
         leftKeys.add(KeyEvent.VK_LEFT);
@@ -73,7 +74,7 @@ public class InputHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
 
         // Variables
-        int keycode = e.getKeyCode();
+        var keycode = e.getKeyCode();
         boolean control = e.isControlDown();
         boolean alt = e.isAltDown();
 
@@ -110,7 +111,7 @@ public class InputHandler implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
         // Variables
-        int keycode = e.getKeyCode();
+        var keycode = e.getKeyCode();
 
         // F3 Pressed
         if (keycode == KeyEvent.VK_F3) f3isPressed = false;

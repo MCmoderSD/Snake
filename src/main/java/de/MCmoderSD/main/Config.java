@@ -1,15 +1,15 @@
 package de.MCmoderSD.main;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.sun.source.tree.BinaryTree;
 import de.MCmoderSD.JavaAudioLibrary.AudioFile;
 import de.MCmoderSD.JavaAudioLibrary.AudioLoader;
 import de.MCmoderSD.imageloader.ImageLoader;
 import de.MCmoderSD.json.JsonUtility;
-import de.MCmoderSD.utilities.Calculate;
 
 import javax.swing.ImageIcon;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URISyntaxException;

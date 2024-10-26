@@ -1,7 +1,6 @@
 package de.MCmoderSD.objects;
 
 import de.MCmoderSD.JavaAudioLibrary.AudioFile;
-import de.MCmoderSD.utilities.Calculate;
 
 import javax.swing.ImageIcon;
 import java.awt.Color;
@@ -19,6 +18,7 @@ public class Food {
     private final BufferedImage image;
     private final BufferedImage cover;
     private final ImageIcon animation;
+    private final AudioFile sound;
     private final Color color;
     private final Color hitboxColor;
     private final boolean isSpecial;
@@ -26,15 +26,15 @@ public class Food {
     private final int x;
     private final int y;
 
-
     // Constructor
     public Food(ArrayList<SnakePiece> snakePieces) {
 
-        isSpecial = Calculate.randomChance(SPECIAL_FOOD_CHANCE);
+        isSpecial = Math.random() <= SPECIAL_FOOD_CHANCE;
         image = isSpecial ? GOLD_FOOD : FOOD;
+        sound = FOOD_SOUND.copy();
 
 
-        isOp = isSpecial && Calculate.randomChance(SPECIAL_FOOD_CHANCE);
+        isOp = isSpecial && Math.random() <= SPECIAL_FOOD_CHANCE;
         animation = isOp ? OP_FOOD_ANIMATION : null;
         cover = isOp ? BACKGROUND_COVER : null;
 
@@ -60,8 +60,7 @@ public class Food {
 
     // Methods
     public void playSound() {
-        AudioFile audioFile = FOOD_SOUND;
-        audioFile.play();
+        sound.play();
     }
 
     // Getter

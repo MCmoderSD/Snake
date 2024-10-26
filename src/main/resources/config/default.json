@@ -14,31 +14,31 @@
   },
   "assets": {
     "images": {
-      "icon": "/Images/Icon.png",
-      "backgroundTile": "/Images/BackgroundTile.png",
-      "backgroundCover": "/Images/BackgroundCover.png",
-      "head": "/Images/Head.png",
-      "upperBody": "/Images/UpperBody.png",
-      "lowerBody": "/Images/LowerBody.png",
-      "legTile": "/Images/LegTile.png",
-      "legTransition": "/Images/LegTransition.png",
-      "feet": "/Images/Feet.png",
-      "food": "/Images/Food.png",
-      "goldFood": "/Images/GoldFood.png"
+      "icon": "/assets/images/Icon.png",
+      "backgroundTile": "/assets/images/BackgroundTile.png",
+      "backgroundCover": "/assets/images/BackgroundCover.png",
+      "head": "/assets/images/Head.png",
+      "upperBody": "/assets/images/UpperBody.png",
+      "lowerBody": "/assets/images/LowerBody.png",
+      "legTile": "/assets/images/LegTile.png",
+      "legTransition": "/assets/images/LegTransition.png",
+      "feet": "/assets/images/Feet.png",
+      "food": "/assets/images/Food.png",
+      "goldFood": "/assets/images/GoldFood.png"
     },
     "animations": {
-      "head": "/Animations/Head.gif",
-      "upperBody": "/Animations/UpperBody.gif",
-      "lowerBody": "/Animations/LowerBody.gif",
-      "legTile": "/Animations/LegTile.gif",
-      "legTransition": "/Animations/LegTransition.gif",
-      "feet": "/Animations/Feet.gif",
-      "opFood": "/Animations/OpFood.gif"
+      "head": "/assets/animations/Head.gif",
+      "upperBody": "/assets/animations/UpperBody.gif",
+      "lowerBody": "/assets/animations/LowerBody.gif",
+      "legTile": "/assets/animations/LegTile.gif",
+      "legTransition": "/assets/animations/LegTransition.gif",
+      "feet": "/assets/animations/Feet.gif",
+      "opFood": "/assets/animations/OpFood.gif"
     },
     "sounds": {
-      "food": "/Audio/Eating.wav",
-      "ult": "/Audio/Rainbow.wav",
-      "die": "/Audio/OOF.wav"
+      "food": "/assets/sounds/Eating.wav",
+      "ult": "/assets/sounds/Rainbow.wav",
+      "die": "/assets/sounds/OOF.wav"
     }
   },
   "colors": {

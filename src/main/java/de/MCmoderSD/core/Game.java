@@ -5,11 +5,9 @@ import de.MCmoderSD.UI.UI;
 import de.MCmoderSD.main.Main;
 import de.MCmoderSD.objects.Food;
 import de.MCmoderSD.objects.Snake;
-import de.MCmoderSD.utilities.Calculate;
 
 import static de.MCmoderSD.main.Config.*;
 
-@SuppressWarnings("BusyWait")
 public class Game implements Runnable {
 
     // Associations
@@ -51,7 +49,7 @@ public class Game implements Runnable {
         gameOver = false;
         gameStarted = false;
         ultActive = false;
-        tickrate = Calculate.tickrate(TPS);
+        tickrate = (double) 1000000000 / TPS;
 
         // Init Debug Variables
         debug = false;

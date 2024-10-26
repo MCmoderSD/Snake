@@ -120,7 +120,7 @@ public class UI extends JPanel {
         // Draw Food
         g.setColor(food.getColor());
         g.drawImage(food.isOp() ? food.getAnimation().getImage() : food.getImage(), food.getX() * SCALE, food.getY() * SCALE, null);
-        if (food.isOp())
+        if (food.isOp()) // Draw Cover
             g.drawImage(food.getCover(), food.getX() * SCALE, food.getY() * SCALE, null);
 
         // Draw Snake
@@ -140,11 +140,9 @@ public class UI extends JPanel {
         }
 
         // Draw Grid Lines
-        if (game.isShowGridLines() || game.isDebug()) {
-            for (BackgroundTile tile : background) {
+        if (game.isShowGridLines() || game.isDebug()) for (BackgroundTile tile : background) {
                 g.setColor(tile.getHitboxColor());
                 g.draw(tile.getBounds());
-            }
         }
 
         // Draw Hitboxes
