@@ -14,11 +14,12 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+@SuppressWarnings("unused")
 public class Config {
     
     // Constants
-    public static final String configPath = "/config/default.json";
-    public static final String streamingURL = "https://raw.githubusercontent.com/MCmoderSD/Snake/refs/heads/master/src/main/resources";
+    public static final String CONFIG_PATH = "/config/default.json";
+    public static final String STREAMING_URL = "https://raw.githubusercontent.com/MCmoderSD/Snake/refs/heads/master/src/main/resources";
     
     // Config Variables
     public static int SCALE;
@@ -91,20 +92,37 @@ public class Config {
         ImageLoader imageLoader = new ImageLoader();
         JsonUtility jsonUtility = new JsonUtility();
 
-        // Load Config
+        // Get Config Path
         JsonNode config = null;
         boolean customConfig = args.length > 1;
-        boolean textureStreaming = !customConfig && Config.class.getResourceAsStream(configPath) == null;
+        boolean textureStreaming = !customConfig && Config.class.getResourceAsStream(CONFIG_PATH) == null;
+
+        // Get Language Config Path
+        JsonNode languageConfig = null;
+        boolean customLanguage = args.length == 1;
+        String languagePath = null;
+        if (customConfig) languagePath = args[0];
+        if (customLanguage) languagePath = "/languages/" + args[0].toLowerCase() + ".json";
+        if (textureStreaming) languagePath = STREAMING_URL + (customLanguage ? languagePath : "/languages/en.json");
 
         try {
-            config = customConfig ? jsonUtility.load(args[1], true) : jsonUtility.load(textureStreaming ? streamingURL + configPath : configPath, false);
+
+            // Load Config
+            config = customConfig ? jsonUtility.load(args[1], true) : jsonUtility.load(textureStreaming ? STREAMING_URL + CONFIG_PATH : CONFIG_PATH, false);
+
+            // Load Language
+            languageConfig = jsonUtility.load(languagePath, customConfig);
+
         } catch (IOException | URISyntaxException e) {
             System.err.println("An error occurred while loading Config: " + e.getMessage());
         }
 
-
         // Check if config is null
         if (config == null) throw new NullPointerException("Config is null");
+
+
+        // Check if languageConfig is null
+        if (languageConfig == null) throw new NullPointerException("Language Config is null");
 
         // Load Settings
         JsonNode settings = config.get("settings");
@@ -120,6 +138,14 @@ public class Config {
         OP_ULT_SPEED_MODIFIER = settings.get("opUltSpeed").asDouble();
         SOLID_WALLS = settings.get("solidWalls").asBoolean();
         DIMENSION = new Dimension(FIELD_WIDTH * SCALE, FIELD_HEIGHT * SCALE);
+
+        // Language
+        TITLE = languageConfig.get("title").asText();
+        RESTART = languageConfig.get("restart").asText();
+        RESTART_TOOL_TIP = languageConfig.get("restartToolTip").asText();
+        GAME_OVER = languageConfig.get("gameOver").asText();
+        SCORE_PREFIX = languageConfig.get("scorePrefix").asText();
+        FPS_PREFIX = languageConfig.get("fpsPrefix").asText();
 
         // Load Assets
         JsonNode assets = config.get("assets");
@@ -157,54 +183,34 @@ public class Config {
         try {
 
             // Load Images
-            ICON = imageLoader.load(textureStreaming ? streamingURL + iconPath : iconPath);
-            BACKGROUND_TILE = scaleImage(imageLoader.load(textureStreaming ? streamingURL + backgroundTilePath : backgroundTilePath));
-            BACKGROUND_COVER = scaleImage(imageLoader.load(textureStreaming ? streamingURL + backgroundCoverPath : backgroundCoverPath));
-            HEAD = scaleImage(imageLoader.load(textureStreaming ? streamingURL + headPath : headPath));
-            UPPER_BODY = scaleImage(imageLoader.load(textureStreaming ? streamingURL + upperBodyPath : upperBodyPath));
-            LOWER_BODY = scaleImage(imageLoader.load(textureStreaming ? streamingURL + lowerBodyPath : lowerBodyPath));
-            LEG_TILE = scaleImage(imageLoader.load(textureStreaming ? streamingURL + legTilePath : legTilePath));
-            LEG_TRANSITION = scaleImage(imageLoader.load(textureStreaming ? streamingURL + legTransitionPath : legTransitionPath));
-            FEET = scaleImage(imageLoader.load(textureStreaming ? streamingURL + feetPath : feetPath));
-            FOOD = scaleImage(imageLoader.load(textureStreaming ? streamingURL + foodPath : foodPath));
-            GOLD_FOOD = scaleImage(imageLoader.load(textureStreaming ? streamingURL + goldFoodPath : goldFoodPath));
+            ICON = imageLoader.load(textureStreaming ? STREAMING_URL + iconPath : iconPath);
+            BACKGROUND_TILE = scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + backgroundTilePath : backgroundTilePath));
+            BACKGROUND_COVER = scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + backgroundCoverPath : backgroundCoverPath));
+            HEAD = scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + headPath : headPath));
+            UPPER_BODY = scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + upperBodyPath : upperBodyPath));
+            LOWER_BODY = scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + lowerBodyPath : lowerBodyPath));
+            LEG_TILE = scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + legTilePath : legTilePath));
+            LEG_TRANSITION = scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + legTransitionPath : legTransitionPath));
+            FEET = scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + feetPath : feetPath));
+            FOOD = scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + foodPath : foodPath));
+            GOLD_FOOD = scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + goldFoodPath : goldFoodPath));
 
             // Load Animations
-            HEAD_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? streamingURL + headAnimationPath : headAnimationPath)));
-            UPPER_BODY_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? streamingURL + upperBodyAnimationPath : upperBodyAnimationPath)));
-            LOWER_BODY_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? streamingURL + lowerBodyAnimationPath : lowerBodyAnimationPath)));
-            LEG_TILE_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? streamingURL + legTileAnimationPath : legTileAnimationPath)));
-            LEG_TRANSITION_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? streamingURL + legTransitionAnimationPath : legTransitionAnimationPath)));
-            FEET_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? streamingURL + feetAnimationPath : feetAnimationPath)));
-            OP_FOOD_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? streamingURL + opFoodAnimationPath : opFoodAnimationPath)));
+            HEAD_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + headAnimationPath : headAnimationPath)));
+            UPPER_BODY_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + upperBodyAnimationPath : upperBodyAnimationPath)));
+            LOWER_BODY_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + lowerBodyAnimationPath : lowerBodyAnimationPath)));
+            LEG_TILE_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + legTileAnimationPath : legTileAnimationPath)));
+            LEG_TRANSITION_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + legTransitionAnimationPath : legTransitionAnimationPath)));
+            FEET_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + feetAnimationPath : feetAnimationPath)));
+            OP_FOOD_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + opFoodAnimationPath : opFoodAnimationPath)));
 
             // Sounds
-            FOOD_SOUND = audioLoader.load(textureStreaming ? streamingURL + foodSoundPath : foodSoundPath);
-            ULT_SOUND = audioLoader.load(textureStreaming ? streamingURL + ultSoundPath : ultSoundPath);
-            DIE_SOUND = audioLoader.load(textureStreaming ? streamingURL + dieSoundPath : dieSoundPath);
+            FOOD_SOUND = audioLoader.load(textureStreaming ? STREAMING_URL + foodSoundPath : foodSoundPath);
+            ULT_SOUND = audioLoader.load(textureStreaming ? STREAMING_URL + ultSoundPath : ultSoundPath);
+            DIE_SOUND = audioLoader.load(textureStreaming ? STREAMING_URL + dieSoundPath : dieSoundPath);
         } catch (IOException | URISyntaxException e) {
             System.err.println("An error occurred while loading Images: " + e.getMessage());
         }
-
-
-        // Load Language
-        JsonNode languageConfig;
-        try {
-            languageConfig = jsonUtility.load("/languages/en.json");
-        } catch (IOException | URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-
-        // Check if languageConfig is null
-        if (languageConfig == null) throw new NullPointerException("Language Config is null");
-
-        // Language
-        TITLE = languageConfig.get("title").asText();
-        RESTART = languageConfig.get("restart").asText();
-        RESTART_TOOL_TIP = languageConfig.get("restartToolTip").asText();
-        GAME_OVER = languageConfig.get("gameOver").asText();
-        SCORE_PREFIX = languageConfig.get("scorePrefix").asText();
-        FPS_PREFIX = languageConfig.get("fpsPrefix").asText();
 
         // Colors
         JsonNode colors = config.get("colors");
@@ -221,6 +227,7 @@ public class Config {
         OP_FOOD_COLOR = getColor(colors.get("opFood").asText());
     }
 
+    // Helper Methods
     private static BufferedImage scaleImage(BufferedImage image) {
         BufferedImage scaledImage = new BufferedImage(SCALE, SCALE, BufferedImage.TYPE_INT_ARGB);
         scaledImage.getGraphics().drawImage(image.getScaledInstance(SCALE, SCALE, Image.SCALE_DEFAULT), 0, 0, SCALE, SCALE, null);

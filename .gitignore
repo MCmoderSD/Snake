@@ -4,6 +4,7 @@ target/
 !**/src/test/**/target/
 docs/
 out/
+src/main/resources/META-INF
 
 
 ### IntelliJ IDEA ###
