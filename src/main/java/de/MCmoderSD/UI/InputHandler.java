@@ -1,6 +1,7 @@
 package de.MCmoderSD.UI;
 
 import de.MCmoderSD.core.Game;
+import de.MCmoderSD.objects.Direction;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -97,6 +98,7 @@ public class InputHandler implements KeyListener {
 
         // Debug
         if (f3isPressed && (keycode == KeyEvent.VK_F)) game.toggleFps();
+        if (f3isPressed && (keycode == KeyEvent.VK_T)) game.toggleTps();
         if (f3isPressed && (keycode == KeyEvent.VK_B)) game.toggleHitbox();
         if (f3isPressed && (keycode == KeyEvent.VK_G)) game.toggleGridLines();
 
@@ -124,21 +126,21 @@ public class InputHandler implements KeyListener {
     }
 
     // Getter
-    public byte getDirection() {
+    public Direction getDirection() {
 
         // Single Press
-        if (left && !up && !right && !down) return 0;
-        if (!left && up && !right && !down) return 1;
-        if (!left && !up && right && !down) return 2;
-        if (!left && !up && !right && down) return 3;
+        if (left && !up && !right && !down) return Direction.LEFT;
+        if (!left && up && !right && !down) return Direction.UP;
+        if (!left && !up && right && !down) return Direction.RIGHT;
+        if (!left && !up && !right && down) return Direction.DOWN;
 
         // Triple Press
-        if (left && up && !right && down) return 0;
-        if (left && up && right && !down) return 1;
-        if (!left && up && right && down) return 2;
-        if (left && !up && right && down) return 3;
+        if (left && up && !right && down) return Direction.UP;
+        if (left && up && right && !down) return Direction.LEFT;
+        if (!left && up && right && down) return Direction.RIGHT;
+        if (left && !up && right && down) return Direction.DOWN;
 
         // Else
-        return -1;
+        return null;
     }
 }

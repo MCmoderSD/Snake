@@ -46,6 +46,7 @@
     "snakeHitbox": "#FF0000",
     "foodHitbox": "#FFFF00",
     "fps": "#FFFF00",
+    "tps": "#FFFF00",
     "score": "#FFFF00",
     "text": "#000000",
     "background": "#1E2428",

@@ -4,5 +4,6 @@
   "restartToolTip": "Reiniciar el juego",
   "gameOver": "Juego terminado",
   "scorePrefix": "Puntos: ",
-  "fpsPrefix": "FPS: "
+  "fpsPrefix": "FPS: ",
+  "tpsPrefix": "TPS: "
 }

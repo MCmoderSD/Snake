@@ -10,7 +10,7 @@ import de.MCmoderSD.objects.Snake;
 import java.util.ArrayList;
 
 import static de.MCmoderSD.main.Config.*;
-import static de.MCmoderSD.utilities.Calculate.*;
+import static de.MCmoderSD.utilities.Util.*;
 
 public class Game {
 
@@ -34,6 +34,7 @@ public class Game {
     // Debug Flags
     private boolean debug;
     private boolean showFPS;
+    private boolean showTPS;
     private boolean showHitboxes;
     private boolean showGridLines;
 
@@ -43,6 +44,7 @@ public class Game {
 
     // Game Variables
     private Thread ult;
+    private AudioFile ultSound;
     private int score;
 
     // Game Objects
@@ -79,8 +81,8 @@ public class Game {
         score = 0;
 
         // Init Objects
-        snake = new Snake(this, FIELD_WIDTH / 2 - 2, FIELD_HEIGHT / 2, HEAD, HEAD_ANIMATION);
-        food = new Food(snake.getSnakePieces());
+        snake = new Snake(this, FIELD_WIDTH / 2 - 2, FIELD_HEIGHT / 2);
+        food = new Food(snake.getSnakeParts());
 
         // Start Game Threads
         debugExecutor.start();
@@ -93,9 +95,10 @@ public class Game {
 
         // Show Debug Information
         if (showFPS) ui.setFps(frames);
+        if (showTPS) ui.setTps(ticks);
 
         // Print Debug Information
-        System.out.printf("%s\t FPS: %d | TPS: %d%n", INFO, frames, ticks);
+        if (debug || showFPS || showTPS) System.out.printf("%s\t FPS: %d | TPS: %d%n", INFO, frames, ticks);
 
         // Reset Debug Counter
         ticks = 0;
@@ -109,7 +112,7 @@ public class Game {
         if (gameStarted && !paused && !gameOver) {
 
             // Check for win
-            if (FIELD_WIDTH * FIELD_HEIGHT == snake.getSnakePieces().size()) {
+            if (FIELD_WIDTH * FIELD_HEIGHT == snake.getSnakeParts().size()) {
                 // ToDo Win
                 System.out.printf("%s\t Win%n", GAME);
                 gameOver();
@@ -129,7 +132,7 @@ public class Game {
                 snake.grow();
 
                 // Sound
-                AudioFile sound = food.getSound(); // Get Sound
+                AudioFile sound = FOOD_SOUND.copy(); // Get Sound
                 activeAudio.add(sound); // Add Sound
                 sound.play(); // Play Sound
 
@@ -137,12 +140,12 @@ public class Game {
                 if (food.isSpecial()) activateUlt(food.isOp());
 
                 // Spawn new Food
-                food = new Food(snake.getSnakePieces()); // Spawn new Food
+                food = new Food(snake.getSnakeParts()); // Spawn new Food
             }
 
             // Check Input and Move Snake
-            snake.updateDirection(ui.getInputs().getDirection());
-            snake.moveSnake();
+            snake.setDirection(ui.getInputs().getDirection());
+            snake.move();
         }
 
         // Debug
@@ -174,11 +177,10 @@ public class Game {
                 ultActive = true;
 
                 // Get Sound
-                AudioFile audioPlayer = ULT_SOUND.copy();
-
-                // Add Sound
-                activeAudio.add(audioPlayer);
-                audioPlayer.play();
+                if (ultSound != null && ultSound.isPlaying()) ultSound.close();
+                ultSound = ULT_SOUND.copy();
+                activeAudio.add(ultSound);
+                ultSound.play();
 
                 // Set Speed Modifier
                 tickExecutor.setModifier(isOp ? OP_ULT_SPEED_MODIFIER : ULT_SPEED_MODIFIER);
@@ -240,8 +242,8 @@ public class Game {
         score = 0;
 
         // Reset Objects
-        snake = new Snake(this, FIELD_WIDTH / 2 - 2, FIELD_HEIGHT / 2, HEAD, HEAD_ANIMATION);
-        food = new Food(snake.getSnakePieces());
+        snake = new Snake(this, FIELD_WIDTH / 2 - 2, FIELD_HEIGHT / 2);
+        food = new Food(snake.getSnakeParts());
 
         // Reset UI
         ui.setScore(score);
@@ -296,22 +298,27 @@ public class Game {
     }
 
     public void toggleDebug() {
-        System.out.printf("%s\tDebug Toggled%n", DEBUG);
+        System.out.printf("%s\t Debug Toggled %s%n", DEBUG, debug ? "OFF" : "ON");
         debug = !debug;
     }
 
     public void toggleFps() {
-        System.out.printf("%s\t FPS Toggled%n", DEBUG);
+        System.out.printf("%s\t FPS Toggled %s%n", DEBUG, showFPS ? "OFF" : "ON");
         showFPS = !showFPS;
     }
 
+    public void toggleTps() {
+        System.out.printf("%s\t TPS Toggled %s%n", DEBUG , showTPS ? "OFF" : "ON");
+        showTPS = !showTPS;
+    }
+
     public void toggleHitbox() {
-        System.out.printf("%s\t Hitboxes Toggled%n", DEBUG);
+        System.out.printf("%s\t Hitboxes Toggled %s%n", DEBUG, showHitboxes ? "OFF" : "ON");
         showHitboxes = !showHitboxes;
     }
 
     public void toggleGridLines() {
-        System.out.printf("%s\t Grid Lines Toggled%n", DEBUG);
+        System.out.printf("%s\t Grid Lines Toggled %s%n", DEBUG, showGridLines ? "OFF" : "ON");
         showGridLines = !showGridLines;
     }
 
@@ -344,6 +351,10 @@ public class Game {
 
     public boolean isShowFPS() {
         return showFPS;
+    }
+
+    public boolean isShowTPS() {
+        return showTPS;
     }
 
     public boolean isShowHitboxes() {

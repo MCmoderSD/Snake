@@ -1,8 +1,0 @@
-{
-  "title": "Slange",
-  "restart": "Genstart",
-  "restartToolTip": "Genstart spillet",
-  "gameOver": "Spil slut",
-  "scorePrefix": "Point: ",
-  "fpsPrefix": "FPS: "
-}

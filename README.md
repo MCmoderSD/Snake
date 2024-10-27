@@ -18,8 +18,8 @@ Your op ult is like the normal ult, but you are three times as fast and grow eve
 
 ## How to run
 
-You need Java 8 installed on your computer to run this game. <br>
-You can download it [here](https://www.java.com/de/download/manual.jsp). <br>
+You need Java 21 installed on your computer to run this game. <br>
+You can download it [here](https://www.oracle.com/de/java/technologies/downloads/#java21). <br>
 
 You can download the latest release [here](https://github.com/MCmoderSD/Snake/releases/latest). <br>
 After downloading the JAR file, you can run it by double-clicking it. <br>
@@ -30,10 +30,14 @@ The JAR with asset-streaming downloads the assets from the internet, so it is a 
 The downside is that you need a good and constant internet connection to run it. <br>
 
 Alternatively, you can run it from the command line with the following command: <br>
-`java -jar Snake.jar` <br>
+```bash
+java -jar Snake.jar
+```
 
 You can change the language of the game by adding the following argument: <br>
-`java -jar Snake.jar en` <br>
+```bash
+java -jar Snake.jar en
+```
 
 Currently, the following languages are supported: <br>
 
@@ -41,12 +45,11 @@ Currently, the following languages are supported: <br>
 - German (de)
 - Italian (it)
 - Spanish (es)
-
-and many other but not approved by native speakers. <br>
+- French (fr)
 
 I'm planning to add more languages in the future. <br>
-If you want to help me translate the game into your language , please contact me and [read more](#custom-language). <br>
-Or else you can approve the translations [here](#unapproved). <br>
+If you want to help me translate the game into your language, please contact me. <br>
+
 
 ## Controls
 
@@ -58,6 +61,7 @@ You can exit the game by pressing Ctrl + C. <br>
 ## Debugging
 
 You can enable an FPS counter by pressing F3 + F. <br>
+You can enable an TPS counter by pressing F3 + T. <br>
 You can enable grid lines by pressing F3 + G. <br>
 You can enable hitboxes by pressing F3 + B. <br>
 
@@ -70,50 +74,62 @@ You can use both the main JAR and the JAR with asset-streaming. <br>
 
 ```json
 {
-  "icon": "/Images/Icon.png",
-  "fieldWidth": 32,
-  "fieldHeight": 16,
-  "scale": 32,
-  "fps": 60,
-  "tps": 10,
-  "specialFoodChance": 0.05,
-  "specialFoodDuration": 7,
-  "opUltGrowInterval": 1000,
-  "ultSpeed": 2,
-  "opUltSpeed": 3,
-  "resizable": false,
-  "solidWalls": false,
-  "backgroundCover": "/Images/BackgroundCover.png",
-  "backgroundTile": "/Images/BackgroundTile.png",
-  "head": "/Images/Head.png",
-  "upperBody": "/Images/UpperBody.png",
-  "lowerBody": "/Images/LowerBody.png",
-  "legTile": "/Images/LegTile.png",
-  "legTransition": "/Images/LegTransition.png",
-  "feet": "/Images/Feet.png",
-  "food": "/Images/Food.png",
-  "goldFood": "/Images/GoldFood.png",
-  "foodSound": "/Audio/Eating.wav",
-  "ultSound": "/Audio/Rainbow.wav",
-  "dieSound": "/Audio/OOF.wav",
-  "headAnimation": "/Animations/Head.gif",
-  "upperBodyAnimation": "/Animations/UpperBody.gif",
-  "lowerBodyAnimation": "/Animations/LowerBody.gif",
-  "legTileAnimation": "/Animations/LegTile.gif",
-  "legTransitionAnimation": "/Animations/LegTransition.gif",
-  "feetAnimation": "/Animations/Feet.gif",
-  "opFoodAnimation": "/Animations/OpFood.gif",
-  "gridLayoutColor": "#000000",
-  "snakeHitboxColor": "#FF0000",
-  "foodHitboxColor": "#FFFF00",
-  "fpsColor": "#FFFF00",
-  "scoreColor": "#FFFF00",
-  "textColor": "#000000",
-  "backgroundColor": "#1E2428",
-  "snakeColor": "#5662F6",
-  "foodColor": "#E27662",
-  "goldFoodColor": "#1CCB5B",
-  "opFoodColor": "#FF00FF"
+   "settings": {
+      "fieldWidth": 32,
+      "fieldHeight": 16,
+      "scale": 32,
+      "fps": 60,
+      "tps": 10,
+      "specialFoodChance": 0.05,
+      "specialFoodDuration": 7,
+      "opUltGrowInterval": 1000,
+      "ultSpeed": 2,
+      "opUltSpeed": 3,
+      "solidWalls": false
+   },
+   "assets": {
+      "images": {
+         "icon": "/assets/images/Icon.png",
+         "backgroundTile": "/assets/images/BackgroundTile.png",
+         "backgroundCover": "/assets/images/BackgroundCover.png",
+         "head": "/assets/images/Head.png",
+         "upperBody": "/assets/images/UpperBody.png",
+         "lowerBody": "/assets/images/LowerBody.png",
+         "legTile": "/assets/images/LegTile.png",
+         "legTransition": "/assets/images/LegTransition.png",
+         "feet": "/assets/images/Feet.png",
+         "food": "/assets/images/Food.png",
+         "goldFood": "/assets/images/GoldFood.png"
+      },
+      "animations": {
+         "head": "/assets/animations/Head.gif",
+         "upperBody": "/assets/animations/UpperBody.gif",
+         "lowerBody": "/assets/animations/LowerBody.gif",
+         "legTile": "/assets/animations/LegTile.gif",
+         "legTransition": "/assets/animations/LegTransition.gif",
+         "feet": "/assets/animations/Feet.gif",
+         "opFood": "/assets/animations/OpFood.gif"
+      },
+      "sounds": {
+         "food": "/assets/sounds/Eating.wav",
+         "ult": "/assets/sounds/Rainbow.wav",
+         "die": "/assets/sounds/OOF.wav"
+      }
+   },
+   "colors": {
+      "gridLayout": "#000000",
+      "snakeHitbox": "#FF0000",
+      "foodHitbox": "#FFFF00",
+      "fps": "#FFFF00",
+      "tps": "#FFFF00",
+      "score": "#FFFF00",
+      "text": "#000000",
+      "background": "#1E2428",
+      "snake": "#5662F6",
+      "food": "#E27662",
+      "goldFood": "#1CCB5B",
+      "opFood": "#FF00FF"
+   }
 }
 ```
 
@@ -124,7 +140,10 @@ You can use both the main JAR and the JAR with asset-streaming. <br>
    For animations, you can use .gif files. <br> <br>
 
 3. Run the game with the custom config file. <br>
-   For example: java -jar Snake.jar <language> <PathToTheConfigFile> <br> <br>
+   For example:
+```bash
+java -jar Snake.jar <language> <PathToTheConfigFile>
+```
 
 ## Custom Language
 
@@ -140,80 +159,15 @@ You can use both the main JAR and the JAR with asset-streaming. <br>
   "restartToolTip": "Restart the game",
   "gameOver": "Game Over",
   "scorePrefix": "Score: ",
-  "fpsPrefix": "FPS: "
+  "fpsPrefix": "FPS: ", 
+  "tpsPrefix": "TPS: "
 }
 ```
 
 2. Replace the values with your translations. <br>
    If you want to help me translate the game into your language, please contact me. <br> <br>
 3. Run the game with the custom language file. <br>
-   For example: java -jar Snake.jar <PathToTheLanguageFile> <br> <br>
-
-## Languages
-
-### Approved
-
-- English (en)
-- German (de)
-- Italian (it)
-- Spanish (es)
-
-### Unapproved
-
-- French (fr)
-- Portuguese (pt)
-- Russian (ru)
-- Chinese (zh)
-- Japanese (ja)
-- Korean (ko)
-- Turkish (tr)
-- Polish (pl)
-- Dutch (nl)
-- Swedish (sv)
-- Czech (cs)
-- Hungarian (hu)
-- Danish (da)
-- Finnish (fi)
-- Norwegian (no)
-- Romanian (ro)
-- Slovak (sk)
-- Slovenian (sl)
-- Ukrainian (uk)
-- Vietnamese (vi)
-- Greek (el)
-- Bulgarian (bg)
-- Croatian (hr)
-- Lithuanian (lt)
-- Serbian (sr)
-- Arabic (ar)
-
-## Features
-
-- [x] Snake movement
-- [x] Apple spawning
-- [x] Snake growing
-- [x] Snake hitting itself
-- [x] Snake going through walls
-- [x] Snake hitting walls (optional)
-- [x] Score
-- [x] Golden apple
-- [x] Asset-streaming
-- [x] Sound effects
-- [x] Ult Working
-- [x] Ult Animation
-- [x] Ult Sound
-- [x] Ult Timer
-- [x] Op Ult
-- [x] Rotation
-- [x] Restart
-- [x] Pause
-- [x] Resume
-- [x] FPS Counter
-- [x] Grid Lines
-- [x] Hitboxes
-- [x] Language Support
-- [x] Custom Assets
-- [x] Op Ult Animation
-- [ ] Win
-- [ ] Game Over
-- [ ] Menu
+   For example:
+```bash
+java -jar Snake.jar <PathToTheLanguageFile>
+```

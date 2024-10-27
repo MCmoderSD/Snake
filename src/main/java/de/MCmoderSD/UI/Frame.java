@@ -6,7 +6,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import static de.MCmoderSD.main.Config.*;
-import static de.MCmoderSD.utilities.Calculate.divide;
+import static de.MCmoderSD.utilities.Util.divide;
 
 public class Frame extends JFrame {
 

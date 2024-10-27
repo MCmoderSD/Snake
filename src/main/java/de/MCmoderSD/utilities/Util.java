@@ -1,6 +1,6 @@
 package de.MCmoderSD.utilities;
 
-public class Calculate {
+public class Util {
 
     public final static String INFO = "[INFO]";
     public final static String GAME = "[GAME]";

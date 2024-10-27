@@ -4,5 +4,6 @@
   "restartToolTip": "Restart the game",
   "gameOver": "Game Over",
   "scorePrefix": "Score: ",
-  "fpsPrefix": "FPS: "
+  "fpsPrefix": "FPS: ",
+  "tpsPrefix": "TPS: "
 }

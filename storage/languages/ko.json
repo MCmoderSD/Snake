@@ -1,8 +1,0 @@
-{
-  "title": "뱀",
-  "restart": "다시 시작",
-  "restartToolTip": "게임 다시 시작",
-  "gameOver": "게임 오버",
-  "scorePrefix": "점수: ",
-  "fpsPrefix": "FPS: "
-}

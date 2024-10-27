@@ -3,6 +3,7 @@ package de.MCmoderSD.main;
 import com.fasterxml.jackson.databind.JsonNode;
 import de.MCmoderSD.JavaAudioLibrary.AudioFile;
 import de.MCmoderSD.JavaAudioLibrary.AudioLoader;
+import de.MCmoderSD.imageloader.AnimationLoader;
 import de.MCmoderSD.imageloader.ImageLoader;
 import de.MCmoderSD.json.JsonUtility;
 
@@ -34,6 +35,16 @@ public class Config {
     public static float OP_ULT_SPEED_MODIFIER;
     public static boolean SOLID_WALLS;
 
+    // Language
+    public static String LANGUAGE;
+    public static String TITLE;
+    public static String RESTART;
+    public static String RESTART_TOOL_TIP;
+    public static String GAME_OVER;
+    public static String SCORE_PREFIX;
+    public static String FPS_PREFIX;
+    public static String TPS_PREFIX;
+
     // Assets
     public static Dimension DIMENSION;
     public static BufferedImage ICON;
@@ -48,11 +59,6 @@ public class Config {
     public static BufferedImage FOOD;
     public static BufferedImage GOLD_FOOD;
 
-    // Sounds
-    public static AudioFile FOOD_SOUND;
-    public static AudioFile ULT_SOUND;
-    public static AudioFile DIE_SOUND;
-
     // Animations
     public static ImageIcon HEAD_ANIMATION;
     public static ImageIcon UPPER_BODY_ANIMATION;
@@ -62,20 +68,17 @@ public class Config {
     public static ImageIcon FEET_ANIMATION;
     public static ImageIcon OP_FOOD_ANIMATION;
 
-    // Language
-    public static String LANGUAGE;
-    public static String TITLE;
-    public static String RESTART;
-    public static String RESTART_TOOL_TIP;
-    public static String GAME_OVER;
-    public static String SCORE_PREFIX;
-    public static String FPS_PREFIX;
+    // Sounds
+    public static AudioFile FOOD_SOUND;
+    public static AudioFile ULT_SOUND;
+    public static AudioFile DIE_SOUND;
 
     // Colors
     public static Color GRID_LAYOUT_COLOR;
     public static Color SNAKE_HITBOX_COLOR;
     public static Color FOOD_HITBOX_COLOR;
     public static Color FPS_COLOR;
+    public static Color TPS_COLOR;
     public static Color SCORE_COLOR;
     public static Color TEXT_COLOR;
     public static Color BACKGROUND_COLOR;
@@ -88,8 +91,9 @@ public class Config {
     public static void init(String[] args) {
 
         // Init Utilities
-        AudioLoader audioLoader = new AudioLoader();
         ImageLoader imageLoader = new ImageLoader();
+        AnimationLoader animationLoader = new AnimationLoader();
+        AudioLoader audioLoader = new AudioLoader();
         JsonUtility jsonUtility = new JsonUtility();
 
         // Get Config Path
@@ -146,6 +150,7 @@ public class Config {
         GAME_OVER = languageConfig.get("gameOver").asText();
         SCORE_PREFIX = languageConfig.get("scorePrefix").asText();
         FPS_PREFIX = languageConfig.get("fpsPrefix").asText();
+        TPS_PREFIX = languageConfig.get("tpsPrefix").asText();
 
         // Load Assets
         JsonNode assets = config.get("assets");
@@ -196,18 +201,19 @@ public class Config {
             GOLD_FOOD = scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + goldFoodPath : goldFoodPath));
 
             // Load Animations
-            HEAD_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + headAnimationPath : headAnimationPath)));
-            UPPER_BODY_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + upperBodyAnimationPath : upperBodyAnimationPath)));
-            LOWER_BODY_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + lowerBodyAnimationPath : lowerBodyAnimationPath)));
-            LEG_TILE_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + legTileAnimationPath : legTileAnimationPath)));
-            LEG_TRANSITION_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + legTransitionAnimationPath : legTransitionAnimationPath)));
-            FEET_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + feetAnimationPath : feetAnimationPath)));
-            OP_FOOD_ANIMATION = new ImageIcon(scaleImage(imageLoader.load(textureStreaming ? STREAMING_URL + opFoodAnimationPath : opFoodAnimationPath)));
+            HEAD_ANIMATION = scaleAnimation(animationLoader.load(textureStreaming ? STREAMING_URL + headAnimationPath : headAnimationPath));
+            UPPER_BODY_ANIMATION = scaleAnimation(animationLoader.load(textureStreaming ? STREAMING_URL + upperBodyAnimationPath : upperBodyAnimationPath));
+            LOWER_BODY_ANIMATION = scaleAnimation(animationLoader.load(textureStreaming ? STREAMING_URL + lowerBodyAnimationPath : lowerBodyAnimationPath));
+            LEG_TILE_ANIMATION = scaleAnimation(animationLoader.load(textureStreaming ? STREAMING_URL + legTileAnimationPath : legTileAnimationPath));
+            LEG_TRANSITION_ANIMATION = scaleAnimation(animationLoader.load(textureStreaming ? STREAMING_URL + legTransitionAnimationPath : legTransitionAnimationPath));
+            FEET_ANIMATION = scaleAnimation(animationLoader.load(textureStreaming ? STREAMING_URL + feetAnimationPath : feetAnimationPath));
+            OP_FOOD_ANIMATION = scaleAnimation(animationLoader.load(textureStreaming ? STREAMING_URL + opFoodAnimationPath : opFoodAnimationPath));
 
             // Sounds
             FOOD_SOUND = audioLoader.load(textureStreaming ? STREAMING_URL + foodSoundPath : foodSoundPath);
             ULT_SOUND = audioLoader.load(textureStreaming ? STREAMING_URL + ultSoundPath : ultSoundPath);
             DIE_SOUND = audioLoader.load(textureStreaming ? STREAMING_URL + dieSoundPath : dieSoundPath);
+            
         } catch (IOException | URISyntaxException e) {
             System.err.println("An error occurred while loading Images: " + e.getMessage());
         }
@@ -218,6 +224,7 @@ public class Config {
         SNAKE_HITBOX_COLOR = getColor(colors.get("snakeHitbox").asText());
         FOOD_HITBOX_COLOR = getColor(colors.get("foodHitbox").asText());
         FPS_COLOR = getColor(colors.get("fps").asText());
+        TPS_COLOR = getColor(colors.get("tps").asText());
         SCORE_COLOR = getColor(colors.get("score").asText());
         TEXT_COLOR = getColor(colors.get("text").asText());
         BACKGROUND_COLOR = getColor(colors.get("background").asText());
@@ -232,6 +239,10 @@ public class Config {
         BufferedImage scaledImage = new BufferedImage(SCALE, SCALE, BufferedImage.TYPE_INT_ARGB);
         scaledImage.getGraphics().drawImage(image.getScaledInstance(SCALE, SCALE, Image.SCALE_DEFAULT), 0, 0, SCALE, SCALE, null);
         return scaledImage;
+    }
+    
+    private static ImageIcon scaleAnimation(ImageIcon icon) {
+        return new ImageIcon(icon.getImage().getScaledInstance(SCALE, SCALE, Image.SCALE_DEFAULT));
     }
 
     private static Color getColor(String hex) {
