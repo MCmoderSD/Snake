@@ -2,15 +2,9 @@ package de.MCmoderSD.UI;
 
 import de.MCmoderSD.core.Game;
 import de.MCmoderSD.main.Config;
-import de.MCmoderSD.objects.BackgroundTile;
-import de.MCmoderSD.objects.Food;
-import de.MCmoderSD.objects.Snake;
-import de.MCmoderSD.objects.SnakePiece;
+import de.MCmoderSD.objects.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -41,7 +35,7 @@ public class UI extends JPanel {
 
         // Set UI Attributes
         setPreferredSize(DIMENSION);
-        setDoubleBuffered(true);
+        setFocusable(true);
         setLayout(null);
 
         // Init Game
@@ -93,6 +87,8 @@ public class UI extends JPanel {
         resetButton.setVisible(game.isGameOver());
         add(resetButton);
 
+        // Add UI to Frame
+        requestFocus();
         frame.add(this);
         frame.pack();
     }

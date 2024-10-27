@@ -58,12 +58,11 @@ public class Food {
         return new Point(x, y);
     }
 
-    // Methods
-    public void playSound() {
-        sound.play();
+    // Getter
+    public AudioFile getSound() {
+        return sound;
     }
 
-    // Getter
     public BufferedImage getImage() {
         return image;
     }

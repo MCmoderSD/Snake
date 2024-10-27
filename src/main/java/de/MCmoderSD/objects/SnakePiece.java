@@ -9,7 +9,6 @@ import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
-@SuppressWarnings("unused")
 public class SnakePiece {
 
     // Associations
@@ -85,7 +84,7 @@ public class SnakePiece {
 
     // Wall Hit Detected
     private void wallHitDetected() {
-        if (solidWalls && !game.isUltActive()) game.gameOver();
+        if (solidWalls && !game.isUltActive()) System.out.println("Wall Hit Detected");
         else {
             if (left) x = fieldWidth - 1;
             if (up) y = fieldHeight - 1;
@@ -163,11 +162,6 @@ public class SnakePiece {
                 down = true;
             }
         }
-    }
-
-    // Getter
-    protected Game getGame() {
-        return game;
     }
 
     public AffineTransform getTransform() {

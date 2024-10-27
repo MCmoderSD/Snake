@@ -29,9 +29,9 @@ public class Config {
     public static int TPS;
     public static long OP_ULT_GROW_INTERVAL;
     public static long SPECIAL_FOOD_DURATION;
-    public static double SPECIAL_FOOD_CHANCE;
-    public static double ULT_SPEED_MODIFIER;
-    public static double OP_ULT_SPEED_MODIFIER;
+    public static float SPECIAL_FOOD_CHANCE;
+    public static float ULT_SPEED_MODIFIER;
+    public static float OP_ULT_SPEED_MODIFIER;
     public static boolean SOLID_WALLS;
 
     // Assets
@@ -103,7 +103,7 @@ public class Config {
         String languagePath = null;
         if (customConfig) languagePath = args[0];
         if (customLanguage) languagePath = "/languages/" + args[0].toLowerCase() + ".json";
-        if (textureStreaming) languagePath = STREAMING_URL + (customLanguage ? languagePath : "/languages/en.json");
+        languagePath = textureStreaming ? STREAMING_URL + (customLanguage ? languagePath : "/languages/en.json") : "/languages/en.json";
 
         try {
 
@@ -133,9 +133,9 @@ public class Config {
         TPS = settings.get("tps").asInt();
         OP_ULT_GROW_INTERVAL = settings.get("opUltGrowInterval").asLong();
         SPECIAL_FOOD_DURATION = settings.get("specialFoodDuration").asLong();
-        SPECIAL_FOOD_CHANCE = settings.get("specialFoodChance").asDouble();
-        ULT_SPEED_MODIFIER = settings.get("ultSpeed").asDouble();
-        OP_ULT_SPEED_MODIFIER = settings.get("opUltSpeed").asDouble();
+        SPECIAL_FOOD_CHANCE = Float.parseFloat(settings.get("specialFoodChance").asText());
+        ULT_SPEED_MODIFIER = Float.parseFloat(settings.get("ultSpeed").asText());
+        OP_ULT_SPEED_MODIFIER = Float.parseFloat(settings.get("opUltSpeed").asText());
         SOLID_WALLS = settings.get("solidWalls").asBoolean();
         DIMENSION = new Dimension(FIELD_WIDTH * SCALE, FIELD_HEIGHT * SCALE);
 

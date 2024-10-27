@@ -16,6 +16,13 @@
 
     <dependencies>
 
+        <!-- Executor -->
+        <dependency>
+            <groupId>de.MCmoderSD</groupId>
+            <artifactId>executor</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <!-- ImageLoader -->
         <dependency>
             <groupId>de.MCmoderSD</groupId>

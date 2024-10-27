@@ -1,183 +1,211 @@
 package de.MCmoderSD.core;
 
 import de.MCmoderSD.JavaAudioLibrary.AudioFile;
+import de.MCmoderSD.executor.NanoLoop;
+
 import de.MCmoderSD.UI.UI;
-import de.MCmoderSD.main.Main;
 import de.MCmoderSD.objects.Food;
 import de.MCmoderSD.objects.Snake;
 
-import static de.MCmoderSD.main.Config.*;
+import java.util.ArrayList;
 
-public class Game implements Runnable {
+import static de.MCmoderSD.main.Config.*;
+import static de.MCmoderSD.utilities.Calculate.*;
+
+public class Game {
 
     // Associations
     private final UI ui;
 
-    // Attributes
-    private final double tickrate;
+    // Game Threads
+    private final NanoLoop tickExecutor;
+    private final NanoLoop renderExecutor;
+    private final NanoLoop debugExecutor;
 
-    // Game Variables
-    private Thread ult;
-    private int score;
-    private double speedModifier;
+    // Audio
+    private final ArrayList<AudioFile> activeAudio;
 
-    // Game State Variables
+    // Game State Flags
     private boolean paused;
     private boolean gameOver;
     private boolean gameStarted;
     private boolean ultActive;
 
-    // Debug Variables
+    // Debug Flags
     private boolean debug;
     private boolean showFPS;
     private boolean showHitboxes;
     private boolean showGridLines;
 
-    // Objects
+    // Debug Variables
+    private int ticks = 0;
+    private int frames = 0;
+
+    // Game Variables
+    private Thread ult;
+    private int score;
+
+    // Game Objects
     private Snake snake;
     private Food food;
+
 
     public Game(UI ui) {
 
         // Init Associations
         this.ui = ui;
 
-        // Init Game Variables
-        score = 0;
-        speedModifier = 1;
+        // Init Game Threads
+        debugExecutor = new NanoLoop(this::debug, 1);
+        tickExecutor = new NanoLoop(this::tick, TPS);
+        renderExecutor = new NanoLoop(this::render, FPS);
+
+        // Init Audio List
+        activeAudio = new ArrayList<>();
+
+        // Init Game State Flags
         paused = false;
         gameOver = false;
         gameStarted = false;
         ultActive = false;
-        tickrate = (double) 1000000000 / TPS;
 
-        // Init Debug Variables
+        // Init Debug Flags
         debug = false;
         showFPS = false;
         showHitboxes = false;
         showGridLines = false;
 
+        // Init Game Variables
+        score = 0;
+
         // Init Objects
         snake = new Snake(this, FIELD_WIDTH / 2 - 2, FIELD_HEIGHT / 2, HEAD, HEAD_ANIMATION);
         food = new Food(snake.getSnakePieces());
 
-        new Thread(this).start();
+        // Start Game Threads
+        debugExecutor.start();
+        tickExecutor.start();
+        renderExecutor.start();
     }
 
-    @Override
-    public void run() {
-        while (Main.IS_RUNNING) {
+    // Debug Loop
+    private void debug() {
 
-            // Timer
-            double delta = 0;
-            long current;
-            long timer = 0;
-            long now = System.nanoTime();
-            int renderedFrames = 0;
+        // Show Debug Information
+        if (showFPS) ui.setFps(frames);
 
+        // Print Debug Information
+        System.out.printf("%s\t FPS: %d | TPS: %d%n", INFO, frames, ticks);
 
-            // Game Loop
-            while (!paused && !gameOver) {
-                current = System.nanoTime();
-                delta += (current - now) / (tickrate / speedModifier);
-                timer += current - now;
-                now = current;
+        // Reset Debug Counter
+        ticks = 0;
+        frames = 0;
+    }
 
-                // Wait for Start
-                if (!gameStarted) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                    delta = 0;
-                }
+    // Game Loop
+    private void tick() {
 
-                // Tick
-                if (delta >= 1) {
-                    // Game Loop Start:
+        // Check if game is started
+        if (gameStarted && !paused && !gameOver) {
 
-
-                    // Check for win
-                    if (FIELD_WIDTH * FIELD_HEIGHT == snake.getSnakePieces().size()) {
-                        // ToDo Win
-                        System.out.println("Win");
-                        gameOver();
-                    }
-
-                    // Check Collision with itself
-                    if (snake.checkCollision() && !ultActive) gameOver();
-
-                    // Check Collision with Food
-                    if (snake.checkFood(food)) {
-
-                        score++; // Increase Score
-                        ui.setScore(score); // Update Score
-                        snake.grow(); // Grow Snake
-                        food.playSound(); // Play Sound
-
-                        if (food.isSpecial()) activateUlt(food.isOp()); // Activate Ult
-
-                        food = new Food(snake.getSnakePieces()); // Spawn new Food
-                    }
-
-                    // Check Input and Move Snake
-                    snake.updateDirection(ui.getInputs().getDirection());
-                    snake.moveSnake();
-
-                    // Update Frame
-                    if (renderedFrames < FPS) {
-                        ui.repaint();
-                        renderedFrames++;
-                    }
-
-                    // FPS Counter
-                    if (timer >= 1000000000) {
-                        ui.setFps(renderedFrames);
-                        timer = 0;
-                        renderedFrames = 0;
-                    }
-
-                    // Game Loop End:
-                    delta--;
-                }
-                ui.requestFocusInWindow();
+            // Check for win
+            if (FIELD_WIDTH * FIELD_HEIGHT == snake.getSnakePieces().size()) {
+                // ToDo Win
+                System.out.printf("%s\t Win%n", GAME);
+                gameOver();
             }
 
-            // Delay to prevent 100% CPU Usage
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            // Check Collision with itself
+            if (snake.checkCollision() && !ultActive) gameOver();
+
+            // Check Collision with Food
+            if (snake.checkFood(food)) {
+
+                // Increase Score
+                score++;
+                ui.setScore(score);
+
+                // Grow Snake
+                snake.grow();
+
+                // Sound
+                AudioFile sound = food.getSound(); // Get Sound
+                activeAudio.add(sound); // Add Sound
+                sound.play(); // Play Sound
+
+                // Activate Ultimate
+                if (food.isSpecial()) activateUlt(food.isOp());
+
+                // Spawn new Food
+                food = new Food(snake.getSnakePieces()); // Spawn new Food
             }
-            ui.requestFocusInWindow();
+
+            // Check Input and Move Snake
+            snake.updateDirection(ui.getInputs().getDirection());
+            snake.moveSnake();
         }
+
+        // Debug
+        ticks++;
     }
 
-    // Methods
+    // Render Loop
+    private void render() {
+
+        // Render UI
+        if (gameStarted && !gameOver) ui.repaint();
+
+        // Debug
+        frames++;
+    }
+
+    // Activate Ultimate
+    @SuppressWarnings("BusyWait")
     private void activateUlt(boolean isOp) {
+
+        // Stop old Ultimate
         if (ult != null && ult.isAlive()) ult.interrupt();
 
+        // Start new Ultimate
         ult = new Thread(() -> {
             try {
+
+                // Set Ultimate Active
                 ultActive = true;
-                AudioFile audioPlayer = ULT_SOUND;
+
+                // Get Sound
+                AudioFile audioPlayer = ULT_SOUND.copy();
+
+                // Add Sound
+                activeAudio.add(audioPlayer);
                 audioPlayer.play();
+
+                // Set Speed Modifier
+                tickExecutor.setModifier(isOp ? OP_ULT_SPEED_MODIFIER : ULT_SPEED_MODIFIER);
+
                 if (isOp) {
-                    setSpeedModifier(OP_ULT_SPEED_MODIFIER);
+
+                    // Grow Snake
                     for (var i = 0; i < SPECIAL_FOOD_DURATION; i++) {
                         snake.grow();
                         score++;
                         ui.setScore(score);
                         Thread.sleep(OP_ULT_GROW_INTERVAL);
                     }
-                    setSpeedModifier(1);
+
+                    // Reset Speed Modifier
+                    tickExecutor.setModifier(1);
+
                 } else {
-                    setSpeedModifier(ULT_SPEED_MODIFIER);
+
+                    // Wait
                     Thread.sleep((SPECIAL_FOOD_DURATION * 1000));
-                    setSpeedModifier(1);
+
+                    // Reset Speed Modifier
+                    tickExecutor.setModifier(1);
                 }
 
+                // Set Ultimate Inactive
                 ultActive = false;
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
@@ -187,33 +215,29 @@ public class Game implements Runnable {
         ult.start();
     }
 
-    public void gameOver() {
-        // ToDo Game Over
-        AudioFile dieSound = DIE_SOUND;
-        dieSound.play();
-        ui.setGameOver(true);
-        gameOver = true;
-
-        System.out.println("Game Over");
-    }
-
-    public void start() {
-        gameStarted = true;
-    }
-
-    public void setSpeedModifier(double speedModifier) {
-        this.speedModifier = speedModifier;
-    }
-
+    // Reset Game
     public void reset() {
 
-        // Reset Game Variables
-        score = 0;
-        speedModifier = 1;
+        // Check if game is started
+        if (!gameStarted || !gameOver) return;
+
+        // Print Debug Information
+        System.out.printf("%s\t Reset%n", GAME);
+
+        // Stop all Audio
+        activeAudio.forEach(AudioFile::close);
+
+        // Reset Game State Flags
         paused = false;
         gameOver = false;
         gameStarted = false;
         ultActive = false;
+
+        // Reset Speed Modifier
+        tickExecutor.setModifier(1);
+
+        // Reset Game Variables
+        score = 0;
 
         // Reset Objects
         snake = new Snake(this, FIELD_WIDTH / 2 - 2, FIELD_HEIGHT / 2, HEAD, HEAD_ANIMATION);
@@ -225,25 +249,69 @@ public class Game implements Runnable {
         ui.repaint();
     }
 
-    // Trigger
-    public void togglePause() {
-        paused = !paused;
+    // Game Over
+    public void gameOver() {
+
+        // Check if game is started
+        if (!gameStarted || gameOver) return;
+
+        // ToDo Game Over
+
+        // Print Debug Information
+        System.out.printf("%s\t Game Over%n", GAME);
+
+        // Set Game Over
+        gameOver = true;
+        ui.setGameOver(true);
+
+        // Get Sound
+        AudioFile sound = DIE_SOUND.copy();
+        activeAudio.add(sound);
+
+        // Play Sound
+        sound.play();
     }
 
-    @SuppressWarnings("unused")
+    // Trigger
+    public void startGame() {
+        if (gameStarted || gameOver) return;
+        System.out.printf("%s\t Game Started%n", GAME);
+        gameStarted = true;
+    }
+
+    public void togglePause() {
+
+        // Check if game is started
+        if (!gameStarted || ultActive || gameOver) return;
+
+        // Set Flag
+        paused = !paused;
+
+        // Remove all Audio that are not playing
+        if (paused) activeAudio.removeIf(audioFile -> !audioFile.isPlaying());
+
+        // Pause or resume all Audio Files
+        if (paused) activeAudio.forEach(AudioFile::pause);
+        else activeAudio.forEach(AudioFile::resume);
+    }
+
     public void toggleDebug() {
+        System.out.printf("%s\tDebug Toggled%n", DEBUG);
         debug = !debug;
     }
 
     public void toggleFps() {
+        System.out.printf("%s\t FPS Toggled%n", DEBUG);
         showFPS = !showFPS;
     }
 
     public void toggleHitbox() {
+        System.out.printf("%s\t Hitboxes Toggled%n", DEBUG);
         showHitboxes = !showHitboxes;
     }
 
     public void toggleGridLines() {
+        System.out.printf("%s\t Grid Lines Toggled%n", DEBUG);
         showGridLines = !showGridLines;
     }
 

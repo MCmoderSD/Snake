@@ -82,8 +82,8 @@ public class InputHandler implements KeyListener {
         if (keycode == KeyEvent.VK_F3) f3isPressed = true;
 
         // Start
-        if (keycode == KeyEvent.VK_ENTER) game.start();
-        if (keycode == KeyEvent.VK_SPACE) game.start();
+        if (keycode == KeyEvent.VK_ENTER) game.startGame();
+        if (keycode == KeyEvent.VK_SPACE) game.startGame();
 
         // Exit
         if (control && keycode == KeyEvent.VK_C) System.exit(0);
