@@ -9,9 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 
 import java.util.ArrayList;
@@ -133,6 +131,9 @@ public class UI extends JPanel {
             // Variables
             SnakePart snakePart = snakeParts.get(i);
 
+            // Sync Graphics
+            Toolkit.getDefaultToolkit().sync();
+
             // Draw Snake Part
             g.setColor(SNAKE_COLOR);
             g.fill(snakePart.getBounds());
@@ -161,6 +162,9 @@ public class UI extends JPanel {
             g.setColor(FOOD_HITBOX_COLOR);
             g.draw(food.getBounds());
         }
+
+        // Sync Graphics
+        Toolkit.getDefaultToolkit().sync();
 
         // Update UI Components
         fpsLabel.setVisible(game.isShowFPS());

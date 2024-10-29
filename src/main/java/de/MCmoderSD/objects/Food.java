@@ -39,13 +39,19 @@ public class Food {
     // Methods
     private Point getValidSpawnPont(ArrayList<SnakePart> snakeParts) {
 
-        // Random Spawn Point
-        var x = (int) (Math.random() * FIELD_WIDTH);
-        var y = (int) (Math.random() * FIELD_HEIGHT);
+        // Calculate Invalid Points
+        ArrayList<Point> invalidPoints = new ArrayList<>();
+        for (SnakePart part : snakeParts) invalidPoints.add(new Point(part.getX(), part.getY()));
 
-        // Check for Snake Collision
-        for (SnakePart snakePart : snakeParts) if (snakePart.getX() == x && snakePart.getY() == y) return getValidSpawnPont(snakeParts);
-        return new Point(x, y);
+        // Calculate Valid Spawn Points
+        ArrayList<Point> validPoints = new ArrayList<>();
+        for (var i = 0; i < FIELD_WIDTH; i++) for (var j = 0; j < FIELD_HEIGHT; j++) {
+            Point point = new Point(i, j);
+            if (!invalidPoints.contains(point)) validPoints.add(point);
+        }
+
+        // Return Random Point
+        return validPoints.get((int) (Math.random() * validPoints.size()));
     }
 
     // Getter
