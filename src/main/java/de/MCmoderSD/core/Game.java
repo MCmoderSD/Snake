@@ -1,13 +1,11 @@
 package de.MCmoderSD.core;
 
-import de.MCmoderSD.JavaAudioLibrary.AudioFile;
+import de.MCmoderSD.JavaAudioLibrary.AudioPlayer;
 import de.MCmoderSD.executor.NanoLoop;
 
 import de.MCmoderSD.UI.UI;
 import de.MCmoderSD.objects.Food;
 import de.MCmoderSD.objects.Snake;
-
-import java.util.ArrayList;
 
 import static de.MCmoderSD.main.Config.*;
 import static de.MCmoderSD.utilities.Util.*;
@@ -23,7 +21,7 @@ public class Game {
     private final NanoLoop debugExecutor;
 
     // Audio
-    private final ArrayList<AudioFile> activeAudio;
+    private final AudioPlayer audioPlayer;
 
     // Game State Flags
     private boolean paused;
@@ -44,7 +42,7 @@ public class Game {
 
     // Game Variables
     private Thread ult;
-    private AudioFile ultSound;
+    private int ultSoundID;
     private int score;
 
     // Game Objects
@@ -63,7 +61,7 @@ public class Game {
         renderExecutor = new NanoLoop(this::render, FPS);
 
         // Init Audio List
-        activeAudio = new ArrayList<>();
+        audioPlayer = new AudioPlayer();
 
         // Init Game State Flags
         paused = false;
@@ -132,9 +130,7 @@ public class Game {
                 snake.grow();
 
                 // Sound
-                AudioFile sound = FOOD_SOUND.copy(); // Get Sound
-                activeAudio.add(sound); // Add Sound
-                sound.play(); // Play Sound
+                audioPlayer.play(FOOD_SOUND);
 
                 // Activate Ultimate
                 if (food.isSpecial()) activateUlt(food.isOp());
@@ -173,14 +169,15 @@ public class Game {
         ult = new Thread(() -> {
             try {
 
+
+                // Get Sound
+                if (ultActive && ultSoundID > -1) audioPlayer.remove(ultSoundID);
+
                 // Set Ultimate Active
                 ultActive = true;
 
-                // Get Sound
-                if (ultSound != null && ultSound.isPlaying()) ultSound.close();
-                ultSound = ULT_SOUND.copy();
-                activeAudio.add(ultSound);
-                ultSound.play();
+                // Play Sound
+                ultSoundID = audioPlayer.play(ULT_SOUND);
 
                 // Set Speed Modifier
                 tickExecutor.setModifier(isOp ? OP_ULT_SPEED_MODIFIER : ULT_SPEED_MODIFIER);
@@ -227,7 +224,7 @@ public class Game {
         System.out.printf("%s\t Reset%n", GAME);
 
         // Stop all Audio
-        activeAudio.forEach(AudioFile::close);
+        audioPlayer.stop();
 
         // Reset Game State Flags
         paused = false;
@@ -266,12 +263,8 @@ public class Game {
         gameOver = true;
         ui.setGameOver(true);
 
-        // Get Sound
-        AudioFile sound = DIE_SOUND.copy();
-        activeAudio.add(sound);
-
         // Play Sound
-        sound.play();
+        audioPlayer.play(DIE_SOUND);
     }
 
     // Trigger
@@ -289,12 +282,9 @@ public class Game {
         // Set Flag
         paused = !paused;
 
-        // Remove all Audio that are not playing
-        if (paused) activeAudio.removeIf(audioFile -> !audioFile.isPlaying());
-
-        // Pause or resume all Audio Files
-        if (paused) activeAudio.forEach(AudioFile::pause);
-        else activeAudio.forEach(AudioFile::resume);
+        // Pause or resume Audio
+        if (paused) audioPlayer.pause();
+        else audioPlayer.resume();
     }
 
     public void toggleDebug() {
