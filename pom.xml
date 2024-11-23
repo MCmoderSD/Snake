@@ -14,34 +14,41 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <dependencies>
 
         <!-- Executor -->
         <dependency>
-            <groupId>de.MCmoderSD</groupId>
-            <artifactId>executor</artifactId>
+            <groupId>com.github.MCmoderSD</groupId>
+            <artifactId>ExecutorUtility</artifactId>
             <version>1.0.2</version>
         </dependency>
 
         <!-- ImageLoader -->
         <dependency>
-            <groupId>de.MCmoderSD</groupId>
-            <artifactId>imageloader</artifactId>
-            <version>1.0.2</version>
+            <groupId>com.github.MCmoderSD</groupId>
+            <artifactId>ImageLoader</artifactId>
+            <version>1.0.3</version>
         </dependency>
 
         <!-- Java Audio Library -->
         <dependency>
-            <groupId>de.MCmoderSD</groupId>
-            <artifactId>jal</artifactId>
-            <version>1.1.5</version>
+            <groupId>com.github.MCmoderSD</groupId>
+            <artifactId>JavaAudioLibrary</artifactId>
+            <version>1.1.6</version>
         </dependency>
 
-        <!-- JsonUtility -->
+        <!-- Json -->
         <dependency>
-            <groupId>de.MCmoderSD</groupId>
-            <artifactId>json</artifactId>
-            <version>1.1.0</version>
+            <groupId>com.github.MCmoderSD</groupId>
+            <artifactId>JsonUtility</artifactId>
+            <version>1.1.1</version>
         </dependency>
 
     </dependencies>
