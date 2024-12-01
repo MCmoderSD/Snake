@@ -70,14 +70,14 @@ jobs:
 
       # Upload the full JAR to the release
       - name: Upload full JAR to Release
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Snake.jar
           path: target/Snake-full-*.jar
 
       # Upload the slim JAR to the release
-      - name: Upload full JAR to Release
-        uses: actions/upload-artifact@v2
+      - name: Upload slim JAR to Release
+        uses: actions/upload-artifact@v3
         with:
           name: Snake-texture-streaming.jar
           path: target/Snake-slim-*.jar
