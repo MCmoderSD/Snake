@@ -24,8 +24,8 @@
 
         <!-- Executor -->
         <dependency>
-            <groupId>de.MCmoderSD</groupId>
-            <artifactId>executor</artifactId>
+            <groupId>com.github.MCmoderSD</groupId>
+            <artifactId>ExecutorUtility</artifactId>
             <version>1.0.2</version>
         </dependency>
 
