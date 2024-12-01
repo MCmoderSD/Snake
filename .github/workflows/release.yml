@@ -42,10 +42,10 @@ jobs:
       - name: Build with Maven
         run: mvn clean package --batch-mode --quiet
 
-      # Get the version from the pom.xml and set it as an output using environment files
+      # Get the version from the pom.xml and set it as an output
       - name: Set Version Output
         id: set_version
-        run: echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+        run: echo "::set-output name=version::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
 
   release:
     runs-on: ubuntu-latest
@@ -64,8 +64,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.VERSION }}  # Use the VERSION from the build job
-          release_name: Snake v${{ env.VERSION }}
+          tag_name: ${{ needs.build.outputs.version }}  # Use the output from the build job
+          release_name: Snake v${{ needs.build.outputs.version }}
           draft: false
           prerelease: false
 
