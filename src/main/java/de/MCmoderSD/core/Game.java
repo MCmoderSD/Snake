@@ -130,7 +130,7 @@ public class Game {
                 snake.grow();
 
                 // Sound
-                audioPlayer.play(FOOD_SOUND);
+                new Thread(() -> audioPlayer.play(FOOD_SOUND)).start();
 
                 // Activate Ultimate
                 if (food.isSpecial()) activateUlt(food.isOp());
@@ -264,7 +264,7 @@ public class Game {
         ui.setGameOver(true);
 
         // Play Sound
-        audioPlayer.play(DIE_SOUND);
+        new Thread(() -> audioPlayer.play(DIE_SOUND)).start();
     }
 
     // Trigger

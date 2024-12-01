@@ -1,0 +1,104 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up JDK 21
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'adoptopenjdk'
+
+      # Cache Maven dependencies
+      - name: Cache Maven dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # Build the project with Maven
+      - name: Build with Maven
+        run: mvn clean package --batch-mode --quiet
+
+      # Create a GitHub release
+      - name: Create GitHub Release
+        id: create_release
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          RELEASE_RESPONSE=$(curl -XPOST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -d '{"tag_name": "v$VERSION", "name": "Release $VERSION", "body": "Release $VERSION"}' https://api.github.com/repos/${{ github.repository }}/releases)
+          RELEASE_ID=$(echo $RELEASE_RESPONSE | jq -r .id)
+          echo "Release ID: $RELEASE_ID"
+
+      # Generate checksums for the full JAR and slim JAR
+      - name: Generate Checksums
+        id: generate_checksums
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          FULL_JAR_PATH="target/Snake-full-$VERSION.jar"
+          SLIM_JAR_PATH="target/Snake-slim-$VERSION.jar"
+          
+          # MD5, MD4, and SHA-1 checksums
+          FULL_MD5=$(md5sum $FULL_JAR_PATH | awk '{ print $1 }')
+          SLIM_MD5=$(md5sum $SLIM_JAR_PATH | awk '{ print $1 }')
+          
+          FULL_MD4=$(md4sum $FULL_JAR_PATH | awk '{ print $1 }')
+          SLIM_MD4=$(md4sum $SLIM_JAR_PATH | awk '{ print $1 }')
+          
+          FULL_SHA1=$(sha1sum $FULL_JAR_PATH | awk '{ print $1 }')
+          SLIM_SHA1=$(sha1sum $SLIM_JAR_PATH | awk '{ print $1 }')
+          
+          echo "Full JAR MD5: $FULL_MD5"
+          echo "Slim JAR MD5: $SLIM_MD5"
+          echo "Full JAR MD4: $FULL_MD4"
+          echo "Slim JAR MD4: $SLIM_MD4"
+          echo "Full JAR SHA-1: $FULL_SHA1"
+          echo "Slim JAR SHA-1: $SLIM_SHA1"
+          
+          echo "FULL_MD5=$FULL_MD5" >> $GITHUB_ENV
+          echo "SLIM_MD5=$SLIM_MD5" >> $GITHUB_ENV
+          echo "FULL_MD4=$FULL_MD4" >> $GITHUB_ENV
+          echo "SLIM_MD4=$SLIM_MD4" >> $GITHUB_ENV
+          echo "FULL_SHA1=$FULL_SHA1" >> $GITHUB_ENV
+          echo "SLIM_SHA1=$SLIM_SHA1" >> $GITHUB_ENV
+
+      # Upload the full JAR
+      - name: Upload Full JAR
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          FILE_PATH="target/Snake-full-$VERSION.jar"
+          curl -XPOST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Content-Type: application/zip" --data-binary @"$FILE_PATH" https://uploads.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID/assets?name=Snake-full-$VERSION.jar
+
+      # Upload the slim JAR
+      - name: Upload Slim JAR
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          FILE_PATH="target/Snake-slim-$VERSION.jar"
+          curl -XPOST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Content-Type: application/zip" --data-binary @"$FILE_PATH" https://uploads.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID/assets?name=Snake-slim-$VERSION.jar
+
+      # Update release description with checksum information
+      - name: Update Release Description with Checksums
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          RELEASE_BODY="### Checksums:\n\n#### Snake-full-$VERSION.jar:\n\n- MD4: ${{ env.FULL_MD4 }}\n- MD5: ${{ env.FULL_MD5 }}\n- SHA-1: ${{ env.FULL_SHA1 }}\n\n#### Snake-slim-$VERSION.jar:\n\n- MD4: ${{ env.SLIM_MD4 }}\n- MD5: ${{ env.SLIM_MD5 }}\n- SHA-1: ${{ env.SLIM_SHA1 }}\n"
+          
+          curl -X PATCH \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -d '{"body": "'"$RELEASE_BODY"'"}' \
+            "https://api.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID"
