@@ -38,48 +38,16 @@ jobs:
       - name: Build with Maven
         run: mvn clean package --batch-mode --quiet
 
-      # Generate checksums for the full JAR and slim JAR
-      - name: Generate Checksums
-        id: generate_checksums
-        run: |
-          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          FULL_JAR_PATH="target/Snake-full-$VERSION.jar"
-          SLIM_JAR_PATH="target/Snake-slim-$VERSION.jar"
-          
-          # MD5, MD4, and SHA-1 checksums
-          FULL_MD5=$(md5sum $FULL_JAR_PATH | awk '{ print $1 }')
-          SLIM_MD5=$(md5sum $SLIM_JAR_PATH | awk '{ print $1 }')
-          
-          FULL_MD4=$(md4sum $FULL_JAR_PATH | awk '{ print $1 }')
-          SLIM_MD4=$(md4sum $SLIM_JAR_PATH | awk '{ print $1 }')
-          
-          FULL_SHA1=$(sha1sum $FULL_JAR_PATH | awk '{ print $1 }')
-          SLIM_SHA1=$(sha1sum $SLIM_JAR_PATH | awk '{ print $1 }')
-          
-          echo "Full JAR MD5: $FULL_MD5"
-          echo "Slim JAR MD5: $SLIM_MD5"
-          echo "Full JAR MD4: $FULL_MD4"
-          echo "Slim JAR MD4: $SLIM_MD4"
-          echo "Full JAR SHA-1: $FULL_SHA1"
-          echo "Slim JAR SHA-1: $SLIM_SHA1"
-          
-          echo "FULL_MD5=$FULL_MD5" >> $GITHUB_ENV
-          echo "SLIM_MD5=$SLIM_MD5" >> $GITHUB_ENV
-          echo "FULL_MD4=$FULL_MD4" >> $GITHUB_ENV
-          echo "SLIM_MD4=$SLIM_MD4" >> $GITHUB_ENV
-          echo "FULL_SHA1=$FULL_SHA1" >> $GITHUB_ENV
-          echo "SLIM_SHA1=$SLIM_SHA1" >> $GITHUB_ENV
-
   release:
     runs-on: ubuntu-latest
-    needs: build  # This ensures the build job runs first
+    needs: build  # Ensures the build job runs first
 
     steps:
       # Checkout the code
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Set up JDK 21 (if needed for release steps)
+      # Set up JDK 21
       - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
@@ -90,28 +58,21 @@ jobs:
       - name: Get Version
         run: echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
 
-      # Create a GitHub release
+      # Create a GitHub Release
       - name: Create GitHub Release
-        id: create_release
         run: |
           TAG_NAME="v${{ env.VERSION }}"
           RELEASE_NAME="Release ${{ env.VERSION }}"
-          RELEASE_BODY="Release for version ${{ env.VERSION }} with checksums."
+          RELEASE_BODY="Release for version ${{ env.VERSION }}."
           
-          # Check if the release already exists
-          EXISTING_RELEASE=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/releases/tags/$TAG_NAME")
+          # Create the release
+          RELEASE_RESPONSE=$(curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -d '{"tag_name": "'"$TAG_NAME"'", "name": "'"$RELEASE_NAME"'", "body": "'"$RELEASE_BODY"'"}' \
+            https://api.github.com/repos/${{ github.repository }}/releases)
           
-          if [[ $(echo "$EXISTING_RELEASE" | jq -r .message) == "Not Found" ]]; then
-            # Create a new release if it does not exist
-            RELEASE_RESPONSE=$(curl -XPOST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              -d '{"tag_name": "'"$TAG_NAME"'", "name": "'"$RELEASE_NAME"'", "body": "'"$RELEASE_BODY"'"}' \
-              https://api.github.com/repos/${{ github.repository }}/releases)
-            RELEASE_ID=$(echo $RELEASE_RESPONSE | jq -r .id)
-            echo "Release ID: $RELEASE_ID"
-          else
-            # If release exists, get the release ID
-            RELEASE_ID=$(echo $EXISTING_RELEASE | jq -r .id)
-            echo "Release already exists with ID: $RELEASE_ID"
+          # Extract the release ID
+          RELEASE_ID=$(echo $RELEASE_RESPONSE | jq -r .id)
+          echo "Release created with ID: $RELEASE_ID"
 
       # Upload the full JAR
       - name: Upload Full JAR
@@ -126,14 +87,3 @@ jobs:
           VERSION=${{ env.VERSION }}
           FILE_PATH="target/Snake-slim-$VERSION.jar"
           curl -XPOST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Content-Type: application/zip" --data-binary @"$FILE_PATH" https://uploads.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID/assets?name=Snake-slim-$VERSION.jar
-
-      # Update release description with checksum information
-      - name: Update Release Description with Checksums
-        run: |
-          VERSION=${{ env.VERSION }}
-          RELEASE_BODY="### Checksums:\n\n#### Snake-full-$VERSION.jar:\n\n- MD4: ${{ env.FULL_MD4 }}\n- MD5: ${{ env.FULL_MD5 }}\n- SHA-1: ${{ env.FULL_SHA1 }}\n\n#### Snake-slim-$VERSION.jar:\n\n- MD4: ${{ env.SLIM_MD4 }}\n- MD5: ${{ env.SLIM_MD5 }}\n- SHA-1: ${{ env.SLIM_SHA1 }}\n"
-          
-          curl -X PATCH \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -d '{"body": "'"$RELEASE_BODY"'"}' \
-            "https://api.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID"
