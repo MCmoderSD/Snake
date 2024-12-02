@@ -111,6 +111,7 @@ jobs:
           changelog_url="https://github.com/${{ github.repository }}/compare/${previous_version}...${{ needs.pre-check.outputs.version }}"
           echo "Changelog URL: $changelog_url"
           echo "changelog_url=$changelog_url" >> $GITHUB_ENV
+        shell: bash
 
       - name: Create Release
         id: create-release
