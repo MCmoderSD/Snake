@@ -1,5 +1,6 @@
 name: Automated Release
 
+
 # Trigger the workflow on push to the master branch or manually
 on:
   push:
@@ -8,12 +9,16 @@ on:
       - actions-test
   workflow_dispatch:
 
+
 # Environment variables
 permissions:
   contents: write # Required for creating releases
 
+
 # Jobs
 jobs:
+
+
   # Extract the project version from the pom.xml file
   extract-version:
     runs-on: ubuntu-latest
@@ -31,7 +36,8 @@ jobs:
           echo "PROJECT_VERSION=$version" >> $GITHUB_ENV
           echo "project-version=$version" >> $GITHUB_OUTPUT # Replace ::set-output
 
-  # Check for an existing release and delete it if it exists
+
+  # Check for an existing and delete it if it exists
   pre-check:
     runs-on: ubuntu-latest
     needs: extract-version
@@ -60,6 +66,7 @@ jobs:
         run: |
           curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             "https://api.github.com/repos/${{ github.repository }}/releases/${{ steps.check-release.outputs.release-id }}"
+
 
   # Build the project and create two JAR files
   build:
@@ -93,25 +100,17 @@ jobs:
           name: jar-files
           path: target/*.jar
 
+
   # Create a release and upload the JAR files
   release:
     runs-on: ubuntu-latest
-    needs: [extract-version, pre-check, build]
+    needs: [pre-check, build]
 
     steps:
       - name: Download JAR artifacts
         uses: actions/download-artifact@v3
         with:
           name: jar-files
-
-      - name: Generate Changelog Link
-        id: generate-changelog
-        run: |
-          previous_version=$(git describe --tags --abbrev=0)
-          changelog_url="https://github.com/${{ github.repository }}/compare/${previous_version}...${{ needs.pre-check.outputs.version }}"
-          echo "Changelog URL: $changelog_url"
-          echo "changelog_url=$changelog_url" >> $GITHUB_ENV
-        shell: bash
 
       - name: Create Release
         id: create-release
@@ -121,8 +120,6 @@ jobs:
           release_name: Snake v${{ needs.pre-check.outputs.version }}
           body: |
             Automated release of version Snake v${{ needs.pre-check.outputs.version }}.
-
-            **Full Changelog**: ${{ env.changelog_url }}
           draft: false
           prerelease: false
         env:
