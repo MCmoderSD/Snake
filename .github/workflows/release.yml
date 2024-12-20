@@ -39,18 +39,13 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Build JARs
-        run: |
-          mvn clean package
-          SLIM=$(find target -name "Snake-slim-*.jar")
-          FULL=$(find target -name "Snake-full-*.jar")
-          echo "slim=$SLIM" >> $GITHUB_ENV
-          echo "full=$FULL" >> $GITHUB_ENV
+        run: mvn clean package
 
       - name: Upload JAR as artifact
         uses: actions/upload-artifact@v4.5.0
         with:
           name: jar-files
-          path: ${{ env.slim }}, ${{ env.full }}
+          path: target/Snake-*.jar
 
   release:
     runs-on: ubuntu-24.04
