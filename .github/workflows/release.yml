@@ -124,8 +124,8 @@ jobs:
         run: |
           mv ${{ env.slim-file }} ${{ env.slim-asset-name }}
           mv ${{ env.full-file }} ${{ env.full-asset-name }}
-          echo "slim-file=${{ nv.slim-asset-name }}" >> $GITHUB_ENV
-          echo "full-file=${{ nv.full-asset-name }}" >> $GITHUB_ENV
+          echo "slim-file=${{ env.slim-asset-name }}" >> $GITHUB_ENV
+          echo "full-file=${{ env.full-asset-name }}" >> $GITHUB_ENV
 
       - name: Create new release
         uses: softprops/action-gh-release@v2
