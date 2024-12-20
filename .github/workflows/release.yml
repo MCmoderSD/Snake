@@ -1,146 +1,188 @@
 name: Automated Release
 
-
-# Trigger the workflow on push to the master branch or manually
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
-      - actions-test
-  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
 
-
-# Environment variables
 permissions:
-  contents: write # Required for creating releases
+  contents: write
 
-
-# Jobs
 jobs:
 
-
-  # Extract the project version from the pom.xml file
-  extract-version:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-24.04
     outputs:
-      version: ${{ steps.extract-version.outputs.project-version }}
+      version: ${{ steps.extract-version.outputs.version }}
 
     steps:
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4.6.0
+        with:
+          java-version: '21'
+          distribution: 'zulu'
+
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.2.2
 
       - name: Extract version from pom.xml
         id: extract-version
         run: |
-          version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          echo "PROJECT_VERSION=$version" >> $GITHUB_ENV
-          echo "project-version=$version" >> $GITHUB_OUTPUT # Replace ::set-output
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-
-  # Check for an existing and delete it if it exists
-  pre-check:
-    runs-on: ubuntu-latest
-    needs: extract-version
-    outputs:
-      version: ${{ needs.extract-version.outputs.version }}
-      release-id: ${{ steps.check-release.outputs.release-id }}
-
-    steps:
-      - name: Check for existing release
-        id: check-release
+      - name: Build JARs
+        id: build
         run: |
-          response=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ needs.extract-version.outputs.version }}")
-          if echo "$response" | jq -e .id > /dev/null; then
-            release_id=$(echo "$response" | jq .id)
-            echo "Release exists with ID: $release_id"
-            echo "release-id=$release_id" >> $GITHUB_OUTPUT
-          else
-            echo "No existing release found"
-            echo "release-id=" >> $GITHUB_OUTPUT
-          fi
-        shell: /usr/bin/bash -e {0}
+          mvn clean package
+          SLIM=$(find target -name "Snake-slim-*.jar")
+          FULL=$(find target -name "Snake-full-*.jar")
+          echo "slim=$SLIM" >> $GITHUB_OUTPUT
+           echo "full=$FULL" >> $GITHUB_OUTPUT
 
-      - name: Delete existing release
-        if: steps.check-release.outputs.release-id != ''
-        run: |
-          curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/releases/${{ steps.check-release.outputs.release-id }}"
+      - name: Upload slim JAR as artifact
+        uses: actions/upload-artifact@v4.5.0
+        with:
+          name: slim-jar-file
+          path: ${{ steps.build.outputs.slim }}
 
+      - name: Upload full JAR as artifact
+        uses: actions/upload-artifact@v4.5.0
+        with:
+          name: full-jar-file
+          path: ${{ steps.build.outputs.full }}
 
-  # Build the project and create two JAR files
-  build:
-    runs-on: ubuntu-latest
-    needs: [extract-version, pre-check]
+  release:
+    runs-on: ubuntu-24.04
+    needs: build
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.2.2
 
-      - name: Set up JDK 21
-        uses: actions/setup-java@v3
+      - name: Install GitHub CLI and authenticate
+        run: |
+          curl -sSL https://github.com/cli/cli/releases/download/v2.63.2/gh_2.63.2_linux_amd64.deb -o gh-cli.deb
+          sudo dpkg -i gh-cli.deb
+          sudo apt install -f
+          echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
+
+      - name: Check for existing release
+        id: check-release
+        run: |
+          VERSION="${{ needs.build.outputs.version }}"
+          
+          # Try to view the release; capture both stdout and stderr
+          TAG_EXISTS=$(gh release view "$VERSION" --json tagName --jq ".tagName" 2>&1 || true)
+          
+          # Debugging the value of TAG_EXISTS
+          echo "TAG_EXISTS: $TAG_EXISTS"
+          
+          # If the output contains "release not found", handle gracefully
+          if [[ "$TAG_EXISTS" == *"release not found"* ]]; then
+            echo "No release tag found for version $VERSION."
+          else
+            echo "Release tag found: $TAG_EXISTS"
+            echo "Deleting release and tag: $TAG_EXISTS"
+          
+            # Delete the release and its associated tag
+            gh release delete "$TAG_EXISTS" -y --cleanup-tag
+          
+            # Check if the tag exists before attempting to delete it
+            if git rev-parse "$TAG_EXISTS" >/dev/null 2>&1; then
+              git tag -d "$TAG_EXISTS"
+              git push origin --delete "$TAG_EXISTS"
+            else
+              echo "Tag $TAG_EXISTS not found locally."
+            fi
+          fi
+
+      - name: Download slim JAR artifact
+        uses: actions/download-artifact@v4.1.8
         with:
-          java-version: '21'
-          distribution: 'temurin'
+          name: slim-jar-file
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v3
+      - name: Download full JAR artifact
+        uses: actions/download-artifact@v4.1.8
         with:
-          path: ~/.m2
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          name: full-jar-file
 
-      - name: Build with Maven
-        run: mvn clean package -B
+      - name: Calculate Hash of the full JAR file
+        id: hash
+        run: |
+          FILE=$(find . -name "Snake-slim-*.jar")
+          MD5=$(md5sum "$FILE" | cut -d ' ' -f 1)
+          SHA1=$(sha1sum "$FILE" | cut -d ' ' -f 1)
+          SHA256=$(sha256sum "$FILE" | cut -d ' ' -f 1)
+          echo "slim-md5=$MD5" >> $GITHUB_OUTPUT
+          echo "slim-sha1=$SHA1" >> $GITHUB_OUTPUT
+          echo "slim-sha256=$SHA256" >> $GITHUB_OUTPUT
+          echo "slim-file=$FILE" >> $GITHUB_OUTPUT
 
-      - name: Upload JAR files
-        uses: actions/upload-artifact@v3
-        with:
-          name: jar-files
-          path: target/*.jar
+      - name: Calculate Hash of the full JAR file
+        id: hash
+        run: |
+          FILE=$(find . -name "Snake-full-*.jar")
+          MD5=$(md5sum "$FILE" | cut -d ' ' -f 1)
+          SHA1=$(sha1sum "$FILE" | cut -d ' ' -f 1)
+          SHA256=$(sha256sum "$FILE" | cut -d ' ' -f 1)
+          echo "full-md5=$MD5" >> $GITHUB_OUTPUT
+          echo "full-sha1=$SHA1" >> $GITHUB_OUTPUT
+          echo "full-sha256=$SHA256" >> $GITHUB_OUTPUT
+          echo "full-file=$FILE" >> $GITHUB_OUTPUT
 
-
-  # Create a release and upload the JAR files
-  release:
-    runs-on: ubuntu-latest
-    needs: [pre-check, build]
-
-    steps:
-      - name: Download JAR artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: jar-files
-
-      - name: Create Release
+      - name: Create a new release
         id: create-release
         uses: actions/create-release@v1
         with:
-          tag_name: ${{ needs.pre-check.outputs.version }}
-          release_name: Snake v${{ needs.pre-check.outputs.version }}
+          tag_name: '${{ needs.build.outputs.version }}'
+          release_name: 'Snake v${{ needs.build.outputs.version }}'
           body: |
-            Automated release of version Snake v${{ needs.pre-check.outputs.version }}.
+            **Full Changelog**: https://github.com/MCmoderSD/Snake/commits/${{ needs.build.outputs.version }}
+
+
+            ## Checksums:
+            
+            ### Snake.jar
+            
+            - MD5: ${{ steps.hash.outputs.full-md5 }}
+            - SHA1: ${{ steps.hash.outputs.full-sha1 }}
+            - SHA256: ${{ steps.hash.outputs.full-sha256 }}
+            
+            ### Snake-texture-streaming.jar
+            
+            - MD5: ${{ steps.hash.outputs.slim-md5 }}
+            - SHA1: ${{ steps.hash.outputs.slim-sha1 }}
+            - SHA256: ${{ steps.hash.outputs.slim-sha256 }}
+
           draft: false
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload JARs to Release
+      - name: Upload slim JAR to release
         uses: actions/upload-release-asset@v1
         with:
-          upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: Snake-full-${{ needs.pre-check.outputs.version }}.jar
-          asset_name: Snake.jar
+          asset_name: Snake-texture-streaming-${{ needs.build.outputs.version }}.jar
           asset_content_type: application/java-archive
+          asset_path: ${{ steps.hash.outputs.slim-file }}
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload Slim JAR to Release
+      - name: Upload full JAR to release
         uses: actions/upload-release-asset@v1
         with:
-          upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: Snake-slim-${{ needs.pre-check.outputs.version }}.jar
-          asset_name: Snake-texture-streaming.jar
+          asset_name: Snake-${{ needs.build.outputs.version }}.jar
           asset_content_type: application/java-archive
+          asset_path: ${{ steps.hash.outputs.full-file }}
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
