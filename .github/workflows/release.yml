@@ -58,7 +58,7 @@ jobs:
           echo "token=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
           echo "version=${{ needs.build.outputs.version }}" >> $GITHUB_ENV
           echo "release-name=Snake v${{ needs.build.outputs.version }}" >> $GITHUB_ENV
-          echo "slim-asset-name=-Snake-texture-streaming.jar" >> $GITHUB_ENV
+          echo "slim-asset-name=Snake-texture-streaming.jar" >> $GITHUB_ENV
           echo "full-asset-name=Snake.jar" >> $GITHUB_ENV
 
       - name: Checkout code
