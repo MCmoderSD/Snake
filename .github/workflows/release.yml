@@ -115,28 +115,28 @@ jobs:
           name: full-jar-file
 
       - name: Calculate Hash of the full JAR file
-        id: hash
+        id: hash-slim
         run: |
           FILE=$(find . -name "Snake-slim-*.jar")
           MD5=$(md5sum "$FILE" | cut -d ' ' -f 1)
           SHA1=$(sha1sum "$FILE" | cut -d ' ' -f 1)
           SHA256=$(sha256sum "$FILE" | cut -d ' ' -f 1)
-          echo "slim-md5=$MD5" >> $GITHUB_OUTPUT
-          echo "slim-sha1=$SHA1" >> $GITHUB_OUTPUT
-          echo "slim-sha256=$SHA256" >> $GITHUB_OUTPUT
-          echo "slim-file=$FILE" >> $GITHUB_OUTPUT
+          echo "md5=$MD5" >> $GITHUB_OUTPUT
+          echo "sha1=$SHA1" >> $GITHUB_OUTPUT
+          echo "sha256=$SHA256" >> $GITHUB_OUTPUT
+          echo "file=$FILE" >> $GITHUB_OUTPUT
 
       - name: Calculate Hash of the full JAR file
-        id: hash
+        id: hash-full
         run: |
           FILE=$(find . -name "Snake-full-*.jar")
           MD5=$(md5sum "$FILE" | cut -d ' ' -f 1)
           SHA1=$(sha1sum "$FILE" | cut -d ' ' -f 1)
           SHA256=$(sha256sum "$FILE" | cut -d ' ' -f 1)
-          echo "full-md5=$MD5" >> $GITHUB_OUTPUT
-          echo "full-sha1=$SHA1" >> $GITHUB_OUTPUT
-          echo "full-sha256=$SHA256" >> $GITHUB_OUTPUT
-          echo "full-file=$FILE" >> $GITHUB_OUTPUT
+          echo "md5=$MD5" >> $GITHUB_OUTPUT
+          echo "sha1=$SHA1" >> $GITHUB_OUTPUT
+          echo "sha256=$SHA256" >> $GITHUB_OUTPUT
+          echo "file=$FILE" >> $GITHUB_OUTPUT
 
       - name: Create a new release
         id: create-release
@@ -152,15 +152,15 @@ jobs:
             
             ### Snake.jar
             
-            - MD5: ${{ steps.hash.outputs.full-md5 }}
-            - SHA1: ${{ steps.hash.outputs.full-sha1 }}
-            - SHA256: ${{ steps.hash.outputs.full-sha256 }}
+            - MD5: ${{ steps.hash-full.outputs.md5 }}
+            - SHA1: ${{ steps.hash-full.outputs.sha1 }}
+            - SHA256: ${{ steps.hash-full.outputs.sha256 }}
             
             ### Snake-texture-streaming.jar
             
-            - MD5: ${{ steps.hash.outputs.slim-md5 }}
-            - SHA1: ${{ steps.hash.outputs.slim-sha1 }}
-            - SHA256: ${{ steps.hash.outputs.slim-sha256 }}
+            - MD5: ${{ steps.hash-slim.outputs.md5 }}
+            - SHA1: ${{ steps.hash-slim.outputs.sha1 }}
+            - SHA256: ${{ steps.hash-slim.outputs.sha256 }}
 
           draft: false
           prerelease: false
@@ -172,7 +172,7 @@ jobs:
         with:
           asset_name: Snake-texture-streaming-${{ needs.build.outputs.version }}.jar
           asset_content_type: application/java-archive
-          asset_path: ${{ steps.hash.outputs.slim-file }}
+          asset_path: ${{ steps.hash-slim.outputs.file }}
           upload_url: ${{ steps.create-release.outputs.upload_url }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -182,7 +182,7 @@ jobs:
         with:
           asset_name: Snake-${{ needs.build.outputs.version }}.jar
           asset_content_type: application/java-archive
-          asset_path: ${{ steps.hash.outputs.full-file }}
+          asset_path: ${{ steps.hash-full.outputs.file }}
           upload_url: ${{ steps.create-release.outputs.upload_url }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
