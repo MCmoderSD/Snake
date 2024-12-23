@@ -32,38 +32,35 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4.2.2
 
-      - name: Extract version from pom.xml
+      - name: Extract version
         id: extract-version
         run: |
           VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Build JARs
-        id: build
-        run: |
-          mvn clean package
-          SLIM=$(find target -name "Snake-slim-*.jar")
-          FULL=$(find target -name "Snake-full-*.jar")
-          echo "slim=$SLIM" >> $GITHUB_OUTPUT
-           echo "full=$FULL" >> $GITHUB_OUTPUT
+        run: mvn clean install package
 
-      - name: Upload slim JAR as artifact
+      - name: Upload JAR as artifact
         uses: actions/upload-artifact@v4.5.0
         with:
-          name: slim-jar-file
-          path: ${{ steps.build.outputs.slim }}
-
-      - name: Upload full JAR as artifact
-        uses: actions/upload-artifact@v4.5.0
-        with:
-          name: full-jar-file
-          path: ${{ steps.build.outputs.full }}
+          name: jar-files
+          path: target/Snake-*.jar
 
   release:
     runs-on: ubuntu-24.04
     needs: build
 
     steps:
+
+      - name: Set Parameters
+        run: |
+          echo "token=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+          echo "version=${{ needs.build.outputs.version }}" >> $GITHUB_ENV
+          echo "release-name=Snake v${{ needs.build.outputs.version }}" >> $GITHUB_ENV
+          echo "slim-asset-name=Snake-texture-streaming.jar" >> $GITHUB_ENV
+          echo "full-asset-name=Snake.jar" >> $GITHUB_ENV
+
       - name: Checkout code
         uses: actions/checkout@v4.2.2
 
@@ -72,30 +69,19 @@ jobs:
           curl -sSL https://github.com/cli/cli/releases/download/v2.63.2/gh_2.63.2_linux_amd64.deb -o gh-cli.deb
           sudo dpkg -i gh-cli.deb
           sudo apt install -f
-          echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
+          echo ${{ env.token }} | gh auth login --with-token
 
       - name: Check for existing release
-        id: check-release
         run: |
-          VERSION="${{ needs.build.outputs.version }}"
-          
-          # Try to view the release; capture both stdout and stderr
+          VERSION="${{ env.version }}"
           TAG_EXISTS=$(gh release view "$VERSION" --json tagName --jq ".tagName" 2>&1 || true)
-          
-          # Debugging the value of TAG_EXISTS
           echo "TAG_EXISTS: $TAG_EXISTS"
-          
-          # If the output contains "release not found", handle gracefully
           if [[ "$TAG_EXISTS" == *"release not found"* ]]; then
             echo "No release tag found for version $VERSION."
           else
             echo "Release tag found: $TAG_EXISTS"
             echo "Deleting release and tag: $TAG_EXISTS"
-          
-            # Delete the release and its associated tag
             gh release delete "$TAG_EXISTS" -y --cleanup-tag
-          
-            # Check if the tag exists before attempting to delete it
             if git rev-parse "$TAG_EXISTS" >/dev/null 2>&1; then
               git tag -d "$TAG_EXISTS"
               git push origin --delete "$TAG_EXISTS"
@@ -104,85 +90,58 @@ jobs:
             fi
           fi
 
-      - name: Download slim JAR artifact
+      - name: Download JAR artifacts
         uses: actions/download-artifact@v4.1.8
         with:
-          name: slim-jar-file
+          name: jar-files
 
-      - name: Download full JAR artifact
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: full-jar-file
-
-      - name: Calculate Hash of the full JAR file
-        id: hash
+      - name: Calculate Hashes
         run: |
           FILE=$(find . -name "Snake-slim-*.jar")
           MD5=$(md5sum "$FILE" | cut -d ' ' -f 1)
           SHA1=$(sha1sum "$FILE" | cut -d ' ' -f 1)
           SHA256=$(sha256sum "$FILE" | cut -d ' ' -f 1)
-          echo "slim-md5=$MD5" >> $GITHUB_OUTPUT
-          echo "slim-sha1=$SHA1" >> $GITHUB_OUTPUT
-          echo "slim-sha256=$SHA256" >> $GITHUB_OUTPUT
-          echo "slim-file=$FILE" >> $GITHUB_OUTPUT
-
-      - name: Calculate Hash of the full JAR file
-        id: hash
-        run: |
+          echo "slim-md5=$MD5" >> $GITHUB_ENV
+          echo "slim-sha1=$SHA1" >> $GITHUB_ENV
+          echo "slim-sha256=$SHA256" >> $GITHUB_ENV
+          echo "slim-file=$FILE" >> $GITHUB_ENV
+          
           FILE=$(find . -name "Snake-full-*.jar")
           MD5=$(md5sum "$FILE" | cut -d ' ' -f 1)
           SHA1=$(sha1sum "$FILE" | cut -d ' ' -f 1)
           SHA256=$(sha256sum "$FILE" | cut -d ' ' -f 1)
-          echo "full-md5=$MD5" >> $GITHUB_OUTPUT
-          echo "full-sha1=$SHA1" >> $GITHUB_OUTPUT
-          echo "full-sha256=$SHA256" >> $GITHUB_OUTPUT
-          echo "full-file=$FILE" >> $GITHUB_OUTPUT
+          echo "full-md5=$MD5" >> $GITHUB_ENV
+          echo "full-sha1=$SHA1" >> $GITHUB_ENV
+          echo "full-sha256=$SHA256" >> $GITHUB_ENV
+          echo "full-file=$FILE" >> $GITHUB_ENV
 
-      - name: Create a new release
-        id: create-release
-        uses: actions/create-release@v1
+      - name: Rename JAR files
+        run: |
+          mv ${{ env.slim-file }} ${{ env.slim-asset-name }}
+          mv ${{ env.full-file }} ${{ env.full-asset-name }}
+          echo "slim-file=${{ env.slim-asset-name }}" >> $GITHUB_ENV
+          echo "full-file=${{ env.full-asset-name }}" >> $GITHUB_ENV
+
+      - name: Create new release
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: '${{ needs.build.outputs.version }}'
-          release_name: 'Snake v${{ needs.build.outputs.version }}'
+          files: ${{ env.slim-file }}, ${{ env.full-file }}
+          tag_name: ${{ env.version }}
+          name: ${{ env.release-name }}
           body: |
-            **Full Changelog**: https://github.com/MCmoderSD/Snake/commits/${{ needs.build.outputs.version }}
+            **Full Changelog**: https://github.com/MCmoderSD/GitHubActionsTest/commits/${{ env.version }}
 
 
             ## Checksums:
-            
+
             ### Snake.jar
-            
-            - MD5: ${{ steps.hash.outputs.full-md5 }}
-            - SHA1: ${{ steps.hash.outputs.full-sha1 }}
-            - SHA256: ${{ steps.hash.outputs.full-sha256 }}
-            
+
+            - MD5: ${{ env.full-md5 }}
+            - SHA1: ${{ env.full-sha1 }}
+            - SHA256: ${{ env.full-sha256 }}
+
             ### Snake-texture-streaming.jar
-            
-            - MD5: ${{ steps.hash.outputs.slim-md5 }}
-            - SHA1: ${{ steps.hash.outputs.slim-sha1 }}
-            - SHA256: ${{ steps.hash.outputs.slim-sha256 }}
 
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload slim JAR to release
-        uses: actions/upload-release-asset@v1
-        with:
-          asset_name: Snake-texture-streaming-${{ needs.build.outputs.version }}.jar
-          asset_content_type: application/java-archive
-          asset_path: ${{ steps.hash.outputs.slim-file }}
-          upload_url: ${{ steps.create-release.outputs.upload_url }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload full JAR to release
-        uses: actions/upload-release-asset@v1
-        with:
-          asset_name: Snake-${{ needs.build.outputs.version }}.jar
-          asset_content_type: application/java-archive
-          asset_path: ${{ steps.hash.outputs.full-file }}
-          upload_url: ${{ steps.create-release.outputs.upload_url }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - MD5: ${{ env.slim-md5 }}
+            - SHA1: ${{ env.slim-sha1 }}
+            - SHA256: ${{ env.slim-sha256 }}
