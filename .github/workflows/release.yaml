@@ -71,7 +71,7 @@ jobs:
       filename: ${{ needs.build.outputs.filename }}
       filename-slim: ${{ needs.build.outputs.filename-slim }}
       release-name: ${{ needs.build.outputs.artifact }} v${{ needs.build.outputs.version }}
-      asset-name: ${{ needs.build.outputs.artifact }.jar
+      asset-name: ${{ needs.build.outputs.artifact }}.jar
       asset-name-slim: ${{ needs.build.outputs.artifact }}-texture-streaming.jar
 
     steps:
