@@ -6,7 +6,7 @@
 
     <groupId>de.MCmoderSD</groupId>
     <artifactId>Snake</artifactId>
-    <version>2.0.2</version>
+    <version>2.0.3</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -16,38 +16,40 @@
 
     <repositories>
         <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
+            <id>Nexus</id>
+            <name>Sonatype Nexus</name>
+            <url>https://mcmodersd.de/nexus/repository/maven-releases/</url>
         </repository>
     </repositories>
+
     <dependencies>
 
         <!-- Executor -->
         <dependency>
-            <groupId>com.github.MCmoderSD</groupId>
-            <artifactId>ExecutorUtility</artifactId>
-            <version>1.0.2</version>
+            <groupId>de.MCmoderSD</groupId>
+            <artifactId>Executor</artifactId>
+            <version>1.1.0</version>
         </dependency>
 
         <!-- ImageLoader -->
         <dependency>
-            <groupId>com.github.MCmoderSD</groupId>
+            <groupId>de.MCmoderSD</groupId>
             <artifactId>ImageLoader</artifactId>
-            <version>1.0.3</version>
+            <version>1.1.0</version>
         </dependency>
 
         <!-- Java Audio Library -->
         <dependency>
-            <groupId>com.github.MCmoderSD</groupId>
+            <groupId>de.MCmoderSD</groupId>
             <artifactId>JavaAudioLibrary</artifactId>
-            <version>1.1.6</version>
+            <version>1.2.0</version>
         </dependency>
 
         <!-- JsonUtility -->
         <dependency>
-            <groupId>com.github.MCmoderSD</groupId>
+            <groupId>de.MCmoderSD</groupId>
             <artifactId>JsonUtility</artifactId>
-            <version>1.1.1</version>
+            <version>1.2.0</version>
         </dependency>
     </dependencies>
 
