@@ -1,12 +1,10 @@
 # Snake
 
 ## Description
-
 This is a simple snake game written in Java using the Swing library with Graphics2D. <br>
 Currently, it is in a very early stage of development, so it is not complete yet. <br>
 
 ## How to play
-
 The goal of the game is to eat as many apples as possible. <br>
 In this adaptation, you can go through the walls and appear on the other side. <br>
 It's game over when the snake hits itself. <br>
@@ -17,7 +15,6 @@ The enchanted golden apple activates your op ult for 7 seconds. <br>
 Your op ult is like the normal ult, but you are three times as fast and grow every second. <br>
 
 ## How to run
-
 You need Java 21 installed on your computer to run this game. <br>
 You can download it [here](https://www.oracle.com/de/java/technologies/downloads/#java21). <br>
 
@@ -27,20 +24,19 @@ After downloading the JAR file, you can run it by double-clicking it. <br>
 You can either download the main JAR or the JAR with asset-streaming. <br>
 The main JAR contains all the assets, but it is a lot bigger. <br>
 The JAR with asset-streaming downloads the assets from the internet, so it is a lot smaller. <br>
-The downside is that you need a good and constant internet connection to run it. <br>
+The downside is that you need a good and constant internet connection to run it.
 
-Alternatively, you can run it from the command line with the following command: <br>
+Alternatively, you can run it from the command line with the following command:
 ```bash
 java -jar Snake.jar
 ```
 
-You can change the language of the game by adding the following argument: <br>
+You can change the language of the game by adding the following argument:
 ```bash
 java -jar Snake.jar en
 ```
 
-Currently, the following languages are supported: <br>
-
+Currently, the following languages are supported:
 - English (en)
 - German (de)
 - Italian (it)
@@ -48,30 +44,45 @@ Currently, the following languages are supported: <br>
 - French (fr)
 
 I'm planning to add more languages in the future. <br>
-If you want to help me translate the game into your language, please contact me. <br>
+If you want to help me translate the game into your language, please contact me.
+
+
+## Troubleshooting
+
+### Sound Issues on Linux
+If you encounter sound problems or see an error like this:
+```
+Error initializing audio: line with format PCM_SIGNED 44100.0 Hz, 16 bit, stereo, 4 bytes/frame, little-endian not supported.
+```
+This issue occurs because the sound system used by my [JavaAudioLibrary](https://github.com/MCmoderSD/JavaAudioLibrary) relies on the **ALSA (Advanced Linux Sound Architecture)** system and also requires **PulseAudio** and other related libraries.
+
+To resolve this on Ubuntu/Debian-based distributions, you can install the necessary packages by running the following commands:
+```bash
+sudo apt update
+sudo apt install alsa-utils libasound2-plugins libpulse-java pulseaudio pulseaudio-utils
+```
+After installation, restart your system or restart the PulseAudio service to ensure the changes take effect.
 
 
 ## Controls
-
 The snake is controlled by the arrow keys or WASD. <br>
 You can pause and resume the game by pressing escape. <br>
 To start the game, press space or enter. <br>
 You can exit the game by pressing Ctrl + C. <br>
 
-## Debugging
 
+## Debugging
 You can enable an FPS counter by pressing F3 + F. <br>
 You can enable an TPS counter by pressing F3 + T. <br>
 You can enable grid lines by pressing F3 + G. <br>
 You can enable hitboxes by pressing F3 + B. <br>
 
-## Custom Assets
 
+## Custom Assets
 You can add your own assets to the game. <br>
 You can use both the main JAR and the JAR with asset-streaming. <br>
 
-1. Create a `.json` file with the following structure: <br>
-
+1. Create a `.json` file with the following structure:
 ```json
 {
    "settings": {
@@ -145,13 +156,12 @@ You can use both the main JAR and the JAR with asset-streaming. <br>
 java -jar Snake.jar <language> <PathToTheConfigFile>
 ```
 
-## Custom Language
 
+## Custom Language
 You can use your language pack in the game. <br>
 You can use both the main JAR and the JAR with asset-streaming. <br>
 
-1. Create a .json file with the following structure: <br>
-
+1. Create a .json file with the following structure:
 ```json
 {
   "title": "Snake",
@@ -170,4 +180,4 @@ You can use both the main JAR and the JAR with asset-streaming. <br>
    For example:
 ```bash
 java -jar Snake.jar <PathToTheLanguageFile>
-```
+```         
